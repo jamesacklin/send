@@ -15,20 +15,21 @@
     "vue": "^2.5.17"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@storybook/addon-actions": "^4.0.9",
+    "@storybook/addon-knobs": "^4.0.9",
+    "@storybook/addon-links": "^4.0.9",
+    "@storybook/addons": "^4.0.9",
+    "@storybook/vue": "^4.0.9",
     "@vue/cli-plugin-babel": "^3.0.4",
     "@vue/cli-plugin-eslint": "^3.0.4",
     "@vue/cli-service": "^3.0.4",
     "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.4",
+    "babel-preset-vue": "^2.0.2",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0-0",
-    "vue-template-compiler": "^2.5.17",
-    "@storybook/vue": "^4.0.9",
-    "@storybook/addon-actions": "^4.0.9",
-    "@storybook/addon-links": "^4.0.9",
-    "@storybook/addons": "^4.0.9",
-    "babel-preset-vue": "^2.0.2",
-    "@babel/core": "^7.1.6",
-    "babel-loader": "^8.0.4"
+    "vue-template-compiler": "^2.5.17"
   },
   "eslintConfig": {
     "root": true,

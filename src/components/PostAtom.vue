@@ -1,11 +1,11 @@
 <template lang="html">
   <div class="post-container">
     <div class="post">
-
       <div class="post-title-block">
         <h4 class="post-title">
-          <span class="post-title-callout">
-            Post Title Callout
+          <span
+            v-html="titleCallout"
+            class="post-title-callout">
           </span>
           <span class="post-title-wrap">
             Post Title
@@ -35,7 +35,14 @@
 <script>
 export default {
   name: "PostAtom",
-  props: {},
+  props: {
+    titleCallout: String,
+    title: String,
+    isMedia: Boolean,
+    author: String,
+    date: Date,
+    excerpt: String
+  },
   data: function() {
     return {};
   }
