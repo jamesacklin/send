@@ -17,6 +17,13 @@ storiesOf("Post", module)
   .add("Default", () => ({
     components: { PostAtom },
     props: {
+      pictureUrl: {
+        type: String,
+        default: text(
+          "Picture URL",
+          "https://dirtragmag.com/wp-content/uploads/pivot.jpg"
+        )
+      },
       titleCallout: {
         type: String,
         default: text("Title Callout", "")
@@ -53,6 +60,7 @@ storiesOf("Post", module)
       }
     },
     template: `<PostAtom
+                  :pictureUrl="pictureUrl"
                   :titleCallout="titleCallout"
                   :title="title"
                   :isMedia="isMedia"
