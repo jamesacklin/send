@@ -75,7 +75,13 @@ export default {
 </script>
 
 <style lang="css">
+@import url('https://fonts.googleapis.com/css?family=Libre+Franklin:900|Roboto+Mono:300|Roboto+Slab:300');
+
 * { box-sizing: border-box; }
+
+.post-image {
+  margin-bottom: 1rem;
+}
 
 .post-image-crop {
   position: relative;
@@ -85,7 +91,7 @@ export default {
   padding-top: 56.67%;
 }
 
-.post-image img {
+.post-image-crop img {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -101,7 +107,10 @@ export default {
 }
 
 .post-title {
-  font-family: sans-serif;
+  font-family: 'Libre Franklin', sans-serif;
+  margin: 0 0 1rem;
+  font-size: 1.6rem;
+  line-height: 1.1;
 }
 
 .post-title-callout {
@@ -110,11 +119,15 @@ export default {
 }
 
 .post-author {
-  font-family: monospace;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
 }
 
 .post-excerpt {
-  font-family: serif;
+  font-family: 'Roboto Slab', serif;
+  font-size: 1rem;
+  line-height: 1.6rem;
 }
 
 @media (min-width: 500px){
@@ -125,6 +138,7 @@ export default {
   .post-text {
     width: 50%;
     padding: 0 1rem;
+    margin: 0;
   }
 }
 
