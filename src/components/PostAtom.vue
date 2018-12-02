@@ -7,25 +7,34 @@
             v-html="titleCallout"
             class="post-title-callout">
           </span>
-          <span class="post-title-wrap">
-            Post Title
+          <span
+            v-html="title"
+            class="post-title-wrap">
           </span>
         </h4>
-        <div class="post-video-watch">
-          > Watch Video
+        <div
+          v-if="isMedia"
+          class="post-video-watch">
+          ▶ Watch Video
+        </div>
+        <div
+          v-if="isGallery"
+          class="post-gallery-view">
+          ↗ Launch Gallery
         </div>
       </div>
 
       <div class="post-author">
-        Post Author
+        <span v-html="author"></span>
         <span class="post-date">
           &nbsp;—&nbsp;
-          <span>Post Date</span>
+          <span v-html="postDate"></span>
         </span>
       </div>
 
-      <div class="post-excerpt">
-        <p>Post Excerpt</p>
+      <div
+        class="post-excerpt"
+        v-html="excerpt">
       </div>
 
     </div>
@@ -33,18 +42,26 @@
 </template>
 
 <script>
+import dayjs from "dayjs";
+
 export default {
   name: "PostAtom",
   props: {
     titleCallout: String,
     title: String,
     isMedia: Boolean,
+    isGallery: Boolean,
     author: String,
     date: Date,
     excerpt: String
   },
   data: function() {
     return {};
+  },
+  computed: {
+    postDate: function() {
+      return dayjs(this.date).format("MMMM D, YYYY");
+    }
   }
 };
 </script>
