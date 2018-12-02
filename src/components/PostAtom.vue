@@ -134,6 +134,7 @@ export default {
   font-size: 1.6rem;
   margin-top: -1rem;
   color: red;
+  cursor: pointer;
 }
 
 .post-author {
@@ -194,6 +195,12 @@ export default {
   }
   .enhanced .post-title {
     font-size: 2.5rem;
+  }
+  .enhanced .post-launch-media {
+    margin-bottom: 1rem;
+  }
+  .enhanced .post-author {
+    font-size: 1rem;
   }
   .enhanced .post-excerpt {
     font-size: 1.2rem;
