@@ -5,7 +5,9 @@
       class="post">
       <div class="post-image">
         <div class="post-image-crop">
-          <img :src="pictureUrl" />
+          <img
+            :alt="title"
+            :src="pictureUrl" />
         </div>
       </div>
       <div class="post-text">

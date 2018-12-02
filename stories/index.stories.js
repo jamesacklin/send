@@ -11,6 +11,7 @@ import {
   date,
   select
 } from "@storybook/addon-knobs";
+import { checkA11y } from "@storybook/addon-a11y";
 
 import PostAtom from "../src/components/PostAtom";
 
@@ -27,6 +28,7 @@ const postModeOpts = {
 
 storiesOf("Post", module)
   .addDecorator(withKnobs)
+  .addDecorator(checkA11y)
   .add("Default", () => ({
     components: { PostAtom },
     props: {
