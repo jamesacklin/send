@@ -20,12 +20,12 @@
           </h4>
           <div
             v-if="isMedia"
-            class="post-video-watch">
+            class="post-launch-media">
             ▶ Watch Video
           </div>
           <div
             v-if="isGallery"
-            class="post-gallery-view">
+            class="post-launch-media">
             ↗ Launch Gallery
           </div>
           <div
@@ -115,6 +115,13 @@ export default {
 
 .post-title-callout {
   display: block;
+  color: red;
+}
+
+.post-launch-media {
+  font-family: 'Libre Franklin', sans-serif;
+  font-size: 1.6rem;
+  margin-top: -1rem;
   color: red;
 }
 
