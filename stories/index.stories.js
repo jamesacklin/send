@@ -3,7 +3,14 @@
 import { storiesOf } from "@storybook/vue";
 import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
-import { withKnobs, text, boolean, number, date } from "@storybook/addon-knobs";
+import {
+  withKnobs,
+  text,
+  boolean,
+  number,
+  date,
+  select
+} from "@storybook/addon-knobs";
 
 import PostAtom from "../src/components/PostAtom";
 
@@ -12,11 +19,21 @@ function dateKnob(name, defaultValue) {
   return new Date(stringTimestamp);
 }
 
+const postModeOpts = {
+  Default: "default",
+  Enhanced: "enhanced",
+  Promotion: "promotion"
+};
+
 storiesOf("Post", module)
   .addDecorator(withKnobs)
   .add("Default", () => ({
     components: { PostAtom },
     props: {
+      postMode: {
+        type: String,
+        default: select("Post Mode", postModeOpts, "default")
+      },
       pictureUrl: {
         type: String,
         default: text(
@@ -60,6 +77,7 @@ storiesOf("Post", module)
       }
     },
     template: `<PostAtom
+                  :mode="postMode"
                   :pictureUrl="pictureUrl"
                   :titleCallout="titleCallout"
                   :title="title"

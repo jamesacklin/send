@@ -1,6 +1,8 @@
 <template lang="html">
   <div class="post-container">
-    <div class="post">
+    <div
+      :class="mode"
+      class="post">
       <div class="post-image">
         <div class="post-image-crop">
           <img :src="pictureUrl" />
@@ -54,6 +56,7 @@ import dayjs from "dayjs";
 export default {
   name: "PostAtom",
   props: {
+    mode: String,
     pictureUrl: String,
     titleCallout: String,
     title: String,
@@ -83,12 +86,20 @@ export default {
   margin-bottom: 1rem;
 }
 
-.post-image-crop {
+.default .post-image-crop {
   position: relative;
   width: 100%;
   height: 0;
   overflow: hidden;
   padding-top: 56.67%;
+}
+
+.enhanced .post-image-crop {
+  position: relative;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  padding-top: 75%;
 }
 
 .post-image-crop img {
@@ -147,9 +158,15 @@ export default {
     padding: 0 1rem;
     margin: 0;
   }
+  .enhanced .post-title {
+    font-size: 1.8rem;
+  }
 }
 
 @media (min-width: 1200px){
+  .post.enhanced {
+    align-items: flex-end;
+  }
   .post-image {
     width: 33.33333%;
     padding: 0 1rem;
@@ -163,6 +180,23 @@ export default {
   .post-excerpt {
     width: 50%;
     padding: 0 1rem;
+  }
+  .enhanced .post-image,
+  .enhanced .post-text {
+    width: 50%;
+  }
+  .enhanced .post-text {
+    flex-direction: column;
+  }
+  .enhanced .post-title-block,
+  .enhanced .post-excerpt {
+    width: 100%;
+  }
+  .enhanced .post-title {
+    font-size: 2.5rem;
+  }
+  .enhanced .post-excerpt {
+    font-size: 1.2rem;
   }
 }
 </style>
