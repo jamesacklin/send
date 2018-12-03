@@ -1,11 +1,15 @@
 <template lang="html">
   <div class="post-container">
     <div
+      :style="[mode == 'promotion' ? {'background': 'url(' + pictureUrl + ') center no-repeat #000', 'background-size': 'cover'} : {}]"
       :class="mode"
       class="post">
-      <div class="post-image">
+      <div
+        v-if="mode != 'promotion'"
+        class="post-image">
         <div class="post-image-crop">
           <img
+            v-if="pictureUrl.length"
             :alt="title"
             :src="pictureUrl" />
         </div>
@@ -33,7 +37,7 @@
             ↗ Launch Gallery
           </div>
           <div
-            v-if="!(isMedia || isGallery)"
+            v-if="!(isMedia || isGallery || mode == 'promotion')"
             class="post-author">
             <span v-html="author"></span>
             <span class="post-date">
@@ -44,6 +48,7 @@
         </div>
 
         <div
+          v-if="mode != 'promotion'"
           class="post-excerpt"
           v-html="excerpt">
         </div>
@@ -83,6 +88,10 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=Libre+Franklin:900|Roboto+Mono:300|Roboto+Slab:300');
 
 * { box-sizing: border-box; }
+
+.post.promotion {
+  padding: 4rem 2rem;
+}
 
 .post-image {
   margin-bottom: 1rem;
@@ -124,6 +133,11 @@ export default {
   margin: 0 0 1rem;
   font-size: 1.6rem;
   line-height: 1.1;
+  color: black;
+}
+
+.promotion .post-title {
+  color: white;
 }
 
 .post-title-callout {
