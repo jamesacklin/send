@@ -37,6 +37,11 @@
             ↗ Launch Gallery
           </div>
           <div
+            v-if="isContest"
+            class="post-launch-media">
+            Enter to Win Now
+          </div>
+          <div
             v-if="!(isMedia || isGallery || mode == 'promotion')"
             class="post-author">
             <span v-html="author"></span>
@@ -69,6 +74,7 @@ export default {
     title: String,
     isMedia: Boolean,
     isGallery: Boolean,
+    isContest: Boolean,
     author: String,
     date: Date,
     excerpt: String
@@ -202,15 +208,24 @@ export default {
   .enhanced .post-text {
     width: 50%;
   }
+  .promotion .post-text {
+    width: 66.666666%;
+  }
   .enhanced .post-text {
     flex-direction: column;
   }
+  .promotion .post-title-block,
   .enhanced .post-title-block,
   .enhanced .post-excerpt {
     width: 100%;
   }
-  .enhanced .post-title {
+  .enhanced .post-title,
+  .promotion .post-title {
     font-size: 2.5rem;
+  }
+  .enhanced .post-title-callout,
+  .promotion .post-title-callout {
+    font-size: 1.8rem;
   }
   .enhanced .post-launch-media {
     margin-bottom: 1rem;
