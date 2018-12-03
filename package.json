@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "dayjs": "^1.7.7",
-    "vue": "^2.5.17"
+    "vue": "^2.5.17",
+    "vue-doubleclick": "git+https://github.com/eldub2001/vue-dfp.git"
   },
   "devDependencies": {
     "@babel/core": "^7.1.6",
