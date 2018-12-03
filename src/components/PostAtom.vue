@@ -42,7 +42,7 @@
             Enter to Win Now
           </div>
           <div
-            v-if="!(isMedia || mode == 'promotion')"
+            v-if="!(isMedia || mode == 'promotion' || mode == 'spliced')"
             class="post-author">
             <span v-html="author"></span>
             <span class="post-date">
@@ -53,7 +53,7 @@
         </div>
 
         <div
-          v-if="mode != 'promotion'"
+          v-if="!(mode == 'promotion' || mode == 'spliced')"
           class="post-excerpt"
           v-html="excerpt">
         </div>
@@ -95,6 +95,10 @@ export default {
 
 * { box-sizing: border-box; }
 
+.post {
+  hyphens: auto;
+}
+
 .post.promotion {
   padding: 4rem 2rem;
   position: relative;
@@ -115,7 +119,7 @@ export default {
   margin-bottom: 1rem;
 }
 
-.default .post-image-crop {
+.post-image-crop {
   position: relative;
   width: 100%;
   height: 0;
@@ -124,10 +128,6 @@ export default {
 }
 
 .enhanced .post-image-crop {
-  position: relative;
-  width: 100%;
-  height: 0;
-  overflow: hidden;
   padding-top: 75%;
 }
 
@@ -171,6 +171,11 @@ export default {
   cursor: pointer;
 }
 
+.spliced .post-title,
+.spliced .post-launch-media {
+  font-size: 1.2rem;
+}
+
 .post-author {
   font-family: 'Roboto Mono', monospace;
   font-size: 0.8rem;
@@ -192,11 +197,21 @@ export default {
   .post {
     display: flex;
   }
+  .post.spliced  {
+    flex-direction: column;
+  }
   .post-image,
   .post-text {
     width: 50%;
     padding: 0 1rem;
     margin: 0;
+  }
+  .spliced .post-image,
+  .spliced .post-text  {
+    width: 100%;
+  }
+  .spliced .post-image {
+    margin-bottom: 1rem;
   }
   .enhanced .post-title {
     font-size: 1.8rem;
@@ -228,11 +243,13 @@ export default {
   .promotion .post-text {
     width: 66.666666%;
   }
+  .spliced .post-text,
   .enhanced .post-text {
     flex-direction: column;
   }
   .promotion .post-title-block,
   .enhanced .post-title-block,
+  .spliced .post-title-block,
   .enhanced .post-excerpt {
     width: 100%;
   }

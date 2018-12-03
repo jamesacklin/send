@@ -21,6 +21,7 @@ function dateKnob(name, defaultValue) {
 }
 
 const postModeOpts = {
+  Spliced: "spliced",
   Default: "default",
   Enhanced: "enhanced",
   Promotion: "promotion"
@@ -220,6 +221,70 @@ storiesOf("PostAtom", module)
                   :author="author"
                   :date="date"
                   :excerpt="excerpt" />`
+  }))
+  .add("Spliced", () => ({
+    components: { PostAtom },
+    props: {
+      postMode: {
+        type: String,
+        default: select("Post Mode", postModeOpts, "spliced")
+      },
+      pictureUrl: {
+        type: String,
+        default: text(
+          "Picture URL",
+          "https://dirtragmag.com/wp-content/uploads/pivot.jpg"
+        )
+      },
+      titleCallout: {
+        type: String,
+        default: text("Title Callout", "")
+      },
+      title: {
+        type: String,
+        default: text(
+          "Post Title",
+          "Pivot Introduces New Mach 6 Family with Size-Specific Geometry"
+        )
+      },
+      isMedia: {
+        type: Boolean,
+        default: boolean("Video Post", false)
+      },
+      isGallery: {
+        type: Boolean,
+        default: boolean("Photo Gallery Post", false)
+      },
+      isContest: {
+        type: Boolean,
+        default: boolean("Contest Post", false)
+      },
+      author: {
+        type: String,
+        default: text("Author", "")
+      },
+      date: {
+        type: Date,
+        default: dateKnob("Date", new Date("Jan 20 2017"))
+      },
+      excerpt: {
+        type: String,
+        default: text("Excerpt", "")
+      }
+    },
+    template: `<div style="width: 16rem; margin: 0 auto">
+                <PostAtom
+                  :mode="postMode"
+                  :pictureUrl="pictureUrl"
+                  :titleCallout="titleCallout"
+                  :title="title"
+                  :isMedia="isMedia"
+                  :isGallery="isGallery"
+                  :isContest="isContest"
+                  :author="author"
+                  :date="date"
+                  :excerpt="excerpt" />
+              </div>`
   }))
   .add("Promotion", () => ({
     components: { PostAtom },
