@@ -94,6 +94,68 @@ storiesOf("PostAtom", module)
                   :date="date"
                   :excerpt="excerpt" />`
   }))
+  .add("Photo Feature", () => ({
+    components: { PostAtom },
+    props: {
+      postMode: {
+        type: String,
+        default: select("Post Mode", postModeOpts, "default")
+      },
+      pictureUrl: {
+        type: String,
+        default: text(
+          "Picture URL",
+          "https://dirtragmag.com/wp-content/uploads/dd-2018-1-of-1-25.jpg"
+        )
+      },
+      titleCallout: {
+        type: String,
+        default: text("Title Callout", "Off the Trail")
+      },
+      title: {
+        type: String,
+        default: text("Post Title", "The 2018 Dirty Dozen")
+      },
+      isMedia: {
+        type: Boolean,
+        default: boolean("Video Post", false)
+      },
+      isGallery: {
+        type: Boolean,
+        default: boolean("Photo Gallery Post", true)
+      },
+      isContest: {
+        type: Boolean,
+        default: boolean("Contest Post", false)
+      },
+      author: {
+        type: String,
+        default: text("Author", "Brett Rothmeyer")
+      },
+      date: {
+        type: Date,
+        default: dateKnob("Date", new Date("Nov 26 2018"))
+      },
+      excerpt: {
+        type: String,
+        default: text(
+          "Excerpt",
+          "Pittsburgh winters are cruel on their best days and on the first Saturday after Thanksgiving annually there is an extra dose of self-delivered cruelty by way of the Dirty Dozen. For over three decades, cyclists of all levels and disciplines subject themselves to the punishment of the 13 steepest hills in and around Pittsburgh."
+        )
+      }
+    },
+    template: `<PostAtom
+                  :mode="postMode"
+                  :pictureUrl="pictureUrl"
+                  :titleCallout="titleCallout"
+                  :title="title"
+                  :isMedia="isMedia"
+                  :isGallery="isGallery"
+                  :isContest="isContest"
+                  :author="author"
+                  :date="date"
+                  :excerpt="excerpt" />`
+  }))
   .add("Enhanced", () => ({
     components: { PostAtom },
     props: {
@@ -170,7 +232,7 @@ storiesOf("PostAtom", module)
         type: String,
         default: text(
           "Picture URL",
-          "https://dirtragmag.com/wp-content/uploads/pivot.jpg"
+          "https://dirtragmag.com/wp-content/uploads/Wahoo_KICKRSNAP_WFBKTR4_TT_rear_low-768x512.jpg"
         )
       },
       titleCallout: {
@@ -181,7 +243,7 @@ storiesOf("PostAtom", module)
         type: String,
         default: text(
           "Post Title",
-          "Pivot Introduces New Mach 6 Family with Size-Specific Geometry"
+          "Commerce Time! Black Friday and Cyber Monday Holiday Round Up Deals"
         )
       },
       isMedia: {
@@ -195,6 +257,68 @@ storiesOf("PostAtom", module)
       isContest: {
         type: Boolean,
         default: boolean("Contest Post", false)
+      },
+      author: {
+        type: String,
+        default: text("Author", "")
+      },
+      date: {
+        type: Date,
+        default: dateKnob("Date", new Date("Jan 20 2017"))
+      },
+      excerpt: {
+        type: String,
+        default: text("Excerpt", "")
+      }
+    },
+    template: `<PostAtom
+                  :mode="postMode"
+                  :pictureUrl="pictureUrl"
+                  :titleCallout="titleCallout"
+                  :title="title"
+                  :isMedia="isMedia"
+                  :isGallery="isGallery"
+                  :isContest="isContest"
+                  :author="author"
+                  :date="date"
+                  :excerpt="excerpt" />`
+  }))
+  .add("Promotion: Contest", () => ({
+    components: { PostAtom },
+    props: {
+      postMode: {
+        type: String,
+        default: select("Post Mode", postModeOpts, "promotion")
+      },
+      pictureUrl: {
+        type: String,
+        default: text(
+          "Picture URL",
+          "https://dirtragmag.com/wp-content/uploads/Hawk_Hill-15.jpg"
+        )
+      },
+      titleCallout: {
+        type: String,
+        default: text("Title Callout", "")
+      },
+      title: {
+        type: String,
+        default: text(
+          "Post Title",
+          "Win A Full-Suspension Hawk Hill 3 From Marin"
+        )
+      },
+      isMedia: {
+        type: Boolean,
+        default: boolean("Video Post", false)
+      },
+      isGallery: {
+        type: Boolean,
+        default: boolean("Photo Gallery Post", false)
+      },
+      isContest: {
+        type: Boolean,
+        default: boolean("Contest Post", true)
       },
       author: {
         type: String,

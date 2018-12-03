@@ -42,7 +42,7 @@
             Enter to Win Now
           </div>
           <div
-            v-if="!(isMedia || isGallery || mode == 'promotion')"
+            v-if="!(isMedia || mode == 'promotion')"
             class="post-author">
             <span v-html="author"></span>
             <span class="post-date">
@@ -97,6 +97,18 @@ export default {
 
 .post.promotion {
   padding: 4rem 2rem;
+  position: relative;
+}
+
+.post.promotion::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
 }
 
 .post-image {
@@ -154,7 +166,7 @@ export default {
 .post-launch-media {
   font-family: 'Libre Franklin', sans-serif;
   font-size: 1.6rem;
-  margin-top: -1rem;
+  margin: -1rem 0 1rem;
   color: red;
   cursor: pointer;
 }
@@ -169,6 +181,11 @@ export default {
   font-family: 'Roboto Slab', serif;
   font-size: 1rem;
   line-height: 1.6rem;
+}
+
+.promotion .post-text {
+  position: relative;
+  z-index: 1;
 }
 
 @media (min-width: 500px){
