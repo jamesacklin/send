@@ -1,13 +1,17 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+    <Logo orientation="horizontal" style="width: 300px; margin: 0 auto" />
   </div>
 </template>
 
 <script>
+import Logo from "@/components/Logo";
+
 export default {
   name: "app",
-  components: {}
+  components: {
+    Logo
+  }
 };
 </script>
 

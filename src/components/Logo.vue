@@ -11,8 +11,7 @@ export default {
   props: {
     orientation: {
       type: String,
-      default: "vertical",
-      required: true
+      default: "vertical"
     }
   }
 };
