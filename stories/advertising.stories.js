@@ -16,6 +16,7 @@ import { checkA11y } from "@storybook/addon-a11y";
 import Vue from "vue";
 import DoubleClick from "vue-doubleclick";
 import OutsideFeed from "../src/components/OutsideFeed";
+import Advertising from "../src/components/Advertising";
 
 let mappings = {
   banner: [
@@ -41,61 +42,71 @@ storiesOf("Advertising", module)
     template: `<div style="width: 600px"><OutsideFeed /></div>`
   }))
   .add("DR_300x250_Square1", () => ({
-    template: `<google-ad
+    components: { Advertising },
+    template: `<Advertising
                 ref="adStory"
                 unit="DR_300x250_Square1"
                 size="rectangle" />`
   }))
   .add("DR_300x250_Square2", () => ({
-    template: `<google-ad
+    components: { Advertising },
+    template: `<Advertising
                 ref="adStory"
                 unit="DR_300x250_Square2"
                 size="rectangle" />`
   }))
   .add("DR_300x250_Square3", () => ({
-    template: `<google-ad
+    components: { Advertising },
+    template: `<Advertising
                 ref="adStory"
                 unit="DR_300x250_Square3"
                 size="rectangle" />`
   }))
   .add("DR_300x250_Square4", () => ({
-    template: `<google-ad
+    components: { Advertising },
+    template: `<Advertising
                 ref="adStory"
                 unit="DR_300x250_Square4"
                 size="rectangle" />`
   }))
   .add("DR_300x250_Square5", () => ({
-    template: `<google-ad
+    components: { Advertising },
+    template: `<Advertising
                 ref="adStory"
                 unit="DR_300x250_Square5"
                 size="rectangle" />`
   }))
   .add("DR_300x250_Square6", () => ({
-    template: `<google-ad
+    components: { Advertising },
+    template: `<Advertising
                 ref="adStory"
                 unit="DR_300x250_Square6"
                 size="rectangle" />`
   }))
   .add("DR_300x250_Square7", () => ({
-    template: `<google-ad
+    components: { Advertising },
+    template: `<Advertising
                 ref="adStory"
                 unit="DR_300x250_Square7"
                 size="rectangle" />`
   }))
   .add("DR_300x250_Square8", () => ({
-    template: `<google-ad
+    components: { Advertising },
+    template: `<Advertising
                 ref="adStory"
                 unit="DR_300x250_Square8"
                 size="rectangle" />`
   }))
   .add("DR_300x250_SquareNine", () => ({
-    template: `<google-ad
+    components: { Advertising },
+    template: `<Advertising
                 ref="adStory"
                 unit="DR_300x250_SquareNine"
                 size="rectangle" />`
   }))
   .add("DR_300x250_SquareTen", () => ({
-    template: `<google-ad
+    components: { Advertising },
+    template: `<Advertising
                 ref="adStory"
                 unit="DR_300x250_SquareTen"
                 size="rectangle" />`
