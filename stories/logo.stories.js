@@ -21,7 +21,7 @@ storiesOf("Logo", module)
     components: { Logo },
     props: {
       bgColor: {
-        type: Text,
+        type: String,
         default: text("Background Color", "transparent")
       }
     },
@@ -31,7 +31,7 @@ storiesOf("Logo", module)
     components: { Logo },
     props: {
       bgColor: {
-        type: Text,
+        type: String,
         default: text("Background Color", "transparent")
       }
     },
