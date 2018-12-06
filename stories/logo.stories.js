@@ -19,11 +19,23 @@ storiesOf("Logo", module)
   .addDecorator(withKnobs)
   .add("Vertical (Default)", () => ({
     components: { Logo },
-    template: `<Logo orientation="vertical" />`
+    props: {
+      bgColor: {
+        type: Text,
+        default: text("Background Color", "transparent")
+      }
+    },
+    template: `<Logo :bgColor="bgColor" orientation="vertical" />`
   }))
   .add("Horizontal", () => ({
     components: { Logo },
-    template: `<Logo orientation="horizontal" />`
+    props: {
+      bgColor: {
+        type: Text,
+        default: text("Background Color", "transparent")
+      }
+    },
+    template: `<Logo :bgColor="bgColor" orientation="horizontal" />`
   }));
 
 /* eslint-enable react/react-in-jsx-scope */
