@@ -76,7 +76,7 @@ export default {
     isGallery: Boolean,
     isContest: Boolean,
     author: String,
-    date: Date,
+    date: String,
     excerpt: String
   },
   data: function() {
@@ -97,6 +97,7 @@ export default {
 
 .post {
   hyphens: auto;
+  margin-bottom: 2rem;
 }
 
 .post.promotion {
