@@ -97,7 +97,7 @@ export default {
 
 .post {
   hyphens: auto;
-  margin-bottom: 2rem;
+  padding: 1rem 1rem;
 }
 
 .post.promotion {
@@ -197,6 +197,7 @@ export default {
 @media (min-width: 500px){
   .post {
     display: flex;
+    padding: 1rem 0;
   }
   .post.spliced  {
     flex-direction: column;

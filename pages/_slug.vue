@@ -1,7 +1,7 @@
 <template>
   <article
     :id="'post-id-' + post.id"
-    class="post hentry"
+    class="entry"
   >
     <header class="entry-header">
       <time
@@ -28,27 +28,27 @@ export default {
   components: {},
   computed: {
     post() {
-      return this.$store.getters.getPostBySlug(this.$route.params.slug)
+      return this.$store.getters.getPostBySlug(this.$route.params.slug);
     }
   },
   async asyncData({ payload, isStatic, store, params }) {
     // payload set during static generation
     if (payload && isStatic) {
-      store.commit('addPosts', [payload])
+      store.commit("addPosts", [payload]);
     } else {
-      await store.dispatch('getPost', params)
+      await store.dispatch("getPost", params);
     }
   },
   methods: {
     featuredImage() {
-      let featuredImage = this.post._embedded['wp:featuredmedia']
+      let featuredImage = this.post._embedded["wp:featuredmedia"];
       if (featuredImage && featuredImage[0].media_details) {
         return (
           featuredImage[0].media_details.sizes.large.source_url ||
           featuredImage[0].media_details.sizes.full.source_url
-        )
+        );
       } else {
-        return '/og-card.png'
+        return "/og-card.png";
       }
     }
   },
@@ -56,31 +56,31 @@ export default {
     return {
       title: this.post.title.rendered,
       bodyAttrs: {
-        class: 'single post post-id-' + this.post.id
+        class: "single post post-id-" + this.post.id
       },
       meta: [
         {
-          hid: 'description',
-          name: 'description',
+          hid: "description",
+          name: "description",
           content: this.post.excerpt.rendered
         },
         {
-          hid: 'og:title',
-          property: 'og:title',
-          content: this.post.title.rendered + ' • Scott Evans'
+          hid: "og:title",
+          property: "og:title",
+          content: this.post.title.rendered + " • Scott Evans"
         },
         {
-          hid: 'og:description',
-          property: 'og:description',
+          hid: "og:description",
+          property: "og:description",
           content: this.post.excerpt.rendered
         },
         {
-          hid: 'og:image',
-          property: 'og:image'
+          hid: "og:image",
+          property: "og:image"
           // content: this.featuredImage()
         }
       ]
-    }
+    };
   }
-}
+};
 </script>
