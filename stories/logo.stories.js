@@ -13,7 +13,7 @@ import {
 } from "@storybook/addon-knobs";
 import { checkA11y } from "@storybook/addon-a11y";
 
-import Logo from "../src/components/Logo.vue";
+import Logo from "../components/Logo.vue";
 
 storiesOf("Logo", module)
   .addDecorator(withKnobs)

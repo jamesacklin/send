@@ -13,8 +13,8 @@ import {
 } from "@storybook/addon-knobs";
 import { checkA11y } from "@storybook/addon-a11y";
 
-import NavItem from "../src/components/Navigation/NavItem.vue";
-import NavDrawer from "../src/components/Navigation/NavDrawer.vue";
+import NavItem from "../components/Navigation/NavItem.vue";
+import NavDrawer from "../components/Navigation/NavDrawer.vue";
 
 storiesOf("Navigation", module)
   .addDecorator(withKnobs)
