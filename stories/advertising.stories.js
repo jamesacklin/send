@@ -15,8 +15,8 @@ import { checkA11y } from "@storybook/addon-a11y";
 
 import Vue from "vue";
 import DoubleClick from "vue-doubleclick";
-import OutsideFeed from "../src/components/OutsideFeed";
-import Advertising from "../src/components/Advertising";
+import OutsideFeed from "../components/OutsideFeed.vue";
+import Advertising from "../components/Advertising";
 
 let mappings = {
   banner: [

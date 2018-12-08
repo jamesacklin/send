@@ -76,7 +76,7 @@ export default {
     isGallery: Boolean,
     isContest: Boolean,
     author: String,
-    date: Date,
+    date: String,
     excerpt: String
   },
   data: function() {
@@ -97,6 +97,7 @@ export default {
 
 .post {
   hyphens: auto;
+  padding: 1rem 1rem;
 }
 
 .post.promotion {
@@ -196,6 +197,7 @@ export default {
 @media (min-width: 500px){
   .post {
     display: flex;
+    padding: 1rem 0;
   }
   .post.spliced  {
     flex-direction: column;

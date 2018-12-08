@@ -6,7 +6,7 @@ import { linkTo } from "@storybook/addon-links";
 import { withKnobs, array } from "@storybook/addon-knobs";
 import { checkA11y } from "@storybook/addon-a11y";
 
-import Ticker from "../src/components/Ticker";
+import Ticker from "../components/Ticker";
 
 storiesOf("Ticker", module)
   .addDecorator(withKnobs)

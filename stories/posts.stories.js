@@ -13,7 +13,7 @@ import {
 } from "@storybook/addon-knobs";
 import { checkA11y } from "@storybook/addon-a11y";
 
-import PostAtom from "../src/components/PostAtom";
+import PostAtom from "../components/PostAtom";
 
 function dateKnob(name, defaultValue) {
   const stringTimestamp = date(name, defaultValue);
