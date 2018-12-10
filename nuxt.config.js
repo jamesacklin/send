@@ -35,7 +35,6 @@ module.exports = {
   ** Middleware
   */
   router: {
-    middleware: ["https"],
     scrollBehavior: function(to, from, savedPosition) {
       return { x: 0, y: 0 };
     }
