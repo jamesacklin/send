@@ -1,53 +1,38 @@
 <template lang="html">
   <div class="post-container">
     <div
-      :style="[mode == 'promotion' ? {'background': 'url(' + pictureUrl + ') center no-repeat #000', 'background-size': 'cover'} : {}]"
+      :style="[
+        mode == 'promotion'
+          ? {
+              background: 'url(' + pictureUrl + ') center no-repeat #000',
+              'background-size': 'cover'
+            }
+          : {}
+      ]"
       :class="mode"
-      class="post">
-      <div
-        v-if="mode != 'promotion'"
-        class="post-image">
+      class="post"
+    >
+      <div v-if="mode != 'promotion'" class="post-image">
         <div class="post-image-crop">
-          <img
-            v-if="pictureUrl.length"
-            :alt="title"
-            :src="pictureUrl" />
+          <img v-if="pictureUrl.length" :alt="title" :src="pictureUrl" />
         </div>
       </div>
       <div class="post-text">
         <div class="post-title-block">
           <h4 class="post-title">
-            <span
-              v-html="titleCallout"
-              class="post-title-callout">
-            </span>
-            <span
-              v-html="title"
-              class="post-title-wrap">
-            </span>
+            <span v-html="titleCallout" class="post-title-callout"> </span>
+            <span v-html="title" class="post-title-wrap"> </span>
           </h4>
-          <div
-            v-if="isMedia"
-            class="post-launch-media">
-            ▶ Watch Video
-          </div>
-          <div
-            v-if="isGallery"
-            class="post-launch-media">
-            ↗ Launch Gallery
-          </div>
-          <div
-            v-if="isContest"
-            class="post-launch-media">
-            Enter to Win Now
-          </div>
+          <div v-if="isMedia" class="post-launch-media">▶ Watch Video</div>
+          <div v-if="isGallery" class="post-launch-media">↗ Launch Gallery</div>
+          <div v-if="isContest" class="post-launch-media">Enter to Win Now</div>
           <div
             v-if="!(isMedia || mode == 'promotion' || mode == 'spliced')"
-            class="post-author">
+            class="post-author"
+          >
             <span v-html="author"></span>
             <span class="post-date">
-              &nbsp;—&nbsp;
-              <span v-html="postDate"></span>
+              &nbsp;—&nbsp; <span v-html="postDate"></span>
             </span>
           </div>
         </div>
@@ -55,18 +40,18 @@
         <div
           v-if="!(mode == 'promotion' || mode == 'spliced')"
           class="post-excerpt"
-          v-html="excerpt">
-        </div>
+          v-html="excerpt"
+        ></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import dayjs from "dayjs";
+import dayjs from 'dayjs'
 
 export default {
-  name: "PostAtom",
+  name: 'PostAtom',
   props: {
     mode: String,
     pictureUrl: String,
@@ -80,14 +65,14 @@ export default {
     excerpt: String
   },
   data: function() {
-    return {};
+    return {}
   },
   computed: {
     postDate: function() {
-      return dayjs(this.date).format("MMMM D, YYYY");
+      return dayjs(this.date).format('MMMM D, YYYY')
     }
   }
-};
+}
 </script>
 
 <style lang="css">
@@ -187,6 +172,10 @@ export default {
   font-family: 'Roboto Slab', serif;
   font-size: 1rem;
   line-height: 1.6rem;
+}
+
+.post-excerpt p {
+  margin-top: 0;
 }
 
 .promotion .post-text {
