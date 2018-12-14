@@ -1,19 +1,13 @@
 <template>
-  <section class="posts">
-    <transition-group
-      v-if="posts && posts.length"
-      :css="false"
-      name="list"
-      tag="div"
-      appear
-      @before-enter="beforeEnter"
-      @enter="enter"
-      @leave="leave"
-    >
-      <div
-        v-for="post in posts"
-        :key="post.id"
-      >
+  <div>
+    <header style="background: red; margin-bottom: 1rem; padding: 1rem;">
+      <div style="background: white; width: 200px; margin: 1rem auto;">
+        <Logo orientation="horizontal" />
+      </div>
+    </header>
+    <section class="posts">
+      <google-ad unit="DR_300x250_Square1" size="rectangle" />
+      <div v-for="post in posts" :key="post.id">
         <nuxt-link class="story-link" tag="div" :to="post.slug">
           <PostAtom
             :pictureUrl="featuredImage(post)"
@@ -26,16 +20,18 @@
           />
         </nuxt-link>
       </div>
-    </transition-group>
-  </section>
+    </section>
+  </div>
 </template>
 
 <script>
-import PostAtom from "@/components/PostAtom";
+import PostAtom from '@/components/PostAtom'
+import Logo from '@/components/Logo'
 
 export default {
   components: {
-    PostAtom
+    PostAtom,
+    Logo
   },
   mixins: {
     longTimestamp: Function,
@@ -46,112 +42,80 @@ export default {
     if (payload && isStatic) {
       // setup the store as it would be in SPA mode
       // const page = parseInt( params.id ) || 1
-      const page = payload.meta.page;
-      store.commit("currentPage", page);
-      store.commit("paginate", page);
-      store.commit("paginateTotals", {
+      const page = payload.meta.page
+      store.commit('currentPage', page)
+      store.commit('paginate', page)
+      store.commit('paginateTotals', {
         totalPosts: payload.meta.totalPosts,
         totalPostsPages: payload.meta.totalPostsPages
-      });
-      store.commit("addPosts", payload.payload);
+      })
+      store.commit('addPosts', payload.payload)
     } else {
-      await store.dispatch("getPosts", { page: parseInt(params.id || 1) });
+      await store.dispatch('getPosts', { page: parseInt(params.id || 1) })
     }
   },
   fetch({ params, redirect, route }) {
     // redirect page 1 or /page/
     if (
       1 === parseInt(params.id) ||
-      "/page" === route.path.replace(/\/$/, "")
+      '/page' === route.path.replace(/\/$/, '')
     ) {
-      redirect(301, "/");
+      redirect(301, '/')
     }
   },
   computed: {
     posts() {
       return this.$store.getters.getPostsPage(
         parseInt(this.$route.params.id) || 1
-      );
+      )
+    },
+    ads() {
+      return this.$store.state.advertising.rectangles
     }
   },
   mounted() {
     // prefetch pages either side of this one
-    const nextPage = parseInt(this.$route.params.id) + 1 || 2;
-    this.$store.dispatch("getPosts", { page: nextPage, prefetch: true });
+    const nextPage = parseInt(this.$route.params.id) + 1 || 2
+    this.$store.dispatch('getPosts', { page: nextPage, prefetch: true })
 
     const previousPage = this.$route.params.id
       ? parseInt(this.$route.params.id - 1)
-      : false;
+      : false
     if (previousPage) {
-      this.$store.dispatch("getPosts", { page: previousPage, prefetch: true });
+      this.$store.dispatch('getPosts', { page: previousPage, prefetch: true })
     }
   },
   head() {
     return {
-      title: "Dirt Rag Magazine • Page " + (this.$route.params.id || 1),
+      title: 'Dirt Rag Magazine • Page ' + (this.$route.params.id || 1),
       bodyAttrs: {
         class: this.$route.params.id
-          ? "archive page page-" + this.$route.params.id
-          : "home archive"
+          ? 'archive page page-' + this.$route.params.id
+          : 'home archive'
       },
       meta: [
         {
-          hid: "og:title",
-          property: "og:title",
-          content: "Dirt Rag Magazine • Page " + (this.$route.params.id || 1)
+          hid: 'og:title',
+          property: 'og:title',
+          content: 'Dirt Rag Magazine • Page ' + (this.$route.params.id || 1)
         }
       ]
-    };
+    }
   },
   methods: {
     featuredImage: function(post) {
-      let featuredImage = post._embedded["wp:featuredmedia"][0];
+      let featuredImage = post._embedded['wp:featuredmedia'][0]
       if (featuredImage && featuredImage.media_details) {
         return (
           featuredImage.media_details.sizes.medium.source_url ||
           featuredImage.media_details.sizes.full.source_url
-        );
+        )
       } else {
-        return "/og-card.png";
-      }
-    },
-    beforeEnter: function(el) {
-      if ("animate" in el) {
-        el.style.opacity = 0;
-      }
-    },
-    enter: function(el, done) {
-      if ("animate" in el) {
-        var delay = el.dataset.index * 150;
-        setTimeout(() => {
-          el.animate(
-            [{ opacity: 0 }, { opacity: 1 }],
-            {
-              duration: 400,
-              fill: "forwards"
-            },
-            done
-          );
-        }, delay);
-      }
-    },
-    leave: function(el, done) {
-      if ("animate" in el) {
-        var delay = el.dataset.index * 150;
-        setTimeout(() => {
-          el.animate(
-            [{ opacity: 1 }, { opacity: 0 }],
-            {
-              duration: 400,
-              fill: "forwards"
-            },
-            done
-          );
-        }, delay);
+        return '/og-card.png'
       }
     }
   }
-};
+}
 </script>
 
 <style lang="css">
