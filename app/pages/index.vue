@@ -21,46 +21,9 @@
       </div>
     </section>
     <section class="advertising">
-      <advertising
-        id="div-gpt-ad-1487038544877-0"
-        size="rectangle"
-        unit="DR_300x250_Square1"
-      />
-      <advertising
-        id="div-gpt-ad-1487038544877-1"
-        size="rectangle"
-        unit="DR_300x250_Square2"
-      />
-      <advertising
-        id="div-gpt-ad-1487038544877-2"
-        size="rectangle"
-        unit="DR_300x250_Square3"
-      />
-      <advertising
-        id="div-gpt-ad-1487038544877-3"
-        size="rectangle"
-        unit="DR_300x250_Square4"
-      />
-      <advertising
-        id="div-gpt-ad-1487038544877-4"
-        size="rectangle"
-        unit="DR_300x250_Square5"
-      />
-      <advertising
-        id="div-gpt-ad-1487038544877-5"
-        size="rectangle"
-        unit="DR_300x250_Square6"
-      />
-      <advertising
-        id="div-gpt-ad-1487038544877-6"
-        size="rectangle"
-        unit="DR_300x250_Square7"
-      />
-      <advertising
-        id="div-gpt-ad-1487038544877-7"
-        size="rectangle"
-        unit="DR_300x250_Square8"
-      />
+      <div style="margin-bottom: 1rem;" v-for="ad in ads" :key="ad.index">
+        <advertising :id="ad.id" :size="ad.size" :unit="ad.name" />
+      </div>
     </section>
   </div>
 </template>
@@ -113,7 +76,7 @@ export default {
       )
     },
     ads() {
-      return this.$store.state.advertising.rectangles
+      return this.$store.state.advertising.rectangle
     }
   },
   mounted() {
