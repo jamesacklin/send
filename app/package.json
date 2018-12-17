@@ -17,11 +17,11 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/pwa": "^2.6.0",
+    "dayjs": "^1.7.7",
     "npm": "^6.4.1",
     "nuxt": "^2.3.4",
-    "dayjs": "^1.7.7",
     "vue": "^2.5.18",
-    "vue-doubleclick": "git+https://github.com/jamesacklin/vue-dfp.git",
+    "vue-doubleclick": "^1.0.4",
     "vue-marquee-text-component": "^1.1.1"
   },
   "devDependencies": {

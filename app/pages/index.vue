@@ -1,12 +1,11 @@
 <template>
   <div>
-    <header style="background: red; margin-bottom: 1rem; padding: 1rem;">
-      <div style="background: white; width: 200px; margin: 1rem auto;">
+    <header style="margin-bottom: 1rem; padding: 1rem;">
+      <div style="width: 200px; margin: 1rem auto;">
         <Logo orientation="horizontal" />
       </div>
     </header>
     <section class="posts">
-      <google-ad unit="DR_300x250_Square1" size="rectangle" />
       <div v-for="post in posts" :key="post.id">
         <nuxt-link class="story-link" tag="div" :to="post.slug">
           <PostAtom
@@ -21,17 +20,61 @@
         </nuxt-link>
       </div>
     </section>
+    <section class="advertising">
+      <advertising
+        id="div-gpt-ad-1487038544877-0"
+        size="rectangle"
+        unit="DR_300x250_Square1"
+      />
+      <advertising
+        id="div-gpt-ad-1487038544877-1"
+        size="rectangle"
+        unit="DR_300x250_Square2"
+      />
+      <advertising
+        id="div-gpt-ad-1487038544877-2"
+        size="rectangle"
+        unit="DR_300x250_Square3"
+      />
+      <advertising
+        id="div-gpt-ad-1487038544877-3"
+        size="rectangle"
+        unit="DR_300x250_Square4"
+      />
+      <advertising
+        id="div-gpt-ad-1487038544877-4"
+        size="rectangle"
+        unit="DR_300x250_Square5"
+      />
+      <advertising
+        id="div-gpt-ad-1487038544877-5"
+        size="rectangle"
+        unit="DR_300x250_Square6"
+      />
+      <advertising
+        id="div-gpt-ad-1487038544877-6"
+        size="rectangle"
+        unit="DR_300x250_Square7"
+      />
+      <advertising
+        id="div-gpt-ad-1487038544877-7"
+        size="rectangle"
+        unit="DR_300x250_Square8"
+      />
+    </section>
   </div>
 </template>
 
 <script>
 import PostAtom from '@/components/PostAtom'
 import Logo from '@/components/Logo'
+import Advertising from '@/components/Advertising'
 
 export default {
   components: {
     PostAtom,
-    Logo
+    Logo,
+    Advertising
   },
   mixins: {
     longTimestamp: Function,
@@ -119,6 +162,14 @@ export default {
 </script>
 
 <style lang="css">
+.posts {
+  float: left;
+  width: calc(100% - 300px);
+}
+.advertising {
+  float: left;
+  width: 300px;
+}
 .story-link,
 .story-link h4,
 .story-link .post-image .post-image-crop,
