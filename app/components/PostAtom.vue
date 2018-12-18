@@ -10,7 +10,7 @@
           : {}
       ]"
       :class="mode"
-      class="post"
+      class="post-atom"
     >
       <div v-if="mode != 'promotion'" class="post-image">
         <div class="post-image-crop">
@@ -76,17 +76,17 @@ export default {
 </script>
 
 <style lang="css">
-.post {
+.post-atom {
   hyphens: auto;
   padding: 1rem 1rem;
 }
 
-.post.promotion {
+.post-atom.promotion {
   padding: 4rem 2rem;
   position: relative;
 }
 
-.post.promotion::after {
+.post-atom.promotion::after {
   content: "";
   display: block;
   position: absolute;
@@ -187,11 +187,11 @@ export default {
 }
 
 @media (min-width: 500px){
-  .post {
+  .post-atom {
     display: flex;
     padding: 1rem 0;
   }
-  .post.spliced  {
+  .post-atom.spliced  {
     flex-direction: column;
   }
   .post-image,
@@ -213,7 +213,7 @@ export default {
 }
 
 @media (min-width: 1200px){
-  .post.enhanced {
+  .post-atom.enhanced {
     align-items: flex-end;
   }
   .post-image {

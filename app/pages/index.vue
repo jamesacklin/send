@@ -1,10 +1,5 @@
 <template>
   <div>
-    <header style="margin-bottom: 1rem; padding: 1rem;">
-      <div style="width: 200px; margin: 1rem auto;">
-        <Logo orientation="horizontal" />
-      </div>
-    </header>
     <main class="content">
       <section class="posts">
         <div v-for="post in posts" :key="post.id">
@@ -32,13 +27,11 @@
 
 <script>
 import PostAtom from '@/components/PostAtom'
-import Logo from '@/components/Logo'
 import Advertising from '@/components/Advertising'
 
 export default {
   components: {
     PostAtom,
-    Logo,
     Advertising
   },
   mixins: {
