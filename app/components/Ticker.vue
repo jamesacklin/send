@@ -36,8 +36,6 @@ export default {
 </script>
 
 <style lang="css">
-@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:300');
-
 .ticker {
   background: black;
   padding: 0.25rem 0;

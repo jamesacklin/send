@@ -9,16 +9,14 @@
 
 <script>
 export default {
-  name: "navItem",
+  name: 'navItem',
   props: {
     item: Object
   }
-};
+}
 </script>
 
 <style lang="css">
-@import url('https://fonts.googleapis.com/css?family=Libre+Franklin:900|Roboto+Mono:300|Roboto+Slab:300');
-
 .nav-item {
   display: block;
   background: black;

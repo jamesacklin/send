@@ -76,10 +76,6 @@ export default {
 </script>
 
 <style lang="css">
-@import url('https://fonts.googleapis.com/css?family=Libre+Franklin:900|Roboto+Mono:300|Roboto+Slab:300');
-
-* { box-sizing: border-box; }
-
 .post {
   hyphens: auto;
   padding: 1rem 1rem;
@@ -154,6 +150,7 @@ export default {
   font-size: 1.6rem;
   margin: -1rem 0 1rem;
   color: red;
+  font-weight: 900;
   cursor: pointer;
 }
 
@@ -169,7 +166,7 @@ export default {
 }
 
 .post-excerpt {
-  font-family: 'Roboto Slab', serif;
+  font-family: 'Libre Franklin', sans-serif;
   font-size: 1rem;
   line-height: 1.6rem;
 }
