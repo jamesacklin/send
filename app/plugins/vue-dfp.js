@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import DoubleClick from 'vue-doubleclick'
-import MarqueeText from 'vue-marquee-text-component'
 
 /* Mappings for @ably/vue-dfp */
 let mappings = {
@@ -23,6 +22,3 @@ Vue.use(DoubleClick, {
   id: '28844187',
   mappings
 })
-
-/* Component registration for @EvodiaAut/vue-marquee-text-component */
-Vue.component('marquee-text', MarqueeText)
