@@ -17,6 +17,28 @@ export default () => {
       },
       posts: [],
       pages: [],
+      tickerStories: [
+        {
+          title: 'Pivot to return as 2019 DirtFest Sponsor',
+          link: 'https://www.google.com/'
+        },
+        {
+          title: 'Snow Bike Festival is Back',
+          link: 'https://www.google.com/'
+        },
+        {
+          title: 'Canyon releases the new Neuron',
+          link: 'https://www.google.com'
+        },
+        {
+          title: 'Hark! Dirt Rag Issue 208 is on its way!',
+          link: 'https://www.google.com'
+        },
+        {
+          title: 'Remember to shred the vote November 6th',
+          link: 'https://www.google.com'
+        }
+      ],
       advertising: {
         rectangle: [
           {

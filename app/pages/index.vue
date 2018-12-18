@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Ticker :tickerStories="tickerStories" />
     <header style="margin-bottom: 1rem; padding: 1rem;">
       <div style="width: 200px; margin: 1rem auto;">
         <Logo orientation="horizontal" />
@@ -32,10 +33,12 @@
 import PostAtom from '@/components/PostAtom'
 import Logo from '@/components/Logo'
 import Advertising from '@/components/Advertising'
+import Ticker from '@/components/Ticker'
 
 export default {
   components: {
     PostAtom,
+    Ticker,
     Logo,
     Advertising
   },
@@ -77,6 +80,9 @@ export default {
     },
     ads() {
       return this.$store.state.advertising.rectangle
+    },
+    tickerStories() {
+      return this.$store.state.tickerStories
     }
   },
   mounted() {

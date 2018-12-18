@@ -4,7 +4,9 @@
       <span class="ticker-badge">Dirt Rag Newswire</span>
       <span
         class="ticker-story"
-        v-for="story in tickerStories">
+        :key="story.index"
+        v-for="story in tickerStories"
+      >
         <a :href="story.link">{{ story.title }}</a>
       </span>
     </marquee-text>
@@ -12,30 +14,25 @@
 </template>
 
 <script>
-import MarqueeText from "vue-marquee-text-component";
-
 export default {
-  name: "Ticker",
-  components: {
-    MarqueeText
-  },
+  name: 'Ticker',
   data: function() {
     return {
       paused: false
-    };
+    }
   },
   props: {
     tickerStories: Array
   },
   methods: {
     pauseTicker: function() {
-      this.paused = true;
+      this.paused = true
     },
     resumeTicker: function() {
-      this.paused = false;
+      this.paused = false
     }
   }
-};
+}
 </script>
 
 <style lang="css">
@@ -44,6 +41,7 @@ export default {
 .ticker {
   background: black;
   padding: 0.25rem 0;
+  overflow: hidden;
 }
 
 .ticker-story {
@@ -78,5 +76,4 @@ export default {
   padding: 0 0.25rem;
   margin-right: 1rem;
 }
-
 </style>
