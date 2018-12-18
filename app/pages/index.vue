@@ -5,26 +5,28 @@
         <Logo orientation="horizontal" />
       </div>
     </header>
-    <section class="posts">
-      <div v-for="post in posts" :key="post.id">
-        <nuxt-link class="story-link" tag="div" :to="post.slug">
-          <PostAtom
-            :pictureUrl="featuredImage(post)"
-            :title="post.title.rendered"
-            :author="post._embedded.author[0].name"
-            :date="post.date"
-            :excerpt="post.excerpt.rendered"
-            :isMedia="post.format == 'video' ? true : false"
-            :mode="post.meta.featuredPost.length ? 'enhanced' : 'default'"
-          />
-        </nuxt-link>
-      </div>
-    </section>
-    <section class="advertising">
-      <div style="margin-bottom: 1rem;" v-for="ad in ads" :key="ad.index">
-        <advertising :id="ad.id" :size="ad.size" :unit="ad.name" />
-      </div>
-    </section>
+    <main class="content">
+      <section class="posts">
+        <div v-for="post in posts" :key="post.id">
+          <nuxt-link class="story-link" tag="div" :to="post.slug">
+            <PostAtom
+              :pictureUrl="featuredImage(post)"
+              :title="post.title.rendered"
+              :author="post._embedded.author[0].name"
+              :date="post.date"
+              :excerpt="post.excerpt.rendered"
+              :isMedia="post.format == 'video' ? true : false"
+              :mode="post.meta.featuredPost.length ? 'enhanced' : 'default'"
+            />
+          </nuxt-link>
+        </div>
+      </section>
+      <section class="advertising">
+        <div style="margin-bottom: 1rem;" v-for="ad in ads" :key="ad.index">
+          <advertising :id="ad.id" :size="ad.size" :unit="ad.name" />
+        </div>
+      </section>
+    </main>
   </div>
 </template>
 
@@ -125,14 +127,26 @@ export default {
 </script>
 
 <style lang="css">
-.posts {
-  float: left;
-  width: calc(100% - 300px);
+@media (min-width: 1024px){
+  .content {
+    display: flex;
+    justify-content: space-between;
+  }
+  .posts {
+    width: calc(100% - 300px);
+  }
+  .advertising {
+    width: 300px;
+  }
 }
-.advertising {
-  float: left;
-  width: 300px;
+
+@media (min-width: 1600px){
+  .posts {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
 }
+
 .story-link,
 .story-link h4,
 .story-link .post-image .post-image-crop,

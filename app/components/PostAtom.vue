@@ -175,6 +175,12 @@ export default {
   margin-top: 0;
 }
 
+
+/* FIXME: do this for real on the API side */
+.post-excerpt a {
+  display: none;
+}
+
 .promotion .post-text {
   position: relative;
   z-index: 1;
