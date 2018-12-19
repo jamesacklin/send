@@ -6,19 +6,20 @@
           <nuxt-link class="story-link" tag="div" :to="post.slug">
             <PostAtom
               :pictureUrl="featuredImage(post)"
+              :titleCallout="titleCallout(post)"
               :title="post.title.rendered"
               :author="post._embedded.author[0].name"
               :date="post.date"
               :excerpt="post.excerpt.rendered"
               :isMedia="post.format == 'video' ? true : false"
               :isContest="post.categories[0] == '589' ? true : false"
-              :mode="post.meta.featuredPost.length ? 'enhanced' : 'default'"
+              :mode="postMode(post)"
             />
           </nuxt-link>
         </div>
       </section>
       <section class="advertising">
-        <div style="margin-bottom: 1rem;" v-for="ad in ads" :key="ad.index">
+        <div v-for="ad in ads" :key="ad.index">
           <advertising :id="ad.id" :size="ad.size" :unit="ad.name" />
         </div>
       </section>
@@ -27,6 +28,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import PostAtom from '@/components/PostAtom'
 import Advertising from '@/components/Advertising'
 
@@ -105,6 +107,30 @@ export default {
     }
   },
   methods: {
+    titleCallout: function(post) {
+      if (
+        _.find(post.categories, function(cat) {
+          return cat == '589'
+        })
+      ) {
+        return 'Contest'
+      } else if (
+        _.find(post._embedded['wp:term'][1], function(tag) {
+          return tag.id == '2339'
+        })
+      ) {
+        return 'Holiday Gift Guide'
+      }
+    },
+    postMode: function(post) {
+      if (post.categories[0] == '589') {
+        return 'promotion'
+      } else if (post.meta.featuredPost.length) {
+        return 'enhanced'
+      } else {
+        return 'default'
+      }
+    },
     featuredImage: function(post) {
       let featuredImage = post._embedded['wp:featuredmedia'][0]
       if (featuredImage && featuredImage.media_details) {
@@ -121,16 +147,23 @@ export default {
 </script>
 
 <style lang="css">
+
+.advertising > div > div:not(:empty) {
+  text-align: center;
+  margin: 0 auto 1rem;
+}
+
 @media (min-width: 1024px){
   .content {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
   }
   .posts {
     width: calc(100% - 300px);
   }
   .advertising {
-    width: 300px;
+    padding: 0 1rem;
+    width: auto;
   }
 }
 
@@ -141,7 +174,11 @@ export default {
   }
 }
 
-.story-link:hover {
+.story-link .post-atom {
+  transition: background-color 0.2s ease;
+}
+
+.story-link:hover .post-atom {
   cursor: pointer;
   background-color: rgba(255,0,0,0.125);
 }

@@ -9,7 +9,7 @@
             }
           : {}
       ]"
-      :class="mode"
+      :class="[mode, isContest ? 'contest' : true]"
       class="post-atom"
     >
       <div v-if="mode != 'promotion'" class="post-image">
@@ -95,6 +95,13 @@ export default {
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.4);
+}
+
+.post-atom.contest {
+  margin: 1rem;
+  border: 1px solid #CCC;
+  border-top: 0.25rem solid red;
+  box-shadow: 0 0.125em 0.25em rgba(0,0,0,0.125);
 }
 
 .post-image {
