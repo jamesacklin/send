@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="ticker" @mouseover="pauseTicker()" @mouseout="resumeTicker()">
     <div :class="{ paused: this.paused }">
-      <div class="text marquee-1">
+      <div class="text marquee">
         <span class="ticker-badge">Dirt Rag Newswire</span>
         <span
           class="ticker-story"
@@ -11,7 +11,7 @@
           <a :href="story.link">{{ story.title }}</a>
         </span>
       </div>
-      <div class="text marquee-2">
+      <div class="text marquee">
         <span class="ticker-badge">Dirt Rag Newswire</span>
         <span
           class="ticker-story"
@@ -30,11 +30,14 @@ export default {
   name: 'Ticker',
   data: function() {
     return {
-      textWidth: null,
-      paused: false
+      paused: this.initialPaused
     }
   },
   props: {
+    initialPaused: {
+      type: Boolean,
+      default: false
+    },
     tickerStories: Array
   },
   methods: {
@@ -57,18 +60,18 @@ export default {
   white-space: nowrap;
 }
 
-.text.marquee-1 {
+.text.marquee:nth-of-type(1) {
   display: inline-block;
   animation: marquee 20s linear infinite;
 }
 
-.text.marquee-2 {
+.text.marquee:nth-of-type(2) {
   display: inline-block;
   animation: marquee2 20s linear infinite;
   animation-delay: 10s;
 }
 
-.paused .text {
+.paused .text.marquee {
   animation-play-state: paused
 }
 
