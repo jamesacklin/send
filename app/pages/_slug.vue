@@ -120,16 +120,22 @@ export default {
   font-size: 1rem;
 }
 
+.advertising > div > div:not(:empty) {
+  text-align: center;
+  margin: 0 auto 1rem;
+}
+
 @media (min-width: 1024px) {
   .content {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
   }
   .entry {
     width: calc(100% - 300px);
   }
   .advertising {
-    width: 300px;
+    padding: 0 1rem;
+    width: auto;
   }
 }
 
