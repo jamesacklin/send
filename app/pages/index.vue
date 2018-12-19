@@ -140,30 +140,8 @@ export default {
   }
 }
 
-.story-link,
-.story-link h4,
-.story-link .post-image .post-image-crop,
-.story-link .post-image img {
-  transition: all 0.2s ease;
-}
-
 .story-link:hover {
-  background-color: rgba(255,0,0,0.125);
-}
-
-.story-link:hover h4,
-.story-link:hover a,
-.story-link:hover {
-  color: red;
   cursor: pointer;
-}
-
-.story-link:hover .post-image .post-image-crop {
-  background: red;
-}
-
-.story-link:hover .post-image img {
-  filter: grayscale(100%);
-  mix-blend-mode: multiply;
+  background-color: rgba(255,0,0,0.125);
 }
 </style>
