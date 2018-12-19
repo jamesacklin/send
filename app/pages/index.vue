@@ -11,6 +11,7 @@
               :date="post.date"
               :excerpt="post.excerpt.rendered"
               :isMedia="post.format == 'video' ? true : false"
+              :isContest="post.categories[0] == '589' ? true : false"
               :mode="post.meta.featuredPost.length ? 'enhanced' : 'default'"
             />
           </nuxt-link>
