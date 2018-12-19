@@ -1,15 +1,17 @@
 <template lang="html">
   <div class="ticker" @mouseover="pauseTicker()" @mouseout="resumeTicker()">
-    <marquee-text :paused="this.paused">
-      <span class="ticker-badge">Dirt Rag Newswire</span>
-      <span
-        class="ticker-story"
-        :key="story.index"
-        v-for="story in tickerStories"
-      >
-        <a :href="story.link">{{ story.title }}</a>
-      </span>
-    </marquee-text>
+    <no-ssr>
+      <marquee-text :paused="this.paused">
+        <span class="ticker-badge">Dirt Rag Newswire</span>
+        <span
+          class="ticker-story"
+          :key="story.index"
+          v-for="story in tickerStories"
+        >
+          <a :href="story.link">{{ story.title }}</a>
+        </span>
+      </marquee-text>
+    </no-ssr>
   </div>
 </template>
 
