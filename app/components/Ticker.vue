@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="ticker" @mouseover="pauseTicker()" @mouseout="resumeTicker()">
-    <no-ssr>
-      <marquee-text :paused="this.paused">
+    <div :class="{ paused: this.paused }">
+      <div class="text marquee-1">
         <span class="ticker-badge">Dirt Rag Newswire</span>
         <span
           class="ticker-story"
@@ -10,8 +10,18 @@
         >
           <a :href="story.link">{{ story.title }}</a>
         </span>
-      </marquee-text>
-    </no-ssr>
+      </div>
+      <div class="text marquee-2">
+        <span class="ticker-badge">Dirt Rag Newswire</span>
+        <span
+          class="ticker-story"
+          :key="story.index"
+          v-for="story in tickerStories"
+        >
+          <a :href="story.link">{{ story.title }}</a>
+        </span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -20,6 +30,7 @@ export default {
   name: 'Ticker',
   data: function() {
     return {
+      textWidth: null,
       paused: false
     }
   },
@@ -37,39 +48,34 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 .ticker {
   background: black;
   padding: 0.25rem 0;
   height: 30px;
   overflow: hidden;
-  position: relative;
+  white-space: nowrap;
 }
 
-.marquee {
-  display: block;
-  min-width: 200%;
-  height: 30px;
-  position: absolute;
-  overflow: hidden;
-  animation: marquee 10s linear infinite;
+.text.marquee-1 {
+  display: inline-block;
+  animation: marquee 20s linear infinite;
 }
 
-.marquee span {
-  /* float: left;
-  width: 50%; */
+.text.marquee-2 {
+  display: inline-block;
+  animation: marquee2 20s linear infinite;
+  animation-delay: 10s;
 }
 
-@keyframes marquee {
-  0% { left: 0; }
-  100% { left: -100%; }
+.paused .text {
+  animation-play-state: paused
 }
 
 .ticker-story {
   font-family: "Roboto Mono", monospace;
   font-weight: 300;
   color: white;
-  display: inline-block;
   text-transform: uppercase;
 }
 
@@ -93,8 +99,25 @@ export default {
   font-weight: 300;
   color: white;
   background: red;
-  display: inline-block;
   padding: 0 0.25rem;
   margin-right: 1rem;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes marquee2 {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-200%);
+  }
 }
 </style>

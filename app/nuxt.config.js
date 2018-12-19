@@ -13,10 +13,7 @@ module.exports = {
   },
   loading: { color: '#FF0000' },
   css: ['~/static/global.css'],
-  plugins: [
-    { src: '~/plugins/vue-dfp.js', ssr: false }
-    // { src: '~/plugins/vue-marquee-text.js', ssr: false }
-  ],
+  plugins: [{ src: '~/plugins/vue-dfp.js', ssr: false }],
   router: {
     scrollBehavior: function(to, from, savedPosition) {
       return { x: 0, y: 0 }
