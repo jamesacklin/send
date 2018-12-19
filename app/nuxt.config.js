@@ -14,8 +14,8 @@ module.exports = {
   loading: { color: '#FF0000' },
   css: ['~/static/global.css'],
   plugins: [
-    { src: '~/plugins/vue-dfp.js', ssr: false },
-    { src: '~/plugins/vue-marquee-text.js', ssr: false }
+    { src: '~/plugins/vue-dfp.js', ssr: false }
+    // { src: '~/plugins/vue-marquee-text.js', ssr: false }
   ],
   router: {
     scrollBehavior: function(to, from, savedPosition) {

@@ -1,4 +1,5 @@
 <template lang="html">
+<<<<<<< HEAD
   <div class="ticker" @mouseover="pauseTicker()" @mouseout="resumeTicker()">
     <no-ssr>
       <marquee-text :paused="this.paused">
@@ -12,6 +13,19 @@
         </span>
       </marquee-text>
     </no-ssr>
+=======
+  <div class="ticker">
+    <div class="marquee">
+      <span class="ticker-badge">Dirt Rag Newswire</span>
+      <span
+        class="ticker-story"
+        :key="story.index"
+        v-for="story in tickerStories"
+      >
+        <a :href="story.link">{{ story.title }}</a>
+      </span>
+    </div>
+>>>>>>> d5cc6df3bb02d4314f54d44a764006199d52e085
   </div>
 </template>
 
@@ -41,7 +55,28 @@ export default {
 .ticker {
   background: black;
   padding: 0.25rem 0;
+  height: 30px;
   overflow: hidden;
+  position: relative;
+}
+
+.marquee {
+  display: block;
+  min-width: 200%;
+  height: 30px;
+  position: absolute;
+  overflow: hidden;
+  animation: marquee 10s linear infinite;
+}
+
+.marquee span {
+  /* float: left;
+  width: 50%; */
+}
+
+@keyframes marquee {
+  0% { left: 0; }
+  100% { left: -100%; }
 }
 
 .ticker-story {
