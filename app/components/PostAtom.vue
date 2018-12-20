@@ -14,13 +14,7 @@
     >
       <div v-if="mode != 'promotion'" class="post-image">
         <div class="post-image-crop">
-          <img
-            v-lazyload
-            v-if="pictureUrl.length"
-            :alt="title"
-            :data-src="pictureUrl"
-            :src="pictureUrl"
-          />
+          <img v-if="pictureUrl.length" :alt="title" :src="pictureUrl" />
         </div>
       </div>
       <div class="post-text">
