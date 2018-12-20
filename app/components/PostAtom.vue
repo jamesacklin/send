@@ -14,7 +14,13 @@
     >
       <div v-if="mode != 'promotion'" class="post-image">
         <div class="post-image-crop">
-          <img v-if="pictureUrl.length" :alt="title" :src="pictureUrl" />
+          <no-ssr>
+            <lazy-img
+              :alt="title"
+              :src="pictureUrl"
+              placeholder="/og-card.png"
+            />
+          </no-ssr>
         </div>
       </div>
       <div class="post-text">
@@ -109,26 +115,26 @@ export default {
 }
 
 .post-image-crop {
-  position: relative;
+  /* position: relative;
   width: 100%;
   height: 0;
   overflow: hidden;
-  padding-top: 56.67%;
+  padding-top: 56.67%; */
 }
 
 .enhanced .post-image-crop {
-  padding-top: 75%;
+  /* padding-top: 75%; */
 }
 
 .post-image-crop img {
-  position: absolute;
+  /* position: absolute;
   left: 50%;
   top: 50%;
   width: 100%;
   height: auto;
   -webkit-transform: translate(-50%,-50%);
       -ms-transform: translate(-50%,-50%);
-          transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%); */
 }
 
 .post-title-block {

@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import DoubleClick from 'vue-doubleclick'
+import VueLazyImageLoading from 'vue-lazy-image-loading'
+
+Vue.use(VueLazyImageLoading)
 
 /* Mappings for @ably/vue-dfp */
 let mappings = {
