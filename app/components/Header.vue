@@ -1,6 +1,6 @@
 <template lang="html">
   <div ref="banner" :class="{ block: pastHeader }">
-    <Ticker :tickerStories="tickerStories" />
+    <Ticker ref="ticker" :tickerStories="tickerStories" />
     <header role="banner" :class="{ sticky: pastHeader }">
       <div class="logo-wrapper">
         <nuxt-link tag="a" :to="`/`">
@@ -34,8 +34,8 @@ export default {
   methods: {
     scrollHeader() {
       const scrollY = window.scrollY
-      const bannerHeight = this.$refs.banner.clientHeight
-      if (scrollY >= bannerHeight) {
+      const tickerHeight = 30
+      if (scrollY >= tickerHeight) {
         return true
       } else {
         return false
