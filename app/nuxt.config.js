@@ -27,12 +27,18 @@ module.exports = {
         workbox: false // no service worker during dev
       }
     ],
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    'nuxt-webfontloader'
   ],
   axios: {
     baseURL: 'https://www.dirtragmag.com/wp-json/wp/v2/',
     https: true,
     progress: true
+  },
+  webfontloader: {
+    google: {
+      families: ['Libre+Franklin:900,300', 'Roboto+Mono:300']
+    }
   },
   build: {
     extend(config, ctx) {
