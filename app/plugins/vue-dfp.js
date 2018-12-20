@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import DoubleClick from 'vue-doubleclick'
+import VueTinyLazyloadImg from 'vue-tiny-lazyload-img'
 
 /* Mappings for @ably/vue-dfp */
 let mappings = {
@@ -22,3 +23,5 @@ Vue.use(DoubleClick, {
   id: '28844187',
   mappings
 })
+
+Vue.use(VueTinyLazyloadImg)

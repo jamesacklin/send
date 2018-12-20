@@ -21,7 +21,8 @@
     "npm": "^6.4.1",
     "nuxt": "^2.3.4",
     "vue": "^2.5.18",
-    "vue-doubleclick": "^1.0.4"
+    "vue-doubleclick": "^1.0.4",
+    "vue-tiny-lazyload-img": "0.0.3"
   },
   "devDependencies": {
     "@storybook/addon-a11y": "^4.0.10",
