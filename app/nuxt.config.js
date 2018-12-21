@@ -13,11 +13,6 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'preconnect',
-        href: 'https://fonts.gstatic.com/',
-        crossorigin: true
-      },
-      {
-        rel: 'preconnect',
         href: 'https://www.dirtragmag.com/',
         crossorigin: true
       }
@@ -42,20 +37,12 @@ module.exports = {
         workbox: false // no service worker during dev
       }
     ],
-    '@nuxtjs/axios',
-    'nuxt-webfontloader'
+    '@nuxtjs/axios'
   ],
   axios: {
     baseURL: 'https://www.dirtragmag.com/wp-json/wp/v2/',
     https: true,
     progress: true
-  },
-  webfontloader: {
-    classes: false,
-    events: false,
-    google: {
-      families: ['Libre+Franklin:900,300:latin', 'Roboto+Mono:300:latin']
-    }
   },
   render: {
     compressor: {

@@ -1,4 +1,32 @@
+/* libre-franklin-300 - latin */
 @font-face {
+  font-family: 'Libre Franklin';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Libre Franklin Light'), local('LibreFranklin-Light'),
+    url('/fonts/libre-franklin-v2-latin-300.woff2') format('woff2'),
+    url('/fonts/libre-franklin-v2-latin-300.woff') format('woff');
+  font-display: swap;
+}
+/* libre-franklin-900 - latin */
+@font-face {
+  font-family: 'Libre Franklin';
+  font-style: normal;
+  font-weight: 900;
+  src: local('Libre Franklin Black'), local('LibreFranklin-Black'),
+    url('/fonts/libre-franklin-v2-latin-900.woff2') format('woff2'),
+    url('/fonts/libre-franklin-v2-latin-900.woff') format('woff');
+  font-display: swap;
+}
+
+/* roboto-mono-300 - latin */
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Roboto Mono Light'), local('RobotoMono-Light'),
+    url('/fonts/roboto-mono-v5-latin-300.woff2') format('woff2'),
+    url('/fonts/roboto-mono-v5-latin-300.woff') format('woff');
   font-display: swap;
 }
 
