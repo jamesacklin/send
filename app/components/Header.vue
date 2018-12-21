@@ -72,7 +72,7 @@ header[role='banner']{
 
 header.sticky {
   position: fixed;
-  z-index: 1;
+  z-index: 2;
 }
 
 .logo-wrapper {
