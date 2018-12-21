@@ -23,7 +23,7 @@
     "nuxt-webfontloader": "^1.0.0",
     "vue": "^2.5.18",
     "vue-doubleclick": "^1.0.4",
-    "vue-lazy-image-loading": "^1.1.5"
+    "vue-lazyload": "^1.2.6"
   },
   "devDependencies": {
     "@storybook/addon-a11y": "^4.0.10",

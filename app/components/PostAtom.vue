@@ -1,27 +1,11 @@
 <template lang="html">
   <div class="post-container">
     <div
-      :style="[
-        mode == 'promotion'
-          ? {
-              background: 'url(' + pictureUrl + ') center no-repeat #000',
-              'background-size': 'cover'
-            }
-          : {}
-      ]"
-      :class="[mode, isContest ? 'contest' : true]"
-      class="post-atom"
+      v-lazy:background-image="backgroundImage"
+      :class="[mode, isContest ? 'contest' : true, 'post-atom']"
     >
       <div v-if="mode != 'promotion'" class="post-image">
-        <div class="post-image-crop">
-          <no-ssr>
-            <lazy-img
-              :alt="title"
-              :src="pictureUrl"
-              placeholder="/og-card.png"
-            />
-          </no-ssr>
-        </div>
+        <div class="post-image-crop"><img alt="" v-lazy="pictureUrl" /></div>
       </div>
       <div class="post-text">
         <div class="post-title-block">
@@ -76,6 +60,13 @@ export default {
   computed: {
     postDate: function() {
       return dayjs(this.date).format('MMMM D, YYYY')
+    },
+    backgroundImage() {
+      if (this.mode == 'promotion') {
+        return this.pictureUrl
+      } else {
+        return '/og-card.png'
+      }
     }
   }
 }
@@ -87,9 +78,16 @@ export default {
   padding: 1rem 1rem;
 }
 
+.post-atom:not(.promotion){
+  background-image: none !important;
+}
+
 .post-atom.promotion {
   padding: 4rem 2rem;
   position: relative;
+  background-color: black;
+  background-size: cover;
+  background-position: center center;
 }
 
 .post-atom.promotion::after {
@@ -115,26 +113,27 @@ export default {
 }
 
 .post-image-crop {
-  /* position: relative;
+  position: relative;
   width: 100%;
   height: 0;
   overflow: hidden;
-  padding-top: 56.67%; */
+  padding-top: 56.67%;
 }
 
 .enhanced .post-image-crop {
-  /* padding-top: 75%; */
+  padding-top: 75%;
 }
 
 .post-image-crop img {
-  /* position: absolute;
+  backface-visibility: hidden;
+  position: absolute;
   left: 50%;
   top: 50%;
   width: 100%;
   height: auto;
   -webkit-transform: translate(-50%,-50%);
       -ms-transform: translate(-50%,-50%);
-          transform: translate(-50%,-50%); */
+          transform: translate(-50%,-50%);
 }
 
 .post-title-block {

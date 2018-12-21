@@ -11,15 +11,15 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'preconnect', href: 'https://www.dirtragmag.com/' }
-    ],
-    script: [
-      { src: 'https://www.googletagservices.com/tag/js/gpt.js', defer: true }
+      { rel: 'preload', href: 'https://www.dirtragmag.com', crossorigin: true }
     ]
   },
   loading: { color: '#FF0000' },
   css: ['~/static/global.css'],
-  plugins: [{ src: '~/plugins/vue-dfp.js', ssr: false }],
+  plugins: [
+    { src: '~/plugins/vue-dfp.js', ssr: false },
+    { src: '~/plugins/vue-lazy.js', ssr: false }
+  ],
   router: {
     scrollBehavior: function(to, from, savedPosition) {
       return { x: 0, y: 0 }
