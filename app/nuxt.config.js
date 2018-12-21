@@ -70,6 +70,7 @@ module.exports = {
       }
     },
     extractCSS: true,
+    cache: true,
     html: {
       minify: {
         collapseBooleanAttributes: true,
