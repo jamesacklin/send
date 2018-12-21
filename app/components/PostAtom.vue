@@ -1,21 +1,11 @@
 <template lang="html">
   <div class="post-container">
     <div
-      :style="[
-        mode == 'promotion'
-          ? {
-              background: 'url(' + pictureUrl + ') center no-repeat #000',
-              'background-size': 'cover'
-            }
-          : {}
-      ]"
-      :class="[mode, isContest ? 'contest' : true]"
-      class="post-atom"
+      v-lazy:background-image="backgroundImage"
+      :class="[mode, isContest ? 'contest' : true, 'post-atom']"
     >
       <div v-if="mode != 'promotion'" class="post-image">
-        <div class="post-image-crop">
-          <img v-if="pictureUrl.length" :alt="title" :src="pictureUrl" />
-        </div>
+        <div class="post-image-crop"><img alt="" v-lazy="pictureUrl" /></div>
       </div>
       <div class="post-text">
         <div class="post-title-block">
@@ -70,6 +60,13 @@ export default {
   computed: {
     postDate: function() {
       return dayjs(this.date).format('MMMM D, YYYY')
+    },
+    backgroundImage() {
+      if (this.mode == 'promotion') {
+        return this.pictureUrl
+      } else {
+        return '/og-card.png'
+      }
     }
   }
 }
@@ -81,9 +78,16 @@ export default {
   padding: 1rem 1rem;
 }
 
+.post-atom:not(.promotion){
+  background-image: none !important;
+}
+
 .post-atom.promotion {
   padding: 4rem 2rem;
   position: relative;
+  background-color: black;
+  background-size: cover;
+  background-position: center center;
 }
 
 .post-atom.promotion::after {
@@ -121,6 +125,7 @@ export default {
 }
 
 .post-image-crop img {
+  backface-visibility: hidden;
   position: absolute;
   left: 50%;
   top: 50%;

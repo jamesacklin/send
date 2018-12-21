@@ -14,7 +14,11 @@
     </article>
     <section class="advertising">
       <div style="margin-bottom: 1rem;" v-for="ad in ads" :key="ad.index">
-        <advertising :id="ad.id" :size="ad.size" :unit="ad.name" />
+        <no-ssr>
+          <div v-for="ad in ads" :key="ad.index">
+            <advertising :id="ad.id" :size="ad.size" :unit="ad.name" />
+          </div>
+        </no-ssr>
       </div>
     </section>
   </main>

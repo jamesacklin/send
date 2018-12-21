@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Libre+Franklin:900,300|Roboto+Mono:300');
+@font-face {
+  font-display: swap;
+}
 
 * {
   box-sizing: border-box;

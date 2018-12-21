@@ -19,9 +19,13 @@
         </div>
       </section>
       <section class="advertising">
-        <div v-for="ad in ads" :key="ad.index">
-          <advertising :id="ad.id" :size="ad.size" :unit="ad.name" />
-        </div>
+        <no-ssr>
+          <div v-for="ad in ads" :key="ad.index">
+            <keep-alive>
+              <advertising :id="ad.id" :size="ad.size" :unit="ad.name" />
+            </keep-alive>
+          </div>
+        </no-ssr>
       </section>
     </main>
   </div>
