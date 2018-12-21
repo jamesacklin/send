@@ -42,8 +42,10 @@ module.exports = {
     progress: true
   },
   webfontloader: {
+    classes: false,
+    events: false,
     google: {
-      families: ['Libre+Franklin:900,300', 'Roboto+Mono:300']
+      families: ['Libre+Franklin:900,300:latin', 'Roboto+Mono:300:latin']
     }
   },
   build: {
