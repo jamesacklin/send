@@ -57,6 +57,11 @@ module.exports = {
       families: ['Libre+Franklin:900,300:latin', 'Roboto+Mono:300:latin']
     }
   },
+  render: {
+    compressor: {
+      level: 6
+    }
+  },
   build: {
     extend(config, ctx) {
       // Run ESLint on save
@@ -69,7 +74,6 @@ module.exports = {
         })
       }
     },
-    extractCSS: true,
     cache: true,
     html: {
       minify: {
