@@ -11,7 +11,16 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'preload', href: 'https://www.dirtragmag.com', crossorigin: true }
+      {
+        rel: 'preconnect',
+        href: 'https://fonts.gstatic.com/',
+        crossorigin: true
+      },
+      {
+        rel: 'preconnect',
+        href: 'https://www.dirtragmag.com/',
+        crossorigin: true
+      }
     ]
   },
   loading: { color: '#FF0000' },
