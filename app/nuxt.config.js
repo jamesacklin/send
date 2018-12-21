@@ -11,7 +11,16 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'preload', href: 'https://www.dirtragmag.com', crossorigin: true }
+      {
+        rel: 'preconnect',
+        href: 'https://fonts.gstatic.com/',
+        crossorigin: true
+      },
+      {
+        rel: 'preconnect',
+        href: 'https://www.dirtragmag.com/',
+        crossorigin: true
+      }
     ]
   },
   loading: { color: '#FF0000' },
@@ -48,6 +57,11 @@ module.exports = {
       families: ['Libre+Franklin:900,300:latin', 'Roboto+Mono:300:latin']
     }
   },
+  render: {
+    compressor: {
+      level: 6
+    }
+  },
   build: {
     extend(config, ctx) {
       // Run ESLint on save
@@ -60,7 +74,7 @@ module.exports = {
         })
       }
     },
-    extractCSS: true,
+    cache: true,
     html: {
       minify: {
         collapseBooleanAttributes: true,
