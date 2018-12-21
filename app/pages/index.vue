@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import _ from 'lodash'
+import find from 'lodash/find'
 import PostAtom from '@/components/PostAtom'
 import Advertising from '@/components/Advertising'
 
@@ -113,13 +113,13 @@ export default {
   methods: {
     titleCallout: function(post) {
       if (
-        _.find(post.categories, function(cat) {
+        find(post.categories, function(cat) {
           return cat == '589'
         })
       ) {
         return 'Contest'
       } else if (
-        _.find(post._embedded['wp:term'][1], function(tag) {
+        find(post._embedded['wp:term'][1], function(tag) {
           return tag.id == '2339'
         })
       ) {
