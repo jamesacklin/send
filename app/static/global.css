@@ -1,4 +1,5 @@
-/* libre-franklin-300 - latin */
+/* Web fonts */
+
 @font-face {
   font-family: 'Libre Franklin';
   font-style: normal;
@@ -8,7 +9,7 @@
     url('/fonts/libre-franklin-v2-latin-300.woff') format('woff');
   font-display: swap;
 }
-/* libre-franklin-900 - latin */
+
 @font-face {
   font-family: 'Libre Franklin';
   font-style: normal;
@@ -19,7 +20,6 @@
   font-display: swap;
 }
 
-/* roboto-mono-300 - latin */
 @font-face {
   font-family: 'Roboto Mono';
   font-style: normal;
@@ -29,6 +29,8 @@
     url('/fonts/roboto-mono-v5-latin-300.woff') format('woff');
   font-display: swap;
 }
+
+/* General resets */
 
 * {
   box-sizing: border-box;
@@ -40,15 +42,30 @@ body {
   padding: 0;
 }
 
+/* Responsive images */
+
 img {
   max-width: 100%;
   height: auto;
 }
 
+figure {
+  width: 100% !important;
+  margin: 1rem 0;
+}
+
+figcaption {
+  text-transform: uppercase;
+  font-size: 0.7em;
+}
+
+/* Vue fade transition */
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
