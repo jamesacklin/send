@@ -136,12 +136,16 @@ export default {
       }
     },
     featuredImage: function(post) {
-      let featuredImage = post._embedded['wp:featuredmedia'][0]
-      if (featuredImage && featuredImage.media_details) {
-        return (
-          featuredImage.media_details.sizes.medium.source_url ||
-          featuredImage.media_details.sizes.full.source_url
-        )
+      if (post._embedded['wp:featuredmedia']) {
+        let featuredImage = post._embedded['wp:featuredmedia'][0]
+        if (featuredImage && featuredImage.media_details.sizes.medium) {
+          return (
+            featuredImage.media_details.sizes.medium.source_url ||
+            featuredImage.media_details.sizes.full.source_url
+          )
+        } else {
+          return '/og-card.png'
+        }
       } else {
         return '/og-card.png'
       }
