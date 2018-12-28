@@ -28,7 +28,12 @@
         </no-ssr>
       </section>
     </main>
-    <Pagination />
+    <div
+      v-if="bottom === true"
+      style="width: 100%; background: #CCC; padding: 1rem 1rem 5rem; font-family: 'Roboto Mono', monospace; position: fixed; bottom: 50%;"
+    >
+      Loading...
+    </div>
   </div>
 </template>
 
@@ -36,60 +41,23 @@
 import find from 'lodash/find'
 import PostAtom from '@/components/PostAtom'
 import Advertising from '@/components/Advertising'
-import Pagination from '@/components/Navigation/Pagination'
 
 export default {
   components: {
     PostAtom,
-    Advertising,
-    Pagination
+    Advertising
   },
-  mixins: {
-    longTimestamp: Function,
-    widont: Function
+  data() {
+    return {
+      bottom: false
+    }
   },
   async asyncData({ payload, isStatic, store, params }) {
-    // payload set during static generation
-    if (payload && isStatic) {
-      // setup the store as it would be in SPA mode
-      // const page = parseInt( params.id ) || 1
-      const page = payload.meta.page
-      store.commit('currentPage', page)
-      store.commit('paginate', page)
-      store.commit('paginateTotals', {
-        totalPosts: payload.meta.totalPosts,
-        totalPostsPages: payload.meta.totalPostsPages
-      })
-      store.commit('addPosts', payload.payload)
-    } else {
-      await store.dispatch('getPosts', { page: parseInt(params.id || 1) })
-    }
-  },
-  fetch({ params, redirect, route }) {
-    // redirect page 1 or /page/
-    if (
-      1 === parseInt(params.id) ||
-      '/page' === route.path.replace(/\/$/, '')
-    ) {
-      redirect(301, '/')
-    }
-  },
-  mounted() {
-    // prefetch pages either side of this one
-    const nextPage = parseInt(this.$route.params.id) + 1 || 2
-    this.$store.dispatch('getPosts', { page: nextPage, prefetch: true })
-    const previousPage = this.$route.params.id
-      ? parseInt(this.$route.params.id - 1)
-      : false
-    if (previousPage) {
-      this.$store.dispatch('getPosts', { page: previousPage, prefetch: true })
-    }
+    await store.dispatch('getPosts', { page: parseInt(params.id || 1) })
   },
   computed: {
     posts() {
-      return this.$store.getters.getPostsPage(
-        parseInt(this.$route.params.id) || 1
-      )
+      return this.$store.getters.getPosts
     },
     ads() {
       return this.$store.state.advertising.rectangle
@@ -97,17 +65,15 @@ export default {
   },
   head() {
     return {
-      title: 'Dirt Rag Magazine • Page ' + (this.$route.params.id || 1),
+      title: 'Dirt Rag Magazine',
       bodyAttrs: {
-        class: this.$route.params.id
-          ? 'archive page page-' + this.$route.params.id
-          : 'home archive'
+        class: 'home archive'
       },
       meta: [
         {
           hid: 'og:title',
           property: 'og:title',
-          content: 'Dirt Rag Magazine • Page ' + (this.$route.params.id || 1)
+          content: 'Dirt Rag Magazine'
         }
       ]
     }
@@ -151,13 +117,39 @@ export default {
       } else {
         return '/og-card.png'
       }
+    },
+    bottomVisible() {
+      const scrollY = window.scrollY
+      const visible = document.documentElement.clientHeight
+      const pageHeight = document.documentElement.scrollHeight
+      const bottomOfPage = visible + scrollY >= pageHeight
+      return bottomOfPage || pageHeight < visible
     }
+  },
+  watch: {
+    bottom(bottom) {
+      if (bottom) {
+        const nextPage = parseInt(this.$route.params.id) + 1 || 2
+        this.$route.params.id = nextPage
+        this.$store.commit('currentPage', nextPage)
+        this.$store.dispatch('getPosts', { page: nextPage, prefetch: true })
+      }
+    }
+  },
+  beforeMount() {
+    document.addEventListener('scroll', () => {
+      this.bottom = this.bottomVisible()
+    })
+  },
+  beforeDestroy() {
+    document.removeEventListener('scroll', () => {
+      this.bottom = this.bottomVisible()
+    })
   }
 }
 </script>
 
 <style lang="css">
-
 .advertising > div > div:not(:empty) {
   text-align: center;
   margin: 0 auto 1rem;
