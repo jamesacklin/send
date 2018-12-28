@@ -17,8 +17,9 @@
             />
           </nuxt-link>
         </div>
+        <div class="posts-loader">Loading more posts...</div>
       </section>
-      <section class="advertising">
+      <section class="advertising" :style="{ paddingTop: `${adSidebarTop}px` }">
         <no-ssr>
           <div v-for="ad in ads" :key="ad.index">
             <keep-alive>
@@ -28,12 +29,6 @@
         </no-ssr>
       </section>
     </main>
-    <div
-      v-if="bottom === true"
-      style="width: 100%; background: #CCC; padding: 1rem 1rem 5rem; font-family: 'Roboto Mono', monospace; position: fixed; bottom: 50%;"
-    >
-      Loading...
-    </div>
   </div>
 </template>
 
@@ -49,7 +44,8 @@ export default {
   },
   data() {
     return {
-      bottom: false
+      bottom: false,
+      adSidebarTop: 0
     }
   },
   async asyncData({ payload, isStatic, store, params }) {
@@ -133,6 +129,8 @@ export default {
         this.$route.params.id = nextPage
         this.$store.commit('currentPage', nextPage)
         this.$store.dispatch('getPosts', { page: nextPage, prefetch: true })
+        this.adSidebarTop = window.scrollY - 40
+        googletag.pubads().refresh()
       }
     }
   },
@@ -155,15 +153,33 @@ export default {
   margin: 0 auto 1rem;
 }
 
+.posts {
+  padding-bottom: 7rem;
+  position: relative;
+}
+
+.posts-loader {
+  width: 100%;
+  border-top: 5px solid #CCC;
+  padding: 1rem;
+  margin-top: 1rem;
+  height: 6rem;
+  font-family: 'Roboto Mono', monospace;
+  position: absolute;
+  bottom: 0;
+}
+
 @media (min-width: 1024px){
   .content {
     display: flex;
+    align-items: flex-start;
     justify-content: center;
   }
   .posts {
     width: calc(100% - 300px);
   }
   .advertising {
+    transition: padding-top 0.2s ease;
     padding: 0 1rem;
     width: auto;
   }
