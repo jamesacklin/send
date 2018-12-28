@@ -3,7 +3,7 @@
     <main class="content">
       <section class="posts">
         <div v-for="post in posts" :key="post.id">
-          <nuxt-link class="story-link" tag="div" :to="post.slug">
+          <nuxt-link class="story-link" tag="div" :to="`/` + post.slug">
             <PostAtom
               :pictureUrl="featuredImage(post)"
               :titleCallout="titleCallout(post)"
@@ -28,6 +28,7 @@
         </no-ssr>
       </section>
     </main>
+    <Pagination />
   </div>
 </template>
 
@@ -35,11 +36,13 @@
 import find from 'lodash/find'
 import PostAtom from '@/components/PostAtom'
 import Advertising from '@/components/Advertising'
+import Pagination from '@/components/Navigation/Pagination'
 
 export default {
   components: {
     PostAtom,
-    Advertising
+    Advertising,
+    Pagination
   },
   mixins: {
     longTimestamp: Function,
@@ -71,6 +74,17 @@ export default {
       redirect(301, '/')
     }
   },
+  mounted() {
+    // prefetch pages either side of this one
+    const nextPage = parseInt(this.$route.params.id) + 1 || 2
+    this.$store.dispatch('getPosts', { page: nextPage, prefetch: true })
+    const previousPage = this.$route.params.id
+      ? parseInt(this.$route.params.id - 1)
+      : false
+    if (previousPage) {
+      this.$store.dispatch('getPosts', { page: previousPage, prefetch: true })
+    }
+  },
   computed: {
     posts() {
       return this.$store.getters.getPostsPage(
@@ -79,18 +93,6 @@ export default {
     },
     ads() {
       return this.$store.state.advertising.rectangle
-    }
-  },
-  mounted() {
-    // prefetch pages either side of this one
-    const nextPage = parseInt(this.$route.params.id) + 1 || 2
-    this.$store.dispatch('getPosts', { page: nextPage, prefetch: true })
-
-    const previousPage = this.$route.params.id
-      ? parseInt(this.$route.params.id - 1)
-      : false
-    if (previousPage) {
-      this.$store.dispatch('getPosts', { page: previousPage, prefetch: true })
     }
   },
   head() {
@@ -136,12 +138,16 @@ export default {
       }
     },
     featuredImage: function(post) {
-      let featuredImage = post._embedded['wp:featuredmedia'][0]
-      if (featuredImage && featuredImage.media_details) {
-        return (
-          featuredImage.media_details.sizes.medium.source_url ||
-          featuredImage.media_details.sizes.full.source_url
-        )
+      if (post._embedded['wp:featuredmedia']) {
+        let featuredImage = post._embedded['wp:featuredmedia'][0]
+        if (featuredImage && featuredImage.media_details.sizes.medium) {
+          return (
+            featuredImage.media_details.sizes.medium.source_url ||
+            featuredImage.media_details.sizes.full.source_url
+          )
+        } else {
+          return '/og-card.png'
+        }
       } else {
         return '/og-card.png'
       }

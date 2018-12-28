@@ -1,36 +1,41 @@
 <template>
-  <main class="content">
-    <article :id="'post-id-' + post.id" class="entry">
-      <header class="entry-header">
-        <h1 class="entry-title" v-html="post.title.rendered"></h1>
-        <div class="post-author">
-          <span>{{ post._embedded.author[0].name }}</span>
-          <span class="post-date">
-            &nbsp;—&nbsp; <span v-html="postDate"></span>
-          </span>
-        </div>
-      </header>
-      <div class="entry-content" v-html="post.content.rendered" />
-    </article>
-    <section class="advertising">
-      <div style="margin-bottom: 1rem;" v-for="ad in ads" :key="ad.index">
-        <no-ssr>
-          <div v-for="ad in ads" :key="ad.index">
-            <advertising :id="ad.id" :size="ad.size" :unit="ad.name" />
+  <div>
+    <main class="content">
+      <article :id="'post-id-' + post.id" class="entry">
+        <header class="entry-header">
+          <h1 class="entry-title" v-html="post.title.rendered"></h1>
+          <div class="post-author">
+            <span>{{ post._embedded.author[0].name }}</span>
+            <span class="post-date">
+              &nbsp;—&nbsp; <span v-html="postDate"></span>
+            </span>
           </div>
-        </no-ssr>
-      </div>
-    </section>
-  </main>
+        </header>
+        <div class="entry-content" v-html="post.content.rendered" />
+      </article>
+      <section class="advertising">
+        <div style="margin-bottom: 1rem;" v-for="ad in ads" :key="ad.index">
+          <no-ssr>
+            <div v-for="ad in ads" :key="ad.index">
+              <advertising :id="ad.id" :size="ad.size" :unit="ad.name" />
+            </div>
+          </no-ssr>
+        </div>
+      </section>
+    </main>
+    <Pagination />
+  </div>
 </template>
 
 <script>
 import dayjs from 'dayjs'
 import Advertising from '@/components/Advertising'
+import Pagination from '@/components/Navigation/Pagination'
 
 export default {
   components: {
-    Advertising
+    Advertising,
+    Pagination
   },
   computed: {
     post() {
