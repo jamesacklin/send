@@ -23,19 +23,16 @@
         </div>
       </section>
     </main>
-    <Pagination />
   </div>
 </template>
 
 <script>
 import dayjs from 'dayjs'
 import Advertising from '@/components/Advertising'
-import Pagination from '@/components/Navigation/Pagination'
 
 export default {
   components: {
-    Advertising,
-    Pagination
+    Advertising
   },
   computed: {
     post() {

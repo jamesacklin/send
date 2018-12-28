@@ -48,7 +48,7 @@ export default {
     })
   },
   beforeDestroy() {
-    document.body.removeEventListener('scroll', () => {
+    document.removeEventListener('scroll', () => {
       this.pastHeader = this.scrollHeader()
     })
   }
