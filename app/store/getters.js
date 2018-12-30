@@ -25,11 +25,14 @@ export default {
     })
     return posts
   },
-  getPostsWithAds: state => {
-    // sort posts by date
-    const posts = state.posts.sort((a, b) => {
-      return a.date < b.date ? 1 : -1
-    })
+  getPostsPageWithAds: state => page => {
+    // filter to just the current page, and sort posts by date
+    const posts = state.posts
+      .filter(post => post.page === page)
+      .sort((a, b) => {
+        return a.date < b.date ? 1 : -1
+      })
+
     // get ads
     const ads = state.advertising.rectangle
     // insert ad into every 3 posts

@@ -64,7 +64,9 @@ export default {
       return this.$store.state.advertising.rectangle
     },
     pageItems() {
-      return _.compact(_.flattenDeep(_.zip(_.chunk(this.posts, 3), this.ads)))
+      return this.$store.getters.getPostsPageWithAds(
+        parseInt(this.$route.params.id) || 1
+      )
     }
   },
   head() {
