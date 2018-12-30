@@ -25,27 +25,6 @@ export default {
     })
     return posts
   },
-  getPostsPageWithAds: state => page => {
-    // filter to just the current page, and sort posts by date
-    const posts = state.posts
-      .filter(post => post.page === page)
-      .sort((a, b) => {
-        return a.date < b.date ? 1 : -1
-      })
-
-    // get ads
-    const ads = state.advertising.rectangle
-    // insert ad into every 3 posts
-    function insertAds(posts) {
-      return _.compact(_.flattenDeep(_.zip(_.chunk(posts, 3), ads)))
-    }
-    // chunk posts by 30 (page length)
-    var chunkedPosts = _.chunk(posts, 30)
-    // smush chunks (with insterted ads) back together
-    const postsWithAds = _.flattenDeep(_.map(chunkedPosts, insertAds))
-    // return new array
-    return postsWithAds
-  },
   // get page of posts
   getPostsPage: state => page => {
     // filter just the current page

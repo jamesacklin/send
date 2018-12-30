@@ -1,5 +1,5 @@
 <template lang="html">
-  <nav class="navigation">
+  <nav class="page-navigation">
     <ul class="pagination pagination-archive" v-if="postArchive" key="archive">
       <li v-if="notFirstPage">
         <nuxt-link :to="prevPage">
@@ -142,10 +142,6 @@ export default {
 <style lang="scss">
 .screen-reader-text {
   font-family: 'Roboto Mono', monospace;
-  // display: block;
-  // height: 0;
-  // width: 0;
-  // overflow: hidden;
 }
 .pagination {
   list-style: none;

@@ -1,35 +1,41 @@
 <template>
-  <div>
-    <main class="content">
-      <section class="posts">
-        <div v-for="pageItem in pageItems" :key="pageItem.index">
-          <div v-if="pageItem.type === 'post'">
-            <nuxt-link class="story-link" tag="div" :to="`/` + pageItem.slug">
-              <PostAtom
-                :pictureUrl="featuredImage(pageItem)"
-                :titleCallout="titleCallout(pageItem)"
-                :title="pageItem.title.rendered"
-                :author="pageItem._embedded.author[0].name"
-                :date="pageItem.date"
-                :excerpt="pageItem.excerpt.rendered"
-                :isMedia="pageItem.format == 'video' ? true : false"
-                :isContest="pageItem.categories[0] == '589' ? true : false"
-                :mode="postMode(pageItem)"
-              />
-            </nuxt-link>
-          </div>
-          <div class="feed-insert" v-if="pageItem.size === 'rectangle'">
-            <advertising
-              :id="pageItem.id"
-              :size="pageItem.size"
-              :unit="pageItem.name"
+  <main class="content">
+    <section class="feed">
+      <template v-for="pageItem in pageItems">
+        <div
+          v-if="pageItem.type === 'post'"
+          class="feed-post"
+          :key="pageItem.index"
+        >
+          <nuxt-link class="story-link" tag="div" :to="`/` + pageItem.slug">
+            <PostAtom
+              :pictureUrl="featuredImage(pageItem)"
+              :titleCallout="titleCallout(pageItem)"
+              :title="pageItem.title.rendered"
+              :author="pageItem._embedded.author[0].name"
+              :date="pageItem.date"
+              :excerpt="pageItem.excerpt.rendered"
+              :isMedia="pageItem.format == 'video' ? true : false"
+              :isContest="pageItem.categories[0] == '589' ? true : false"
+              :mode="postMode(pageItem)"
             />
-          </div>
+          </nuxt-link>
         </div>
-        <Pagination />
-      </section>
-    </main>
-  </div>
+        <div
+          v-if="pageItem.size === 'rectangle'"
+          class="feed-insert"
+          :key="pageItem.index"
+        >
+          <advertising
+            :id="pageItem.id"
+            :size="pageItem.size"
+            :unit="pageItem.name"
+          />
+        </div>
+      </template>
+    </section>
+    <Pagination />
+  </main>
 </template>
 
 <script>
@@ -48,7 +54,7 @@ export default {
   data() {
     return {
       bottom: false,
-      adSidebarTop: 0
+      responsiveMode: 'mobile'
     }
   },
   async asyncData({ payload, isStatic, store, params }) {
@@ -64,9 +70,11 @@ export default {
       return this.$store.state.advertising.rectangle
     },
     pageItems() {
-      return this.$store.getters.getPostsPageWithAds(
-        parseInt(this.$route.params.id) || 1
-      )
+      if (this.responsiveMode === 'mobile') {
+        return _.compact(_.flattenDeep(_.zip(_.chunk(this.posts, 3), this.ads)))
+      } else {
+        return _.concat(this.posts, this.ads)
+      }
     }
   },
   head() {

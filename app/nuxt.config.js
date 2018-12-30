@@ -83,7 +83,7 @@ module.exports = {
     lang: 'en-us',
     dir: 'ltr',
     background_color: '#fff',
-    theme_color: '#444444',
+    theme_color: '#FF0000',
     display: 'standalone',
     orientation: 'portrait-primary'
   }
