@@ -1,0 +1,183 @@
+<template lang="html">
+  <nav class="navigation">
+    <ul class="pagination pagination-archive" v-if="postArchive" key="archive">
+      <li v-if="notFirstPage">
+        <nuxt-link :to="prevPage">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            version="1.1"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            aria-labelledby="leftTitle"
+            role="img"
+          >
+            <title id="leftTitle">Left arrow icon</title>
+            <path
+              d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"
+            />
+          </svg>
+          <span class="screen-reader-text">Newer Posts</span>
+        </nuxt-link>
+      </li>
+      <li v-else>&nbsp;</li>
+      <li v-if="notLastPage">
+        <nuxt-link :to="nextPage">
+          <span class="screen-reader-text">Older Posts</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            version="1.1"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            aria-labelledby="rightTitle"
+            role="img"
+          >
+            <title id="rightTitle">Right arrow icon</title>
+            <path
+              d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"
+            />
+          </svg>
+        </nuxt-link>
+      </li>
+      <li v-else>&nbsp;</li>
+    </ul>
+    <ul class="pagination pagination-single" v-else key="single">
+      <li>
+        <nuxt-link :to="backUp">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            version="1.1"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            aria-labelledby="backTitle"
+            role="img"
+          >
+            <title id="backTitle">Menu icon</title>
+            <path
+              d="M5,13L9,17L7.6,18.42L1.18,12L7.6,5.58L9,7L5,11H21V13H5M21,6V8H11V6H21M21,16V18H11V16H21Z"
+            />
+          </svg>
+          <span class="screen-reader-text">{{ backUpText }}</span>
+        </nuxt-link>
+      </li>
+    </ul>
+  </nav>
+</template>
+
+<script>
+export default {
+  computed: {
+    backUp() {
+      if (
+        !this.$store.state.pagination.current ||
+        this.$store.state.pagination.current === 1
+      ) {
+        return '/'
+      } else {
+        return '/page/' + this.$store.state.pagination.current + '/'
+      }
+    },
+    backUpText() {
+      if (
+        !this.$store.state.pagination.current ||
+        this.$store.state.pagination.current === 1
+      ) {
+        return 'Back to Home'
+      } else {
+        return 'Back to Page ' + this.$store.state.pagination.current
+      }
+    },
+    nextPage() {
+      return '/page/' + (this.$store.state.pagination.current + 1) + '/'
+    },
+    prevPage() {
+      if (this.$store.state.pagination.current - 1 === 1) {
+        return '/'
+      } else {
+        return '/page/' + (this.$store.state.pagination.current - 1) + '/'
+      }
+    },
+    postArchive() {
+      return this.$route.path === '/' || this.$route.name === 'page-id'
+    },
+    notFirstPage() {
+      return (
+        this.$store.state.pagination.current &&
+        this.$store.state.pagination.current !== 1
+      )
+    },
+    notLastPage() {
+      return (
+        this.$store.state.pagination.current <
+        this.$store.state.pagination.totalPostsPages
+      )
+    }
+  },
+  methods: {
+    goNextPage() {
+      if (this.notLastPage && this.postArchive) {
+        this.$router.push(this.nextPage)
+      }
+    },
+    goPrevPage() {
+      if (this.notFirstPage && this.postArchive) {
+        this.$router.push(this.prevPage)
+      }
+    },
+    goBackUp() {
+      this.$router.push(this.backUp)
+    },
+    goHome() {
+      this.$router.push('/')
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+.screen-reader-text {
+  font-family: 'Roboto Mono', monospace;
+  // display: block;
+  // height: 0;
+  // width: 0;
+  // overflow: hidden;
+}
+.pagination {
+  list-style: none;
+  background: #ccc;
+  margin: 0;
+  padding: 0;
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+  li {
+    text-align: center;
+    width: 50%;
+    height: 100%;
+    float: left;
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: underline;
+      padding: 1rem;
+      background: red;
+      svg {
+        fill: white;
+      }
+      &:hover {
+        text-decoration: none;
+        background: black;
+      }
+    }
+  }
+}
+</style>

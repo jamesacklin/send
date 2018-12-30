@@ -2,31 +2,31 @@
   <div>
     <main class="content">
       <section class="posts">
-        <div v-for="post in posts" :key="post.id">
-          <nuxt-link class="story-link" tag="div" :to="`/` + post.slug">
-            <PostAtom
-              :pictureUrl="featuredImage(post)"
-              :titleCallout="titleCallout(post)"
-              :title="post.title.rendered"
-              :author="post._embedded.author[0].name"
-              :date="post.date"
-              :excerpt="post.excerpt.rendered"
-              :isMedia="post.format == 'video' ? true : false"
-              :isContest="post.categories[0] == '589' ? true : false"
-              :mode="postMode(post)"
-            />
-          </nuxt-link>
-        </div>
-        <div class="posts-loader">Loading more posts...</div>
-      </section>
-      <section class="advertising" :style="{ paddingTop: `${adSidebarTop}px` }">
-        <no-ssr>
-          <div v-for="ad in ads" :key="ad.index">
-            <keep-alive>
-              <advertising :id="ad.id" :size="ad.size" :unit="ad.name" />
-            </keep-alive>
+        <div v-for="pageItem in pageItems" :key="pageItem.index">
+          <div v-if="pageItem.type === 'post'">
+            <nuxt-link class="story-link" tag="div" :to="`/` + pageItem.slug">
+              <PostAtom
+                :pictureUrl="featuredImage(pageItem)"
+                :titleCallout="titleCallout(pageItem)"
+                :title="pageItem.title.rendered"
+                :author="pageItem._embedded.author[0].name"
+                :date="pageItem.date"
+                :excerpt="pageItem.excerpt.rendered"
+                :isMedia="pageItem.format == 'video' ? true : false"
+                :isContest="pageItem.categories[0] == '589' ? true : false"
+                :mode="postMode(pageItem)"
+              />
+            </nuxt-link>
           </div>
-        </no-ssr>
+          <div class="feed-insert" v-if="pageItem.size === 'rectangle'">
+            <advertising
+              :id="pageItem.id"
+              :size="pageItem.size"
+              :unit="pageItem.name"
+            />
+          </div>
+        </div>
+        <Pagination />
       </section>
     </main>
   </div>
@@ -34,13 +34,16 @@
 
 <script>
 import find from 'lodash/find'
+import _ from 'lodash'
 import PostAtom from '@/components/PostAtom'
 import Advertising from '@/components/Advertising'
+import Pagination from '@/components/Navigation/Pagination'
 
 export default {
   components: {
     PostAtom,
-    Advertising
+    Advertising,
+    Pagination
   },
   data() {
     return {
@@ -53,10 +56,15 @@ export default {
   },
   computed: {
     posts() {
-      return this.$store.getters.getPosts
+      return this.$store.getters.getPostsPage(
+        parseInt(this.$route.params.id) || 1
+      )
     },
     ads() {
       return this.$store.state.advertising.rectangle
+    },
+    pageItems() {
+      return _.compact(_.flattenDeep(_.zip(_.chunk(this.posts, 3), this.ads)))
     }
   },
   head() {
@@ -113,80 +121,34 @@ export default {
       } else {
         return '/og-card.png'
       }
-    },
-    bottomVisible() {
-      const scrollY = window.scrollY
-      const visible = document.documentElement.clientHeight
-      const pageHeight = document.documentElement.scrollHeight
-      const bottomOfPage = visible + scrollY >= pageHeight
-      return bottomOfPage || pageHeight < visible
     }
   },
-  watch: {
-    bottom(bottom) {
-      if (bottom) {
-        const nextPage = parseInt(this.$route.params.id) + 1 || 2
-        this.$route.params.id = nextPage
-        this.$store.commit('currentPage', nextPage)
-        this.$store.dispatch('getPosts', { page: nextPage, prefetch: true })
-        this.adSidebarTop = window.scrollY - 40
-        googletag.pubads().refresh()
-      }
-    }
-  },
-  beforeMount() {
-    document.addEventListener('scroll', () => {
-      this.bottom = this.bottomVisible()
-    })
-  },
-  beforeDestroy() {
-    document.removeEventListener('scroll', () => {
-      this.bottom = this.bottomVisible()
-    })
-  }
+  watch: {},
+  beforeMount() {},
+  beforeDestroy() {}
 }
 </script>
 
 <style lang="css">
-.advertising > div > div:not(:empty) {
+
+.feed-insert {
+  background: rgb(240,240,240);
+  margin: 1rem 0;
   text-align: center;
-  margin: 0 auto 1rem;
+}
+
+.feed-insert > div > div:not(:empty) {
+  text-align: center;
+  padding: 1rem;
+  /* margin: 1rem auto 1rem; */
 }
 
 .posts {
-  padding-bottom: 7rem;
   position: relative;
 }
 
-.posts-loader {
-  width: 100%;
-  border-top: 5px solid #CCC;
-  padding: 1rem;
-  margin-top: 1rem;
-  height: 6rem;
-  font-family: 'Roboto Mono', monospace;
-  position: absolute;
-  bottom: 0;
-}
-
-@media (min-width: 1024px){
-  .content {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-  }
-  .posts {
-    width: calc(100% - 300px);
-  }
-  .advertising {
-    transition: padding-top 0.2s ease;
-    padding: 0 1rem;
-    width: auto;
-  }
-}
-
-@media (min-width: 1600px){
-  .posts {
+@media (min-width: 1200px){
+  .posts .post-atom {
     max-width: 1000px;
     margin: 0 auto;
   }

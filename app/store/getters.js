@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 export default {
   // get a page by slug
   getPageBySlug: state => slug => {
@@ -22,6 +24,24 @@ export default {
       return a.date < b.date ? 1 : -1
     })
     return posts
+  },
+  getPostsWithAds: state => {
+    // sort posts by date
+    const posts = state.posts.sort((a, b) => {
+      return a.date < b.date ? 1 : -1
+    })
+    // get ads
+    const ads = state.advertising.rectangle
+    // insert ad into every 3 posts
+    function insertAds(posts) {
+      return _.compact(_.flattenDeep(_.zip(_.chunk(posts, 3), ads)))
+    }
+    // chunk posts by 30 (page length)
+    var chunkedPosts = _.chunk(posts, 30)
+    // smush chunks (with insterted ads) back together
+    const postsWithAds = _.flattenDeep(_.map(chunkedPosts, insertAds))
+    // return new array
+    return postsWithAds
   },
   // get page of posts
   getPostsPage: state => page => {

@@ -12,7 +12,7 @@ export default () => {
         totalPosts: 0,
         pages: [],
         totalPostsPages: 0,
-        postsPerPage: 10,
+        postsPerPage: 30,
         paginate: true
       },
       posts: [],
