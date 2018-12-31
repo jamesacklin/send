@@ -6,6 +6,7 @@ module.exports = {
     title: pkg.name,
     meta: [
       { charset: 'utf-8' },
+      { name: 'language', content: 'en-us' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: pkg.description }
     ],
