@@ -60,7 +60,7 @@ export default {
 header[role='banner']{
   top: 0;
   width: 100%;
-  background: black;
+  background: #0D0D0D;
   transition: all 0.2s ease;
 }
 
