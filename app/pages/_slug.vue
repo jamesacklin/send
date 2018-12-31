@@ -1,11 +1,8 @@
 <template>
   <main class="content">
-    <article :id="'post-id-' + post.id" class="article">
-      <header
-        class="article-header"
-        :class="{ 'has-artwork': featuredImage() }"
-      >
-        <div class="article-artwork">
+    <article :id="'page-id-' + this.post.id" class="page">
+      <header class="page-header" :class="{ 'has-artwork': featuredImage() }">
+        <div class="page-artwork">
           <img
             class=""
             v-if="featuredImage()"
@@ -13,18 +10,12 @@
             alt=""
           />
         </div>
-        <div class="article-title-block">
-          <h1 class="article-title" v-html="post.title.rendered"></h1>
-          <div class="article-author">
-            <span>{{ post._embedded.author[0].name }}</span>
-            <span class="article-date">
-              &nbsp;—&nbsp; <span v-html="postDate"></span>
-            </span>
-          </div>
+        <div class="page-title-block">
+          <h1 class="page-title" v-html="post.title.rendered"></h1>
         </div>
       </header>
-      <div class="article-content">
-        <div class="article-copy" v-html="post.content.rendered" />
+      <div class="page-content">
+        <div class="page-copy" v-html="post.content.rendered" />
         <section class="advertising">
           <div style="margin-bottom: 1rem;" v-for="ad in ads" :key="ad.index">
             <no-ssr>
@@ -49,7 +40,7 @@ export default {
   },
   computed: {
     post() {
-      return this.$store.getters.getPostBySlug(this.$route.params.slug)
+      return this.$store.getters.getPageBySlug(this.$route.params.slug)
     },
     ads() {
       return this.$store.state.advertising.rectangle
@@ -61,9 +52,9 @@ export default {
   async asyncData({ payload, isStatic, store, params }) {
     // payload set during static generation
     if (payload && isStatic) {
-      store.commit('addPosts', [payload])
+      store.commit('addPage', [payload])
     } else {
-      await store.dispatch('getPost', params)
+      await store.dispatch('getPage', params)
     }
   },
   methods: {
@@ -83,9 +74,9 @@ export default {
   },
   head() {
     return {
-      title: this.post.title.rendered,
+      title: this.post.title.rendered + ' · Dirt Rag',
       bodyAttrs: {
-        class: 'single post post-id-' + this.post.id
+        class: 'single page page-id-' + this.post.id
       },
       meta: [
         {
@@ -96,7 +87,7 @@ export default {
         {
           hid: 'og:title',
           property: 'og:title',
-          content: this.post.title.rendered + ' · Dirt Rag'
+          content: this.post.title.rendered + ' | Dirt Rag'
         },
         {
           hid: 'og:description',
@@ -115,16 +106,16 @@ export default {
 </script>
 
 <style lang="scss">
-.article {
+.page {
   font-family: 'Libre Franklin', sans-serif;
   line-height: 1.6;
 }
 
-.article a {
+.page a {
   color: red;
 }
 
-.article-header {
+.page-header {
   background: black;
   position: relative;
   @media (min-width: 1024px) {
@@ -139,7 +130,7 @@ export default {
   }
 }
 
-.article-artwork {
+.page-artwork {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -169,7 +160,7 @@ export default {
   }
 }
 
-.article-title-block {
+.page-title-block {
   color: white;
   padding: 1rem 5vw 2rem;
   @media (min-width: 1024px) {
@@ -179,32 +170,32 @@ export default {
   @media (min-width: 1200px) {
     max-width: 48rem;
     margin: 0 auto;
+    text-align: center;
   }
 }
 
-.article-title {
+.page-title {
   font-size: 2.5rem;
   line-height: 1;
   max-width: 45rem;
-  margin-bottom: 0.5em;
-  margin-top: 0;
+  margin: 0;
   @media (min-width: 1024px) {
     font-size: 3rem;
   }
 }
 
-.article-author {
+.page-author {
   font-family: 'Roboto Mono', monospace;
   font-size: 1rem;
 }
 
-.article-content {
+.page-content {
   border-top: 1px solid #efefef;
   padding: 1rem 5vw;
   margin: 0 auto;
 }
 
-.article-copy {
+.page-copy {
   max-width: 45rem;
   img {
     width: 100% !important;
@@ -217,7 +208,7 @@ export default {
 }
 
 @media (min-width: 1024px) {
-  .article-content {
+  .page-content {
     display: flex;
     justify-content: center;
   }

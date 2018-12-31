@@ -49,7 +49,7 @@ export default {
     },
     fillColor: {
       type: String,
-      default: '#000000'
+      default: '#FFF'
     }
   }
 }
