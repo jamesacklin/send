@@ -1,9 +1,12 @@
 <template>
   <main class="content">
     <article :id="'post-id-' + post.id" class="article">
-      <header class="article-header">
+      <header
+        class="article-header"
+        :class="{ 'has-artwork': featuredImage() }"
+      >
         <div class="article-artwork">
-          <img class="" :src="featuredImage()" alt="" />
+          <img class="" v-if="featuredImage()" :src="featuredImage()" alt="" />
         </div>
         <div class="article-title-block">
           <h1 class="article-title" v-html="post.title.rendered"></h1>
@@ -60,12 +63,9 @@ export default {
     featuredImage() {
       let featuredImage = this.post._embedded['wp:featuredmedia']
       if (featuredImage && featuredImage[0].media_details) {
-        return (
-          // featuredImage[0].media_details.sizes.large.source_url ||
-          featuredImage[0].media_details.sizes.full.source_url
-        )
+        return featuredImage[0].media_details.sizes.full.source_url
       } else {
-        return '/static/og-card.png'
+        return false
       }
     }
   },
@@ -115,11 +115,15 @@ export default {
 .article-header {
   background: black;
   position: relative;
-  padding-bottom: 66%;
   @media (min-width: 1024px) {
     background: white;
-    padding-bottom: 0;
-    padding-top: 50%;
+  }
+  &.has-artwork {
+    padding-bottom: 66%;
+    @media (min-width: 1024px) {
+      padding-bottom: 0;
+      padding-top: 50%;
+    }
   }
 }
 
