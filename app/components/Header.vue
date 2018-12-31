@@ -4,7 +4,11 @@
     <header role="banner" :class="{ sticky: pastHeader }">
       <div class="logo-wrapper">
         <nuxt-link tag="a" :to="`/`">
-          <Logo style="cursor: pointer;" orientation="horizontal" />
+          <Logo
+            style="cursor: pointer;"
+            orientation="horizontal"
+            :fillColor="logoFill"
+          />
         </nuxt-link>
       </div>
     </header>
@@ -29,6 +33,13 @@ export default {
   computed: {
     tickerStories() {
       return this.$store.state.tickerStories
+    },
+    logoFill() {
+      if (this.$route.name === 'article-slug') {
+        return '#FFFFFF'
+      } else {
+        return '#000000'
+      }
     }
   },
   methods: {
@@ -61,13 +72,14 @@ header[role='banner']{
   top: 0;
   width: 100%;
   background: white;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
   border-bottom: 1px solid #CCC;
+  transition: all 0.2s ease;
 }
 
 .block {
   position: relative;
-  height: 122.532px;
+  height: 77px;
 }
 
 header.sticky {
@@ -76,13 +88,23 @@ header.sticky {
 }
 
 .logo-wrapper {
-  transition: all 0.2s ease;
   width: 200px;
-  margin: 1rem auto;
+  padding: 1rem 0;
+  margin: 0 auto;
 }
 
 header.sticky .logo-wrapper {
   width: 100px;
-  margin: 0.5rem auto;
+  padding: 0.5rem 0;
+  margin: 0 auto;
+}
+
+.post header {
+  background: black;
+  border-color: transparent;
+}
+
+.post .block {
+  background: black;
 }
 </style>

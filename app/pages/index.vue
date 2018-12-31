@@ -3,7 +3,11 @@
     <section class="feed">
       <template v-for="(feedItem, index) in feedItems">
         <div v-if="feedItem.type === 'post'" class="feed-post" :key="index">
-          <nuxt-link class="story-link" tag="div" :to="`/` + feedItem.slug">
+          <nuxt-link
+            class="story-link"
+            tag="div"
+            :to="`/article/` + feedItem.slug"
+          >
             <PostAtom
               :pictureUrl="featuredImage(feedItem)"
               :titleCallout="titleCallout(feedItem)"
@@ -131,7 +135,7 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="css">
 
 .feed-insert {
   background: rgb(240,240,240);
@@ -198,11 +202,11 @@ export default {
   }
 }
 
-.story-link .post-atom {
+.story-link {
   transition: background-color 0.2s ease;
 }
 
-.story-link:hover .post-atom {
+.story-link:hover {
   cursor: pointer;
   background-color: rgba(255,0,0,0.125);
 }

@@ -1,16 +1,21 @@
 <template>
   <main class="content">
-    <article :id="'post-id-' + post.id" class="entry">
-      <header class="entry-header">
-        <h1 class="entry-title" v-html="post.title.rendered"></h1>
-        <div class="post-author">
-          <span>{{ post._embedded.author[0].name }}</span>
-          <span class="post-date">
-            &nbsp;—&nbsp; <span v-html="postDate"></span>
-          </span>
+    <article :id="'post-id-' + post.id" class="article">
+      <header class="article-header">
+        <div class="article-artwork">
+          <img class="" :src="featuredImage()" alt="" />
+        </div>
+        <div class="article-title-block">
+          <h1 class="article-title" v-html="post.title.rendered"></h1>
+          <div class="article-author">
+            <span>{{ post._embedded.author[0].name }}</span>
+            <span class="article-date">
+              &nbsp;—&nbsp; <span v-html="postDate"></span>
+            </span>
+          </div>
         </div>
       </header>
-      <div class="entry-content" v-html="post.content.rendered" />
+      <div class="article-content" v-html="post.content.rendered" />
     </article>
     <section class="advertising">
       <div style="margin-bottom: 1rem;" v-for="ad in ads" :key="ad.index">
@@ -56,11 +61,11 @@ export default {
       let featuredImage = this.post._embedded['wp:featuredmedia']
       if (featuredImage && featuredImage[0].media_details) {
         return (
-          featuredImage[0].media_details.sizes.large.source_url ||
+          // featuredImage[0].media_details.sizes.large.source_url ||
           featuredImage[0].media_details.sizes.full.source_url
         )
       } else {
-        return '/og-card.png'
+        return '/static/og-card.png'
       }
     }
   },
@@ -88,8 +93,8 @@ export default {
         },
         {
           hid: 'og:image',
-          property: 'og:image'
-          // content: this.featuredImage()
+          property: 'og:image',
+          content: this.featuredImage()
         }
       ]
     }
@@ -97,31 +102,76 @@ export default {
 }
 </script>
 
-<style scoped>
-.entry {
+<style lang="scss">
+.article {
   font-family: 'Libre Franklin', sans-serif;
   line-height: 1.6;
-  padding: 0 5vw;
 }
 
-.entry a {
+.article a {
   color: red;
 }
 
-.entry-header {
-  margin-bottom: 3rem;
+.article-header {
+  background: black;
+  position: relative;
+  padding-bottom: 66%;
+  @media (min-width: 1024px) {
+    background: white;
+    padding-bottom: 0;
+    padding-top: 50%;
+  }
 }
 
-.entry-title {
-  font-size: 3rem;
+.article-artwork {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  overflow: hidden;
+  padding-bottom: 66%;
+  img {
+    width: 100%;
+  }
+  @media (min-width: 1024px) {
+    top: 0;
+    padding-bottom: 50%;
+  }
+}
+
+.article-title-block {
+  color: white;
+  padding: 1rem 5vw 2rem;
+  @media (min-width: 1024px) {
+    color: black;
+    padding: 2rem 5vw;
+    max-width: 1000px;
+    margin: 0 auto;
+    border-bottom: 1px solid #efefef;
+  }
+}
+
+.article-title {
+  font-size: 2.5rem;
   line-height: 1;
   max-width: 45rem;
   margin-bottom: 0.5em;
+  margin-top: 0;
+  @media (min-width: 1024px) {
+    font-size: 3rem;
+  }
 }
 
-.post-author {
+.article-author {
   font-family: 'Roboto Mono', monospace;
   font-size: 1rem;
+}
+
+.article-content {
+  padding: 1rem 5vw;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .advertising > div > div:not(:empty) {
@@ -130,23 +180,10 @@ export default {
 }
 
 @media (min-width: 1024px) {
-  .content {
-    display: flex;
-    justify-content: center;
-  }
-  .entry {
-    width: calc(100% - 300px);
-  }
-  .advertising {
-    padding: 0 1rem;
-    width: auto;
+  .article-content {
   }
 }
 
 @media (min-width: 1600px) {
-  .entry {
-    max-width: 1000px;
-    margin: 0 auto;
-  }
 }
 </style>
