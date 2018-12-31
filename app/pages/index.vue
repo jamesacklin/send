@@ -1,35 +1,35 @@
 <template>
   <main class="content">
     <section class="feed">
-      <template v-for="pageItem in pageItems">
+      <template v-for="feedItem in feedItems">
         <div
-          v-if="pageItem.type === 'post'"
+          v-if="feedItem.type === 'post'"
           class="feed-post"
-          :key="pageItem.index"
+          :key="feedItem.index"
         >
-          <nuxt-link class="story-link" tag="div" :to="`/` + pageItem.slug">
+          <nuxt-link class="story-link" tag="div" :to="`/` + feedItem.slug">
             <PostAtom
-              :pictureUrl="featuredImage(pageItem)"
-              :titleCallout="titleCallout(pageItem)"
-              :title="pageItem.title.rendered"
-              :author="pageItem._embedded.author[0].name"
-              :date="pageItem.date"
-              :excerpt="pageItem.excerpt.rendered"
-              :isMedia="pageItem.format == 'video' ? true : false"
-              :isContest="pageItem.categories[0] == '589' ? true : false"
-              :mode="postMode(pageItem)"
+              :pictureUrl="featuredImage(feedItem)"
+              :titleCallout="titleCallout(feedItem)"
+              :title="feedItem.title.rendered"
+              :author="feedItem._embedded.author[0].name"
+              :date="feedItem.date"
+              :excerpt="feedItem.excerpt.rendered"
+              :isMedia="feedItem.format == 'video' ? true : false"
+              :isContest="feedItem.categories[0] == '589' ? true : false"
+              :mode="postMode(feedItem)"
             />
           </nuxt-link>
         </div>
         <div
-          v-if="pageItem.size === 'rectangle'"
+          v-if="feedItem.size === 'rectangle'"
           class="feed-insert"
-          :key="pageItem.index"
+          :key="feedItem.index"
         >
           <advertising
-            :id="pageItem.id"
-            :size="pageItem.size"
-            :unit="pageItem.name"
+            :id="feedItem.id"
+            :size="feedItem.size"
+            :unit="feedItem.name"
           />
         </div>
       </template>
@@ -53,8 +53,7 @@ export default {
   },
   data() {
     return {
-      bottom: false,
-      responsiveMode: 'mobile'
+      bottom: false
     }
   },
   async asyncData({ payload, isStatic, store, params }) {
@@ -69,12 +68,8 @@ export default {
     ads() {
       return this.$store.state.advertising.rectangle
     },
-    pageItems() {
-      if (this.responsiveMode === 'mobile') {
-        return _.compact(_.flattenDeep(_.zip(_.chunk(this.posts, 3), this.ads)))
-      } else {
-        return _.concat(this.posts, this.ads)
-      }
+    feedItems() {
+      return _.compact(_.flattenDeep(_.zip(_.chunk(this.posts, 3), this.ads)))
     }
   },
   head() {
