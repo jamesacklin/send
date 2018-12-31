@@ -23,17 +23,19 @@
           </div>
         </div>
       </header>
-      <div class="article-content" v-html="post.content.rendered" />
-    </article>
-    <section class="advertising">
-      <div style="margin-bottom: 1rem;" v-for="ad in ads" :key="ad.index">
-        <no-ssr>
-          <div v-for="ad in ads" :key="ad.index">
-            <advertising :id="ad.id" :size="ad.size" :unit="ad.name" />
+      <div class="article-content">
+        <div class="article-copy" v-html="post.content.rendered" />
+        <section class="advertising">
+          <div style="margin-bottom: 1rem;" v-for="ad in ads" :key="ad.index">
+            <no-ssr>
+              <div v-for="ad in ads" :key="ad.index">
+                <advertising :id="ad.id" :size="ad.size" :unit="ad.name" />
+              </div>
+            </no-ssr>
           </div>
-        </no-ssr>
+        </section>
       </div>
-    </section>
+    </article>
   </main>
 </template>
 
@@ -155,9 +157,10 @@ export default {
   @media (min-width: 1024px) {
     color: black;
     padding: 2rem 5vw;
-    max-width: 1000px;
+  }
+  @media (min-width: 1200px) {
+    max-width: 48rem;
     margin: 0 auto;
-    border-bottom: 1px solid #efefef;
   }
 }
 
@@ -178,9 +181,16 @@ export default {
 }
 
 .article-content {
+  border-top: 1px solid #efefef;
   padding: 1rem 5vw;
-  max-width: 1000px;
   margin: 0 auto;
+}
+
+.article-copy {
+  max-width: 45rem;
+  img {
+    width: 100% !important;
+  }
 }
 
 .advertising > div > div:not(:empty) {
@@ -190,6 +200,12 @@ export default {
 
 @media (min-width: 1024px) {
   .article-content {
+    display: flex;
+    justify-content: center;
+  }
+  .advertising {
+    padding-left: 3rem;
+    text-align: center;
   }
 }
 
