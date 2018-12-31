@@ -6,7 +6,12 @@
         :class="{ 'has-artwork': featuredImage() }"
       >
         <div class="article-artwork">
-          <img class="" v-if="featuredImage()" :src="featuredImage()" alt="" />
+          <img
+            class=""
+            v-if="featuredImage()"
+            v-lazy="featuredImage()"
+            alt=""
+          />
         </div>
         <div class="article-title-block">
           <h1 class="article-title" v-html="post.title.rendered"></h1>
