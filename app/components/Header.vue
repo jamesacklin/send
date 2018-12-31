@@ -35,7 +35,7 @@ export default {
       return this.$store.state.tickerStories
     },
     logoFill() {
-      if (this.$route.name === 'article-slug') {
+      if (this.$route.name === 'article-slug' || 'index') {
         return '#FFFFFF'
       } else {
         return '#000000'
@@ -106,5 +106,10 @@ header.sticky .logo-wrapper {
 
 .post .block {
   background: black;
+}
+
+.home header {
+  background: black;
+  border-color: transparent;
 }
 </style>
