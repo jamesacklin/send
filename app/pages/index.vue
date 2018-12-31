@@ -129,6 +129,11 @@ export default {
       }
     }
   },
+  scrollToTop: false,
+  transition: {
+    name: 'fade',
+    mode: 'out-in'
+  },
   watch: {},
   beforeMount() {},
   beforeDestroy() {}
@@ -203,7 +208,8 @@ export default {
 }
 
 .story-link {
-  transition: background-color 0.2s ease;
+  background-color: transparent;
+  transition: background-color 0.25s ease;
 }
 
 .story-link:hover {

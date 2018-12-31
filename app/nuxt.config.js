@@ -26,9 +26,9 @@ module.exports = {
     { src: '~/plugins/vue-lazy.js', ssr: false }
   ],
   router: {
-    scrollBehavior: function(to, from, savedPosition) {
-      return { x: 0, y: 0 }
-    }
+    // scrollBehavior: function(to, from, savedPosition) {
+    //   return savedPosition
+    // }
   },
   modules: [
     [

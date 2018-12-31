@@ -76,6 +76,11 @@ export default {
       }
     }
   },
+  scrollToTop: true,
+  transition: {
+    name: 'fade',
+    mode: 'out-in'
+  },
   head() {
     return {
       title: this.post.title.rendered,
@@ -144,6 +149,19 @@ export default {
   padding-bottom: 66%;
   img {
     width: 100%;
+    transition: all 0.25s ease;
+  }
+  img[lazy='error'] {
+    height: 0px;
+    width: 0px;
+  }
+  img[lazy='loading'] {
+    transform: translateX(5em);
+    opacity: 0;
+  }
+  img[lazy='loaded'] {
+    transform: translateX(0);
+    opacity: 1;
   }
   @media (min-width: 1024px) {
     top: 0;

@@ -40,6 +40,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 /* Responsive images */
@@ -63,9 +64,10 @@ figcaption {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+  transform: translateX(5em);
 }
