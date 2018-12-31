@@ -131,7 +131,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 
 .feed-insert {
   background: rgb(240,240,240);
