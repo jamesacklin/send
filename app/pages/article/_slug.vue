@@ -91,7 +91,7 @@ export default {
         {
           hid: 'og:title',
           property: 'og:title',
-          content: this.post.title.rendered + ' • Scott Evans'
+          content: this.post.title.rendered + ' | Dirt Rag'
         },
         {
           hid: 'og:description',
