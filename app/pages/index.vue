@@ -1,12 +1,8 @@
 <template>
   <main class="content">
     <section class="feed">
-      <template v-for="feedItem in feedItems">
-        <div
-          v-if="feedItem.type === 'post'"
-          class="feed-post"
-          :key="feedItem.index"
-        >
+      <template v-for="(feedItem, index) in feedItems">
+        <div v-if="feedItem.type === 'post'" class="feed-post" :key="index">
           <nuxt-link class="story-link" tag="div" :to="`/` + feedItem.slug">
             <PostAtom
               :pictureUrl="featuredImage(feedItem)"
@@ -24,7 +20,8 @@
         <div
           v-if="feedItem.size === 'rectangle'"
           class="feed-insert"
-          :key="feedItem.index"
+          :class="`feed-insert-${index}`"
+          :key="index"
         >
           <advertising
             :id="feedItem.id"
@@ -148,14 +145,56 @@ export default {
   /* margin: 1rem auto 1rem; */
 }
 
-.posts {
+.feed {
   position: relative;
 }
 
 @media (min-width: 1200px){
-  .posts .post-atom {
+  .feed {
+    padding-right: 400px;
+  }
+  .feed-post {
     max-width: 1000px;
     margin: 0 auto;
+  }
+  .feed-insert {
+    position: absolute;
+    right: 0px;
+    margin: 0;
+    text-align: center;
+  }
+  .feed-insert > div > div:not(:empty){
+    padding: 0;
+  }
+  .feed-insert-3 {
+    top: 0px;
+  }
+  .feed-insert-7 {
+    top: 600px;
+  }
+  .feed-insert-11 {
+    top: 900px
+  }
+  .feed-insert-15 {
+    top: 1150px;
+  }
+  .feed-insert-19 {
+    top: 1400px;
+  }
+  .feed-insert-24 {
+    top: 1650px;
+  }
+  .feed-insert-27 {
+    top: 1900px;
+  }
+  .feed-insert-31 {
+    top: 2150px;
+  }
+  .feed-insert-35 {
+    top: 2400px;
+  }
+  .feed-insert-39 {
+    top: 2650px
   }
 }
 
