@@ -30,16 +30,7 @@ module.exports = {
     //   return savedPosition
     // }
   },
-  modules: [
-    [
-      '@nuxtjs/pwa',
-      {
-        onesignal: false,
-        workbox: false // no service worker during dev
-      }
-    ],
-    '@nuxtjs/axios'
-  ],
+  modules: ['@nuxtjs/pwa', '@nuxtjs/axios'],
   axios: {
     baseURL: 'https://www.dirtragmag.com/wp-json/wp/v2/',
     https: true,
