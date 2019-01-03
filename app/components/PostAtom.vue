@@ -11,7 +11,9 @@
         <div class="post-title-block">
           <h4 class="post-title">
             <span v-html="titleCallout" class="post-title-callout"> </span>
-            <span v-html="title" class="post-title-wrap"> </span>
+            <a :href="`/` + permalink">
+              <span v-html="title" class="post-title-wrap"> </span>
+            </a>
           </h4>
           <div v-if="isMedia" class="post-launch-media">▶ Watch Video</div>
           <div v-if="isGallery" class="post-launch-media">↗ Launch Gallery</div>
@@ -43,6 +45,7 @@ import dayjs from 'dayjs'
 export default {
   name: 'PostAtom',
   props: {
+    slug: String,
     mode: String,
     pictureUrl: String,
     titleCallout: String,
@@ -117,6 +120,19 @@ export default {
   font-size: 1.6rem;
   line-height: 1.1;
   color: black;
+}
+
+.post-title a {
+  text-decoration: none;
+  color: black;
+}
+
+.promotion .post-title a {
+  color: white;
+}
+
+.post-title a:hover {
+  color: red;
 }
 
 .promotion .post-title {

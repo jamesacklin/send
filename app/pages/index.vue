@@ -13,6 +13,7 @@
             :to="`/article/` + feedItem.slug"
           >
             <PostAtom
+              :slug="feedItem.slug"
               :pictureUrl="featuredImage(feedItem)"
               :titleCallout="titleCallout(feedItem)"
               :title="feedItem.title.rendered"
@@ -198,13 +199,7 @@ export default {
   grid-column: full;
 }
 
-.story-link {
-  background-color: transparent;
-  transition: background-color 0.25s ease;
-}
-
 .story-link:hover {
   cursor: pointer;
-  background-color: rgba(255,0,0,0.125);
 }
 </style>
