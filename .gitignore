@@ -76,6 +76,7 @@ dist
 .vuepress/dist
 
 # serviceworker (created during build)
+app/sw.*
 sw.*
 
 # Serverless directories
