@@ -88,3 +88,4 @@ sw.*
 # Storybook
 storybook-static
 
+app/static/sw.js
