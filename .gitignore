@@ -76,7 +76,7 @@ dist
 .vuepress/dist
 
 # serviceworker (created during build)
-app/sw.*
+app/static/sw.js
 sw.*
 
 # Serverless directories
@@ -87,3 +87,4 @@ sw.*
 
 # Storybook
 storybook-static
+
