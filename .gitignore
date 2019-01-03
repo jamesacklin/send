@@ -75,6 +75,9 @@ dist
 # vuepress build output
 .vuepress/dist
 
+# serviceworker (created during build)
+sw.*
+
 # Serverless directories
 .serverless
 
