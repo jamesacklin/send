@@ -2,7 +2,11 @@
   <main class="content">
     <section class="feed">
       <template v-for="(feedItem, index) in feedItems">
-        <div v-if="feedItem.type === 'post'" class="feed-post" :key="index">
+        <div
+          v-if="feedItem.type === 'post'"
+          class="feed-item feed-post"
+          :key="index"
+        >
           <nuxt-link
             class="story-link"
             tag="div"
@@ -23,7 +27,7 @@
         </div>
         <div
           v-if="feedItem.size === 'rectangle'"
-          class="feed-insert"
+          class="feed-item feed-insert"
           :class="`feed-insert-${index}`"
           :key="index"
         >
@@ -141,70 +145,57 @@ export default {
 </script>
 
 <style lang="css">
-
 .feed-insert {
   background: rgb(240,240,240);
-  margin: 1rem 0;
   text-align: center;
 }
 
 .feed-insert > div > div:not(:empty) {
   text-align: center;
   padding: 1rem;
-  /* margin: 1rem auto 1rem; */
 }
 
 .feed {
-  position: relative;
+  display: grid;
+  grid-row-gap: 1em;
+  grid-auto-rows: auto;
+  grid-template-columns:
+    [full-start] 0
+    [main-start] minmax(0, 45em) [main-end]
+    0 [full-end];
+}
+
+@media (min-width: 500px){
+  .feed {
+    display: grid;
+    grid-row-gap: 1em;
+    grid-auto-rows: auto;
+    grid-template-columns:
+      [full-start] minmax(1em, 1fr)
+      [main-start] minmax(0, 45em) [main-end]
+      minmax(1em, 1fr) [full-end];
+  }
 }
 
 @media (min-width: 1200px){
   .feed {
-    padding-right: 400px;
+    display: grid;
+    grid-column-gap: 2%;
+    grid-row-gap: 2em;
+    grid-auto-rows: auto;
+    grid-template-columns:
+      [full-start] minmax(1em, 1fr)
+      [main-start] minmax(0, 62.5em) [main-end]
+      minmax(1em, 1fr) [full-end];
   }
-  .feed-post {
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-  .feed-insert {
-    position: absolute;
-    right: 0px;
-    margin: 0;
-    text-align: center;
-  }
-  .feed-insert > div > div:not(:empty){
-    padding: 0;
-  }
-  .feed-insert-3 {
-    top: 0px;
-  }
-  .feed-insert-7 {
-    top: 600px;
-  }
-  .feed-insert-11 {
-    top: 900px
-  }
-  .feed-insert-15 {
-    top: 1150px;
-  }
-  .feed-insert-19 {
-    top: 1400px;
-  }
-  .feed-insert-24 {
-    top: 1650px;
-  }
-  .feed-insert-27 {
-    top: 1900px;
-  }
-  .feed-insert-31 {
-    top: 2150px;
-  }
-  .feed-insert-35 {
-    top: 2400px;
-  }
-  .feed-insert-39 {
-    top: 2650px
-  }
+}
+
+.feed-post {
+  grid-column: main;
+}
+
+.feed-insert {
+  grid-column: full;
 }
 
 .story-link {

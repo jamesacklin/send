@@ -75,7 +75,6 @@ export default {
 <style lang="css">
 .post-atom {
   hyphens: auto;
-  padding: 1rem 1rem;
 }
 
 .post-atom:not(.promotion){
@@ -83,7 +82,7 @@ export default {
 }
 
 .post-atom.promotion {
-  padding: 4rem 2rem;
+  padding: 4em 2%;
   position: relative;
   background-color: black;
   background-size: cover;
@@ -102,42 +101,14 @@ export default {
 }
 
 .post-atom.contest {
-  margin: 1rem;
   border: 1px solid #CCC;
   border-top: 0.25rem solid red;
   box-shadow: 0 0.125em 0.25em rgba(0,0,0,0.125);
 }
 
-.post-image {
-  margin-bottom: 1rem;
-}
-
-.post-image-crop {
-  position: relative;
-  width: 100%;
-  height: 0;
-  overflow: hidden;
-  padding-top: 56.67%;
-}
-
-.enhanced .post-image-crop {
-  padding-top: 75%;
-}
-
 .post-image-crop img {
-  backface-visibility: hidden;
-  position: absolute;
-  left: 50%;
-  top: 50%;
   width: 100%;
   height: auto;
-  -webkit-transform: translate(-50%,-50%);
-      -ms-transform: translate(-50%,-50%);
-          transform: translate(-50%,-50%);
-}
-
-.post-title-block {
-
 }
 
 .post-title {
@@ -160,7 +131,7 @@ export default {
 .post-launch-media {
   font-family: 'Libre Franklin', sans-serif;
   font-size: 1.6rem;
-  margin: -1rem 0 1rem;
+  margin: -1rem 0 0;
   color: red;
   font-weight: 900;
   cursor: pointer;
@@ -169,6 +140,10 @@ export default {
 .spliced .post-title,
 .spliced .post-launch-media {
   font-size: 1.2rem;
+}
+
+.post-text {
+  padding: 0 2%;
 }
 
 .post-author {
@@ -200,65 +175,56 @@ export default {
 
 @media (min-width: 500px){
   .post-atom {
-    display: flex;
-    padding: 1rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 2%;
   }
-  .post-atom.spliced  {
-    flex-direction: column;
+  .post-image {
+    grid-column-start: 1;
+    grid-column-end: 2;
   }
-  .post-image,
   .post-text {
-    width: 50%;
-    padding: 0 1rem;
-    margin: 0;
+    padding: 0;
+    grid-column-start: 2;
+    grid-column-end: 3;
   }
-  .spliced .post-image,
-  .spliced .post-text  {
-    width: 100%;
-  }
-  .spliced .post-image {
-    margin-bottom: 1rem;
-  }
-  .enhanced .post-title {
-    font-size: 1.8rem;
+  .promotion .post-text {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    background: rgba(0,0,0,0.66);
+    padding: 1em;
   }
 }
 
 @media (min-width: 1200px){
-  .post-atom.enhanced {
-    align-items: flex-end;
-  }
-  .post-image {
-    width: 33.33333%;
-    padding: 0 1rem;
+  .post-atom {
+    grid-template-columns: 1fr 2fr;
   }
   .post-text {
-    width: 66.66666%;
-    display: flex;
-    padding: 0;
+    display: grid;
+    grid-column-gap: 2%;
+    grid-template-columns: 1fr 1fr;
   }
-  .post-title-block,
-  .post-excerpt {
-    width: 50%;
-    padding: 0 1rem;
+
+  .enhanced {
+    grid-template-columns: 1fr 1fr;
   }
-  .enhanced .post-image,
+
   .enhanced .post-text {
-    width: 50%;
+    display: block;
+    align-self: end;
   }
+
+  .promotion {
+    grid-template-columns: 2fr 1fr;
+  }
+
   .promotion .post-text {
-    width: 66.666666%;
+    display: block;
+    grid-column-start: 1;
+    grid-column-end: 2;
   }
-  .spliced .post-text,
-  .enhanced .post-text {
-    flex-direction: column;
-  }
-  .promotion .post-title-block,
-  .enhanced .post-title-block,
-  .spliced .post-title-block,
-  .enhanced .post-excerpt {
-    width: 100%;
-  }
+
   .enhanced .post-title,
   .promotion .post-title {
     font-size: 2.5rem;
