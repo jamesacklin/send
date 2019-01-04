@@ -11,7 +11,7 @@
         <div class="post-title-block">
           <h4 class="post-title">
             <span v-html="titleCallout" class="post-title-callout"> </span>
-            <a :href="`/` + permalink">
+            <a :href="`/` + slug">
               <span v-html="title" class="post-title-wrap"> </span>
             </a>
           </h4>

@@ -10,7 +10,7 @@
           <nuxt-link
             class="story-link"
             tag="div"
-            :to="`/article/` + feedItem.slug"
+            :to="`/articles/` + feedItem.slug"
           >
             <PostAtom
               :slug="feedItem.slug"
