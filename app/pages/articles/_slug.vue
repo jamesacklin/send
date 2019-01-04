@@ -24,7 +24,11 @@
         </div>
       </header>
       <div class="article-content">
-        <div class="article-copy" v-html="post.content.rendered" />
+        <div
+          class="article-copy"
+          @click="zoomFigure"
+          v-html="post.content.rendered"
+        />
         <section class="advertising">
           <div style="margin-bottom: 1rem;" v-for="ad in ads" :key="ad.index">
             <no-ssr>
@@ -74,6 +78,16 @@ export default {
       } else {
         return false
       }
+    },
+    zoomFigure(event) {
+      const e = event.target
+      if (e.tagName === 'IMG' && e.parentNode.tagName === 'FIGURE') {
+        console.log('yahtzee')
+        const f = e.parentNode
+        f.classList.toggle('zoomed')
+      } else {
+        return
+      }
     }
   },
   scrollToTop: true,
@@ -118,6 +132,27 @@ export default {
 .article {
   font-family: 'Libre Franklin', sans-serif;
   line-height: 1.6;
+  display: grid;
+  grid-row-gap: 1em;
+  grid-auto-rows: auto;
+  grid-template-columns:
+    [full-start] 0
+    [main-start] minmax(0, 50em) [main-end]
+    0 [full-end];
+  @media (min-width: 500px) {
+    grid-template-columns:
+      [full-start] minmax(1em, 1fr)
+      [main-start] minmax(0, 50em) [main-end]
+      minmax(1em, 1fr) [full-end];
+  }
+  @media (min-width: 1200px) {
+    grid-row-gap: 2em;
+    grid-column-gap: 2em;
+    grid-template-columns:
+      [full-start] minmax(1em, 1fr)
+      [main-start] minmax(0, 62.5em) [main-end]
+      minmax(1em, 1fr) [full-end];
+  }
 }
 
 .article a {
@@ -125,14 +160,15 @@ export default {
 }
 
 .article-header {
+  grid-column: full;
   background: black;
   position: relative;
-  @media (min-width: 1024px) {
+  @media (min-width: 1000px) {
     background: white;
   }
   &.has-artwork {
     padding-bottom: 66%;
-    @media (min-width: 1024px) {
+    @media (min-width: 1000px) {
       padding-bottom: 0;
       padding-top: 50%;
     }
@@ -163,70 +199,101 @@ export default {
     transform: translateX(0);
     opacity: 1;
   }
-  @media (min-width: 1024px) {
+  @media (min-width: 1000px) {
     top: 0;
     padding-bottom: 50%;
   }
 }
 
 .article-title-block {
+  grid-column: main;
   color: white;
-  padding: 1rem 5vw 2rem;
-  @media (min-width: 1024px) {
+  padding: 0 2%;
+  margin-bottom: 1em;
+  display: grid;
+  grid-row-gap: 1em;
+  grid-auto-rows: auto;
+  grid-template-columns:
+    [full-start] 0
+    [main-start] minmax(0, 50em) [main-end]
+    0 [full-end];
+  @media (min-width: 500px) {
+    padding: 0;
+    grid-template-columns:
+      [full-start] minmax(1em, 1fr)
+      [main-start] minmax(0, 50em) [main-end]
+      minmax(1em, 1fr) [full-end];
+  }
+  @media (min-width: 1000px) {
     color: black;
-    padding: 2rem 5vw;
+    margin-bottom: 0;
+    margin-top: 2em;
   }
   @media (min-width: 1200px) {
-    max-width: 48rem;
-    margin: 0 auto;
+    grid-column-gap: 2em;
+    grid-template-columns:
+      [full-start] minmax(1em, 1fr)
+      [main-start] minmax(0, 62.5em) [main-end]
+      minmax(1em, 1fr) [full-end];
   }
 }
 
 .article-title {
+  grid-column: main;
   font-size: 2.5rem;
+  margin: 0;
   line-height: 1;
-  max-width: 45rem;
-  margin-bottom: 0.5em;
-  margin-top: 0;
   @media (min-width: 1024px) {
     font-size: 3rem;
   }
 }
 
 .article-author {
+  grid-column: main;
   font-family: 'Roboto Mono', monospace;
   font-size: 1rem;
 }
 
 .article-content {
+  grid-column: main;
   border-top: 1px solid #efefef;
-  padding: 1rem 5vw;
-  margin: 0 auto;
+  padding: 0 2%;
+  @media (min-width: 1000px) {
+    padding: 0;
+    display: grid;
+    grid-template-columns: auto 300px;
+    grid-column-gap: 2em;
+  }
 }
 
-.article-copy {
-  max-width: 45rem;
-  img {
-    width: 100% !important;
+.article-copy img {
+  width: 100% !important;
+}
+
+@media (min-width: 1000px) {
+  .article-copy figure {
+    position: relative;
+    z-index: 1;
+    transition: all 0.2s ease;
+  }
+  .article-copy figure img {
+    cursor: zoom-in;
+  }
+  .article-copy figure.zoomed {
+    width: calc(100% + 300px + 2em) !important;
+    background: black;
+    color: white;
+    outline: 1em solid black;
+    box-shadow: 0 0 4em rgba(0, 0, 0, 0.25);
+    margin: 2em 0;
+  }
+  .article-copy figure.zoomed img {
+    cursor: zoom-out;
   }
 }
 
 .advertising > div > div:not(:empty) {
   text-align: center;
   margin: 0 auto 1rem;
-}
-
-@media (min-width: 1024px) {
-  .article-content {
-    display: flex;
-    justify-content: center;
-  }
-  .advertising {
-    padding-left: 3rem;
-    text-align: center;
-  }
-}
-
-@media (min-width: 1600px) {
 }
 </style>
