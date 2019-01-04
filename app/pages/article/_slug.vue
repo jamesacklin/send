@@ -209,6 +209,7 @@ export default {
   grid-column: main;
   color: white;
   padding: 0 2%;
+  margin-bottom: 1em;
   display: grid;
   grid-row-gap: 1em;
   grid-auto-rows: auto;
@@ -225,6 +226,7 @@ export default {
   }
   @media (min-width: 1000px) {
     color: black;
+    margin-bottom: 0;
     margin-top: 2em;
   }
   @media (min-width: 1200px) {
