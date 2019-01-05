@@ -15,6 +15,7 @@ export default () => {
         postsPerPage: 30,
         paginate: true
       },
+      category: {},
       posts: [],
       pages: [],
       tickerStories: [

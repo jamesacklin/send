@@ -12,6 +12,16 @@ export default {
     }
   },
 
+  // category ID from slug
+  async getCategoryIdFromSlug({ commit, state }, params) {
+    const cat = await this.$axios.$get('categories', {
+      params: {
+        slug: params.slug
+      }
+    })
+    commit('currentCategory', cat)
+  },
+
   // post
   async getPost({ commit, state }, params) {
     // check store for post already, bail if found

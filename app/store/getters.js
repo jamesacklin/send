@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 export default {
   // get a page by slug
   getPageBySlug: state => slug => {
@@ -24,6 +22,10 @@ export default {
       return a.date < b.date ? 1 : -1
     })
     return posts
+  },
+  getCategoryIdFromSlug: state => slug => {
+    const cat = state.category.id
+    return cat
   },
   // get page of posts
   getPostsPage: state => page => {
