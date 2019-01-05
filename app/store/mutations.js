@@ -27,7 +27,10 @@ export default {
     state.pagination.current = page
   },
   currentCategory(state, category) {
-    state.category = category[0]
+    state.currentCategory = category
+  },
+  category(state, category) {
+    state.category = category
   },
   // pagination totals from API
   paginateTotals(state, totals) {

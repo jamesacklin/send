@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 export default {
   // get a page by slug
   getPageBySlug: state => slug => {
@@ -23,13 +25,19 @@ export default {
     })
     return posts
   },
-  getCategoryIdFromSlug: state => slug => {
-    const cat = state.category.id
-    return cat
+  getCategoryId: state => {
+    if (!_.isEmpty(state.category)) {
+      const cat = state.category.id
+      return cat
+    } else {
+      return ''
+    }
   },
   // get page of posts
   getPostsPage: state => page => {
-    // filter just the current page
+    // filter all posts by category ID
+    // TODO: write me
+    // then filter just the current page
     const posts = state.posts.filter(post => post.page === page)
     // sort by date
     return posts.sort((a, b) => {

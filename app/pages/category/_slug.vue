@@ -1,7 +1,6 @@
 <template>
   <main class="content">
     <section class="feed">
-      <pre>{{ catId }}</pre>
       <template v-for="(feedItem, index) in feedItems">
         <div
           v-if="feedItem.type === 'post'"
@@ -67,12 +66,13 @@ export default {
     await store.dispatch('getCategoryIdFromSlug', {
       slug: params.slug
     })
-    await store.dispatch('getPosts', { page: parseInt(params.id || 1) })
+    const thisCat = store.getters.getCategoryId
+    await store.dispatch('getPosts', {
+      page: parseInt(params.id || 1),
+      cat: thisCat
+    })
   },
   computed: {
-    catId() {
-      return this.$store.getters.getCategoryIdFromSlug(this.$route.params.slug)
-    },
     posts() {
       return this.$store.getters.getPostsPage(
         parseInt(this.$route.params.id) || 1

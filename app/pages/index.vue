@@ -63,7 +63,11 @@ export default {
     }
   },
   async asyncData({ payload, isStatic, store, params }) {
-    await store.dispatch('getPosts', { page: parseInt(params.id || 1) })
+    await store.dispatch('clearCategory')
+    await store.dispatch('getPosts', {
+      page: parseInt(params.id || 1),
+      cat: ''
+    })
   },
   computed: {
     posts() {

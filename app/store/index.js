@@ -16,6 +16,7 @@ export default () => {
         paginate: true
       },
       category: {},
+      currentCategory: '',
       posts: [],
       pages: [],
       tickerStories: [

@@ -19,7 +19,12 @@ export default {
         slug: params.slug
       }
     })
-    commit('currentCategory', cat)
+    commit('category', cat[0])
+  },
+
+  // nuke current category
+  async clearCategory({ commit, state }) {
+    commit('category', [{ id: '' }])
   },
 
   // post
@@ -37,12 +42,15 @@ export default {
 
   // posts TODO: turn this page/prefecth into an object
   async getPosts({ commit, state }, params) {
+    console.log(params)
     const { page } = params
+    const { cat } = params
     const { prefetch } = params
 
     // which page are we on?
     if (!prefetch) {
       commit('currentPage', page)
+      commit('currentCategory', cat)
     }
     // check before requesting more pages
     if (
@@ -56,7 +64,9 @@ export default {
       (prefetch &&
         page &&
         !state.pagination.pages.includes(page) &&
-        page <= state.pagination.totalPostsPages)
+        page <= state.pagination.totalPostsPages) ||
+      // categories do not match up
+      cat === state.category.id
       // TODO: some time has passed, lets check again? - store time in object against page? or post
       // we don't want to be invalidating all stored data all the time?
       // perhaps it is better to just empty the store from time to time?
@@ -67,7 +77,8 @@ export default {
       const posts = await this.$axios.get('posts?_embed', {
         params: {
           per_page: state.pagination.postsPerPage,
-          page: page
+          page: page,
+          categories: cat
         }
       })
 
