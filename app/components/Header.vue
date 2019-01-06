@@ -6,7 +6,6 @@
       <nuxt-link tag="a" :to="`/category/gear`">Gear</nuxt-link>
       <nuxt-link tag="a" :to="`/category/opinion`">Opinion</nuxt-link>
       <nuxt-link tag="a" :to="`/category/events`">Events</nuxt-link>
-      <nuxt-link tag="a" :to="`/category/gear`">Off the Trail</nuxt-link>
       <div class="logo-wrapper">
         <nuxt-link tag="a" :to="`/`">
           <Logo style="cursor: pointer;" orientation="horizontal" />

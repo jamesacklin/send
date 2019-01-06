@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 export default {
   // page
   async getPage({ commit, state }, params) {
@@ -15,18 +17,17 @@ export default {
   // category from slug
   async getCategoryFromSlug({ commit, state }, params) {
     // Check to see if we already have the category in the store
-    if (!this.getters.getCategoryIdFromSlug(params.slug)) {
-      const cat = await this.$axios.$get('categories', {
-        params: {
-          slug: params.slug
-        }
-      })
-      commit('storeCategory', cat[0])
-      commit('currentCategory', cat[0].id)
-    } else {
-      const thisCat = this.getters.getCategoryIdFromSlug(params.slug)
-      commit('currentCategory', thisCat)
-    }
+    // if (!this.getters.getCategoryIdFromSlug(params.slug)) {
+    const cat = await this.$axios.$get('categories', {
+      params: {
+        slug: params.slug
+      }
+    })
+    // commit('storeCategory', cat[0])
+    commit('currentCategory', cat[0].id)
+    // } else {
+    //   commit('currentCategory', this.getters.getCategoryIdFromSlug(params.slug))
+    // }
   },
 
   // nuke current category
@@ -49,9 +50,8 @@ export default {
 
   // posts TODO: turn this page/prefecth into an object
   async getPosts({ commit, state }, params) {
-    console.log(params)
     const { page } = params
-    const { cat } = params
+    console.log(page)
     const { prefetch } = params
 
     // which page are we on?
@@ -59,51 +59,52 @@ export default {
       commit('currentPage', page)
     }
     // check before requesting more pages
-    if (
-      // we have no posts, get some
-      0 === state.pagination.pages.length ||
-      // we have requested a new page and not hit total pages
-      (page &&
-        !state.pagination.pages.includes(page) &&
-        page <= state.pagination.totalPostsPages) ||
-      // we are prefetching and the prefetched page does not yet exist
-      (prefetch &&
-        page &&
-        !state.pagination.pages.includes(page) &&
-        page <= state.pagination.totalPostsPages)
-      // FIXME: Add a category check, if the category doesn't exist already
-
-      // TODO: some time has passed, lets check again? - store time in object against page? or post
-      // we don't want to be invalidating all stored data all the time?
-      // perhaps it is better to just empty the store from time to time?
-    ) {
-      // paginate - add this to our object of seen pages
-      commit('paginate', page)
-      // request posts from API
-      const posts = await this.$axios.get('posts?_embed', {
-        params: {
-          per_page: state.pagination.postsPerPage,
-          page: page,
-          categories: state.currentCategory
-        }
-      })
-
-      if (posts) {
-        // update pagination totals in store from API response
-        commit('paginateTotals', {
-          totalPosts: parseInt(posts.headers['x-wp-total']),
-          totalPostsPages: parseInt(posts.headers['x-wp-totalpages'])
-        })
-        // add page to returned data so we can grab posts by page later
-        posts.data.forEach(post => {
-          post.page = page
-        })
-        // add posts to store
-        commit('addPosts', posts.data)
+    console.log(state.currentCategory)
+    // if (
+    //   // we have no posts, get some
+    //   0 === state.pagination.pages.length ||
+    //   // we have requested a new page and not hit total pages
+    //   (page &&
+    //     !state.pagination.pages.includes(page) &&
+    //     page <= state.pagination.totalPostsPages) ||
+    //   // we are prefetching and the prefetched page does not yet exist
+    //   (prefetch &&
+    //     page &&
+    //     !state.pagination.pages.includes(page) &&
+    //     page <= state.pagination.totalPostsPages)
+    //   // FIXME: Add a category check, if the category doesn't exist already
+    //
+    //   // TODO: some time has passed, lets check again? - store time in object against page? or post
+    //   // we don't want to be invalidating all stored data all the time?
+    //   // perhaps it is better to just empty the store from time to time?
+    // ) {
+    // paginate - add this to our object of seen pages
+    commit('paginate', page)
+    // request posts from API
+    const posts = await this.$axios.get('posts?_embed', {
+      params: {
+        per_page: state.pagination.postsPerPage,
+        page: page,
+        categories: state.currentCategory
       }
-      // TODO: if a new post comes into the store after a timed update,
-      // we need to re-index all pages as the new post may be on an unknown page
-      // we don't want some pages with totalposts + 1 for example
+    })
+
+    if (posts) {
+      // update pagination totals in store from API response
+      commit('paginateTotals', {
+        totalPosts: parseInt(posts.headers['x-wp-total']),
+        totalPostsPages: parseInt(posts.headers['x-wp-totalpages'])
+      })
+      // add page to returned data so we can grab posts by page later
+      posts.data.forEach(post => {
+        post.page = page
+      })
+      // add posts to store
+      commit('addPosts', posts.data)
     }
+    // TODO: if a new post comes into the store after a timed update,
+    // we need to re-index all pages as the new post may be on an unknown page
+    // we don't want some pages with totalposts + 1 for example
+    // }
   }
 }

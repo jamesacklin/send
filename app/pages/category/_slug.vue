@@ -67,7 +67,7 @@ export default {
       slug: params.slug
     })
     await store.dispatch('getPosts', {
-      page: parseInt(query.id || 1)
+      page: parseInt(query.page) || 1
     })
   },
   computed: {
@@ -76,7 +76,7 @@ export default {
     },
     posts() {
       return this.$store.getters.getPostsPage(
-        parseInt(this.$route.query.id) || 1,
+        parseInt(this.$route.query.page) || 1,
         this.catId
       )
     },
