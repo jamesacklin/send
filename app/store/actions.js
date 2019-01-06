@@ -71,6 +71,8 @@ export default {
         page &&
         !state.pagination.pages.includes(page) &&
         page <= state.pagination.totalPostsPages)
+      // FIXME: Add a category check, if the category doesn't exist already
+
       // TODO: some time has passed, lets check again? - store time in object against page? or post
       // we don't want to be invalidating all stored data all the time?
       // perhaps it is better to just empty the store from time to time?
