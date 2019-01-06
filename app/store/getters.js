@@ -25,21 +25,13 @@ export default {
     })
     return posts
   },
-  // get category from slug
-  getCategoryIdFromSlug: state => slug => {
-    if (!state.categories[slug]) {
-      return false
-    } else {
-      return state.categories[slug].id
-    }
+  getCategoryBySlug: state => slug => {
+    return state.categories.categories[slug]
   },
   // get page of posts
   getPostsPage: state => (page, cat) => {
     // filter all posts by category ID
     // then filter just the current page
-
-    // FIXME: Get pagination working correctly here
-
     const posts = state.posts
       .filter(post => post.categories.includes(cat))
       .filter(post => post.page === page)

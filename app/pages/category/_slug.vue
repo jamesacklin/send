@@ -1,44 +1,9 @@
 <template>
   <main class="content">
     <section class="feed">
-      <template v-for="(feedItem, index) in feedItems">
-        <div
-          v-if="feedItem.type === 'post'"
-          class="feed-item feed-post"
-          :key="index"
-        >
-          <nuxt-link
-            class="story-link"
-            tag="div"
-            :to="`/articles/` + feedItem.slug"
-          >
-            <PostAtom
-              :slug="feedItem.slug"
-              :pictureUrl="featuredImage(feedItem)"
-              :titleCallout="titleCallout(feedItem)"
-              :title="feedItem.title.rendered"
-              :author="feedItem._embedded.author[0].name"
-              :date="feedItem.date"
-              :excerpt="feedItem.excerpt.rendered"
-              :isMedia="feedItem.format == 'video' ? true : false"
-              :isContest="feedItem.categories[0] == '589' ? true : false"
-              :mode="postMode(feedItem)"
-            />
-          </nuxt-link>
-        </div>
-        <div
-          v-if="feedItem.size === 'rectangle'"
-          class="feed-item feed-insert"
-          :class="`feed-insert-${index}`"
-          :key="index"
-        >
-          <advertising
-            :id="feedItem.id"
-            :size="feedItem.size"
-            :unit="feedItem.name"
-          />
-        </div>
-      </template>
+      <div class="feed-item feed-post" v-for="post in posts" :key="post.index">
+        <p>{{ post.title.rendered }}</p>
+      </div>
     </section>
     <Pagination />
   </main>
@@ -47,14 +12,14 @@
 <script>
 import find from 'lodash/find'
 import _ from 'lodash'
-import PostAtom from '@/components/PostAtom'
-import Advertising from '@/components/Advertising'
+// import PostAtom from '@/components/PostAtom'
+// import Advertising from '@/components/Advertising'
 import Pagination from '@/components/Navigation/Pagination'
 
 export default {
   components: {
-    PostAtom,
-    Advertising,
+    // PostAtom,
+    // Advertising,
     Pagination
   },
   data() {
@@ -67,16 +32,21 @@ export default {
       slug: params.slug
     })
     await store.dispatch('getPosts', {
-      page: parseInt(query.page) || 1
+      // I have a feeling query is the wrong thing here, since it doesn't
+      // actually force a route change. Maybe look into _.vue ?
+      page: parseInt(query.page || 1),
+      cat: params.slug
     })
   },
   computed: {
     catId() {
-      return this.$store.state.currentCategory
+      return this.$store.getters.getCategoryBySlug(this.$route.params.slug).id
     },
     posts() {
       return this.$store.getters.getPostsPage(
-        parseInt(this.$route.query.page) || 1,
+        // I have a feeling query is the wrong thing here, since it doesn't
+        // actually force a route change. Maybe look into _.vue ?
+        parseInt(this.$route.query.page || 1),
         this.catId
       )
     },

@@ -15,8 +15,11 @@ export default () => {
         postsPerPage: 30,
         paginate: true
       },
-      categories: {},
-      currentCategory: '',
+      categories: {
+        current: false,
+        categories: {},
+        categoryIds: []
+      },
       posts: [],
       pages: [],
       tickerStories: [
