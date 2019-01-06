@@ -25,20 +25,24 @@ export default {
     })
     return posts
   },
-  getCategoryId: state => {
-    if (!_.isEmpty(state.category)) {
-      const cat = state.category.id
-      return cat
+  // get category from slug
+  getCategoryIdFromSlug: state => slug => {
+    if (!state.categories[slug]) {
+      return false
     } else {
-      return ''
+      return state.categories[slug].id
     }
   },
   // get page of posts
-  getPostsPage: state => page => {
+  getPostsPage: state => (page, cat) => {
     // filter all posts by category ID
-    // TODO: write me
     // then filter just the current page
-    const posts = state.posts.filter(post => post.page === page)
+
+    // FIXME: Get pagination working correctly here
+
+    const posts = state.posts
+      .filter(post => post.categories.includes(cat))
+      .filter(post => post.page === page)
     // sort by date
     return posts.sort((a, b) => {
       return a.date < b.date ? 1 : -1

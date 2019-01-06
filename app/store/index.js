@@ -15,7 +15,7 @@ export default () => {
         postsPerPage: 30,
         paginate: true
       },
-      category: {},
+      categories: {},
       currentCategory: '',
       posts: [],
       pages: [],

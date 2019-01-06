@@ -69,6 +69,15 @@ header[role='banner']{
   transition: all 0.2s ease;
 }
 
+header a {
+  font-family: "Roboto Mono";
+  color: white;
+}
+
+header a.nuxt-link-exact-active {
+  color: red;
+}
+
 .block {
   position: relative;
   height: 77px;

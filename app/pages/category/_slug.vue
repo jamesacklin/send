@@ -62,20 +62,22 @@ export default {
       bottom: false
     }
   },
-  async asyncData({ payload, isStatic, store, params }) {
-    await store.dispatch('getCategoryIdFromSlug', {
+  async asyncData({ payload, isStatic, store, params, query }) {
+    await store.dispatch('getCategoryFromSlug', {
       slug: params.slug
     })
-    const thisCat = store.getters.getCategoryId
     await store.dispatch('getPosts', {
-      page: parseInt(params.id || 1),
-      cat: thisCat
+      page: parseInt(query.id || 1)
     })
   },
   computed: {
+    catId() {
+      return this.$store.state.currentCategory
+    },
     posts() {
       return this.$store.getters.getPostsPage(
-        parseInt(this.$route.params.id) || 1
+        parseInt(this.$route.query.id) || 1,
+        this.catId
       )
     },
     ads() {

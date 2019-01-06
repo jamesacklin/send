@@ -12,14 +12,21 @@ export default {
     }
   },
 
-  // category ID from slug
-  async getCategoryIdFromSlug({ commit, state }, params) {
-    const cat = await this.$axios.$get('categories', {
-      params: {
-        slug: params.slug
-      }
-    })
-    commit('category', cat[0])
+  // category from slug
+  async getCategoryFromSlug({ commit, state }, params) {
+    // Check to see if we already have the category in the store
+    if (!this.getters.getCategoryIdFromSlug(params.slug)) {
+      const cat = await this.$axios.$get('categories', {
+        params: {
+          slug: params.slug
+        }
+      })
+      commit('storeCategory', cat[0])
+      commit('currentCategory', cat[0].id)
+    } else {
+      const thisCat = this.getters.getCategoryIdFromSlug(params.slug)
+      commit('currentCategory', thisCat)
+    }
   },
 
   // nuke current category
@@ -50,7 +57,6 @@ export default {
     // which page are we on?
     if (!prefetch) {
       commit('currentPage', page)
-      commit('currentCategory', cat)
     }
     // check before requesting more pages
     if (
@@ -64,9 +70,7 @@ export default {
       (prefetch &&
         page &&
         !state.pagination.pages.includes(page) &&
-        page <= state.pagination.totalPostsPages) ||
-      // categories do not match up
-      cat === state.category.id
+        page <= state.pagination.totalPostsPages)
       // TODO: some time has passed, lets check again? - store time in object against page? or post
       // we don't want to be invalidating all stored data all the time?
       // perhaps it is better to just empty the store from time to time?
@@ -78,7 +82,7 @@ export default {
         params: {
           per_page: state.pagination.postsPerPage,
           page: page,
-          categories: cat
+          categories: state.currentCategory
         }
       })
 

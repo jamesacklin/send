@@ -72,7 +72,8 @@ export default {
   computed: {
     posts() {
       return this.$store.getters.getPostsPage(
-        parseInt(this.$route.params.id) || 1
+        parseInt(this.$route.params.id) || 1,
+        ''
       )
     },
     ads() {
