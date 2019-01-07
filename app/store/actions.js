@@ -88,6 +88,10 @@ export default {
         })
         // add page to returned data so we can grab posts by page later
         posts.data.forEach(post => {
+          // store empty categoryPage info in case we need to add category:page later
+          post.categoryPage = {}
+          post.categories.forEach(cat => (post.categoryPage[cat] = ''))
+          // but add the separate "page" counter anyway, in case we need it again on the index
           post.page = page
         })
         // add posts to store
@@ -145,10 +149,11 @@ export default {
           totalPosts: parseInt(posts.headers['x-wp-total']),
           totalPostsPages: parseInt(posts.headers['x-wp-totalpages'])
         })
-        // add page to returned data so we can grab posts by page later
-        // todo: this may come back to bite us if a post is in multiple categories?
+        // add category:page to returned data so we can grab posts by category:page later
         posts.data.forEach(post => {
-          post.categoryPage = page
+          post.categoryPage = {}
+          post.categories.forEach(cat => (post.categoryPage[cat] = ''))
+          post.categoryPage[currentCategory] = page
         })
         // add posts to store
         commit('addPosts', posts.data)

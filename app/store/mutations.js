@@ -1,3 +1,5 @@
+import merge from 'lodash/merge'
+
 export default {
   // add one the pages state
   addPage(state, page) {
@@ -9,10 +11,10 @@ export default {
   // add one or many posts to the posts state
   addPosts(state, posts) {
     for (let post of posts) {
-      // either replace the existing item or push onto state array
+      // either merge with the existing item or push onto state array
       const i = state.posts.findIndex(o => o.id === post.id)
       if (state.posts[i]) {
-        state.posts[i] = post
+        state.posts[i] = merge(state.posts[i], post)
       } else {
         state.posts.push(post)
       }

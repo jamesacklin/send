@@ -85,7 +85,7 @@ export default {
       return this.$store.getters.getCategoryBySlug(this.$route.params.slug).id
     },
     posts() {
-      return this.$store.getters.getPostsPage(
+      return this.$store.getters.getCatPostsPage(
         parseInt(this.$route.params.page || 1),
         this.catId
       )
