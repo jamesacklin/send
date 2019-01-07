@@ -41,6 +41,7 @@ export default {
     } else {
       const posts = state.posts
         .filter(post => post.categories.includes(cat))
+        // Make posts aware of what category-page they're on
         .filter(post => post.categoryPage === page)
       // sort by date
       return posts.sort((a, b) => {

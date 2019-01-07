@@ -1,6 +1,6 @@
 <template lang="html">
   <div ref="banner" :class="{ block: pastHeader }">
-    <Ticker ref="ticker" :tickerStories="tickerStories" />
+    <!-- <Ticker ref="ticker" :tickerStories="tickerStories" /> -->
     <header role="banner" :class="{ sticky: pastHeader }">
       <div style="text-align: center">
         <nuxt-link tag="a" :to="`/category/news`">News</nuxt-link>
@@ -18,12 +18,12 @@
 </template>
 
 <script>
-import Ticker from '@/components/Ticker'
+// import Ticker from '@/components/Ticker'
 import Logo from '@/components/Logo'
 
 export default {
   components: {
-    Ticker,
+    // Ticker,
     Logo
   },
   data() {

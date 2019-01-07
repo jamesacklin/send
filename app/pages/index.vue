@@ -1,6 +1,7 @@
 <template>
   <main class="content">
     <section class="feed">
+      <SectionHeader />
       <template v-for="(feedItem, index) in feedItems">
         <div
           v-if="feedItem.type === 'post'"
@@ -51,12 +52,14 @@ import flattenDeep from 'lodash/flattenDeep'
 import zip from 'lodash/zip'
 import chunk from 'lodash/chunk'
 import PostAtom from '@/components/PostAtom'
+import SectionHeader from '@/components/SectionHeader'
 import Advertising from '@/components/Advertising'
 import Pagination from '@/components/Navigation/Pagination'
 
 export default {
   components: {
     PostAtom,
+    SectionHeader,
     Advertising,
     Pagination
   },

@@ -1,6 +1,7 @@
 <template>
   <main class="content">
     <section class="feed category-feed">
+      <SectionHeader />
       <template v-for="(feedItem, index) in feedItems">
         <div
           v-if="feedItem.type === 'post'"
@@ -46,14 +47,19 @@
 
 <script>
 import find from 'lodash/find'
-import _ from 'lodash'
+import compact from 'lodash/compact'
+import flattenDeep from 'lodash/flattenDeep'
+import zip from 'lodash/zip'
+import chunk from 'lodash/chunk'
 import PostAtom from '@/components/PostAtom'
+import SectionHeader from '@/components/SectionHeader'
 import Advertising from '@/components/Advertising'
 import Pagination from '@/components/Navigation/Pagination'
 
 export default {
   components: {
     PostAtom,
+    SectionHeader,
     Advertising,
     Pagination
   },
@@ -72,6 +78,9 @@ export default {
     })
   },
   computed: {
+    catTitle() {
+      return this.$store.getters.getCategoryBySlug(this.$route.params.slug).name
+    },
     catId() {
       return this.$store.getters.getCategoryBySlug(this.$route.params.slug).id
     },
@@ -85,7 +94,7 @@ export default {
       return this.$store.state.advertising.rectangle
     },
     feedItems() {
-      return _.compact(_.flattenDeep(_.zip(_.chunk(this.posts, 3), this.ads)))
+      return compact(flattenDeep(zip(chunk(this.posts, 3), this.ads)))
     }
   },
   head() {
