@@ -110,28 +110,28 @@ export default {
     // tell the store which category we're on
     commit('currentCategory', currentCategory)
     // which page are we on?
-    commit('currentPage', page)
+    commit('currentCategoryPage', page)
     // check before requesting more pages
     if (
       // we have no posts, get some
-      0 === state.pagination.pages.length ||
+      0 === state.categories.pagination.pages.length ||
       // we have requested a new page and not hit total pages
       (page &&
-        !state.pagination.pages.includes(page) &&
-        page <= state.pagination.totalPostsPages) ||
+        !state.categories.pagination.pages.includes(page) &&
+        page <= state.categories.pagination.totalPostsPages) ||
       // check if the we don't have this category in the store already
       (currentCategory &&
         !state.categories.categoryIds.includes(currentCategory))
     ) {
-      // paginate - add this to our object of seen pages
-      commit('paginate', page)
+      // paginate - add this to our object of seen category pages
+      commit('paginateCategory', page)
       // Add this category ID to the list of category IDs we've already gotten
       commit('storeCategoryId', currentCategory)
 
       // request posts from API
       const posts = await this.$axios.get('posts?_embed', {
         params: {
-          per_page: state.pagination.postsPerPage,
+          per_page: state.categories.pagination.postsPerPage,
           page: page,
           categories: state.categories.current
         }
@@ -139,13 +139,13 @@ export default {
 
       if (posts) {
         // update pagination totals in store from API response
-        commit('paginateTotals', {
+        commit('paginateCategoryTotals', {
           totalPosts: parseInt(posts.headers['x-wp-total']),
           totalPostsPages: parseInt(posts.headers['x-wp-totalpages'])
         })
         // add page to returned data so we can grab posts by page later
         posts.data.forEach(post => {
-          post.page = page
+          post.categoryPage = page
         })
         // add posts to store
         commit('addPosts', posts.data)

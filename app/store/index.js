@@ -18,7 +18,15 @@ export default () => {
       categories: {
         current: false,
         categories: {},
-        categoryIds: []
+        categoryIds: [],
+        pagination: {
+          current: false,
+          totalPosts: 0,
+          pages: [],
+          totalPostsPages: 0,
+          postsPerPage: 30,
+          paginate: true
+        }
       },
       posts: [],
       pages: [],

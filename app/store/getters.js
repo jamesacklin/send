@@ -41,7 +41,7 @@ export default {
     } else {
       const posts = state.posts
         .filter(post => post.categories.includes(cat))
-        .filter(post => post.page === page)
+        .filter(post => post.categoryPage === page)
       // sort by date
       return posts.sort((a, b) => {
         return a.date < b.date ? 1 : -1

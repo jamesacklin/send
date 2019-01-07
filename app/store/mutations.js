@@ -26,6 +26,14 @@ export default {
   currentPage(state, page) {
     state.pagination.current = page
   },
+  // paginate
+  paginateCategory(state, page) {
+    state.categories.pagination.pages.push(page)
+  },
+  // current category page
+  currentCategoryPage(state, page) {
+    state.categories.pagination.current = page
+  },
   // store raw category info
   storeCategory(state, category) {
     state.categories.categories[category.slug] = category
@@ -42,6 +50,11 @@ export default {
   paginateTotals(state, totals) {
     state.pagination.totalPosts = totals.totalPosts
     state.pagination.totalPostsPages = totals.totalPostsPages
+  },
+  // pagination totals from API
+  paginateCategoryTotals(state, totals) {
+    state.categories.pagination.totalPosts = totals.totalPosts
+    state.categories.pagination.totalPostsPages = totals.totalPostsPages
   },
   // enable / disable pagination
   paginateToggle(state, onoff) {
