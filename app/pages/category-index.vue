@@ -1,9 +1,44 @@
 <template>
   <main class="content">
-    <section class="feed">
-      <div class="feed-item feed-post" v-for="post in posts" :key="post.index">
-        <p>{{ post.title.rendered }}</p>
-      </div>
+    <section class="feed category-feed">
+      <template v-for="(feedItem, index) in feedItems">
+        <div
+          v-if="feedItem.type === 'post'"
+          class="feed-item feed-post"
+          :key="index"
+        >
+          <nuxt-link
+            class="story-link"
+            tag="div"
+            :to="`/articles/` + feedItem.slug"
+          >
+            <PostAtom
+              :slug="feedItem.slug"
+              :pictureUrl="featuredImage(feedItem)"
+              :titleCallout="titleCallout(feedItem)"
+              :title="feedItem.title.rendered"
+              :author="feedItem._embedded.author[0].name"
+              :date="feedItem.date"
+              :excerpt="feedItem.excerpt.rendered"
+              :isMedia="feedItem.format == 'video' ? true : false"
+              :isContest="feedItem.categories[0] == '589' ? true : false"
+              :mode="postMode(feedItem)"
+            />
+          </nuxt-link>
+        </div>
+        <div
+          v-if="feedItem.size === 'rectangle'"
+          class="feed-item feed-insert"
+          :class="`feed-insert-${index}`"
+          :key="index"
+        >
+          <advertising
+            :id="feedItem.id"
+            :size="feedItem.size"
+            :unit="feedItem.name"
+          />
+        </div>
+      </template>
     </section>
     <Pagination />
   </main>
@@ -12,14 +47,14 @@
 <script>
 import find from 'lodash/find'
 import _ from 'lodash'
-// import PostAtom from '@/components/PostAtom'
-// import Advertising from '@/components/Advertising'
+import PostAtom from '@/components/PostAtom'
+import Advertising from '@/components/Advertising'
 import Pagination from '@/components/Navigation/Pagination'
 
 export default {
   components: {
-    // PostAtom,
-    // Advertising,
+    PostAtom,
+    Advertising,
     Pagination
   },
   data() {
@@ -31,9 +66,7 @@ export default {
     await store.dispatch('getCategoryFromSlug', {
       slug: params.slug
     })
-    await store.dispatch('getPosts', {
-      // I have a feeling query is the wrong thing here, since it doesn't
-      // actually force a route change. Maybe look into _.vue ?
+    await store.dispatch('getPostsByCategory', {
       page: parseInt(params.page || 1),
       cat: params.slug
     })
@@ -44,8 +77,6 @@ export default {
     },
     posts() {
       return this.$store.getters.getPostsPage(
-        // I have a feeling query is the wrong thing here, since it doesn't
-        // actually force a route change. Maybe look into _.vue ?
         parseInt(this.$route.params.page || 1),
         this.catId
       )
@@ -61,7 +92,7 @@ export default {
     return {
       title: 'Dirt Rag Magazine',
       bodyAttrs: {
-        class: 'home archive'
+        class: 'home archive category-archive'
       },
       meta: [
         {

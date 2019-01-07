@@ -29,14 +29,34 @@ module.exports = {
     extendRoutes(routes, resolve) {
       return [
         {
+          path: '/',
+          component: resolve(__dirname, 'pages/index.vue'),
+          name: 'index'
+        },
+        {
+          path: '/page/:page',
+          component: resolve(__dirname, 'pages/index.vue'),
+          name: 'index-page'
+        },
+        {
+          path: '/:slug',
+          component: resolve(__dirname, 'pages/page.vue'),
+          name: 'page'
+        },
+        {
+          path: '/articles/:slug',
+          component: resolve(__dirname, 'pages/article.vue'),
+          name: 'article'
+        },
+        {
           path: '/category/:slug',
-          component: resolve(__dirname, 'pages/category/index.vue'),
-          name: 'category'
+          component: resolve(__dirname, 'pages/category-index.vue'),
+          name: 'category-index'
         },
         {
           path: '/category/:slug/page/:page',
-          component: resolve(__dirname, 'pages/category/index.vue'),
-          name: 'category-page'
+          component: resolve(__dirname, 'pages/category-index.vue'),
+          name: 'category-index-page'
         }
       ]
     }

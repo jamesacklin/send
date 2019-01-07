@@ -32,12 +32,20 @@ export default {
   getPostsPage: state => (page, cat) => {
     // filter all posts by category ID
     // then filter just the current page
-    const posts = state.posts
-      .filter(post => post.categories.includes(cat))
-      .filter(post => post.page === page)
-    // sort by date
-    return posts.sort((a, b) => {
-      return a.date < b.date ? 1 : -1
-    })
+    if (!cat) {
+      const posts = state.posts.filter(post => post.page === page)
+      // sort by date
+      return posts.sort((a, b) => {
+        return a.date < b.date ? 1 : -1
+      })
+    } else {
+      const posts = state.posts
+        .filter(post => post.categories.includes(cat))
+        .filter(post => post.page === page)
+      // sort by date
+      return posts.sort((a, b) => {
+        return a.date < b.date ? 1 : -1
+      })
+    }
   }
 }
