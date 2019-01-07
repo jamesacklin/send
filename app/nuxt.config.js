@@ -26,6 +26,20 @@ module.exports = {
     { src: '~/plugins/vue-lazy.js', ssr: false }
   ],
   router: {
+    extendRoutes(routes, resolve) {
+      return [
+        {
+          path: '/category/:slug',
+          component: resolve(__dirname, 'pages/category/index.vue'),
+          name: 'category'
+        },
+        {
+          path: '/category/:slug/page/:page',
+          component: resolve(__dirname, 'pages/category/index.vue'),
+          name: 'category-page'
+        }
+      ]
+    }
     // scrollBehavior: function(to, from, savedPosition) {
     //   return savedPosition
     // }

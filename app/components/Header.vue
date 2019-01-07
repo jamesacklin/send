@@ -4,10 +4,8 @@
     <header role="banner" :class="{ sticky: pastHeader }">
       <nuxt-link tag="a" :to="`/category/news`">News</nuxt-link>
       <nuxt-link tag="a" :to="`/category/gear`">Gear</nuxt-link>
-      <nuxt-link tag="a" :to="`/category/opinion?page=1`"
-        >Opinion pg 1</nuxt-link
-      >
-      <nuxt-link tag="a" :to="`/category/opinion?page=2`"
+      <nuxt-link tag="a" :to="`/category/opinion`">Opinion</nuxt-link>
+      <nuxt-link tag="a" :to="`/category/opinion/page/2`"
         >Opinion pg 2</nuxt-link
       >
       <nuxt-link tag="a" :to="`/category/events`">Events</nuxt-link>

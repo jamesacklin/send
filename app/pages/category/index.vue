@@ -34,7 +34,7 @@ export default {
     await store.dispatch('getPosts', {
       // I have a feeling query is the wrong thing here, since it doesn't
       // actually force a route change. Maybe look into _.vue ?
-      page: parseInt(query.page || 1),
+      page: parseInt(params.page || 1),
       cat: params.slug
     })
   },
@@ -46,7 +46,7 @@ export default {
       return this.$store.getters.getPostsPage(
         // I have a feeling query is the wrong thing here, since it doesn't
         // actually force a route change. Maybe look into _.vue ?
-        parseInt(this.$route.query.page || 1),
+        parseInt(this.$route.params.page || 1),
         this.catId
       )
     },
