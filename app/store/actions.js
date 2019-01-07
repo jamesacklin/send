@@ -91,7 +91,6 @@ export default {
           // store empty categoryPage info in case we need to add category:page later
           if (!post.categoryPage) {
             post.categoryPage = {}
-            post.categories.forEach(cat => (post.categoryPage[cat] = ''))
           }
           // but add the separate "page" counter anyway, in case we need it again on the index
           post.page = page
@@ -155,9 +154,10 @@ export default {
         posts.data.forEach(post => {
           if (!post.categoryPage) {
             post.categoryPage = {}
-            post.categories.forEach(cat => (post.categoryPage[cat] = ''))
           }
-          post.categoryPage[currentCategory] = page
+          post.categoryPage = merge(post.categoryPage, {
+            [currentCategory]: page
+          })
         })
         // add posts to store
         commit('addPosts', posts.data)
