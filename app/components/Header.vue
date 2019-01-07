@@ -75,6 +75,11 @@ header a {
   color: white;
 }
 
+header a:focus,
+header a:active {
+  color: red;
+}
+
 header a.nuxt-link-exact-active {
   color: red;
 }
