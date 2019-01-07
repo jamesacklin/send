@@ -89,8 +89,10 @@ export default {
         // add page to returned data so we can grab posts by page later
         posts.data.forEach(post => {
           // store empty categoryPage info in case we need to add category:page later
-          post.categoryPage = {}
-          post.categories.forEach(cat => (post.categoryPage[cat] = ''))
+          if (!post.categoryPage) {
+            post.categoryPage = {}
+            post.categories.forEach(cat => (post.categoryPage[cat] = ''))
+          }
           // but add the separate "page" counter anyway, in case we need it again on the index
           post.page = page
         })
@@ -151,8 +153,10 @@ export default {
         })
         // add category:page to returned data so we can grab posts by category:page later
         posts.data.forEach(post => {
-          post.categoryPage = {}
-          post.categories.forEach(cat => (post.categoryPage[cat] = ''))
+          if (!post.categoryPage) {
+            post.categoryPage = {}
+            post.categories.forEach(cat => (post.categoryPage[cat] = ''))
+          }
           post.categoryPage[currentCategory] = page
         })
         // add posts to store
