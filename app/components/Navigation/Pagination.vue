@@ -47,7 +47,7 @@
     <ul
       class="pagination pagination-archive"
       v-if="categoryArchive"
-      key="archive"
+      key="category-archive"
     >
       <li v-if="notFirstCategoryPage">
         <nuxt-link :to="prevCategoryPage">
@@ -92,7 +92,7 @@
       </li>
       <li v-else>&nbsp;</li>
     </ul>
-    <ul class="pagination pagination-single" v-else key="single">
+    <ul class="pagination pagination-single" v-if="postSingle" key="single">
       <li>
         <nuxt-link :to="backUp">
           <svg
@@ -155,25 +155,37 @@ export default {
         '/category/' +
         this.$route.params.slug +
         '/page/' +
-        (this.$store.state.categories.pagination.current + 1) +
+        (this.$store.state.categories.categories[this.$route.params.slug]
+          .pagination.current +
+          1) +
         '/'
       )
     },
     prevCategoryPage() {
-      if (this.$store.state.categories.pagination.current - 1 === 1) {
-        return '/' + this.$route.params.slug
+      if (
+        this.$store.state.categories.categories[this.$route.params.slug]
+          .pagination.current -
+          1 ===
+        1
+      ) {
+        return '/category/' + this.$route.params.slug
       } else {
         return (
           '/category/' +
           this.$route.params.slug +
           '/page/' +
-          (this.$store.state.categories.pagination.current - 1) +
+          (this.$store.state.categories.categories[this.$route.params.slug]
+            .pagination.current -
+            1) +
           '/'
         )
       }
     },
+    postSingle() {
+      return this.$route.name === 'page' || this.$route.name === 'article'
+    },
     postArchive() {
-      return this.$route.path === '/' || this.$route.name === 'index-page'
+      return this.$route.name === 'index' || this.$route.name === 'index-page'
     },
     categoryArchive() {
       return (
@@ -195,14 +207,18 @@ export default {
     },
     notFirstCategoryPage() {
       return (
-        this.$store.state.categories.pagination.current &&
-        this.$store.state.categories.pagination.current !== 1
+        this.$store.state.categories.categories[this.$route.params.slug]
+          .pagination.current &&
+        this.$store.state.categories.categories[this.$route.params.slug]
+          .pagination.current !== 1
       )
     },
     notLastCategoryPage() {
       return (
-        this.$store.state.categories.pagination.current <
-        this.$store.state.categories.pagination.totalPostsPages
+        this.$store.state.categories.categories[this.$route.params.slug]
+          .pagination.current <
+        this.$store.state.categories.categories[this.$route.params.slug]
+          .pagination.totalPostsPages
       )
     }
   },
@@ -230,6 +246,12 @@ export default {
 <style lang="scss">
 .screen-reader-text {
   font-family: 'Roboto Mono', monospace;
+}
+.page-navigation {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }
 .pagination {
   list-style: none;

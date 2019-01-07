@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import merge from 'lodash/merge'
 
 export default {
   // page
@@ -23,13 +23,12 @@ export default {
           slug: params.slug
         }
       })
-      commit('storeCategory', cat[0])
+      // instantiate pagination store model, merge with what we get from the API
+      const storeCat = merge(cat[0], {
+        pagination: { current: false, pages: [] }
+      })
+      commit('storeCategory', storeCat)
     }
-  },
-
-  // nuke current category
-  async clearCategory({ commit, state }) {
-    commit('category', [{ id: '' }])
   },
 
   // post
@@ -102,7 +101,9 @@ export default {
 
   // get posts by category
   async getPostsByCategory({ commit, state }, params) {
+    // page from route params
     const { page } = params
+    // category slug from route params
     const { cat } = params
     const { prefetch } = params
     // get the ID for the category slug we're on
@@ -110,40 +111,42 @@ export default {
     // tell the store which category we're on
     commit('currentCategory', currentCategory)
     // which page are we on?
-    commit('currentCategoryPage', page)
+    commit('currentCategoryPage', { cat: cat, page: page })
     // check before requesting more pages
     if (
       // we have no posts, get some
-      0 === state.categories.pagination.pages.length ||
+      0 === state.categories.categories[cat].pagination.pages.length ||
       // we have requested a new page and not hit total pages
       (page &&
-        !state.categories.pagination.pages.includes(page) &&
-        page <= state.categories.pagination.totalPostsPages) ||
+        !state.categories.categories[cat].pagination.pages.includes(page) &&
+        page <= state.categories.categories[cat].pagination.totalPostsPages) ||
       // check if the we don't have this category in the store already
       (currentCategory &&
         !state.categories.categoryIds.includes(currentCategory))
     ) {
-      // paginate - add this to our object of seen category pages
-      commit('paginateCategory', page)
+      // paginate - add this to our category-specific object of seen category pages
+      commit('paginateCategory', { cat: cat, page: page })
       // Add this category ID to the list of category IDs we've already gotten
       commit('storeCategoryId', currentCategory)
 
       // request posts from API
       const posts = await this.$axios.get('posts?_embed', {
         params: {
-          per_page: state.categories.pagination.postsPerPage,
+          per_page: state.pagination.postsPerPage,
           page: page,
           categories: state.categories.current
         }
       })
 
       if (posts) {
-        // update pagination totals in store from API response
+        // update category-specific pagination totals in store from API response
         commit('paginateCategoryTotals', {
+          cat: cat,
           totalPosts: parseInt(posts.headers['x-wp-total']),
           totalPostsPages: parseInt(posts.headers['x-wp-totalpages'])
         })
         // add page to returned data so we can grab posts by page later
+        // todo: this may come back to bite us if a post is in multiple categories?
         posts.data.forEach(post => {
           post.categoryPage = page
         })

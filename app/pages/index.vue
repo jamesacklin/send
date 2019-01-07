@@ -46,7 +46,10 @@
 
 <script>
 import find from 'lodash/find'
-import _ from 'lodash'
+import compact from 'lodash/compact'
+import flattenDeep from 'lodash/flattenDeep'
+import zip from 'lodash/zip'
+import chunk from 'lodash/chunk'
 import PostAtom from '@/components/PostAtom'
 import Advertising from '@/components/Advertising'
 import Pagination from '@/components/Navigation/Pagination'
@@ -77,7 +80,7 @@ export default {
       return this.$store.state.advertising.rectangle
     },
     feedItems() {
-      return _.compact(_.flattenDeep(_.zip(_.chunk(this.posts, 3), this.ads)))
+      return compact(flattenDeep(zip(chunk(this.posts, 3), this.ads)))
     }
   },
   head() {
