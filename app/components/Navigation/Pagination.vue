@@ -256,7 +256,7 @@ export default {
 }
 .pagination {
   list-style: none;
-  background: #ccc;
+  background: #000;
   margin: 0;
   padding: 0;
   &::after {

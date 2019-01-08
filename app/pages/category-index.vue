@@ -41,7 +41,6 @@
         </div>
       </template>
     </section>
-    <Pagination />
   </main>
 </template>
 
@@ -54,14 +53,12 @@ import chunk from 'lodash/chunk'
 import PostAtom from '@/components/PostAtom'
 import SectionHeader from '@/components/SectionHeader'
 import Advertising from '@/components/Advertising'
-import Pagination from '@/components/Navigation/Pagination'
 
 export default {
   components: {
     PostAtom,
     SectionHeader,
-    Advertising,
-    Pagination
+    Advertising
   },
   data() {
     return {

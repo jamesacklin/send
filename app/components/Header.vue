@@ -1,29 +1,26 @@
 <template lang="html">
   <div ref="banner" :class="{ block: pastHeader }">
-    <!-- <Ticker ref="ticker" :tickerStories="tickerStories" /> -->
     <header role="banner" :class="{ sticky: pastHeader }">
-      <div style="text-align: center">
-        <nuxt-link tag="a" :to="`/category/news`">News</nuxt-link>
-        <nuxt-link tag="a" :to="`/category/gear`">Gear</nuxt-link>
-        <nuxt-link tag="a" :to="`/category/opinion`">Opinion</nuxt-link>
-        <nuxt-link tag="a" :to="`/category/events`">Events</nuxt-link>
-      </div>
       <div class="logo-wrapper">
         <nuxt-link tag="a" :to="`/`">
           <Logo style="cursor: pointer;" orientation="horizontal" />
         </nuxt-link>
       </div>
+      <OutsideFeed />
+      <Ticker ref="ticker" :tickerStories="tickerStories" />
     </header>
   </div>
 </template>
 
 <script>
-// import Ticker from '@/components/Ticker'
+import Ticker from '@/components/Ticker'
 import Logo from '@/components/Logo'
+import OutsideFeed from '@/components/OutsideFeed'
 
 export default {
   components: {
-    // Ticker,
+    Ticker,
+    OutsideFeed,
     Logo
   },
   data() {
@@ -96,13 +93,41 @@ header.sticky {
 
 .logo-wrapper {
   width: 200px;
-  padding: 1rem 0;
-  margin: 0 auto;
+  padding: 1rem 0 1rem 2%;
+  transition: all 0.2s ease;
+  /* margin: 0 auto; */
 }
 
 header.sticky .logo-wrapper {
-  width: 100px;
-  padding: 0.5rem 0;
-  margin: 0 auto;
+  width: 125px;
+  padding: 0.25rem 0 0.25rem 2%;
+}
+
+@media (max-width: 812px){
+  header .outside-player {
+    display: none;
+  }
+}
+
+header .outside-player {
+  position: absolute;
+  z-index: 2;
+  top: 1rem;
+  right: 2%;
+  width: 16em;
+  transition: all 0.2s ease;
+}
+
+header .outside-player:not(:empty){
+  outline: 1em solid black;
+}
+
+header.sticky .outside-player:not(:empty){
+  outline: 0.5em solid black;
+  transform: translateX(0.25em)
+}
+
+header.sticky .outside-player {
+  width: 12em;
 }
 </style>
