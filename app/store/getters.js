@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 export default {
   // get a page by slug
   getPageBySlug: state => slug => {
@@ -24,6 +22,22 @@ export default {
       return a.date < b.date ? 1 : -1
     })
     return posts
+  },
+  getCategoryBySlug: state => slug => {
+    return state.categories.categories[slug]
+  },
+  // get category-page of posts
+  getCatPostsPage: state => (page, cat) => {
+    const posts = state.posts
+      // Posts should be aware of what category-page they're on,
+      // so grab posts by category
+      .filter(post => post.categories.includes(cat))
+      // then filter just the current category-page
+      .filter(post => post.categoryPage[cat] === page)
+    // sort by date
+    return posts.sort((a, b) => {
+      return a.date < b.date ? 1 : -1
+    })
   },
   // get page of posts
   getPostsPage: state => page => {

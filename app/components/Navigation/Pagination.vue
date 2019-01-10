@@ -44,7 +44,55 @@
       </li>
       <li v-else>&nbsp;</li>
     </ul>
-    <ul class="pagination pagination-single" v-else key="single">
+    <ul
+      class="pagination pagination-archive"
+      v-if="categoryArchive"
+      key="category-archive"
+    >
+      <li v-if="notFirstCategoryPage">
+        <nuxt-link :to="prevCategoryPage">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            version="1.1"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            aria-labelledby="leftTitle"
+            role="img"
+          >
+            <title id="leftTitle">Left arrow icon</title>
+            <path
+              d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"
+            />
+          </svg>
+          <span class="screen-reader-text">Newer Posts</span>
+        </nuxt-link>
+      </li>
+      <li v-else>&nbsp;</li>
+      <li v-if="notLastCategoryPage">
+        <nuxt-link :to="nextCategoryPage">
+          <span class="screen-reader-text">Older Posts</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            version="1.1"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            aria-labelledby="rightTitle"
+            role="img"
+          >
+            <title id="rightTitle">Right arrow icon</title>
+            <path
+              d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"
+            />
+          </svg>
+        </nuxt-link>
+      </li>
+      <li v-else>&nbsp;</li>
+    </ul>
+    <ul class="pagination pagination-single" v-if="postSingle" key="single">
       <li>
         <nuxt-link :to="backUp">
           <svg
@@ -102,8 +150,48 @@ export default {
         return '/page/' + (this.$store.state.pagination.current - 1) + '/'
       }
     },
+    nextCategoryPage() {
+      return (
+        '/category/' +
+        this.$route.params.slug +
+        '/page/' +
+        (this.$store.state.categories.categories[this.$route.params.slug]
+          .pagination.current +
+          1) +
+        '/'
+      )
+    },
+    prevCategoryPage() {
+      if (
+        this.$store.state.categories.categories[this.$route.params.slug]
+          .pagination.current -
+          1 ===
+        1
+      ) {
+        return '/category/' + this.$route.params.slug
+      } else {
+        return (
+          '/category/' +
+          this.$route.params.slug +
+          '/page/' +
+          (this.$store.state.categories.categories[this.$route.params.slug]
+            .pagination.current -
+            1) +
+          '/'
+        )
+      }
+    },
+    postSingle() {
+      return this.$route.name === 'page' || this.$route.name === 'article'
+    },
     postArchive() {
-      return this.$route.path === '/' || this.$route.name === 'page-id'
+      return this.$route.name === 'index' || this.$route.name === 'index-page'
+    },
+    categoryArchive() {
+      return (
+        this.$route.name === 'category-index' ||
+        this.$route.name === 'category-index-page'
+      )
     },
     notFirstPage() {
       return (
@@ -115,6 +203,22 @@ export default {
       return (
         this.$store.state.pagination.current <
         this.$store.state.pagination.totalPostsPages
+      )
+    },
+    notFirstCategoryPage() {
+      return (
+        this.$store.state.categories.categories[this.$route.params.slug]
+          .pagination.current &&
+        this.$store.state.categories.categories[this.$route.params.slug]
+          .pagination.current !== 1
+      )
+    },
+    notLastCategoryPage() {
+      return (
+        this.$store.state.categories.categories[this.$route.params.slug]
+          .pagination.current <
+        this.$store.state.categories.categories[this.$route.params.slug]
+          .pagination.totalPostsPages
       )
     }
   },
@@ -143,9 +247,16 @@ export default {
 .screen-reader-text {
   font-family: 'Roboto Mono', monospace;
 }
+.page-navigation {
+  position: fixed;
+  z-index: 3;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
 .pagination {
   list-style: none;
-  background: #ccc;
+  background: #000;
   margin: 0;
   padding: 0;
   &::after {

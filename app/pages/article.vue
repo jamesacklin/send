@@ -21,6 +21,7 @@
               &nbsp;—&nbsp; <span v-html="postDate"></span>
             </span>
           </div>
+          <div class="article-sharing">[SOCIAL SHARING LINKS]</div>
         </div>
       </header>
       <div class="article-content">
@@ -132,27 +133,6 @@ export default {
 .article {
   font-family: 'Libre Franklin', sans-serif;
   line-height: 1.6;
-  display: grid;
-  grid-row-gap: 1em;
-  grid-auto-rows: auto;
-  grid-template-columns:
-    [full-start] 0
-    [main-start] minmax(0, 50em) [main-end]
-    0 [full-end];
-  @media (min-width: 500px) {
-    grid-template-columns:
-      [full-start] minmax(1em, 1fr)
-      [main-start] minmax(0, 50em) [main-end]
-      minmax(1em, 1fr) [full-end];
-  }
-  @media (min-width: 1200px) {
-    grid-row-gap: 2em;
-    grid-column-gap: 2em;
-    grid-template-columns:
-      [full-start] minmax(1em, 1fr)
-      [main-start] minmax(0, 62.5em) [main-end]
-      minmax(1em, 1fr) [full-end];
-  }
 }
 
 .article a {
@@ -206,64 +186,81 @@ export default {
 }
 
 .article-title-block {
-  grid-column: main;
   color: white;
-  padding: 0 2%;
-  margin-bottom: 1em;
+  padding: 1rem 0;
   display: grid;
-  grid-row-gap: 1em;
-  grid-auto-rows: auto;
   grid-template-columns:
-    [full-start] 0
-    [main-start] minmax(0, 50em) [main-end]
-    0 [full-end];
-  @media (min-width: 500px) {
-    padding: 0;
+    [full-start] minmax(1em, 1fr)
+    [main-start] minmax(0, 45em) [main-end]
+    minmax(1em, 1fr) [full-end];
+  grid-column-gap: 1rem;
+  grid-auto-rows: auto;
+  @media (min-width: 1000px) {
+    padding: 2rem 0;
     grid-template-columns:
       [full-start] minmax(1em, 1fr)
-      [main-start] minmax(0, 50em) [main-end]
+      [main-start] minmax(0, 45em) [main-end sidebar-start] 300px [sidebar-end]
       minmax(1em, 1fr) [full-end];
-  }
-  @media (min-width: 1000px) {
+    grid-column-gap: 2rem;
     color: black;
-    margin-bottom: 0;
-    margin-top: 2em;
   }
   @media (min-width: 1200px) {
-    grid-column-gap: 2em;
     grid-template-columns:
       [full-start] minmax(1em, 1fr)
-      [main-start] minmax(0, 62.5em) [main-end]
+      [main-start] minmax(0, 62.5em)
+      [main-end sidebar-start] 300px [sidebar-end]
       minmax(1em, 1fr) [full-end];
   }
-}
 
-.article-title {
-  grid-column: main;
-  font-size: 2.5rem;
-  margin: 0;
-  line-height: 1;
-  @media (min-width: 1024px) {
-    font-size: 3rem;
+  .article-title {
+    grid-column: main;
+    font-size: 2.5rem;
+    margin: 0;
+    line-height: 1;
+    @media (min-width: 1024px) {
+      font-size: 3rem;
+    }
   }
-}
 
-.article-author {
-  grid-column: main;
-  font-family: 'Roboto Mono', monospace;
-  font-size: 1rem;
+  .article-author {
+    grid-column: main;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1rem;
+  }
+
+  .article-sharing {
+    grid-column: main;
+    margin-top: 1rem;
+    @media (min-width: 1000px) {
+      margin-top: 0;
+      grid-column: sidebar;
+    }
+  }
 }
 
 .article-content {
-  grid-column: main;
-  border-top: 1px solid #efefef;
   padding: 0 2%;
+  border-top: 1px solid #efefef;
   @media (min-width: 1000px) {
     padding: 0;
     display: grid;
-    grid-template-columns: auto 300px;
+    grid-row-gap: 2em;
     grid-column-gap: 2em;
+    grid-template-columns:
+      [full-start] minmax(1em, 1fr) [main-start] minmax(0, 45em)
+      [main-end sidebar-start] 300px [sidebar-end] minmax(1em, 1fr) [full-end];
   }
+  @media (min-width: 1200px) {
+    grid-template-columns:
+      [full-start] minmax(1em, 1fr)
+      [main-start] minmax(0, 62.5em)
+      [main-end sidebar-start] 300px [sidebar-end]
+      minmax(1em, 1fr) [full-end];
+  }
+}
+
+.article-copy {
+  grid-column: main;
 }
 
 .article-copy img {
@@ -273,7 +270,7 @@ export default {
 @media (min-width: 1000px) {
   .article-copy figure {
     position: relative;
-    z-index: 1;
+    z-index: 3;
     transition: all 0.2s ease;
   }
   .article-copy figure img {
@@ -290,6 +287,10 @@ export default {
   .article-copy figure.zoomed img {
     cursor: zoom-out;
   }
+}
+
+.advertising {
+  grid-column: sidebar;
 }
 
 .advertising > div > div:not(:empty) {

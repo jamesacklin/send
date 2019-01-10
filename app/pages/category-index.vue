@@ -1,6 +1,6 @@
 <template>
   <main class="content">
-    <section class="feed">
+    <section class="feed category-feed">
       <SectionHeader />
       <template v-for="(feedItem, index) in feedItems">
         <div
@@ -65,15 +65,26 @@ export default {
       bottom: false
     }
   },
-  async asyncData({ payload, isStatic, store, params }) {
-    await store.dispatch('getPosts', {
-      page: parseInt(params.page || 1)
+  async asyncData({ payload, isStatic, store, params, query }) {
+    await store.dispatch('getCategoryFromSlug', {
+      slug: params.slug
+    })
+    await store.dispatch('getPostsByCategory', {
+      page: parseInt(params.page || 1),
+      cat: params.slug
     })
   },
   computed: {
+    catTitle() {
+      return this.$store.getters.getCategoryBySlug(this.$route.params.slug).name
+    },
+    catId() {
+      return this.$store.getters.getCategoryBySlug(this.$route.params.slug).id
+    },
     posts() {
-      return this.$store.getters.getPostsPage(
-        parseInt(this.$route.params.page || 1)
+      return this.$store.getters.getCatPostsPage(
+        parseInt(this.$route.params.page || 1),
+        this.catId
       )
     },
     ads() {
@@ -87,7 +98,7 @@ export default {
     return {
       title: 'Dirt Rag Magazine',
       bodyAttrs: {
-        class: 'home archive'
+        class: 'home archive category-archive'
       },
       meta: [
         {
@@ -151,16 +162,6 @@ export default {
 </script>
 
 <style lang="scss">
-.feed-insert {
-  background: rgb(240, 240, 240);
-  text-align: center;
-}
-
-.feed-insert > div > div:not(:empty) {
-  text-align: center;
-  padding: 1rem;
-}
-
 .feed {
   display: grid;
   grid-row-gap: 1em;
@@ -193,8 +194,16 @@ export default {
 
 .feed-insert {
   grid-column: full;
+  background: rgb(240, 240, 240);
+  text-align: center;
+  & > div > div:not(:empty) {
+    text-align: center;
+    padding: 1rem;
+  }
+  @media (min-width: 1000px) {
+    display: none;
+  }
 }
-
 .story-link:hover {
   cursor: pointer;
 }

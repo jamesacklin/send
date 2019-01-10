@@ -53,7 +53,7 @@ export default {
 
 <style lang="css" scoped>
 .ticker {
-  background: black;
+  background: #1C1C1C;
   padding: 0.25rem 0;
   height: 30px;
   overflow: hidden;

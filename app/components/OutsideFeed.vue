@@ -1,19 +1,55 @@
 <template lang="html">
-  <div class="mb3">
-    <div id="botr_tluteeuw_8cg9oAyB_div"></div>
+  <div class="outside-player" :style="{ display: playerDisplay }">
+    <no-ssr>
+      <keep-alive> <div id="botr_tluteeuw_8cg9oAyB_div"></div> </keep-alive>
+    </no-ssr>
+    <div class="controls">
+      <div class="close" v-on:click="closePlayer()">Close Player</div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'OutsideFeed',
-  mounted () {
+  data() {
+    return {
+      playerDisplay: 'block'
+    }
+  },
+  methods: {
+    closePlayer() {
+      this.playerDisplay = 'none'
+      let outsideScript = document.getElementById('outside-script')
+      document.head.removeChild(outsideScript)
+    }
+  },
+  mounted() {
     let outsideScript = document.createElement('script')
-    outsideScript.setAttribute('src', '//content.jwplatform.com/players/tluteeuw-8cg9oAyB.js')
+    outsideScript.setAttribute(
+      'src',
+      '//content.jwplatform.com/players/tluteeuw-8cg9oAyB.js'
+    )
+    outsideScript.setAttribute('id', 'outside-script')
     document.head.appendChild(outsideScript)
   }
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
+.controls {
+  display: none;
+}
+
+.outside-player:hover .controls {
+  display: block;
+  font-family: "Libre Franklin", sans-serif;
+  padding: 0.5em;
+  background: black;
+  color: white;
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  cursor: pointer;
+}
 </style>
