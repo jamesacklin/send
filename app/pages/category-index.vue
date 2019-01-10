@@ -161,48 +161,29 @@ export default {
 }
 </script>
 
-<style lang="css">
-.feed-insert {
-  background: rgb(240,240,240);
-  text-align: center;
-}
-
-.feed-insert > div > div:not(:empty) {
-  text-align: center;
-  padding: 1rem;
-}
-
+<style lang="scss">
 .feed {
   display: grid;
   grid-row-gap: 1em;
   grid-auto-rows: auto;
   grid-template-columns:
     [full-start] 0
-    [main-start] minmax(0, 45em) [main-end]
+    [main-start] minmax(0, 1000px) [main-end]
     0 [full-end];
-}
-
-@media (min-width: 500px){
-  .feed {
+  @media (min-width: 1000px) {
+    padding: 0;
     display: grid;
-    grid-row-gap: 1em;
-    grid-auto-rows: auto;
-    grid-template-columns:
-      [full-start] minmax(1em, 1fr)
-      [main-start] minmax(0, 45em) [main-end]
-      minmax(1em, 1fr) [full-end];
-  }
-}
-
-@media (min-width: 1200px){
-  .feed {
-    display: grid;
-    grid-column-gap: 2%;
     grid-row-gap: 2em;
-    grid-auto-rows: auto;
+    grid-column-gap: 2em;
+    grid-template-columns:
+      [full-start] minmax(1em, 1fr) [main-start] minmax(0, 45em)
+      [main-end sidebar-start] 300px [sidebar-end] minmax(1em, 1fr) [full-end];
+  }
+  @media (min-width: 1200px) {
     grid-template-columns:
       [full-start] minmax(1em, 1fr)
-      [main-start] minmax(0, 62.5em) [main-end]
+      [main-start] minmax(0, 62.5em)
+      [main-end sidebar-start] 300px [sidebar-end]
       minmax(1em, 1fr) [full-end];
   }
 }
@@ -213,8 +194,16 @@ export default {
 
 .feed-insert {
   grid-column: full;
+  background: rgb(240, 240, 240);
+  text-align: center;
+  & > div > div:not(:empty) {
+    text-align: center;
+    padding: 1rem;
+  }
+  @media (min-width: 1000px) {
+    display: none;
+  }
 }
-
 .story-link:hover {
   cursor: pointer;
 }

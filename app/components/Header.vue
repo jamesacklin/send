@@ -39,7 +39,7 @@ export default {
     scrollHeader() {
       // FIXME: this
       const scrollY = window.scrollY
-      const tickerHeight = 300
+      const tickerHeight = 30
       if (scrollY >= tickerHeight) {
         return true
       } else {
@@ -67,27 +67,23 @@ header[role='banner'] {
   background: #000000;
   /* transition: background-color 0.2s ease, height 0.2s ease; */
   display: grid;
-  grid-template-columns: [full-start] minmax(1em, 1fr) [main-start] minmax(
-      0,
-      45em
-    ) [main-end] 300px minmax(1em, 1fr) [full-end];
+  grid-template-columns:
+    [full-start] minmax(1em, 1fr) [main-start] minmax(0, 45em)
+    [main-end] 300px minmax(1em, 1fr) [full-end];
   grid-auto-rows: auto;
   grid-column-gap: 1em;
   grid-row-gap: 0;
   @media (min-width: 1000px) {
-    grid-template-columns: [full-start] minmax(1em, 1fr) [main-start] minmax(
-        0,
-        45em
-      ) [main-end sidebar-start] 300px [sidebar-end] minmax(1em, 1fr) [full-end];
+    grid-template-columns:
+      [full-start] minmax(1em, 1fr) [main-start] minmax(0, 45em)
+      [main-end sidebar-start] 300px [sidebar-end] minmax(1em, 1fr) [full-end];
     grid-column-gap: 2em;
   }
   @media (min-width: 1200px) {
     grid-template-columns:
       [full-start] minmax(1em, 1fr)
-      [main-start] minmax(
-        0,
-        62.5em
-      ) [main-end sidebar-start] 300px [sidebar-end]
+      [main-start] minmax(0, 62.5em)
+      [main-end sidebar-start] 300px [sidebar-end]
       minmax(1em, 1fr) [full-end];
   }
 }
