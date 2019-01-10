@@ -105,6 +105,7 @@ header a.nuxt-link-exact-active {
 .block {
   position: relative;
   height: 200px;
+  background: black;
 }
 
 header.sticky {
@@ -138,11 +139,11 @@ header .header-sidebar {
 }
 
 header .outside-player:not(:empty) {
+  width: 300px;
 }
 
 header.sticky .outside-player {
   position: absolute;
-  width: 300px;
 }
 
 header.sticky .outside-player:not(:empty) {

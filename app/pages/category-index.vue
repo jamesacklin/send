@@ -196,7 +196,7 @@ export default {
   grid-column: full;
   background: rgb(240, 240, 240);
   text-align: center;
-  & > div > div:not(:empty) {
+  > div > div:not(:empty) {
     text-align: center;
     padding: 1rem;
   }

@@ -151,16 +151,6 @@ export default {
 </script>
 
 <style lang="scss">
-.feed-insert {
-  background: rgb(240, 240, 240);
-  text-align: center;
-}
-
-.feed-insert > div > div:not(:empty) {
-  text-align: center;
-  padding: 1rem;
-}
-
 .feed {
   display: grid;
   grid-row-gap: 1em;
@@ -193,6 +183,15 @@ export default {
 
 .feed-insert {
   grid-column: full;
+  background: rgb(240, 240, 240);
+  text-align: center;
+  > div > div:not(:empty) {
+    text-align: center;
+    padding: 1rem;
+  }
+  @media (min-width: 1000px) {
+    display: none;
+  }
 }
 
 .story-link:hover {

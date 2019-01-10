@@ -4,12 +4,15 @@
     :class="!this.$route.params.page ? 'section-header-big' : ''"
   >
     <div class="section-header-title-block">
-      <h1>{{ sectionTitle }}</h1>
-      <div class="section-header-sponsorship">
+      <h1 v-if="this.$route.params.slug">{{ sectionTitle }}</h1>
+      <div v-if="this.$route.params.slug" class="section-header-sponsorship">
         <p>Presented by Dirt Rag Magazine</p>
         <div class="logo">
           <Logo orientation="vertical" style="margin: 0 auto;" />
         </div>
+      </div>
+      <div v-if="!this.$route.params.slug">
+        [ PLACEHOLDER FOR CURRENT PRINT ISSUE ARTWORK / PLUG]
       </div>
     </div>
   </header>
