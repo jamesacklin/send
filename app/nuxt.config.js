@@ -23,7 +23,9 @@ module.exports = {
   css: ['~/static/global.css'],
   plugins: [
     { src: '~/plugins/vue-dfp.js', ssr: false },
-    { src: '~/plugins/vue-lazy.js', ssr: false }
+    { src: '~/plugins/vue-lazy.js', ssr: false },
+    { src: '~/plugins/vue-socialsharing.js', ssr: false },
+    { src: '~/plugins/fontawesome.js', ssr: true }
   ],
   router: {
     extendRoutes(routes, resolve) {
