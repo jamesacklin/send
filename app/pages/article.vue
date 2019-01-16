@@ -21,7 +21,32 @@
               &nbsp;—&nbsp; <span v-html="postDate"></span>
             </span>
           </div>
-          <div class="article-sharing">[SOCIAL SHARING LINKS]</div>
+          <no-ssr>
+            <div class="article-sharing">
+              <social-sharing
+                :url="thisUrl"
+                :title="post.title.rendered"
+                :description="post.excerpt.rendered"
+                network-tag="a"
+                inline-template
+              >
+                <span>
+                  <network network="facebook">
+                    <font-awesome-icon :icon="['fab', 'facebook-square']" />
+                  </network>
+                  <network network="twitter">
+                    <font-awesome-icon :icon="['fab', 'twitter']" />
+                  </network>
+                  <network network="reddit">
+                    <font-awesome-icon :icon="['fab', 'reddit']" />
+                  </network>
+                </span>
+              </social-sharing>
+              <a :href="thisUrl">
+                <font-awesome-icon :icon="['fas', 'link']" />
+              </a>
+            </div>
+          </no-ssr>
         </div>
       </header>
       <div class="article-content">
@@ -61,6 +86,9 @@ export default {
     },
     postDate: function() {
       return dayjs(this.date).format('MMMM D, YYYY')
+    },
+    thisUrl() {
+      return `https://dirtragmag.com${this.$route.path}`
     }
   },
   async asyncData({ payload, isStatic, store, params }) {
@@ -194,6 +222,7 @@ export default {
     [main-start] minmax(0, 45em) [main-end]
     minmax(1em, 1fr) [full-end];
   grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
   grid-auto-rows: auto;
   @media (min-width: 1000px) {
     padding: 2rem 0;
@@ -230,7 +259,7 @@ export default {
 
   .article-sharing {
     grid-column: main;
-    margin-top: 1rem;
+    font-size: 1.5em;
     @media (min-width: 1000px) {
       margin-top: 0;
       grid-column: sidebar;
