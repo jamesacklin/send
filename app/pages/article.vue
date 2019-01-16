@@ -260,6 +260,7 @@ export default {
   .article-sharing {
     grid-column: main;
     font-size: 1.5em;
+    a { cursor: pointer; }
     @media (min-width: 1000px) {
       margin-top: 0;
       grid-column: sidebar;
