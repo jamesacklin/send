@@ -26,7 +26,7 @@
     "i": "^0.3.6",
     "npm": "^6.5.0",
     "nuxt": "^2.3.4",
-    "vue": "^2.5.21",
+    "vue": "^2.5.22",
     "vue-doubleclick": "^1.0.4",
     "vue-lazyload": "^1.2.6",
     "vue-server-renderer": "2.5.22",
