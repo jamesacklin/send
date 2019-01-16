@@ -24,8 +24,8 @@
     "vue": "^2.5.21",
     "vue-doubleclick": "^1.0.4",
     "vue-lazyload": "^1.2.6",
-    "vue-server-renderer": "2.5.21",
-    "vue-template-compiler": "2.5.21"
+    "vue-server-renderer": "2.5.22",
+    "vue-template-compiler": "2.5.22"
   },
   "devDependencies": {
     "@storybook/addon-a11y": "^4.1.4",
