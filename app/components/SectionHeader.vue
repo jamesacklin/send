@@ -4,16 +4,31 @@
     :class="!this.$route.params.page ? 'section-header-big' : ''"
   >
     <div class="section-header-title-block">
-      <h1 v-if="this.$route.params.slug">{{ sectionTitle }}</h1>
-      <div v-if="this.$route.params.slug" class="section-header-sponsorship">
-        <p>Presented by Dirt Rag Magazine</p>
-        <div class="logo">
-          <Logo orientation="vertical" style="margin: 0 auto;" />
+      <!-- For categories -->
+      <div v-if="this.$route.params.slug">
+        <h1>{{ sectionTitle }}</h1>
+        <div class="section-header-sponsorship">
+          <p>Presented by Dirt Rag Magazine</p>
+          <div class="logo">
+            <Logo orientation="vertical" style="margin: 0 auto;" />
+          </div>
         </div>
       </div>
+      <!-- for the home page -->
       <div v-if="!this.$route.params.slug">
-        [ PLACEHOLDER FOR CURRENT PRINT ISSUE ARTWORK / PLUG]
+        <Logo orientation="vertical" style="margin: 2rem 0; max-width: 20em; background: black" />
+        <div class="current-issue-plug">
+          <p>Issue 420 on newstands now!</p>
+          <p><a href="#">Take a peek inside</a></p>
+          <p><a href="#">Find a copy near me</a></p>
+        </div>
       </div>
+    </div>
+    <div
+      class="section-header-image"
+      v-if="!this.$route.params.slug"
+      v-lazy:background-image="'/images/cover.jpg'"
+    >
     </div>
   </header>
 </template>
@@ -42,17 +57,21 @@ export default {
 .section-header {
   grid-column: full;
   width: 100%;
-  background: #444;
-  text-align: center;
-  padding: 1rem 0;
+  background-color: #000;
+  height: 0;
+  overflow: hidden;
+  position: relative;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 .section-header-title-block {
+  position: relative;
+  z-index: 1;
   font-family: 'Libre Franklin', sans-serif;
   color: white;
+  height: 100%;
 }
 
 .section-header h1 {
@@ -90,6 +109,22 @@ export default {
 }
 
 .section-header-big {
-  height: 40vh;
+  padding-bottom: 66.66%;
+  @media (min-width: 500px){
+    padding-bottom: 50%;
+  }
+  @media (min-width: 1000px){
+    padding-bottom: 33.3333%;
+  }
+}
+
+.section-header-image {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-size: cover;
+  top: 0; left: 0;
+  background-position: 50% 20%;
+  z-index: 0;
 }
 </style>
