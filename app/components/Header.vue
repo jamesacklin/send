@@ -104,7 +104,9 @@ header a.nuxt-link-exact-active {
 
 .block {
   position: relative;
-  height: 200px;
+  @media (min-width: 812px){
+    height: 200px;
+  }
   background: black;
 }
 
@@ -117,10 +119,12 @@ header.sticky {
 .logo-wrapper {
   grid-column: main;
   width: 200px;
-  display: flex;
-  align-items: center;
   margin: 1rem 0;
-  /* transform: translateX(-0.5em) */
+  @media (min-width: 812px){
+    display: flex;
+    align-items: center;
+    margin: 0;
+  }
 }
 
 header.sticky .logo-wrapper {
