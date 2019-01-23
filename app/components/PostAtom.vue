@@ -11,9 +11,12 @@
         <div class="post-title-block">
           <h4 class="post-title">
             <span v-html="titleCallout" class="post-title-callout"> </span>
-            <a :href="`/` + slug">
+            <nuxt-link
+              tag="a"
+              :to="`/articles/` + slug"
+            >
               <span v-html="title" class="post-title-wrap"> </span>
-            </a>
+            </nuxt-link>
           </h4>
           <div v-if="isMedia" class="post-launch-media">▶ Watch Video</div>
           <div v-if="isGallery" class="post-launch-media">↗ Launch Gallery</div>
