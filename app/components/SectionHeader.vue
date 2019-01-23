@@ -1,35 +1,76 @@
 <template lang="html">
-  <header
-    class="section-header"
-    :class="!this.$route.params.page ? 'section-header-big' : ''"
-  >
-    <div class="section-header-title-block">
-      <h1 v-if="this.$route.params.slug">{{ sectionTitle }}</h1>
-      <div v-if="this.$route.params.slug" class="section-header-sponsorship">
-        <p>Presented by Dirt Rag Magazine</p>
-        <div class="logo">
-          <Logo orientation="vertical" style="margin: 0 auto;" />
-        </div>
-      </div>
-      <div v-if="!this.$route.params.slug">
-        [ PLACEHOLDER FOR CURRENT PRINT ISSUE ARTWORK / PLUG]
-      </div>
+  <header class="section-header" v-lazy:background-image="backgroundImage">
+    <div class="section-header-content">
+      <div class="text-wrapper" v-html="headerContents"></div>
     </div>
   </header>
 </template>
 
 <script>
-import Logo from '@/components/Logo'
+function titleCase(str) {
+  return str.toLowerCase().split(' ').map(function(word) {
+    return word.replace(word[0], word[0].toUpperCase());
+  }).join(' ');
+}
+
 export default {
+  homeText: `<h2>Issue #420 Out Now</h2>
+             <p>Subscribe Today | Find a Copy Near Me</p>`,
   name: 'SectionHeader',
-  components: {
-    Logo
+  props: [
+    'sectionMeta'
+  ],
+  methods: {
+    sectionType() {
+      if (this.$route.params.slug){
+        return 'category'
+      } else {
+        return 'home'
+      }
+    }
   },
   computed: {
+    headerContents(){
+      const sectionType = this.sectionType()
+      if (sectionType === 'home'){
+        const homeText = this.$options.homeText
+        return homeText
+      } else if (sectionType === 'category'){
+        const catName = titleCase(this.$store.getters.getCategoryBySlug(this.$route.params.slug)
+          .name)
+        const sponsor = this.sectionMeta.category_sponsor
+        const logo = this.sectionMeta.category_sponsor_logo
+        if (sponsor && logo){
+          return `<h2>${catName}</h2><p>Presented by ${sponsor}</p><p><img src='${logo}'></p>`
+        } else if (sponsor &! logo){
+          return `<h2>${catName}</h2><p>Presented by ${sponsor}</p>`
+        } else if (!sponsor){
+          return `<h2>${catName}</h2>`
+        } else {
+          return ''
+        }
+      } else {
+        return ''
+      }
+    },
+    backgroundImage(){
+      const sectionType = this.sectionType()
+      if (sectionType === 'home'){
+        return '../images/cover.jpg'
+      } else if (sectionType === 'category'){
+        const bg = this.sectionMeta.category_background_image;
+        if (bg){
+          return bg
+        } else {
+          return ''
+        }
+      } else {
+        return ''
+      }
+    },
     sectionTitle() {
-      if (this.$route.params.slug) {
-        return this.$store.getters.getCategoryBySlug(this.$route.params.slug)
-          .name
+      if (this.sectionType === 'category') {
+        return
       } else {
         return 'Home'
       }
@@ -38,58 +79,66 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+
 .section-header {
   grid-column: full;
-  width: 100%;
-  background: #444;
-  text-align: center;
-  padding: 1rem 0;
+  position: relative;
+  padding: 1rem;
+  background-color: black;
+  background-size: cover;
+  background-position: center center;
+  @media (orientation: portrait) and (max-width: 700px){
+    padding-top: 33vh;
+  }
+  @media (orientation: portrait) and (min-width: 700px){
+    padding-top: 16vh;
+  }
+  @media (orientation: portrait) and (min-width: 1000px){
+    padding-top: 25vh;
+  }
+  @media (orientation: landscape) and (min-width: 1000px){
+    padding-top: 25vh;
+  }
+}
+
+.section-header[lazy=loading] {
+    background: black;
+    background-image: none !important;
+}
+
+.section-header[lazy=error] {
+  background: black;
+  padding-top: 1rem;
+  background-image: none !important;
+}
+
+.section-header-content {
+  @media (orientation: portrait) and (min-width: 700px){
+    max-height: 33vh;
+  }
+  @media (orientation: landscape){
+    max-height: 66vh;
+  }
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.section-header-title-block {
-  font-family: 'Libre Franklin', sans-serif;
-  color: white;
-}
-
-.section-header h1 {
-  text-transform: capitalize;
-  margin: 0;
-  line-height: 1;
-  font-size: 1.6rem;
-  @media (min-width: 500px) {
-    font-size: 1.8rem;
-  }
-  @media (min-width: 1200px) {
-    font-size: 2.5rem;
-  }
-}
-
-.section-header-sponsorship {
-  margin: 1rem auto 0;
-  font-size: 80%;
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-  .logo {
-    width: 4em;
-    margin-right: 1em;
-  }
-  .section-header-big & {
-    margin: 2rem auto 0;
-    font-size: 100%;
-    flex-direction: column;
-    .logo {
-      width: 9em;
-      margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  .text-wrapper {
+    font-family: 'Libre Franklin', sans-serif;
+    font-size: 1.2em;
+    max-width: 45rem;
+    padding: 0 1rem;
+    background: black;
+    text-align: center;
+    color: white;
+    h2 {
+      font-size: 2.25em;
+      margin: 1rem 0;
     }
+    img { max-width: 10em; }
   }
 }
 
-.section-header-big {
-  height: 40vh;
-}
 </style>

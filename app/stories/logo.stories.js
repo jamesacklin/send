@@ -22,7 +22,7 @@ storiesOf("Logo", module)
     props: {
       bgColor: {
         type: String,
-        default: text("Background Color", "transparent")
+        default: text("Background Color", "black")
       }
     },
     template: `<Logo :bgColor="bgColor" orientation="vertical" />`
@@ -32,7 +32,7 @@ storiesOf("Logo", module)
     props: {
       bgColor: {
         type: String,
-        default: text("Background Color", "transparent")
+        default: text("Background Color", "black")
       }
     },
     template: `<Logo :bgColor="bgColor" orientation="horizontal" />`

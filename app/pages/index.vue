@@ -117,8 +117,9 @@ export default {
     postMode: function(post) {
       if (post.categories[0] == '589') {
         return 'promotion'
-      } else if (post.meta.featuredPost.length) {
-        return 'enhanced'
+      // FIXME: return this from ACF instead of relying on a filter
+      // } else if (post.meta.featuredPost.length) {
+      //   return 'enhanced'
       } else {
         return 'default'
       }

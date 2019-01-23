@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="outside-player" :style="{ display: playerDisplay }">
+  <div class="outside-player" :style="{ visibility: playerDisplay }">
     <no-ssr>
       <keep-alive> <div id="botr_tluteeuw_8cg9oAyB_div"></div> </keep-alive>
     </no-ssr>
@@ -14,7 +14,7 @@ export default {
   name: 'OutsideFeed',
   data() {
     return {
-      playerDisplay: 'block'
+      playerDisplay: 'visible'
     }
   },
   methods: {

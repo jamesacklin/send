@@ -12,7 +12,7 @@
     "build-analyze": "nuxt build --analyze",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 9001 -c .storybook",
     "build-storybook": "build-storybook"
   },
   "dependencies": {
@@ -22,16 +22,14 @@
     "@fortawesome/vue-fontawesome": "^0.1.5",
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/pwa": "^2.6.0",
+    "@storybook/addon-storysource": "^4.1.7",
     "dayjs": "^1.7.8",
     "i": "^0.3.6",
-    "npm": "^6.5.0",
     "nuxt": "^2.3.4",
     "vue": "^2.5.22",
     "vue-doubleclick": "^1.0.4",
     "vue-lazyload": "^1.2.6",
-    "vue-server-renderer": "2.5.22",
-    "vue-social-sharing": "^2.3.3",
-    "vue-template-compiler": "2.5.22"
+    "vue-social-sharing": "^2.3.3"
   },
   "devDependencies": {
     "@storybook/addon-a11y": "^4.1.4",
@@ -42,6 +40,7 @@
     "@storybook/vue": "^4.1.4",
     "babel-eslint": "^10.0.1",
     "babel-preset-vue": "^2.0.2",
+    "css-loader": "^2.1.0",
     "eslint": "^5.11.1",
     "eslint-config-prettier": "^3.1.0",
     "eslint-friendly-formatter": "^4.0.1",
@@ -51,6 +50,9 @@
     "node-sass": "^4.11.0",
     "nodemon": "^1.18.9",
     "prettier": "1.15.3",
-    "sass-loader": "^7.1.0"
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "vue-server-renderer": "2.5.22",
+    "vue-template-compiler": "2.5.22"
   }
 }

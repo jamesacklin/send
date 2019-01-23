@@ -14,7 +14,7 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'preconnect',
-        href: 'https://www.dirtragmag.com/',
+        href: 'http://68.183.116.134',
         crossorigin: true
       }
     ]
@@ -68,8 +68,8 @@ module.exports = {
   },
   modules: ['@nuxtjs/pwa', '@nuxtjs/axios'],
   axios: {
-    baseURL: 'https://www.dirtragmag.com/wp-json/wp/v2/',
-    https: true,
+    baseURL: 'http://68.183.116.134/wp-json/wp/v2/',
+    https: false,
     progress: true
   },
   render: {
