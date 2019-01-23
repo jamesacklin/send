@@ -1,7 +1,7 @@
 <template>
   <main class="content">
     <section class="feed category-feed">
-      <SectionHeader />
+      <SectionHeader :sectionMeta='acfFields' />
       <template v-for="(feedItem, index) in feedItems">
         <div
           v-if="feedItem.type === 'post'"
@@ -92,6 +92,9 @@ export default {
     },
     feedItems() {
       return compact(flattenDeep(zip(chunk(this.posts, 3), this.ads)))
+    },
+    acfFields(){
+      return this.$store.getters.getCategoryBySlug(this.$route.params.slug).acf
     }
   },
   head() {
@@ -128,8 +131,8 @@ export default {
     postMode: function(post) {
       if (post.categories[0] == '589') {
         return 'promotion'
-      } else if (post.meta.featuredPost.length) {
-        return 'enhanced'
+      // } else if (post.meta.featuredPost.length) {
+      //   return 'enhanced'
       } else {
         return 'default'
       }

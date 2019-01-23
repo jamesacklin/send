@@ -1,7 +1,7 @@
 <template lang="html">
-  <header class="section-header" style="background-image: url('/images/cover.jpg')">
+  <header class="section-header" v-lazy:background-image="backgroundImage">
     <div class="section-header-content">
-      <div v-html="headerContents"></div>
+      <div class="text-wrapper" v-html="headerContents"></div>
     </div>
   </header>
 </template>
@@ -17,6 +17,9 @@ export default {
   homeText: `<h2>Issue #420 Out Now</h2>
              <p>Subscribe Today | Find a Copy Near Me</p>`,
   name: 'SectionHeader',
+  props: [
+    'sectionMeta'
+  ],
   methods: {
     sectionType() {
       if (this.$route.params.slug){
@@ -28,13 +31,41 @@ export default {
   },
   computed: {
     headerContents(){
-      if (this.sectionType() === 'home'){
-        return this.$options.homeText
-      } else if (this.sectionType() === 'category'){
-        return `<h2>${titleCase(this.$store.getters.getCategoryBySlug(this.$route.params.slug)
-          .name)}</h2>`
+      const sectionType = this.sectionType()
+      if (sectionType === 'home'){
+        const homeText = this.$options.homeText
+        return homeText
+      } else if (sectionType === 'category'){
+        const catName = titleCase(this.$store.getters.getCategoryBySlug(this.$route.params.slug)
+          .name)
+        const sponsor = this.sectionMeta.category_sponsor
+        const logo = this.sectionMeta.category_sponsor_logo
+        if (sponsor && logo){
+          return `<h2>${catName}</h2><p>Presented by ${sponsor}</p><p><img src='${logo}'></p>`
+        } else if (sponsor &! logo){
+          return `<h2>${catName}</h2><p>Presented by ${sponsor}</p>`
+        } else if (!sponsor){
+          return `<h2>${catName}</h2>`
+        } else {
+          return ''
+        }
       } else {
-        return false
+        return ''
+      }
+    },
+    backgroundImage(){
+      const sectionType = this.sectionType()
+      if (sectionType === 'home'){
+        return '../images/cover.jpg'
+      } else if (sectionType === 'category'){
+        const bg = this.sectionMeta.category_background_image;
+        if (bg){
+          return bg
+        } else {
+          return ''
+        }
+      } else {
+        return ''
       }
     },
     sectionTitle() {
@@ -48,11 +79,13 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+
 .section-header {
   grid-column: full;
   position: relative;
   padding: 1rem;
+  background-color: black;
   background-size: cover;
   background-position: center center;
   @media (orientation: portrait) and (max-width: 700px){
@@ -69,6 +102,17 @@ export default {
   }
 }
 
+.section-header[lazy=loading] {
+    background: black;
+    background-image: none !important;
+}
+
+.section-header[lazy=error] {
+  background: black;
+  padding-top: 1rem;
+  background-image: none !important;
+}
+
 .section-header-content {
   @media (orientation: portrait) and (min-width: 700px){
     max-height: 33vh;
@@ -81,7 +125,7 @@ export default {
   align-items: center;
   position: relative;
   z-index: 1;
-  > div {
+  .text-wrapper {
     font-family: 'Libre Franklin', sans-serif;
     font-size: 1.2em;
     max-width: 45rem;
@@ -89,6 +133,11 @@ export default {
     background: black;
     text-align: center;
     color: white;
+    h2 {
+      font-size: 2.25em;
+      margin: 1rem 0;
+    }
+    img { max-width: 10em; }
   }
 }
 
