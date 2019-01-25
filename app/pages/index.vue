@@ -69,6 +69,9 @@ export default {
     await store.dispatch('getPosts', {
       page: parseInt(params.page || 1)
     })
+    await store.dispatch('getPage', {
+      slug: 'home'
+    })
   },
   computed: {
     posts() {
