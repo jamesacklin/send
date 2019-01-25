@@ -1,6 +1,7 @@
 <template lang="html">
   <header class="section-header" v-lazy:background-image="backgroundImage">
     <div class="section-header-content">
+      <img v-if="headerFigure" v-lazy="headerFigure" class="header-figure">
       <div class="text-wrapper" v-html="headerContents"></div>
     </div>
   </header>
@@ -14,8 +15,6 @@ function titleCase(str) {
 }
 
 export default {
-  homeText: `<h2>Issue #420 Out Now</h2>
-             <p>Subscribe Today | Find a Copy Near Me</p>`,
   name: 'SectionHeader',
   props: [
     'sectionMeta'
@@ -32,12 +31,25 @@ export default {
     }
   },
   computed: {
+    headerFigure() {
+      if (this.sectionType() === 'home'){
+        const homeFields = this.$store.getters.getPageBySlug('home').acf
+        return homeFields.home_figure
+      } else {
+        return false
+      }
+    },
     headerContents(){
-      const sectionType = this.sectionType()
-      if (sectionType === 'home'){
-        const homeText = this.$options.homeText
-        return homeText
-      } else if (sectionType === 'category'){
+      if (this.sectionType() === 'home'){
+        const homeFields = this.$store.getters.getPageBySlug('home').acf
+        if (homeFields.home_banner_headline &! homeFields.home_banner_content){
+          return `<h2>${homeFields.home_banner_headline}</h2>`
+        } else if (homeFields.home_banner_headline && homeFields.home_banner_content){
+          return `<h2>${homeFields.home_banner_headline}</h2><div>${homeFields.home_banner_content}</div>`
+        } else {
+          return ''
+        }
+      } else if (this.sectionType() === 'category'){
         const catName = titleCase(this.$store.getters.getCategoryBySlug(this.$route.params.slug)
           .name)
         const sponsor = this.sectionMeta.category_sponsor
@@ -57,11 +69,16 @@ export default {
     },
     backgroundImage(){
       if (this.sectionType() === 'home'){
-        return '/images/cover.jpg'
+        const homeBg = this.$store.getters.getPageBySlug('home').acf.home_background_image
+        if (homeBg){
+          return homeBg
+        } else {
+          return ''
+        }
       } else if (this.sectionType() === 'category'){
-        const bg = this.sectionMeta.category_background_image;
-        if (bg){
-          return bg
+        const catBg = this.sectionMeta.category_background_image;
+        if (catBg){
+          return catBg
         } else {
           return ''
         }
@@ -98,6 +115,9 @@ export default {
   @media (orientation: portrait) and (min-width: 1000px){
     padding-top: 25vh;
   }
+  @media (orientation: landscape) and (min-width: 700px){
+    padding-top: 16vh;
+  }
   @media (orientation: landscape) and (min-width: 1000px){
     padding-top: 25vh;
   }
@@ -126,6 +146,14 @@ export default {
   align-items: center;
   position: relative;
   z-index: 1;
+  .header-figure {
+    position: absolute;
+    height: 10em;
+    width: auto;
+    top: -10em;
+    left: 48%;
+    transform: rotate(-15deg) translateX(-48%);
+  }
   .text-wrapper {
     font-family: 'Libre Franklin', sans-serif;
     font-size: 1.2em;
@@ -139,6 +167,13 @@ export default {
       margin: 1rem 0;
     }
     img { max-width: 10em; }
+    a {
+      color: red;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
   }
 }
 
