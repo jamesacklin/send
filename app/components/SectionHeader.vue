@@ -22,10 +22,12 @@ export default {
   ],
   methods: {
     sectionType() {
-      if (this.$route.params.slug){
+      if (this.$route.name === "category-index" || this.$route.name  === "category-index-page"){
         return 'category'
-      } else {
+      } else if (this.$route.name === "index" || this.$route.name === "index-page") {
         return 'home'
+      } else {
+        return ''
       }
     }
   },
@@ -54,10 +56,9 @@ export default {
       }
     },
     backgroundImage(){
-      const sectionType = this.sectionType()
-      if (sectionType === 'home'){
-        return '../images/cover.jpg'
-      } else if (sectionType === 'category'){
+      if (this.sectionType() === 'home'){
+        return '/images/cover.jpg'
+      } else if (this.sectionType() === 'category'){
         const bg = this.sectionMeta.category_background_image;
         if (bg){
           return bg
