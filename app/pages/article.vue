@@ -1,22 +1,22 @@
 <template>
   <main class="content">
     <article :id="'post-id-' + post.id" class="article">
-      <header
+      <header class="article-header has-artwork">
+        <!-- <header
         class="article-header"
         :class="{ 'has-artwork': featuredImage() }"
-      >
+      > -->
         <div class="article-artwork">
           <img
             class=""
-            v-if="featuredImage()"
-            v-lazy="featuredImage()"
-            alt=""
+            :srcset="featuredSrcset"
+            sizes="(min-width: 1200px) 1140px, (min-width: 992px) 940px, (min-width: 768px) 720px, (min-width: 576px) 510px, calc(100vw - 30px)"
           />
         </div>
         <div class="article-title-block">
           <h1 class="article-title" v-html="post.title.rendered"></h1>
           <div class="article-author">
-            <span v-html='postAuthor'></span>
+            <span v-html="postAuthor"></span>
             <span class="article-date">
               &nbsp;—&nbsp; <span v-html="postDate"></span>
             </span>
@@ -66,7 +66,7 @@
         </section>
         <section class="article-author-bio" v-if="postAuthorBio">
           <div v-if="postAuthorPic" class="author-image">
-            <img :src="postAuthorPic" :alt="postAuthor">
+            <img :src="postAuthorPic" :alt="postAuthor" />
           </div>
           <div class="author-bio">
             <h3>{{ postAuthor }}</h3>
@@ -81,6 +81,7 @@
 <script>
 import dayjs from 'dayjs'
 import Advertising from '@/components/Advertising'
+import each from 'lodash/each'
 
 export default {
   components: {
@@ -102,7 +103,7 @@ export default {
     postAuthor() {
       const post = this.post
       if (post.author === 74318) {
-        if (post.acf.contributor_name){
+        if (post.acf.contributor_name) {
           return post.acf.contributor_name
         } else {
           return post._embedded.author[0].name
@@ -113,8 +114,8 @@ export default {
     },
     postAuthorBio() {
       const post = this.post
-      if (post.author === 74318){
-        if (post.acf.contributor_bio){
+      if (post.author === 74318) {
+        if (post.acf.contributor_bio) {
           return post.acf.contributor_bio
         } else {
           return false
@@ -125,12 +126,25 @@ export default {
     },
     postAuthorPic() {
       const post = this.post
-      if (post.author === 74318){
-        if (post.acf.contributor_photo){
+      if (post.author === 74318) {
+        if (post.acf.contributor_photo) {
           return post.acf.contributor_photo
         } else {
           return false
         }
+      } else {
+        return false
+      }
+    },
+    featuredSrcset() {
+      if (this.post._embedded['wp:featuredmedia'][0].media_type === 'image') {
+        var srcset = ''
+        const postImageSizes = this.post._embedded['wp:featuredmedia'][0]
+          .media_details.sizes
+        each(postImageSizes, function(size, index) {
+          srcset = srcset + `${size.source_url} ${size.width}w, `
+        })
+        return srcset
       } else {
         return false
       }
@@ -145,14 +159,6 @@ export default {
     }
   },
   methods: {
-    featuredImage() {
-      let featuredImage = this.post._embedded['wp:featuredmedia']
-      if (featuredImage && featuredImage[0].media_details) {
-        return featuredImage[0].media_details.sizes.full.source_url
-      } else {
-        return false
-      }
-    },
     zoomFigure(event) {
       const e = event.target
       if (e.tagName === 'IMG' && e.parentNode.tagName === 'FIGURE') {
@@ -193,8 +199,8 @@ export default {
         },
         {
           hid: 'og:image',
-          property: 'og:image',
-          content: this.featuredImage()
+          property: 'og:image'
+          // content: this.featuredImage()
         }
       ]
     }
@@ -305,7 +311,9 @@ export default {
   .article-sharing {
     grid-column: main;
     font-size: 1.5em;
-    a { cursor: pointer; }
+    a {
+      cursor: pointer;
+    }
     @media (min-width: 1000px) {
       margin-top: 0;
       grid-column: sidebar;
@@ -366,7 +374,7 @@ export default {
 
 .article-author-bio {
   grid-column: main;
-  background: #DCDCDC;
+  background: #dcdcdc;
   display: flex;
   .author-image {
     flex-grow: 0;
