@@ -1,7 +1,6 @@
 <template lang="html">
   <div class="article-artwork">
     <!-- TODO: Make article-artwork slots accept more than just image media -->
-    <!-- FIXME: Make article-artwork its own component -->
     <img
       class=""
       :srcset="featuredSrcset"
