@@ -17,7 +17,7 @@ export default {
   computed: {
     featuredSrcset() {
       // If the featured media is an image, iterate over the sizes and
-      // compose a scset-friendly string with image paths and widths
+      // compose a srcset-friendly string with image paths and widths
       if (this.media.media_type === 'image') {
         var srcset = ''
         const postImageSizes = this.media.media_details.sizes
