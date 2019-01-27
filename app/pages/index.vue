@@ -18,7 +18,7 @@
               :pictureUrl="featuredImage(feedItem)"
               :titleCallout="titleCallout(feedItem)"
               :title="feedItem.title.rendered"
-              :author="feedItem._embedded.author[0].name"
+              :author="postAuthor(feedItem)"
               :date="feedItem.date"
               :excerpt="feedItem.excerpt.rendered"
               :isMedia="feedItem.format == 'video' ? true : false"
@@ -125,6 +125,17 @@ export default {
       //   return 'enhanced'
       } else {
         return 'default'
+      }
+    },
+    postAuthor: function(post){
+      if (post.author === 74318) {
+        if (post.acf.contributor_name){
+          return post.acf.contributor_name
+        } else {
+          return post._embedded.author[0].name
+        }
+      } else {
+        return post._embedded.author[0].name
       }
     },
     featuredImage: function(post) {
