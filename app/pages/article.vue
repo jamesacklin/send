@@ -64,6 +64,15 @@
             </no-ssr>
           </div>
         </section>
+        <section class="article-author-bio" v-if="postAuthorBio">
+          <div v-if="postAuthorPic" class="author-image">
+            <img :src="postAuthorPic" :alt="postAuthor">
+          </div>
+          <div class="author-bio">
+            <h3>{{ postAuthor }}</h3>
+            <p>{{ postAuthorBio }}</p>
+          </div>
+        </section>
       </div>
     </article>
   </main>
@@ -100,6 +109,30 @@ export default {
         }
       } else {
         return post._embedded.author[0].name
+      }
+    },
+    postAuthorBio() {
+      const post = this.post
+      if (post.author === 74318){
+        if (post.acf.contributor_bio){
+          return post.acf.contributor_bio
+        } else {
+          return false
+        }
+      } else {
+        return false
+      }
+    },
+    postAuthorPic() {
+      const post = this.post
+      if (post.author === 74318){
+        if (post.acf.contributor_photo){
+          return post.acf.contributor_photo
+        } else {
+          return false
+        }
+      } else {
+        return false
       }
     }
   },
@@ -286,7 +319,7 @@ export default {
   @media (min-width: 1000px) {
     padding: 0;
     display: grid;
-    grid-row-gap: 2em;
+    grid-row-gap: 1em;
     grid-column-gap: 2em;
     grid-template-columns:
       [full-start] minmax(1em, 1fr) [main-start] minmax(0, 45em)
@@ -328,6 +361,21 @@ export default {
   }
   .article-copy figure.zoomed img {
     cursor: zoom-out;
+  }
+}
+
+.article-author-bio {
+  grid-column: main;
+  background: #DCDCDC;
+  display: flex;
+  .author-image {
+    flex-grow: 0;
+    margin: 1em 0 0.75em 1em;
+    max-width: 15%;
+  }
+  .author-bio {
+    flex-grow: 1;
+    padding-left: 1em;
   }
 }
 
