@@ -40,17 +40,19 @@ export default {
   },
   computed: {
     post() {
+      // Return the page for whatever page we're looking for in route.params
       return this.$store.getters.getPageBySlug(this.$route.params.slug)
     },
     ads() {
+      // Return the ads set explicitly in the store
       return this.$store.state.advertising.rectangle
     },
     postDate: function() {
+      // Pretty-format the post date (January 1, 2019)
       return dayjs(this.date).format('MMMM D, YYYY')
     }
   },
   async asyncData({ payload, isStatic, store, params }) {
-    // payload set during static generation
     if (payload && isStatic) {
       store.commit('addPage', [payload])
     } else {
@@ -59,6 +61,7 @@ export default {
   },
   methods: {
     featuredImage() {
+      // FIXME: Obsolete, look at featuredSrcset() in article.vue
       let featuredImage = this.post._embedded['wp:featuredmedia']
       if (featuredImage && featuredImage[0].media_details) {
         return featuredImage[0].media_details.sizes.full.source_url
@@ -96,8 +99,9 @@ export default {
         },
         {
           hid: 'og:image',
-          property: 'og:image',
-          content: this.featuredImage()
+          property: 'og:image'
+          // FIXME: point to a real image (medium-sized, probably)
+          // content: this.featuredImage()
         }
       ]
     }

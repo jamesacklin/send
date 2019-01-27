@@ -79,8 +79,8 @@
 </template>
 
 <script>
-import dayjs from 'dayjs'
 import Advertising from '@/components/Advertising'
+import dayjs from 'dayjs'
 import each from 'lodash/each'
 
 export default {
@@ -89,18 +89,25 @@ export default {
   },
   computed: {
     post() {
+      // Return the post for whatever post we're looking for in route.params
       return this.$store.getters.getPostBySlug(this.$route.params.slug)
     },
     ads() {
+      // Return the ads set explicitly in the store
       return this.$store.state.advertising.rectangle
     },
     postDate: function() {
+      // Pretty-format the post date (January 1, 2019)
       return dayjs(this.date).format('MMMM D, YYYY')
     },
     thisUrl() {
+      // Prepend our URL to the route path to get an absolute URL without
+      // relying on WordPress's permalink
       return `https://dirtragmag.com${this.$route.path}`
     },
     postAuthor() {
+      // If the post author is "Dirt Rag Contributor" (ID 74318), see if we can
+      // return the contributor's real name (as provided in ACF fields)
       const post = this.post
       if (post.author === 74318) {
         if (post.acf.contributor_name) {
@@ -113,6 +120,8 @@ export default {
       }
     },
     postAuthorBio() {
+      // If the post author is "Dirt Rag Contributor" (ID 74318), see if we can
+      // return the contributor's biography (as provided in ACF fields)
       const post = this.post
       if (post.author === 74318) {
         if (post.acf.contributor_bio) {
@@ -125,6 +134,8 @@ export default {
       }
     },
     postAuthorPic() {
+      // If the post author is "Dirt Rag Contributor" (ID 74318), see if we can
+      // return the contributor's photo (as provided in ACF fields)
       const post = this.post
       if (post.author === 74318) {
         if (post.acf.contributor_photo) {
@@ -137,6 +148,8 @@ export default {
       }
     },
     featuredSrcset() {
+      // If the featured media is an image, iterate over the sizes and
+      // compose a scset-friendly string with image paths and widths
       if (this.post._embedded['wp:featuredmedia'][0].media_type === 'image') {
         var srcset = ''
         const postImageSizes = this.post._embedded['wp:featuredmedia'][0]
@@ -151,7 +164,6 @@ export default {
     }
   },
   async asyncData({ payload, isStatic, store, params }) {
-    // payload set during static generation
     if (payload && isStatic) {
       store.commit('addPosts', [payload])
     } else {
@@ -159,10 +171,12 @@ export default {
     }
   },
   methods: {
+    // When the user clicks on an image within figure, toggle a 'zoomed'
+    // class on the parent figure (expands the image inline over the sidebar on
+    // large screens)
     zoomFigure(event) {
       const e = event.target
       if (e.tagName === 'IMG' && e.parentNode.tagName === 'FIGURE') {
-        console.log('yahtzee')
         const f = e.parentNode
         f.classList.toggle('zoomed')
       } else {
@@ -200,6 +214,7 @@ export default {
         {
           hid: 'og:image',
           property: 'og:image'
+          // FIXME: point to a real image (medium-sized, probably)
           // content: this.featuredImage()
         }
       ]
