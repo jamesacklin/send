@@ -27,6 +27,7 @@
 
 <script>
 export default {
+  // TODO: comment all of this
   name: 'Ticker',
   data: function() {
     return {

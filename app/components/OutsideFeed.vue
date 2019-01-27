@@ -11,6 +11,7 @@
 
 <script>
 export default {
+  // TODO: comment all of this
   name: 'OutsideFeed',
   data() {
     return {

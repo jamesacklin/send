@@ -11,10 +11,7 @@
         <div class="post-title-block">
           <h4 class="post-title">
             <span v-html="titleCallout" class="post-title-callout"> </span>
-            <nuxt-link
-              tag="a"
-              :to="`/articles/` + slug"
-            >
+            <nuxt-link tag="a" :to="`/articles/` + slug">
               <span v-html="title" class="post-title-wrap"> </span>
             </nuxt-link>
           </h4>
@@ -65,9 +62,12 @@ export default {
   },
   computed: {
     postDate: function() {
+      // Pretty-format the post date (January 1, 2019)
       return dayjs(this.date).format('MMMM D, YYYY')
     },
     backgroundImage() {
+      // Set the background image if the post mode is a promotion
+      // FIXME: Make this somewhat more intelligent, please
       if (this.mode == 'promotion') {
         return this.pictureUrl
       } else {
