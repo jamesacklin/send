@@ -119,6 +119,7 @@
 
 <script>
 export default {
+  // TODO: Comment pagination component
   computed: {
     backUp() {
       if (
@@ -274,14 +275,13 @@ export default {
       align-items: center;
       justify-content: center;
       color: white;
-      text-decoration: underline;
+      text-decoration: none;
       padding: 1rem;
       background: red;
       svg {
         fill: white;
       }
       &:hover {
-        text-decoration: none;
         background: black;
       }
     }

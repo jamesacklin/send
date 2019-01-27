@@ -1,22 +1,15 @@
 <template>
   <main class="content">
     <article :id="'post-id-' + post.id" class="article">
-      <header
-        class="article-header"
-        :class="{ 'has-artwork': featuredImage() }"
-      >
-        <div class="article-artwork">
-          <img
-            class=""
-            v-if="featuredImage()"
-            v-lazy="featuredImage()"
-            alt=""
-          />
-        </div>
+      <header class="article-header" :class="{ 'has-artwork': featuredMedia }">
+        <featured-media
+          v-if="featuredMedia"
+          :media="post._embedded['wp:featuredmedia'][0]"
+        />
         <div class="article-title-block">
           <h1 class="article-title" v-html="post.title.rendered"></h1>
           <div class="article-author">
-            <span v-html='postAuthor'></span>
+            <span v-html="postAuthor"></span>
             <span class="article-date">
               &nbsp;—&nbsp; <span v-html="postDate"></span>
             </span>
@@ -50,6 +43,7 @@
         </div>
       </header>
       <div class="article-content">
+        <!-- TODO: Make Rafflecopter script work, may have to split out to its own page template -->
         <div
           class="article-copy"
           @click="zoomFigure"
@@ -66,43 +60,63 @@
         </section>
         <section class="article-author-bio" v-if="postAuthorBio">
           <div v-if="postAuthorPic" class="author-image">
-            <img :src="postAuthorPic" :alt="postAuthor">
+            <img :src="postAuthorPic" :alt="postAuthor" />
           </div>
           <div class="author-bio">
             <h3>{{ postAuthor }}</h3>
             <p>{{ postAuthorBio }}</p>
           </div>
         </section>
+        <!-- TODO: Disqus integration -->
       </div>
     </article>
   </main>
 </template>
 
 <script>
-import dayjs from 'dayjs'
 import Advertising from '@/components/Advertising'
+import FeaturedMedia from '@/components/FeaturedMedia'
+import dayjs from 'dayjs'
 
 export default {
   components: {
+    FeaturedMedia,
     Advertising
   },
   computed: {
     post() {
+      // Return the post for whatever post we're looking for in route.params
       return this.$store.getters.getPostBySlug(this.$route.params.slug)
     },
     ads() {
+      // Return the ads set explicitly in the store
       return this.$store.state.advertising.rectangle
     },
     postDate: function() {
+      // Pretty-format the post date (January 1, 2019)
       return dayjs(this.date).format('MMMM D, YYYY')
     },
     thisUrl() {
+      // Prepend our URL to the route path to get an absolute URL without
+      // relying on WordPress's permalink
       return `https://dirtragmag.com${this.$route.path}`
     },
+    featuredMedia() {
+      // Check for the existence of featured media on the post.
+      // If so, return it. If not, return false.
+      if (this.post._embedded['wp:featuredmedia']) {
+        return this.post._embedded['wp:featuredmedia'][0].media_details.sizes
+          .medium.source_url
+      } else {
+        return false
+      }
+    },
     postAuthor() {
+      // If the post author is "Dirt Rag Contributor" (ID 74318), see if we can
+      // return the contributor's real name (as provided in ACF fields)
       const post = this.post
       if (post.author === 74318) {
-        if (post.acf.contributor_name){
+        if (post.acf.contributor_name) {
           return post.acf.contributor_name
         } else {
           return post._embedded.author[0].name
@@ -112,9 +126,11 @@ export default {
       }
     },
     postAuthorBio() {
+      // If the post author is "Dirt Rag Contributor" (ID 74318), see if we can
+      // return the contributor's biography (as provided in ACF fields)
       const post = this.post
-      if (post.author === 74318){
-        if (post.acf.contributor_bio){
+      if (post.author === 74318) {
+        if (post.acf.contributor_bio) {
           return post.acf.contributor_bio
         } else {
           return false
@@ -124,9 +140,11 @@ export default {
       }
     },
     postAuthorPic() {
+      // If the post author is "Dirt Rag Contributor" (ID 74318), see if we can
+      // return the contributor's photo (as provided in ACF fields)
       const post = this.post
-      if (post.author === 74318){
-        if (post.acf.contributor_photo){
+      if (post.author === 74318) {
+        if (post.acf.contributor_photo) {
           return post.acf.contributor_photo
         } else {
           return false
@@ -137,7 +155,6 @@ export default {
     }
   },
   async asyncData({ payload, isStatic, store, params }) {
-    // payload set during static generation
     if (payload && isStatic) {
       store.commit('addPosts', [payload])
     } else {
@@ -145,18 +162,12 @@ export default {
     }
   },
   methods: {
-    featuredImage() {
-      let featuredImage = this.post._embedded['wp:featuredmedia']
-      if (featuredImage && featuredImage[0].media_details) {
-        return featuredImage[0].media_details.sizes.full.source_url
-      } else {
-        return false
-      }
-    },
+    // When the user clicks on an image within figure, toggle a 'zoomed'
+    // class on the parent figure (expands the image inline over the sidebar on
+    // large screens)
     zoomFigure(event) {
       const e = event.target
       if (e.tagName === 'IMG' && e.parentNode.tagName === 'FIGURE') {
-        console.log('yahtzee')
         const f = e.parentNode
         f.classList.toggle('zoomed')
       } else {
@@ -194,7 +205,7 @@ export default {
         {
           hid: 'og:image',
           property: 'og:image',
-          content: this.featuredImage()
+          content: this.featuredMedia
         }
       ]
     }
@@ -225,36 +236,6 @@ export default {
       padding-bottom: 0;
       padding-top: 50%;
     }
-  }
-}
-
-.article-artwork {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 0;
-  overflow: hidden;
-  padding-bottom: 66%;
-  img {
-    width: 100%;
-    transition: all 0.25s ease;
-  }
-  img[lazy='error'] {
-    height: 0px;
-    width: 0px;
-  }
-  img[lazy='loading'] {
-    transform: translateX(5em);
-    opacity: 0;
-  }
-  img[lazy='loaded'] {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  @media (min-width: 1000px) {
-    top: 0;
-    padding-bottom: 50%;
   }
 }
 
@@ -305,7 +286,9 @@ export default {
   .article-sharing {
     grid-column: main;
     font-size: 1.5em;
-    a { cursor: pointer; }
+    a {
+      cursor: pointer;
+    }
     @media (min-width: 1000px) {
       margin-top: 0;
       grid-column: sidebar;
@@ -366,7 +349,7 @@ export default {
 
 .article-author-bio {
   grid-column: main;
-  background: #DCDCDC;
+  background: #dcdcdc;
   display: flex;
   .author-image {
     flex-grow: 0;

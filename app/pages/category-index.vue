@@ -1,7 +1,7 @@
 <template>
   <main class="content">
     <section class="feed category-feed">
-      <SectionHeader :sectionMeta='acfFields' />
+      <SectionHeader :sectionMeta="acfFields" />
       <template v-for="(feedItem, index) in feedItems">
         <div
           v-if="feedItem.type === 'post'"
@@ -41,6 +41,7 @@
         </div>
       </template>
     </section>
+    <!-- TODO: Desktop ad sidebar with size-specific slots -->
   </main>
 </template>
 
@@ -60,11 +61,6 @@ export default {
     SectionHeader,
     Advertising
   },
-  data() {
-    return {
-      bottom: false
-    }
-  },
   async asyncData({ payload, isStatic, store, params, query }) {
     await store.dispatch('getCategoryFromSlug', {
       slug: params.slug
@@ -76,24 +72,32 @@ export default {
   },
   computed: {
     catTitle() {
+      // Return the category title for whatever category we're on (as set in route.params)
       return this.$store.getters.getCategoryBySlug(this.$route.params.slug).name
     },
     catId() {
+      // Return the category ID for whatever category we're on (as set in route.params)
       return this.$store.getters.getCategoryBySlug(this.$route.params.slug).id
     },
     posts() {
+      // Return the posts for whatever category-page we're on (both set in route.params)
       return this.$store.getters.getCatPostsPage(
         parseInt(this.$route.params.page || 1),
         this.catId
       )
     },
     ads() {
+      // Return the ads explicitly set in the store
       return this.$store.state.advertising.rectangle
     },
     feedItems() {
+      // Compose a feed, with an ad inserted every 3 posts. We should have
+      // 30 posts (set back in the Vuex store as state.postsPerPage)
+      // and 10 ad slots (explicitly set back in the Vuex store).
       return compact(flattenDeep(zip(chunk(this.posts, 3), this.ads)))
     },
-    acfFields(){
+    acfFields() {
+      // Return whatever Advanced Constom Fields we can for this category (as set in route.params)
       return this.$store.getters.getCategoryBySlug(this.$route.params.slug).acf
     }
   },
@@ -114,6 +118,8 @@ export default {
   },
   methods: {
     titleCallout: function(post) {
+      // Determine title callouts for each post based on category.
+      // FIXME: Make this an ACF field; it can stay a method because we're operating on an iteratee
       if (
         find(post.categories, function(cat) {
           return cat == '589'
@@ -129,17 +135,22 @@ export default {
       }
     },
     postMode: function(post) {
+      // Determine the post "mode" [enhanced, promotion, default] based on
+      // category or a featuredPost flag in the post meta.
+      // FIXME: Make this an ACF field; it can stay a method because we're operating on an iteratee
       if (post.categories[0] == '589') {
         return 'promotion'
-      // } else if (post.meta.featuredPost.length) {
-      //   return 'enhanced'
+        // } else if (post.meta.featuredPost.length) {
+        //   return 'enhanced'
       } else {
         return 'default'
       }
     },
-    postAuthor: function(post){
+    postAuthor: function(post) {
+      // If the post author is "Dirt Rag Contributor" (ID 74318), see if we can
+      // return the contributor's real name (as provided in ACF fields)
       if (post.author === 74318) {
-        if (post.acf.contributor_name){
+        if (post.acf.contributor_name) {
           return post.acf.contributor_name
         } else {
           return post._embedded.author[0].name
@@ -150,6 +161,7 @@ export default {
     },
     featuredImage: function(post) {
       if (post._embedded['wp:featuredmedia']) {
+        // Return the post featured image
         let featuredImage = post._embedded['wp:featuredmedia'][0]
         if (featuredImage && featuredImage.media_details.sizes.medium) {
           return (
@@ -168,10 +180,7 @@ export default {
   transition: {
     name: 'fade',
     mode: 'out-in'
-  },
-  watch: {},
-  beforeMount() {},
-  beforeDestroy() {}
+  }
 }
 </script>
 

@@ -7,13 +7,13 @@
         </nuxt-link>
       </div>
       <div class="header-sidebar"><OutsideFeed /></div>
-
       <Ticker ref="ticker" :tickerStories="tickerStories" />
     </header>
   </div>
 </template>
 
 <script>
+// TODO: Banner ad in header
 import Ticker from '@/components/Ticker'
 import Logo from '@/components/Logo'
 import OutsideFeed from '@/components/OutsideFeed'
@@ -32,12 +32,14 @@ export default {
   },
   computed: {
     tickerStories() {
+      // FIXME: Make tickerStories a Vuex getter
       return this.$store.state.tickerStories
     }
   },
   methods: {
     scrollHeader() {
-      // FIXME: this
+      // On scroll, evaluate window scroll position and decide if we should
+      // fix the header or not
       const scrollY = window.scrollY
       const tickerHeight = 30
       if (scrollY >= tickerHeight) {
@@ -48,11 +50,13 @@ export default {
     }
   },
   beforeMount() {
+    // Add our scroll listener for the fixed header
     document.addEventListener('scroll', () => {
       this.pastHeader = this.scrollHeader()
     })
   },
   beforeDestroy() {
+    // Destroy our scroll listener for the fixed header
     document.removeEventListener('scroll', () => {
       this.pastHeader = this.scrollHeader()
     })
@@ -104,7 +108,7 @@ header a.nuxt-link-exact-active {
 
 .block {
   position: relative;
-  @media (min-width: 812px){
+  @media (min-width: 812px) {
     height: 200px;
   }
   background: black;
@@ -120,7 +124,7 @@ header.sticky {
   grid-column: main;
   width: 200px;
   margin: 1rem 0;
-  @media (min-width: 812px){
+  @media (min-width: 812px) {
     display: flex;
     align-items: center;
     margin: 0;

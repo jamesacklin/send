@@ -44,7 +44,6 @@ export default {
     }
   },
 
-  // posts TODO: turn this page/prefecth into an object
   async getPosts({ commit, state }, params) {
     const { page } = params
     const { prefetch } = params
@@ -66,9 +65,6 @@ export default {
         page &&
         !state.pagination.pages.includes(page) &&
         page <= state.pagination.totalPostsPages)
-      // TODO: some time has passed, lets check again? - store time in object against page? or post
-      // we don't want to be invalidating all stored data all the time?
-      // perhaps it is better to just empty the store from time to time?
     ) {
       // paginate - add this to our object of seen pages
       commit('paginate', page)
@@ -98,9 +94,6 @@ export default {
         // add posts to store
         commit('addPosts', posts.data)
       }
-      // TODO: if a new post comes into the store after a timed update,
-      // we need to re-index all pages as the new post may be on an unknown page
-      // we don't want some pages with totalposts + 1 for example
     }
   },
 

@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
     <div class="nav-item">
-      <!-- TODO: bind router link to item.link -->
+      <!-- TODO: Bind router links from Vuex store to item.link -->
       {{ item.name }}
     </div>
   </div>

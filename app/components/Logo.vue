@@ -37,6 +37,7 @@
 
 <script>
 export default {
+  // TODO: Comment logo component and describe prop usage
   name: 'Logo',
   props: {
     orientation: {
