@@ -43,7 +43,7 @@
         </div>
       </header>
       <div class="article-content">
-        <!-- TODO: Make Rafflecopter script work, may have to split out to its own page template -->
+        <!-- TODO: Make Rafflecopter script work, may have to split contests out into their own page template -->
         <div
           class="article-copy"
           @click="zoomFigure"

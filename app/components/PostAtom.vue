@@ -67,7 +67,7 @@ export default {
     },
     backgroundImage() {
       // Set the background image if the post mode is a promotion
-      // FIXME: Make this somewhat more intelligent, please
+      // FIXME: Make background image on promotion posts somewhat more intelligent, please
       if (this.mode == 'promotion') {
         return this.pictureUrl
       } else {
@@ -182,7 +182,7 @@ export default {
 }
 
 
-/* FIXME: Write a filter for this from the WP API */
+/* FIXME: Write a filter Stoke-side to remove the "Read More" links from the excerpt */
 .post-excerpt a {
   display: none;
 }
