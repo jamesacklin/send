@@ -1,15 +1,11 @@
 <template>
   <main class="content">
     <article :id="'page-id-' + this.post.id" class="page">
-      <header class="page-header" :class="{ 'has-artwork': featuredImage() }">
-        <div class="page-artwork">
-          <img
-            class=""
-            v-if="featuredImage()"
-            v-lazy="featuredImage()"
-            alt=""
-          />
-        </div>
+      <header class="page-header" :class="{ 'has-artwork': featuredMedia }">
+        <featured-media
+          v-if="featuredMedia"
+          :media="post._embedded['wp:featuredmedia'][0]"
+        />
         <div class="page-title-block">
           <h1 class="page-title" v-html="post.title.rendered"></h1>
         </div>
@@ -50,6 +46,16 @@ export default {
     postDate: function() {
       // Pretty-format the post date (January 1, 2019)
       return dayjs(this.date).format('MMMM D, YYYY')
+    },
+    featuredMedia() {
+      // Check for the existence of featured media on the post.
+      // If so, return it. If not, return false.
+      if (this.post._embedded['wp:featuredmedia']) {
+        return this.post._embedded['wp:featuredmedia'][0].media_details.sizes
+          .medium.source_url
+      } else {
+        return false
+      }
     }
   },
   async asyncData({ payload, isStatic, store, params }) {
@@ -57,17 +63,6 @@ export default {
       store.commit('addPage', [payload])
     } else {
       await store.dispatch('getPage', params)
-    }
-  },
-  methods: {
-    featuredImage() {
-      // FIXME: Obsolete, look at featuredSrcset() in article.vue
-      let featuredImage = this.post._embedded['wp:featuredmedia']
-      if (featuredImage && featuredImage[0].media_details) {
-        return featuredImage[0].media_details.sizes.full.source_url
-      } else {
-        return false
-      }
     }
   },
   scrollToTop: true,
@@ -99,9 +94,8 @@ export default {
         },
         {
           hid: 'og:image',
-          property: 'og:image'
-          // FIXME: Point og:image to a real image (medium-sized, probably)
-          // content: this.featuredImage()
+          property: 'og:image',
+          content: this.featuredMedia
         }
       ]
     }

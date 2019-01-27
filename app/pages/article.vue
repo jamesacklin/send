@@ -1,9 +1,9 @@
 <template>
   <main class="content">
     <article :id="'post-id-' + post.id" class="article">
-      <header class="article-header has-artwork">
+      <header class="article-header" :class="{ 'has-artwork': featuredMedia }">
         <featured-media
-          v-if="post._embedded['wp:featuredmedia'][0]"
+          v-if="featuredMedia"
           :media="post._embedded['wp:featuredmedia'][0]"
         />
         <div class="article-title-block">
@@ -77,6 +77,7 @@
 import Advertising from '@/components/Advertising'
 import FeaturedMedia from '@/components/FeaturedMedia'
 import dayjs from 'dayjs'
+import _ from 'lodash'
 
 export default {
   components: {
@@ -101,12 +102,14 @@ export default {
       // relying on WordPress's permalink
       return `https://dirtragmag.com${this.$route.path}`
     },
-    featuredImage() {
-      if (this.post._embedded['wp:featuredmedia'][0]) {
+    featuredMedia() {
+      // Check for the existence of featured media on the post.
+      // If so, return it. If not, return false.
+      if (this.post._embedded['wp:featuredmedia']) {
         return this.post._embedded['wp:featuredmedia'][0].media_details.sizes
           .medium.source_url
       } else {
-        return '/og-image.png'
+        return false
       }
     },
     postAuthor() {
@@ -203,7 +206,7 @@ export default {
         {
           hid: 'og:image',
           property: 'og:image',
-          content: this.featuredImage
+          content: this.featuredMedia
         }
       ]
     }
