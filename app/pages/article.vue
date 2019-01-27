@@ -16,7 +16,7 @@
         <div class="article-title-block">
           <h1 class="article-title" v-html="post.title.rendered"></h1>
           <div class="article-author">
-            <span>{{ post._embedded.author[0].name }}</span>
+            <span v-html='postAuthor'></span>
             <span class="article-date">
               &nbsp;—&nbsp; <span v-html="postDate"></span>
             </span>
@@ -89,6 +89,18 @@ export default {
     },
     thisUrl() {
       return `https://dirtragmag.com${this.$route.path}`
+    },
+    postAuthor() {
+      const post = this.post
+      if (post.author === 74318) {
+        if (post.acf.contributor_name){
+          return post.acf.contributor_name
+        } else {
+          return post._embedded.author[0].name
+        }
+      } else {
+        return post._embedded.author[0].name
+      }
     }
   },
   async asyncData({ payload, isStatic, store, params }) {
