@@ -2,17 +2,10 @@
   <main class="content">
     <article :id="'post-id-' + post.id" class="article">
       <header class="article-header has-artwork">
-        <!-- <header
-        class="article-header"
-        :class="{ 'has-artwork': featuredImage() }"
-      > -->
-        <div class="article-artwork">
-          <img
-            class=""
-            :srcset="featuredSrcset"
-            sizes="(min-width: 1200px) 1140px, (min-width: 992px) 940px, (min-width: 768px) 720px, (min-width: 576px) 510px, calc(100vw - 30px)"
-          />
-        </div>
+        <featured-media
+          v-if="post._embedded['wp:featuredmedia'][0]"
+          :media="post._embedded['wp:featuredmedia'][0]"
+        />
         <div class="article-title-block">
           <h1 class="article-title" v-html="post.title.rendered"></h1>
           <div class="article-author">
@@ -50,6 +43,7 @@
         </div>
       </header>
       <div class="article-content">
+        <!-- TODO: Make Rafflecopter script work, may have to split out to its own page template -->
         <div
           class="article-copy"
           @click="zoomFigure"
@@ -73,6 +67,7 @@
             <p>{{ postAuthorBio }}</p>
           </div>
         </section>
+        <!-- TODO: Disqus integration -->
       </div>
     </article>
   </main>
@@ -80,11 +75,12 @@
 
 <script>
 import Advertising from '@/components/Advertising'
+import FeaturedMedia from '@/components/FeaturedMedia'
 import dayjs from 'dayjs'
-import each from 'lodash/each'
 
 export default {
   components: {
+    FeaturedMedia,
     Advertising
   },
   computed: {
@@ -104,6 +100,14 @@ export default {
       // Prepend our URL to the route path to get an absolute URL without
       // relying on WordPress's permalink
       return `https://dirtragmag.com${this.$route.path}`
+    },
+    featuredImage() {
+      if (this.post._embedded['wp:featuredmedia'][0]) {
+        return this.post._embedded['wp:featuredmedia'][0].media_details.sizes
+          .medium.source_url
+      } else {
+        return '/og-image.png'
+      }
     },
     postAuthor() {
       // If the post author is "Dirt Rag Contributor" (ID 74318), see if we can
@@ -143,21 +147,6 @@ export default {
         } else {
           return false
         }
-      } else {
-        return false
-      }
-    },
-    featuredSrcset() {
-      // If the featured media is an image, iterate over the sizes and
-      // compose a scset-friendly string with image paths and widths
-      if (this.post._embedded['wp:featuredmedia'][0].media_type === 'image') {
-        var srcset = ''
-        const postImageSizes = this.post._embedded['wp:featuredmedia'][0]
-          .media_details.sizes
-        each(postImageSizes, function(size, index) {
-          srcset = srcset + `${size.source_url} ${size.width}w, `
-        })
-        return srcset
       } else {
         return false
       }
@@ -213,9 +202,8 @@ export default {
         },
         {
           hid: 'og:image',
-          property: 'og:image'
-          // FIXME: point to a real image (medium-sized, probably)
-          // content: this.featuredImage()
+          property: 'og:image',
+          content: this.featuredImage
         }
       ]
     }
@@ -246,36 +234,6 @@ export default {
       padding-bottom: 0;
       padding-top: 50%;
     }
-  }
-}
-
-.article-artwork {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 0;
-  overflow: hidden;
-  padding-bottom: 66%;
-  img {
-    width: 100%;
-    transition: all 0.25s ease;
-  }
-  img[lazy='error'] {
-    height: 0px;
-    width: 0px;
-  }
-  img[lazy='loading'] {
-    transform: translateX(5em);
-    opacity: 0;
-  }
-  img[lazy='loaded'] {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  @media (min-width: 1000px) {
-    top: 0;
-    padding-bottom: 50%;
   }
 }
 

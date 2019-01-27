@@ -182,7 +182,7 @@ export default {
 }
 
 
-/* FIXME: do this for real on the API side */
+/* FIXME: Write a filter for this from the WP API */
 .post-excerpt a {
   display: none;
 }

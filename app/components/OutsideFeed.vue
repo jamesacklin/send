@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  // TODO: comment all of this
+  // TODO: Comment OutsideFeed component
   name: 'OutsideFeed',
   data() {
     return {
@@ -26,6 +26,7 @@ export default {
     }
   },
   mounted() {
+    // TODO: Do not mount if we don't pass certain checks (viewport size, user-agent, etc)
     let outsideScript = document.createElement('script')
     outsideScript.setAttribute(
       'src',

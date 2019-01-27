@@ -40,6 +40,7 @@
           />
         </div>
       </template>
+      <!-- TODO: Desktop ad sidebar with size-specific slots -->
     </section>
   </main>
 </template>
@@ -104,8 +105,7 @@ export default {
   methods: {
     titleCallout: function(post) {
       // Determine title callouts for each post based on category.
-      // FIXME: Make this an ACF field; it can stay a method because we're
-      //        operating on an iteratee
+      // FIXME: Make this an ACF field; it can stay a method because we're operating on an iteratee
       if (
         find(post.categories, function(cat) {
           return cat == '589'
@@ -123,8 +123,7 @@ export default {
     postMode: function(post) {
       // Determine the post "mode" [enhanced, promotion, default] based on
       // category or a featuredPost flag in the post meta.
-      // FIXME: Make this an ACF field; it can stay a method because we're
-      //        operating on an iteratee
+      // FIXME: Make this an ACF field; it can stay a method because we're operating on an iteratee
       if (post.categories[0] == '589') {
         return 'promotion'
         // } else if (post.meta.featuredPost.length) {

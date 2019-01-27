@@ -119,7 +119,7 @@
 
 <script>
 export default {
-  // TODO: comment all of this
+  // TODO: Comment pagination component
   computed: {
     backUp() {
       if (

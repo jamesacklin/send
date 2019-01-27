@@ -13,6 +13,7 @@
 </template>
 
 <script>
+// TODO: Banner ad in header
 import Ticker from '@/components/Ticker'
 import Logo from '@/components/Logo'
 import OutsideFeed from '@/components/OutsideFeed'
@@ -31,7 +32,7 @@ export default {
   },
   computed: {
     tickerStories() {
-      // FIXME: control ticker content from WordPress with a Vuex getter
+      // FIXME: Make tickerStories a Vuex getter
       return this.$store.state.tickerStories
     }
   },

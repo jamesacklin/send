@@ -3,6 +3,9 @@ import actions from './actions'
 import mutations from './mutations'
 import getters from './getters'
 
+// TODO: Explicitly define pages for a navigation component, or pull from WP menu
+// TODO: Google Analytics integration
+
 export default () => {
   return new Vuex.Store({
     strict: false,
@@ -22,6 +25,7 @@ export default () => {
       },
       posts: [],
       pages: [],
+      // TODO: Control tickerStories from WordPress
       tickerStories: [
         {
           title: 'Pivot to return as 2019 DirtFest Sponsor',

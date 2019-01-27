@@ -3,7 +3,7 @@
 </template>
 <script type="text/babel">
 export default {
-  // TODO: comment all of this (even though it's not really yours!)
+  // TODO: Comment Advertising component
   name: 'Advertising',
   props: {
     id: {

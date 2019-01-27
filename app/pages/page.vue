@@ -100,7 +100,7 @@ export default {
         {
           hid: 'og:image',
           property: 'og:image'
-          // FIXME: point to a real image (medium-sized, probably)
+          // FIXME: Point og:image to a real image (medium-sized, probably)
           // content: this.featuredImage()
         }
       ]

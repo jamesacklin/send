@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  // TODO: comment all of this
+  // TODO: Comment Ticker component
   name: 'Ticker',
   data: function() {
     return {
