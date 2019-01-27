@@ -77,7 +77,6 @@
 import Advertising from '@/components/Advertising'
 import FeaturedMedia from '@/components/FeaturedMedia'
 import dayjs from 'dayjs'
-import _ from 'lodash'
 
 export default {
   components: {
