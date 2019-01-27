@@ -153,6 +153,8 @@ export default {
     top: -10em;
     left: 48%;
     transform: rotate(-15deg) translateX(-48%);
+    &[lazy=loading],
+    &[lazy=error] { visibility: hidden; }
   }
   .text-wrapper {
     font-family: 'Libre Franklin', sans-serif;
