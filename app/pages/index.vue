@@ -60,11 +60,6 @@ export default {
     SectionHeader,
     Advertising
   },
-  data() {
-    return {
-      bottom: false
-    }
-  },
   async asyncData({ payload, isStatic, store, params }) {
     await store.dispatch('getPosts', {
       page: parseInt(params.page || 1)
@@ -75,14 +70,19 @@ export default {
   },
   computed: {
     posts() {
+      // Return the posts for whatever page we're on (as set in route.params)
       return this.$store.getters.getPostsPage(
         parseInt(this.$route.params.page || 1)
       )
     },
     ads() {
+      // Return the ads set explicitly in the store
       return this.$store.state.advertising.rectangle
     },
     feedItems() {
+      // Compose a feed, with an ad inserted every 3 posts. We should have
+      // 30 posts (set back in the Vuex store as state.postsPerPage)
+      // and 10 ad slots (explicitly set back in the Vuex store).
       return compact(flattenDeep(zip(chunk(this.posts, 3), this.ads)))
     }
   },
@@ -103,6 +103,9 @@ export default {
   },
   methods: {
     titleCallout: function(post) {
+      // Determine title callouts for each post based on category.
+      // FIXME: Make this an ACF field; it can stay a method because we're
+      //        operating on an iteratee
       if (
         find(post.categories, function(cat) {
           return cat == '589'
@@ -118,18 +121,23 @@ export default {
       }
     },
     postMode: function(post) {
+      // Determine the post "mode" [enhanced, promotion, default] based on
+      // category or a featuredPost flag in the post meta.
+      // FIXME: Make this an ACF field; it can stay a method because we're
+      //        operating on an iteratee
       if (post.categories[0] == '589') {
         return 'promotion'
-      // FIXME: return this from ACF instead of relying on a filter
-      // } else if (post.meta.featuredPost.length) {
-      //   return 'enhanced'
+        // } else if (post.meta.featuredPost.length) {
+        //   return 'enhanced'
       } else {
         return 'default'
       }
     },
-    postAuthor: function(post){
+    postAuthor: function(post) {
+      // If the post author is "Dirt Rag Contributor" (ID 74318), see if we can
+      // return the contributor's real name (as provided in ACF fields)
       if (post.author === 74318) {
-        if (post.acf.contributor_name){
+        if (post.acf.contributor_name) {
           return post.acf.contributor_name
         } else {
           return post._embedded.author[0].name
@@ -139,6 +147,7 @@ export default {
       }
     },
     featuredImage: function(post) {
+      // Return the post featured image
       if (post._embedded['wp:featuredmedia']) {
         let featuredImage = post._embedded['wp:featuredmedia'][0]
         if (featuredImage && featuredImage.media_details.sizes.medium) {
@@ -158,10 +167,7 @@ export default {
   transition: {
     name: 'fade',
     mode: 'out-in'
-  },
-  watch: {},
-  beforeMount() {},
-  beforeDestroy() {}
+  }
 }
 </script>
 
