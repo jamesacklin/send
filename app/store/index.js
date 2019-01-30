@@ -48,6 +48,33 @@ export default () => {
           link: 'https://www.google.com'
         }
       ],
+      // TODO: Control footerLinks from WordPress
+      footerLinks: [
+        {
+          name: 'Staff',
+          href: '/staff'
+        },
+        {
+          name: 'Contact Us',
+          href: '/contact'
+        },
+        {
+          name: 'Advertise',
+          href: '/advertise'
+        },
+        {
+          name: 'Contribute',
+          href: '/contribute'
+        },
+        {
+          name: 'Mission Statement',
+          href: '/mission-statement'
+        },
+        {
+          name: 'Privacy Policy',
+          href: '/privacy-policy'
+        }
+      ],
       advertising: {
         rectangle: [
           {

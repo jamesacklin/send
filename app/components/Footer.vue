@@ -18,32 +18,8 @@ export default {
   name: 'Footer',
   computed: {
     footerLinks: function() {
-      return [
-        {
-          name: 'Staff',
-          href: '/staff'
-        },
-        {
-          name: 'Contact Us',
-          href: '/contact'
-        },
-        {
-          name: 'Advertise',
-          href: '/advertise'
-        },
-        {
-          name: 'Contribute',
-          href: '/contribute'
-        },
-        {
-          name: 'Mission Statement',
-          href: '/mission-statement'
-        },
-        {
-          name: 'Privacy Policy',
-          href: '/privacy-policy'
-        }
-      ]
+      // FIXME: Make footerLinks a Vuex getter
+      return this.$store.state.footerLinks
     }
   }
 }
@@ -61,10 +37,10 @@ footer {
   display: grid;
   grid-template-columns:
     [full-start] minmax(1em, 1fr) [main-start] minmax(0, 45em)
-    [main-end] 300px minmax(1em, 1fr) [full-end];
+    [main-end] minmax(1em, 1fr) [full-end];
   grid-auto-rows: auto;
   grid-column-gap: 1em;
-  grid-row-gap: 0;
+  grid-row-gap: 1em;
   @media (min-width: 1000px) {
     padding: 2rem 0;
     grid-template-columns:
@@ -104,6 +80,9 @@ a:hover {
 }
 
 .footer-sidebar {
-  grid-column: sidebar;
+  grid-column: main;
+  @media (min-width: 1000px) {
+    grid-column: sidebar;
+  }
 }
 </style>
