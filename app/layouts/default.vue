@@ -2,18 +2,20 @@
   <div class="app-view">
     <Header />
     <nuxt />
+    <Footer />
     <Pagination />
   </div>
 </template>
 
 <script>
-// TODO: Create a global footer
 import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 import Pagination from '@/components/Navigation/Pagination'
 
 export default {
   components: {
     Header,
+    Footer,
     Pagination
   }
 }
@@ -22,6 +24,6 @@ export default {
 <style lang="css" scoped>
 /* FIXME: Figure out some way to pad the bottom of the page based on the pagination height */
 .app-view {
-  padding-bottom: calc(40px + 2rem);
+  padding-bottom: 40px;
 }
 </style>

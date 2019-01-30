@@ -73,7 +73,7 @@ header[role='banner'] {
   display: grid;
   grid-template-columns:
     [full-start] minmax(1em, 1fr) [main-start] minmax(0, 45em)
-    [main-end] 300px minmax(1em, 1fr) [full-end];
+    [main-end] minmax(1em, 1fr) [full-end];
   grid-auto-rows: auto;
   grid-column-gap: 1em;
   grid-row-gap: 0;
