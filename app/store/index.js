@@ -48,6 +48,37 @@ export default () => {
           link: 'https://www.google.com'
         }
       ],
+      // TODO: Control navItems from WordPress
+      navItems: [
+        {
+          name: 'News',
+          href: '/category/news'
+        },
+        {
+          name: 'Gear',
+          href: '/category/gear'
+        },
+        {
+          name: 'Features',
+          href: '/category/features'
+        },
+        {
+          name: 'Contests',
+          href: '/category/contests'
+        },
+        {
+          name: 'Video',
+          href: '/category/video'
+        },
+        {
+          name: 'Opinion',
+          href: '/category/opinion'
+        },
+        {
+          name: 'Off the Trail',
+          href: '/category/off-the-trail'
+        }
+      ],
       // TODO: Control footerLinks from WordPress
       footerLinks: [
         {

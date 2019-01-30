@@ -1,33 +1,63 @@
 <template lang="html">
-  <div>
+  <div class="nav-drawer-wrapper nav-drawer-hide">
     <div class="nav-drawer">
       <div class="nav-logo">
-        <Logo bgColor="white" orientation="horizontal" />
+        <Logo bgColor="black" orientation="horizontal" />
       </div>
       <nav>
-        <NavItem :item="{'name': 'Industry News', 'link': '/news'}" />
-        <NavItem :item="{'name': 'Gear', 'link': '/gear'}" />
-        <NavItem :item="{'name': 'Features', 'link': '/features'}" />
-        <NavItem :item="{'name': 'Videos', 'link': '/videos'}" />
+        <NavItem
+          v-for="navLink in navLinks"
+          :key="navLink.index"
+          :text="navLink.name"
+          :link="navLink.href"
+        />
       </nav>
     </div>
   </div>
 </template>
 
 <script>
-import NavItem from "./NavItem";
-import Logo from "../Logo";
+import NavItem from './NavItem'
+import Logo from '../Logo'
 
 export default {
-  name: "NavDrawer",
+  name: 'NavDrawer',
   components: {
     NavItem,
     Logo
+  },
+  computed: {
+    navLinks: function() {
+      // FIXME: Make navlinks a Vuex getter
+      return this.$store.state.navItems
+    }
   }
-};
+}
 </script>
 
-<style lang="css">
+<style lang="scss">
+.nav-drawer-wrapper {
+  position: fixed;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.nav-drawer-hide {
+  visibility: hidden;
+  opacity: 0;
+  top: 0;
+  left: -20rem;
+}
+
+.nav-drawer-show {
+  visibility: visible;
+  opacity: 1;
+  top: 0;
+  left: 0;
+}
+
 .nav-drawer {
   background: red;
   padding: 2rem;
