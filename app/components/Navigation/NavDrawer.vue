@@ -1,7 +1,7 @@
 <template lang="html">
-  <div class="nav-drawer-wrapper nav-drawer-hide">
+  <div class="nav-drawer-wrapper" :class="drawerStatus">
     <div class="nav-drawer">
-      <button @click="openNav()">open nav</button>
+      <button @click="closeNav()">close nav</button>
       <div class="nav-logo">
         <Logo bgColor="black" orientation="horizontal" />
       </div>
@@ -31,6 +31,17 @@ export default {
     navLinks: function() {
       // FIXME: Make navlinks a Vuex getter
       return this.$store.state.navItems
+    },
+    drawerStatus: function() {
+      return {
+        'nav-drawer-hide': !this.$store.state.navDrawerOpen,
+        'nav-drawer-show': this.$store.state.navDrawerOpen
+      }
+    }
+  },
+  methods: {
+    closeNav() {
+      this.$store.dispatch('closeNavDrawer')
     }
   }
 }
