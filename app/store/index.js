@@ -9,6 +9,7 @@ export default () => {
   return new Vuex.Store({
     strict: false,
     state: {
+      navDrawerOpen: false,
       pagination: {
         current: false,
         totalPosts: 0,

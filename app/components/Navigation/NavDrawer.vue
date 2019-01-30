@@ -1,6 +1,7 @@
 <template lang="html">
   <div class="nav-drawer-wrapper nav-drawer-hide">
     <div class="nav-drawer">
+      <button @click="openNav()">open nav</button>
       <div class="nav-logo">
         <Logo bgColor="black" orientation="horizontal" />
       </div>

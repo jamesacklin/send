@@ -2,6 +2,7 @@
   <div ref="banner" :class="{ block: pastHeader }">
     <header role="banner" :class="{ sticky: pastHeader }">
       <div class="logo-wrapper">
+        <button @click="openNav()">open nav</button>
         <nuxt-link tag="a" :to="`/`">
           <Logo style="cursor: pointer;" orientation="horizontal" />
         </nuxt-link>
@@ -47,6 +48,9 @@ export default {
       } else {
         return false
       }
+    },
+    openNav() {
+      this.$store.dispatch('openNavDrawer')
     }
   },
   beforeMount() {

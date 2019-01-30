@@ -63,5 +63,9 @@ export default {
   // enable / disable pagination
   paginateToggle(state, onoff) {
     state.pagination.paginate = onoff
+  },
+  // open or close nav drawer
+  toggleNavDrawer(state, onoff) {
+    state.navDrawerOpen = onoff
   }
 }

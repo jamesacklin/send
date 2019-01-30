@@ -1,6 +1,14 @@
 import merge from 'lodash/merge'
 
 export default {
+  // Open or close nav drawer
+  openNavDrawer({ commit, state }) {
+    commit('toggleNavDrawer', true)
+  },
+  closeNavDrawer({ commit, state }) {
+    commit('toggleNavDrawer', false)
+  },
+
   // page
   async getPage({ commit, state }, params) {
     // check store for page already, bail if found
