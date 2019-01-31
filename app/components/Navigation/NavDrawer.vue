@@ -8,6 +8,7 @@
       <nav>
         <NavItem
           v-for="navLink in navLinks"
+          @click="closeNav()"
           :key="navLink.index"
           :text="navLink.name"
           :link="navLink.href"
@@ -18,8 +19,8 @@
 </template>
 
 <script>
-import NavItem from './NavItem'
-import Logo from '../Logo'
+import NavItem from '@/components/Navigation/NavItem'
+import Logo from '@/components/Logo'
 
 export default {
   name: 'NavDrawer',
@@ -33,6 +34,7 @@ export default {
       return this.$store.state.navItems
     },
     drawerStatus: function() {
+      // Return a class depending on the boolean value of navDrawerOpen in Vuex
       return {
         'nav-drawer-hide': !this.$store.state.navDrawerOpen,
         'nav-drawer-show': this.$store.state.navDrawerOpen
@@ -41,7 +43,15 @@ export default {
   },
   methods: {
     closeNav() {
+      // Dispatch vuex action to flip navDrawerOpen to false
       this.$store.dispatch('closeNavDrawer')
+    }
+  },
+  watch: {
+    // Watch route, close nav on route change
+    // https://stackoverflow.com/questions/46402809/vuejs-event-on-route-change
+    $route(to, from) {
+      this.closeNav()
     }
   }
 }
@@ -53,7 +63,7 @@ export default {
   z-index: 5;
   width: 100%;
   height: 100%;
-  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all 0.25s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 .nav-drawer-hide {
