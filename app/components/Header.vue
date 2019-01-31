@@ -1,10 +1,15 @@
 <template lang="html">
   <div ref="banner" :class="{ block: pastHeader }">
     <header role="banner" :class="{ sticky: pastHeader }">
-      <div class="logo-wrapper">
-        <nuxt-link tag="a" :to="`/`">
-          <Logo style="cursor: pointer;" orientation="horizontal" />
-        </nuxt-link>
+      <div class="header-content">
+        <button class="nav-toggle" @click="openNav()">
+          <font-awesome-icon :icon="['fas', 'bars']" />
+        </button>
+        <div class="logo-wrapper">
+          <nuxt-link tag="a" :to="`/`">
+            <Logo style="cursor: pointer;" orientation="horizontal" />
+          </nuxt-link>
+        </div>
       </div>
       <div class="header-sidebar"><OutsideFeed /></div>
       <Ticker ref="ticker" :tickerStories="tickerStories" />
@@ -47,6 +52,9 @@ export default {
       } else {
         return false
       }
+    },
+    openNav() {
+      this.$store.dispatch('openNavDrawer')
     }
   },
   beforeMount() {
@@ -120,19 +128,36 @@ header.sticky {
   background: transparent;
 }
 
-.logo-wrapper {
+.header-content {
   grid-column: main;
-  width: 200px;
   margin: 1rem 0;
-  @media (min-width: 812px) {
-    display: flex;
-    align-items: center;
-    margin: 0;
-  }
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.nav-toggle {
+  -webkit-appearance: none;
+  background: black;
+  border: none;
+  outline: none;
+  font-size: 2em;
+  color: white;
+  padding: 0 0.33em;
+  margin: 0;
+  cursor: pointer;
+}
+
+.nav-toggle:hover {
+  background: red;
+}
+
+.logo-wrapper {
+  width: 200px;
+  background: black;
 }
 
 header.sticky .logo-wrapper {
-  background: #000;
   width: 150px;
 }
 

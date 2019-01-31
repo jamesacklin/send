@@ -1,18 +1,13 @@
 <template lang="html">
   <div>
-    <div class="nav-item">
-      <!-- TODO: Bind router links from Vuex store to item.link -->
-      {{ item.name }}
-    </div>
+    <nuxt-link :to="link" tag="a" class="nav-item"> {{ text }} </nuxt-link>
   </div>
 </template>
 
 <script>
 export default {
   name: 'navItem',
-  props: {
-    item: Object
-  }
+  props: ['text', 'link']
 }
 </script>
 
@@ -28,6 +23,7 @@ export default {
   text-align: center;
   padding: 1rem;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .nav-item:hover {

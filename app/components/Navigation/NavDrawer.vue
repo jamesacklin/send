@@ -1,33 +1,90 @@
 <template lang="html">
-  <div>
+  <div class="nav-drawer-wrapper" :class="drawerStatus">
     <div class="nav-drawer">
-      <div class="nav-logo">
-        <Logo bgColor="white" orientation="horizontal" />
+      <div class="nav-drawer-header">
+        <div class="logo-wrapper">
+          <Logo bgColor="black" orientation="horizontal" />
+        </div>
+        <button class="nav-toggle" @click="closeNav()">
+          <font-awesome-icon :icon="['fas', 'times']" />
+        </button>
       </div>
       <nav>
-        <NavItem :item="{'name': 'Industry News', 'link': '/news'}" />
-        <NavItem :item="{'name': 'Gear', 'link': '/gear'}" />
-        <NavItem :item="{'name': 'Features', 'link': '/features'}" />
-        <NavItem :item="{'name': 'Videos', 'link': '/videos'}" />
+        <NavItem
+          v-for="navLink in navLinks"
+          @click="closeNav()"
+          :key="navLink.index"
+          :text="navLink.name"
+          :link="navLink.href"
+        />
       </nav>
     </div>
   </div>
 </template>
 
 <script>
-import NavItem from "./NavItem";
-import Logo from "../Logo";
+import NavItem from '@/components/Navigation/NavItem'
+import Logo from '@/components/Logo'
 
 export default {
-  name: "NavDrawer",
+  name: 'NavDrawer',
   components: {
     NavItem,
     Logo
+  },
+  computed: {
+    navLinks: function() {
+      // FIXME: Make navlinks a Vuex getter
+      return this.$store.state.navItems
+    },
+    drawerStatus: function() {
+      // Return a class depending on the boolean value of navDrawerOpen in Vuex
+      return {
+        'nav-drawer-hide': !this.$store.state.navDrawerOpen,
+        'nav-drawer-show': this.$store.state.navDrawerOpen
+      }
+    }
+  },
+  methods: {
+    closeNav() {
+      // Dispatch vuex action to flip navDrawerOpen to false
+      this.$store.dispatch('closeNavDrawer')
+    }
+  },
+  watch: {
+    // Watch route, close nav on route change
+    // https://stackoverflow.com/questions/46402809/vuejs-event-on-route-change
+    // FIXME: account for when route.to and route.from are the same
+    $route(to, from) {
+      this.closeNav()
+    }
   }
-};
+}
 </script>
 
-<style lang="css">
+<style lang="scss" scoped>
+.nav-drawer-wrapper {
+  position: fixed;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  transition: all 0.25s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.nav-drawer-hide {
+  visibility: hidden;
+  opacity: 0;
+  top: 0;
+  left: -20rem;
+}
+
+.nav-drawer-show {
+  visibility: visible;
+  opacity: 1;
+  top: 0;
+  left: 0;
+}
+
 .nav-drawer {
   background: red;
   padding: 2rem;
@@ -38,11 +95,6 @@ export default {
   height: 100vh;
 }
 
-.nav-logo {
-  margin: 0 auto;
-  padding: 1rem 25vw 5rem;
-}
-
 .nav-drawer nav {
   flex-grow: 1;
   display: flex;
@@ -50,5 +102,34 @@ export default {
   justify-content: space-between;
   min-width: 25em;
   width: 50%;
+}
+
+.nav-drawer-header {
+  margin: 1rem 0 2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.nav-toggle {
+  -webkit-appearance: none;
+  background: black;
+  border: none;
+  outline: none;
+  font-size: 2em;
+  color: white;
+  padding: 0.13em 0.5em;
+  margin: 0;
+  cursor: pointer;
+}
+
+.nav-toggle:hover {
+  background: white;
+  color: black;
+}
+
+.logo-wrapper {
+  width: 200px;
+  background: black;
 }
 </style>

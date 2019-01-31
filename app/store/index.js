@@ -3,13 +3,13 @@ import actions from './actions'
 import mutations from './mutations'
 import getters from './getters'
 
-// TODO: Explicitly define pages for a navigation component, or pull from WP menu
 // TODO: Google Analytics integration
 
 export default () => {
   return new Vuex.Store({
     strict: false,
     state: {
+      navDrawerOpen: false,
       pagination: {
         current: false,
         totalPosts: 0,
@@ -46,6 +46,37 @@ export default () => {
         {
           title: 'Remember to shred the vote November 6th',
           link: 'https://www.google.com'
+        }
+      ],
+      // TODO: Control navItems from WordPress
+      navItems: [
+        {
+          name: 'News',
+          href: '/category/news'
+        },
+        {
+          name: 'Gear',
+          href: '/category/gear'
+        },
+        {
+          name: 'Features',
+          href: '/category/features'
+        },
+        {
+          name: 'Contests',
+          href: '/category/contests'
+        },
+        {
+          name: 'Video',
+          href: '/category/video'
+        },
+        {
+          name: 'Opinion',
+          href: '/category/opinion'
+        },
+        {
+          name: 'Off the Trail',
+          href: '/category/off-the-trail'
         }
       ],
       // TODO: Control footerLinks from WordPress
