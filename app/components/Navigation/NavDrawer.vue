@@ -1,9 +1,13 @@
 <template lang="html">
   <div class="nav-drawer-wrapper" :class="drawerStatus">
     <div class="nav-drawer">
-      <button @click="closeNav()">close nav</button>
-      <div class="nav-logo">
-        <Logo bgColor="black" orientation="horizontal" />
+      <div class="nav-drawer-header">
+        <div class="logo-wrapper">
+          <Logo bgColor="black" orientation="horizontal" />
+        </div>
+        <button class="nav-toggle" @click="closeNav()">
+          <font-awesome-icon :icon="['fas', 'times']" />
+        </button>
       </div>
       <nav>
         <NavItem
@@ -58,7 +62,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .nav-drawer-wrapper {
   position: fixed;
   z-index: 5;
@@ -91,11 +95,6 @@ export default {
   height: 100vh;
 }
 
-.nav-logo {
-  margin: 0 auto;
-  padding: 1rem 25vw 5rem;
-}
-
 .nav-drawer nav {
   flex-grow: 1;
   display: flex;
@@ -103,5 +102,34 @@ export default {
   justify-content: space-between;
   min-width: 25em;
   width: 50%;
+}
+
+.nav-drawer-header {
+  margin: 1rem 0 2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.nav-toggle {
+  -webkit-appearance: none;
+  background: black;
+  border: none;
+  outline: none;
+  font-size: 2em;
+  color: white;
+  padding: 0.13em 0.5em;
+  margin: 0;
+  cursor: pointer;
+}
+
+.nav-toggle:hover {
+  background: white;
+  color: black;
+}
+
+.logo-wrapper {
+  width: 200px;
+  background: black;
 }
 </style>
