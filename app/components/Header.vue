@@ -76,7 +76,7 @@ export default {
 header[role='banner'] {
   top: 0;
   width: 100%;
-  background: #000000;
+  background: #292724;
   /* transition: background-color 0.2s ease, height 0.2s ease; */
   display: grid;
   grid-template-columns:
@@ -102,16 +102,16 @@ header[role='banner'] {
 
 header a {
   font-family: 'Roboto Mono';
-  color: white;
+  color: #F5F3EF;
 }
 
 header a:focus,
 header a:active {
-  color: red;
+  color: #EB181D;
 }
 
 header a.nuxt-link-exact-active {
-  color: red;
+  color: #EB181D;
 }
 
 .block {
@@ -119,7 +119,7 @@ header a.nuxt-link-exact-active {
   @media (min-width: 812px) {
     height: 200px;
   }
-  background: black;
+  background: #292724;
 }
 
 header.sticky {
@@ -138,23 +138,23 @@ header.sticky {
 
 .nav-toggle {
   -webkit-appearance: none;
-  background: black;
+  background: #292724;
   border: none;
   outline: none;
   font-size: 2em;
-  color: white;
+  color: #F5F3EF;
   padding: 0 0.33em;
   margin: 0;
   cursor: pointer;
 }
 
 .nav-toggle:hover {
-  background: red;
+  background: #EB181D;
 }
 
 .logo-wrapper {
   width: 200px;
-  background: black;
+  background: #292724;
 }
 
 header.sticky .logo-wrapper {
@@ -177,9 +177,6 @@ header .outside-player:not(:empty) {
 
 header.sticky .outside-player {
   position: absolute;
-}
-
-header.sticky .outside-player:not(:empty) {
 }
 
 header .ticker {

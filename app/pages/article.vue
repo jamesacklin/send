@@ -220,15 +220,15 @@ export default {
 }
 
 .article a {
-  color: red;
+  color: #EB181D;
 }
 
 .article-header {
   grid-column: full;
-  background: black;
+  background: #292724;
   position: relative;
   @media (min-width: 1000px) {
-    background: white;
+    background: #F5F3EF;
   }
   &.has-artwork {
     padding-bottom: 66%;
@@ -240,7 +240,7 @@ export default {
 }
 
 .article-title-block {
-  color: white;
+  color: #F5F3EF;
   padding: 1rem 0;
   display: grid;
   grid-template-columns:
@@ -257,7 +257,7 @@ export default {
       [main-start] minmax(0, 45em) [main-end sidebar-start] 300px [sidebar-end]
       minmax(1em, 1fr) [full-end];
     grid-column-gap: 2rem;
-    color: black;
+    color: #292724;
   }
   @media (min-width: 1200px) {
     grid-template-columns:
@@ -336,9 +336,9 @@ export default {
   }
   .article-copy figure.zoomed {
     width: calc(100% + 300px + 2em) !important;
-    background: black;
-    color: white;
-    outline: 1em solid black;
+    background: #292724;
+    color: #F5F3EF;
+    outline: 1em solid #292724;
     box-shadow: 0 0 4em rgba(0, 0, 0, 0.25);
     margin: 2em 0;
   }

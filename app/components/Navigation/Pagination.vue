@@ -257,7 +257,7 @@ export default {
 }
 .pagination {
   list-style: none;
-  background: #000;
+  background: #292724;
   margin: 0;
   padding: 0;
   &::after {
@@ -274,15 +274,15 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
+      color: #F5F3EF;
       text-decoration: none;
       padding: 1rem;
-      background: red;
+      background: #EB181D;
       svg {
-        fill: white;
+        fill: #F5F3EF;
       }
       &:hover {
-        background: black;
+        background: #292724;
       }
     }
   }

@@ -27,6 +27,7 @@ export default {
 <style lang="css" scoped>
 /* FIXME: Figure out some way to pad the bottom of the page based on the pagination height */
 .app-view {
+  background-color: #F5F3EF;
   padding-bottom: 40px;
 }
 </style>
