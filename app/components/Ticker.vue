@@ -79,12 +79,12 @@ export default {
 .ticker-story {
   font-family: "Roboto Mono", monospace;
   font-weight: 300;
-  color: white;
+  color: #F5F3EF;
   text-transform: uppercase;
 }
 
 .ticker-story a {
-  color: white;
+  color: #F5F3EF;
   text-decoration: none;
 }
 
@@ -101,8 +101,8 @@ export default {
   font-family: "Roboto Mono", monospace;
   text-transform: uppercase;
   font-weight: 300;
-  color: white;
-  background: red;
+  color: #F5F3EF;
+  background: #EB181D;
   padding: 0 0.25rem;
   margin-right: 1rem;
 }

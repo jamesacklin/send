@@ -30,8 +30,8 @@ footer {
   font-family: 'Roboto Mono', monospace;
   line-height: 1.6;
   width: 100%;
-  background: #000000;
-  color: white;
+  background: #292724;
+  color: #F5F3EF;
   margin-top: 2rem;
   padding: 1rem 0;
   display: grid;
@@ -67,7 +67,7 @@ ul li {
 }
 
 a {
-  color: white;
+  color: #F5F3EF;
   text-decoration: none;
 }
 

@@ -86,7 +86,7 @@ export default {
 }
 
 .nav-drawer {
-  background: red;
+  background: #EB181D;
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -113,23 +113,23 @@ export default {
 
 .nav-toggle {
   -webkit-appearance: none;
-  background: black;
+  background: #292724;
   border: none;
   outline: none;
   font-size: 2em;
-  color: white;
+  color: #F5F3EF;
   padding: 0.13em 0.5em;
   margin: 0;
   cursor: pointer;
 }
 
 .nav-toggle:hover {
-  background: white;
-  color: black;
+  background: #F5F3EF;
+  color: #292724;
 }
 
 .logo-wrapper {
   width: 200px;
-  background: black;
+  background: #292724;
 }
 </style>

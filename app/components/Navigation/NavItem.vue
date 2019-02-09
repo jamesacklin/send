@@ -14,9 +14,9 @@ export default {
 <style lang="css">
 .nav-item {
   display: block;
-  background: black;
+  background: #292724;
   width: 100%;
-  color: white;
+  color: #F5F3EF;
   font-family: 'Libre Franklin', sans-serif;
   font-weight: 900;
   font-size: 1.6rem;
@@ -27,7 +27,7 @@ export default {
 }
 
 .nav-item:hover {
-  color: black;
-  background: white;
+  color: #292724;
+  background: #F5F3EF;
 }
 </style>

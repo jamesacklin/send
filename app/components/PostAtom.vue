@@ -90,7 +90,7 @@ export default {
 .post-atom.promotion {
   padding: 4em 2%;
   position: relative;
-  background-color: black;
+  background-color: #292724;
   background-size: cover;
   background-position: center center;
 }
@@ -108,7 +108,7 @@ export default {
 
 .post-atom.contest {
   border: 1px solid #CCC;
-  border-top: 0.25rem solid red;
+  border-top: 0.25rem solid #EB181D;
   box-shadow: 0 0.125em 0.25em rgba(0,0,0,0.125);
 }
 
@@ -122,36 +122,36 @@ export default {
   margin: 0 0 1rem;
   font-size: 1.6rem;
   line-height: 1.1;
-  color: black;
+  color: #292724;
 }
 
 .post-title a {
   text-decoration: none;
-  color: black;
+  color: #292724;
 }
 
 .promotion .post-title a {
-  color: white;
+  color: #F5F3EF;
 }
 
 .post-title a:hover {
-  color: red;
+  color: #EB181D;
 }
 
 .promotion .post-title {
-  color: white;
+  color: #F5F3EF;
 }
 
 .post-title-callout {
   display: block;
-  color: red;
+  color: #EB181D;
 }
 
 .post-launch-media {
   font-family: 'Libre Franklin', sans-serif;
   font-size: 1.6rem;
   margin: -1rem 0 0;
-  color: red;
+  color: #EB181D;
   font-weight: 900;
   cursor: pointer;
 }

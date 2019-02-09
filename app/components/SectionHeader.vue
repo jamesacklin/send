@@ -128,7 +128,7 @@ export default {
   grid-column: full;
   position: relative;
   padding: 1rem;
-  background-color: black;
+  background-color: #292724;
   background-size: cover;
   background-position: center center;
   @media (orientation: portrait) and (max-width: 700px) {
@@ -149,12 +149,12 @@ export default {
 }
 
 .section-header[lazy='loading'] {
-  background: black;
+  background: #292724;
   background-image: none !important;
 }
 
 .section-header[lazy='error'] {
-  background: black;
+  background: #292724;
   padding-top: 1rem;
   background-image: none !important;
 }
@@ -188,9 +188,9 @@ export default {
     font-size: 1.2em;
     max-width: 45rem;
     padding: 0 1rem;
-    background: black;
+    background: #292724;
     text-align: center;
-    color: white;
+    color: #F5F3EF;
     h2 {
       font-size: 2.25em;
       margin: 1rem 0;
@@ -199,7 +199,7 @@ export default {
       max-width: 10em;
     }
     a {
-      color: red;
+      color: #EB181D;
       text-decoration: none;
     }
     a:hover {
