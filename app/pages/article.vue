@@ -2,16 +2,14 @@
   <main class="content">
     <article :id="'post-id-' + post.id" class="article">
       <header class="article-header" :class="{ 'has-artwork': featuredMedia }">
-        <featured-media
-          v-if="featuredMedia"
-          :media="post._embedded['wp:featuredmedia'][0]"
-        />
+        <featured-media v-if="featuredMedia" :media="post._embedded['wp:featuredmedia'][0]"/>
         <div class="article-title-block">
           <h1 class="article-title" v-html="post.title.rendered"></h1>
           <div class="article-author">
             <span v-html="postAuthor"></span>
             <span class="article-date">
-              &nbsp;—&nbsp; <span v-html="postDate"></span>
+              &nbsp;—&nbsp;
+              <span v-html="postDate"></span>
             </span>
           </div>
           <no-ssr>
@@ -25,18 +23,18 @@
               >
                 <span>
                   <network network="facebook">
-                    <font-awesome-icon :icon="['fab', 'facebook-square']" />
+                    <font-awesome-icon :icon="['fab', 'facebook-square']"/>
                   </network>
                   <network network="twitter">
-                    <font-awesome-icon :icon="['fab', 'twitter']" />
+                    <font-awesome-icon :icon="['fab', 'twitter']"/>
                   </network>
                   <network network="reddit">
-                    <font-awesome-icon :icon="['fab', 'reddit']" />
+                    <font-awesome-icon :icon="['fab', 'reddit']"/>
                   </network>
                 </span>
               </social-sharing>
               <a :href="thisUrl">
-                <font-awesome-icon :icon="['fas', 'link']" />
+                <font-awesome-icon :icon="['fas', 'link']"/>
               </a>
             </div>
           </no-ssr>
@@ -44,23 +42,17 @@
       </header>
       <div class="article-content">
         <!-- TODO: Make Rafflecopter script work, may have to split contests out into their own page template -->
-        <div
-          class="article-copy"
-          @click="zoomFigure"
-          v-html="post.content.rendered"
-        />
+        <div class="article-copy" @click="zoomFigure" v-html="post.content.rendered"/>
         <section class="advertising">
-          <div style="margin-bottom: 1rem;" v-for="ad in ads" :key="ad.index">
-            <no-ssr>
-              <div v-for="ad in ads" :key="ad.index">
-                <advertising :id="ad.id" :size="ad.size" :unit="ad.name" />
-              </div>
-            </no-ssr>
-          </div>
+          <no-ssr>
+            <div v-for="ad in ads" :key="ad.index">
+              <advertising :id="ad.id" :size="ad.size" :unit="ad.name"/>
+            </div>
+          </no-ssr>
         </section>
         <section class="article-author-bio" v-if="postAuthorBio">
           <div v-if="postAuthorPic" class="author-image">
-            <img :src="postAuthorPic" :alt="postAuthor" />
+            <img :src="postAuthorPic" :alt="postAuthor">
           </div>
           <div class="author-bio">
             <h3>{{ postAuthor }}</h3>
@@ -220,7 +212,7 @@ export default {
 }
 
 .article a {
-  color: #EB181D;
+  color: #eb181d;
 }
 
 .article-header {
@@ -228,7 +220,7 @@ export default {
   background: #292724;
   position: relative;
   @media (min-width: 1000px) {
-    background: #F5F3EF;
+    background: #f5f3ef;
   }
   &.has-artwork {
     padding-bottom: 66%;
@@ -240,7 +232,7 @@ export default {
 }
 
 .article-title-block {
-  color: #F5F3EF;
+  color: #f5f3ef;
   padding: 1rem 0;
   display: grid;
   grid-template-columns:
@@ -337,7 +329,7 @@ export default {
   .article-copy figure.zoomed {
     width: calc(100% + 300px + 2em) !important;
     background: #292724;
-    color: #F5F3EF;
+    color: #f5f3ef;
     outline: 1em solid #292724;
     box-shadow: 0 0 4em rgba(0, 0, 0, 0.25);
     margin: 2em 0;
@@ -364,10 +356,15 @@ export default {
 
 .advertising {
   grid-column: sidebar;
+  padding-top: 1rem;
 }
 
-.advertising > div > div:not(:empty) {
+.advertising > div:not(:empty) {
+  background: #f5f3ef;
+  position: relative;
+  z-index: 3;
   text-align: center;
-  margin: 0 auto 1rem;
+  padding: 0 0 1rem;
 }
+
 </style>

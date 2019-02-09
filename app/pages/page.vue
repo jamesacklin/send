@@ -13,13 +13,11 @@
       <div class="page-content">
         <div class="page-copy" v-html="post.content.rendered" />
         <section class="advertising">
-          <div style="margin-bottom: 1rem;" v-for="ad in ads" :key="ad.index">
-            <no-ssr>
-              <div v-for="ad in ads" :key="ad.index">
-                <advertising :id="ad.id" :size="ad.size" :unit="ad.name" />
-              </div>
-            </no-ssr>
-          </div>
+          <no-ssr>
+            <div v-for="ad in ads" :key="ad.index">
+              <advertising :id="ad.id" :size="ad.size" :unit="ad.name"/>
+            </div>
+          </no-ssr>
         </section>
       </div>
     </article>
@@ -265,10 +263,14 @@ article.page a {
 
 .advertising {
   grid-column: sidebar;
+  padding-top: 1rem;
 }
 
-.advertising > div > div:not(:empty) {
+.advertising > div:not(:empty) {
+  background: #f5f3ef;
+  position: relative;
+  z-index: 3;
   text-align: center;
-  margin: 0 auto 1rem;
+  padding: 0 0 1rem;
 }
 </style>
