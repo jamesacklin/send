@@ -63,13 +63,13 @@ export default {
 
 .text.marquee:nth-of-type(1) {
   display: inline-block;
-  animation: marquee 20s linear infinite;
+  animation: marquee 30s linear infinite;
 }
 
 .text.marquee:nth-of-type(2) {
   display: inline-block;
-  animation: marquee2 20s linear infinite;
-  animation-delay: 10s;
+  animation: marquee2 30s linear infinite;
+  animation-delay: 15s;
 }
 
 .paused .text.marquee {
