@@ -12,7 +12,7 @@
       <nav>
         <NavItem
           v-for="navLink in navLinks"
-          @click="closeNav()"
+          @click.native="closeNav()"
           :key="navLink.index"
           :text="navLink.name"
           :link="navLink.href"
