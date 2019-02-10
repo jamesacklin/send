@@ -2,14 +2,7 @@
   <div ref="banner" :class="{ block: pastHeader }">
     <header role="banner" :class="{ sticky: pastHeader }">
       <div class="header-content">
-        <button class="nav-toggle" @click="openNav()">
-          <font-awesome-icon :icon="['fas', 'bars']" />
-        </button>
-        <div class="logo-wrapper">
-          <nuxt-link tag="a" :to="`/`">
-            <Logo style="cursor: pointer;" orientation="horizontal" />
-          </nuxt-link>
-        </div>
+        <NavLogo variant="banner" />
       </div>
       <div class="header-sidebar"><OutsideFeed /></div>
       <Ticker ref="ticker" :tickerStories="tickerStories" />
@@ -20,14 +13,14 @@
 <script>
 // TODO: Banner ad in header
 import Ticker from '@/components/Ticker'
-import Logo from '@/components/Logo'
+import NavLogo from '@/components/Navigation/NavLogo'
 import OutsideFeed from '@/components/OutsideFeed'
 
 export default {
   components: {
     Ticker,
     OutsideFeed,
-    Logo
+    NavLogo
   },
   data() {
     return {
@@ -83,9 +76,8 @@ header[role='banner'] {
     [full-start] minmax(1em, 1fr) [main-start] minmax(0, 45em)
     [main-end] minmax(1em, 1fr) [full-end];
   grid-auto-rows: auto;
-  grid-column-gap: 1em;
   grid-row-gap: 0;
-  @media (min-width: 1000px) {
+  @media (min-width: 800px) {
     grid-template-columns:
       [full-start] minmax(1em, 1fr) [main-start] minmax(0, 45em)
       [main-end sidebar-start] 300px [sidebar-end] minmax(1em, 1fr) [full-end];
@@ -102,16 +94,16 @@ header[role='banner'] {
 
 header a {
   font-family: 'Roboto Mono';
-  color: #F5F3EF;
+  color: #f5f3ef;
 }
 
 header a:focus,
 header a:active {
-  color: #EB181D;
+  color: #eb181d;
 }
 
 header a.nuxt-link-exact-active {
-  color: #EB181D;
+  color: #eb181d;
 }
 
 .block {
@@ -129,36 +121,10 @@ header.sticky {
 }
 
 .header-content {
-  grid-column: main;
-  margin: 1rem 0;
   display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.nav-toggle {
-  -webkit-appearance: none;
-  background: #292724;
-  border: none;
-  outline: none;
-  font-size: 2em;
-  color: #F5F3EF;
-  padding: 0 0.33em;
-  margin: 0;
-  cursor: pointer;
-}
-
-.nav-toggle:hover {
-  background: #EB181D;
-}
-
-.logo-wrapper {
-  width: 200px;
-  background: #292724;
-}
-
-header.sticky .logo-wrapper {
-  width: 150px;
+  align-content: center;
+  padding: 1rem 0;
+  grid-column: main;
 }
 
 header .header-sidebar {
