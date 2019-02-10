@@ -54,7 +54,6 @@ export default {
   watch: {
     // Watch route, close nav on route change
     // https://stackoverflow.com/questions/46402809/vuejs-event-on-route-change
-    // FIXME: account for when route.to and route.from are the same
     $route(to, from) {
       this.closeNav()
     }

@@ -181,7 +181,6 @@ export default {
   margin-top: 0;
 }
 
-
 /* FIXME: Write a filter Stoke-side to remove the "Read More" links from the excerpt */
 .post-excerpt a {
   display: none;

@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="ticker" @mouseover="pauseTicker()" @mouseout="resumeTicker()">
+  <div aria-hidden="true" class="ticker" @mouseover="pauseTicker()" @mouseout="resumeTicker()">
     <div :class="{ paused: this.paused }">
       <div class="text marquee">
         <span class="ticker-badge">Dirt Rag Newswire</span>
@@ -27,7 +27,10 @@
 
 <script>
 export default {
-  // TODO: Comment Ticker component
+  // The ticker component displays a list of "stories" inline with links to the posts.
+  // The template spits these stories out twice to acheive a continuous scrolling effect.
+  // We should probably do something smart to avoid fucking with SEO, or somehow
+  // skip this component. It's hidden from screen readers via aria-hidden.
   name: 'Ticker',
   data: function() {
     return {
@@ -36,16 +39,20 @@ export default {
   },
   props: {
     initialPaused: {
+      // Initially not paused
       type: Boolean,
       default: false
     },
+    // Array of Ticker stories, passed in via props (should this be a getter unto itself?)
     tickerStories: Array
   },
   methods: {
     pauseTicker: function() {
+      // Pause the ticker
       this.paused = true
     },
     resumeTicker: function() {
+      // Unpause the ticker
       this.paused = false
     }
   }
@@ -63,11 +70,13 @@ export default {
 
 .text.marquee:nth-of-type(1) {
   display: inline-block;
+  /* Timing function */
   animation: marquee 30s linear infinite;
 }
 
 .text.marquee:nth-of-type(2) {
   display: inline-block;
+  /* Timing function */
   animation: marquee2 30s linear infinite;
   animation-delay: 15s;
 }
