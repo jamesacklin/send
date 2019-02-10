@@ -3,6 +3,7 @@
     <header role="banner" :class="{ sticky: pastHeader }">
       <div class="header-content">
         <NavLogo variant="banner" />
+        <advertising id="div-gpt-ad-1487038544877-8" size="banner" unit="DR_Leaderboard"/>
       </div>
       <div class="header-sidebar"><OutsideFeed /></div>
       <Ticker ref="ticker" :tickerStories="tickerStories" />
@@ -11,16 +12,17 @@
 </template>
 
 <script>
-// TODO: Banner ad in header
-import Ticker from '@/components/Ticker'
+import Advertising from '@/components/Advertising'
 import NavLogo from '@/components/Navigation/NavLogo'
 import OutsideFeed from '@/components/OutsideFeed'
+import Ticker from '@/components/Ticker'
 
 export default {
   components: {
-    Ticker,
+    Advertising,
+    NavLogo,
     OutsideFeed,
-    NavLogo
+    Ticker
   },
   data() {
     return {
@@ -118,11 +120,15 @@ header.sticky {
   position: fixed;
   z-index: 2;
   background: transparent;
+  div[data-google-query-id] {
+    display: none;
+  }
 }
 
 .header-content {
   display: flex;
-  align-content: center;
+  align-items: center;
+  justify-content: space-between;
   padding: 1rem 0;
   grid-column: main;
 }
