@@ -2,12 +2,7 @@
   <div class="nav-drawer-wrapper" :class="drawerStatus">
     <div class="nav-drawer">
       <div class="nav-drawer-header">
-        <div class="logo-wrapper">
-          <Logo bgColor="black" orientation="horizontal" />
-        </div>
-        <button class="nav-toggle" @click="closeNav()">
-          <font-awesome-icon :icon="['fas', 'times']" />
-        </button>
+        <NavLogo variant="drawer" />
       </div>
       <nav>
         <NavItem
@@ -18,19 +13,22 @@
           :link="navLink.href"
         />
       </nav>
+      <div class="nav-drawer-footer">
+        <small>&copy; 2019 Rotating Mass Media. All rights reserved.</small>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import NavItem from '@/components/Navigation/NavItem'
-import Logo from '@/components/Logo'
+import NavLogo from '@/components/Navigation/NavLogo'
 
 export default {
   name: 'NavDrawer',
   components: {
     NavItem,
-    Logo
+    NavLogo
   },
   computed: {
     navLinks: function() {
@@ -85,8 +83,8 @@ export default {
 }
 
 .nav-drawer {
-  background: #EB181D;
-  padding: 2rem;
+  background: #eb181d;
+  box-shadow: -20em 0 0 #eb181d;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -110,25 +108,51 @@ export default {
   align-items: center;
 }
 
+.nav-logo-wrapper {
+  display: inline-flex;
+  background: #292724;
+  align-content: center;
+  align-items: center;
+}
+
 .nav-toggle {
   -webkit-appearance: none;
   background: #292724;
   border: none;
   outline: none;
   font-size: 2em;
-  color: #F5F3EF;
-  padding: 0.13em 0.5em;
+  color: #f5f3ef;
+  padding: 0 0.33em;
   margin: 0;
   cursor: pointer;
 }
 
 .nav-toggle:hover {
-  background: #F5F3EF;
+  background: #eb181d;
+}
+
+.logo-wrapper {
+  width: 200px;
+  background: #292724;
+}
+
+.nav-toggle:hover {
+  background: #f5f3ef;
   color: #292724;
 }
 
 .logo-wrapper {
   width: 200px;
   background: #292724;
+}
+
+.nav-drawer-footer {
+  width: 100%;
+  margin-top: 2rem;
+  padding: 1rem 0;
+  border-top: 1px solid #f5f3ef;
+  color: #f5f3ef;
+  font-family: 'Roboto Mono', monospace;
+  text-align: center;
 }
 </style>
