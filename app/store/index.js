@@ -60,7 +60,7 @@ export default () => {
         },
         {
           name: 'Features',
-          href: '/category/features'
+          href: '/category/feature'
         },
         {
           name: 'Contests',
@@ -75,8 +75,8 @@ export default () => {
           href: '/category/opinion'
         },
         {
-          name: 'Off the Trail',
-          href: '/category/off-the-trail'
+          name: 'Subscribe to Dirt Rag Today',
+          href: 'https://w1.buysub.com/pubs/RG/DRM/DRM_subpage_print_dig.jsp?cds_page_id=164525&cds_mag_code=DRM&id=1550339017903&lsid=90471143378025183&vid=1'
         }
       ],
       // TODO: Control footerLinks from WordPress
