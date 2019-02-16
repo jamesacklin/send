@@ -65,7 +65,7 @@ export default {
   z-index: 5;
   width: 100%;
   height: 100%;
-  transition: all 0.25s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 .nav-drawer-hide {
@@ -83,8 +83,8 @@ export default {
 }
 
 .nav-drawer {
-  background: #eb181d;
-  box-shadow: -20em 0 0 #eb181d;
+  background: #292724;
+  box-shadow: -20em 0 0 #292724;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -97,7 +97,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-width: 25em;
+  min-width: 20em;
   width: 50%;
 }
 

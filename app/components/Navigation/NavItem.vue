@@ -14,14 +14,14 @@ export default {
 <style lang="css">
 .nav-item {
   display: block;
-  background: #292724;
+  background: #eb181d;
   width: 100%;
   color: #F5F3EF;
   font-family: 'Libre Franklin', sans-serif;
   font-weight: 900;
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   text-align: center;
-  padding: 1rem;
+  padding: 1em;
   cursor: pointer;
   text-decoration: none;
 }

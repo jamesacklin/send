@@ -175,9 +175,10 @@ export default {
     position: absolute;
     height: 10em;
     width: auto;
-    top: -10em;
+    top: -11em;
     left: 48%;
     transform: rotate(-15deg) translateX(-48%);
+    box-shadow: 0.5em 1em 1em rgba(0,0,0,0.4);
     &[lazy='loading'],
     &[lazy='error'] {
       visibility: hidden;

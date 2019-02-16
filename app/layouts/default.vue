@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Header from '@/components/Header'
+import Header from '@/components/HeaderComponents/Header'
 import Footer from '@/components/Footer'
 import NavDrawer from '@/components/Navigation/NavDrawer'
 import Pagination from '@/components/Navigation/Pagination'

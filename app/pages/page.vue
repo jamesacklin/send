@@ -14,9 +14,7 @@
         <div class="page-copy" v-html="post.content.rendered" />
         <section class="advertising">
           <no-ssr>
-            <div v-for="ad in ads" :key="ad.index">
-              <advertising :id="ad.id" :size="ad.size" :unit="ad.name"/>
-            </div>
+            <ad-sidebar :sidebarData="ads" />
           </no-ssr>
         </section>
       </div>
@@ -26,11 +24,11 @@
 
 <script>
 import dayjs from 'dayjs'
-import Advertising from '@/components/Advertising'
+import AdSidebar from '@/components/PageComponents/AdSidebar'
 
 export default {
   components: {
-    Advertising
+    AdSidebar
   },
   computed: {
     post() {
@@ -212,7 +210,7 @@ article.page a {
 
 .page-content {
   padding: 0 2%;
-  border-top: 1px solid #efefef;
+  border-top: 1px solid rgba(0,0,0,0.1);
   @media (min-width: 1000px) {
     padding: 0;
     display: grid;
@@ -232,6 +230,7 @@ article.page a {
 }
 
 .page-copy {
+  padding-top: 1rem;
   grid-column: main;
 }
 
@@ -266,11 +265,4 @@ article.page a {
   padding-top: 1rem;
 }
 
-.advertising > div:not(:empty) {
-  background: #f5f3ef;
-  position: relative;
-  z-index: 3;
-  text-align: center;
-  padding: 0 0 1rem;
-}
 </style>

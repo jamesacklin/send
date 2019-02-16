@@ -45,9 +45,7 @@
         <div class="article-copy" @click="zoomFigure" v-html="post.content.rendered"/>
         <section class="advertising">
           <no-ssr>
-            <div v-for="ad in ads" :key="ad.index">
-              <advertising :id="ad.id" :size="ad.size" :unit="ad.name"/>
-            </div>
+            <ad-sidebar :sidebarData="ads" />
           </no-ssr>
         </section>
         <section class="article-author-bio" v-if="postAuthorBio">
@@ -66,14 +64,14 @@
 </template>
 
 <script>
-import Advertising from '@/components/Advertising'
-import FeaturedMedia from '@/components/FeaturedMedia'
+import AdSidebar from '@/components/PageComponents/AdSidebar'
+import FeaturedMedia from '@/components/PageComponents/FeaturedMedia'
 import dayjs from 'dayjs'
 
 export default {
   components: {
     FeaturedMedia,
-    Advertising
+    AdSidebar
   },
   computed: {
     post() {
@@ -290,7 +288,7 @@ export default {
 
 .article-content {
   padding: 0 2%;
-  border-top: 1px solid #efefef;
+  border-top: 1px solid rgba(0,0,0,0.1);
   @media (min-width: 1000px) {
     padding: 0;
     display: grid;
@@ -311,6 +309,7 @@ export default {
 
 .article-copy {
   grid-column: main;
+  padding-top: 1em;
 }
 
 .article-copy img {
@@ -356,15 +355,7 @@ export default {
 
 .advertising {
   grid-column: sidebar;
-  padding-top: 1rem;
-}
-
-.advertising > div:not(:empty) {
-  background: #f5f3ef;
-  position: relative;
-  z-index: 3;
-  text-align: center;
-  padding: 0 0 1rem;
+  padding-top: 2rem;
 }
 
 </style>
