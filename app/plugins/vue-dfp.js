@@ -6,7 +6,7 @@ let mappings = {
   banner: [
     {
       window: [0, 0],
-      sizes: [[728, 90], [970, 90], [970, 415]]
+      sizes: [[970, 415], [970, 90], [728, 90]]
     }
   ],
   rectangle: [

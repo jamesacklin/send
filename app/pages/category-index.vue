@@ -52,7 +52,7 @@ import flattenDeep from 'lodash/flattenDeep'
 import zip from 'lodash/zip'
 import chunk from 'lodash/chunk'
 import PostAtom from '@/components/PostAtom'
-import SectionHeader from '@/components/SectionHeader'
+import SectionHeader from '@/components/PageComponents/SectionHeader'
 import Advertising from '@/components/Advertising'
 
 export default {

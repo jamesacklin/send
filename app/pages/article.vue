@@ -67,7 +67,7 @@
 
 <script>
 import Advertising from '@/components/Advertising'
-import FeaturedMedia from '@/components/FeaturedMedia'
+import FeaturedMedia from '@/components/PageComponents/FeaturedMedia'
 import dayjs from 'dayjs'
 
 export default {
