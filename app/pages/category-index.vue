@@ -75,8 +75,9 @@ export default {
         return compact(flattenDeep(zip(chunk(this.posts, 3), this.ads)))
       } else {
         // If the user-agent is not "mobile", simply return posts.
-        return this.$store.getters.getPostsPage(
-          parseInt(this.$route.params.page || 1)
+        return this.$store.getters.getCatPostsPage(
+          parseInt(this.$route.params.page || 1),
+          this.catId
         ) 
       }
     },
