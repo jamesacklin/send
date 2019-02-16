@@ -3,7 +3,7 @@
     <header role="banner" :class="{ sticky: pastHeader }">
       <div class="header-content">
         <NavLogo variant="banner" />
-        <advertising id="div-gpt-ad-1550335189859-0" size="banner" unit="DR_Leaderboard"/>
+        <!-- <advertising id="div-gpt-ad-1550335189859-0" size="banner" unit="DR_Leaderboard"/> -->
       </div>
       <div class="header-sidebar"><OutsideFeed /></div>
       <Ticker ref="ticker" :tickerStories="tickerStories" />
@@ -12,15 +12,14 @@
 </template>
 
 <script>
-import Advertising from '@/components/Advertising'
-
+// import Advertising from '@/components/Advertising'
 import NavLogo from '@/components/Navigation/NavLogo'
 import OutsideFeed from '@/components/HeaderComponents/OutsideFeed'
 import Ticker from '@/components/HeaderComponents/Ticker'
 
 export default {
   components: {
-    Advertising,
+    // Advertising,
     NavLogo,
     OutsideFeed,
     Ticker
