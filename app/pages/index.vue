@@ -21,8 +21,6 @@ import chunk from 'lodash/chunk'
 import SectionHeader from '@/components/PageComponents/SectionHeader'
 import Feed from '@/components/PageComponents/Feed'
 import AdSidebar from '@/components/PageComponents/AdSidebar'
-import Advertising from '@/components/Advertising'
-
 
 export default {
   components: {
