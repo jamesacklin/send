@@ -111,6 +111,10 @@ export default {
 </script>
 
 <style>
+.feed .post-container {
+  margin-bottom: 2em;
+}
+
 .feed-insert  > div > div:not(:empty) {
   margin: 2rem 0;
   text-align: center;
