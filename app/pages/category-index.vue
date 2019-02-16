@@ -149,6 +149,9 @@ export default {
 }
 
 .sidebar-ads {
-  grid-column: sidebar;
+  grid-column: main;
+  @media (min-width: 1000px){
+    grid-column: sidebar;
+  }
 }
 </style>

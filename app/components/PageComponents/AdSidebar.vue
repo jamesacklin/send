@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="advertising">
     <template v-for="ad in sidebarData">
       <advertising
         :id="ad.id"
@@ -24,5 +24,11 @@ export default {
 </script>
 
 <style>
-
+.advertising > div:not(:empty) {
+  background: #f5f3ef;
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  padding: 0 0 1rem;
+}
 </style>

@@ -19,7 +19,7 @@ module.exports = {
       }
     ]
   },
-  loading: { color: '#FFFFFF' },
+  loading: { color: '#eb181d' },
   css: ['~/static/global.css'],
   plugins: [
     { src: '~/plugins/vue-dfp.js', ssr: false },
