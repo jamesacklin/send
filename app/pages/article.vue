@@ -358,12 +358,4 @@ export default {
   padding-top: 2rem;
 }
 
-.advertising > div:not(:empty) {
-  background: #f5f3ef;
-  position: relative;
-  z-index: 3;
-  text-align: center;
-  padding: 0 0 1rem;
-}
-
 </style>

@@ -230,6 +230,7 @@ article.page a {
 }
 
 .page-copy {
+  padding-top: 1rem;
   grid-column: main;
 }
 
@@ -264,11 +265,4 @@ article.page a {
   padding-top: 1rem;
 }
 
-.advertising > div:not(:empty) {
-  background: #f5f3ef;
-  position: relative;
-  z-index: 3;
-  text-align: center;
-  padding: 0 0 1rem;
-}
 </style>
