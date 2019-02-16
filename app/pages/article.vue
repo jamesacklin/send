@@ -217,14 +217,17 @@ export default {
   grid-column: full;
   background: #292724;
   position: relative;
+  display: flex;
+  flex-direction: column;
   @media (min-width: 1000px) {
     background: #f5f3ef;
   }
   &.has-artwork {
-    padding-bottom: 66%;
+    .article-title-block { order: 1; }
+    .article-artwork { order: 2; }
     @media (min-width: 1000px) {
-      padding-bottom: 0;
-      padding-top: 50%;
+      .article-title-block { order: 2; }
+      .article-artwork { order: 1; }
     }
   }
 }
@@ -312,9 +315,15 @@ export default {
   padding-top: 1em;
 }
 
+.article-copy iframe {
+  max-width: 100%;
+}
+
+.article-copy .wp-caption.aligncenter,
 .article-copy img {
   width: 100% !important;
 }
+
 
 @media (min-width: 1000px) {
   .article-copy figure {
