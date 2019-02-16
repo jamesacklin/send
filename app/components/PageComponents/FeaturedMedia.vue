@@ -2,7 +2,7 @@
   <div class="article-artwork">
     <!-- TODO: Make article-artwork slots accept more than just image media -->
     <img
-      class=""
+      class="article-artwork-image"
       :srcset="featuredSrcset"
       sizes="(min-width: 1200px) 1140px, (min-width: 992px) 940px, (min-width: 768px) 720px, (min-width: 576px) 510px, calc(100vw - 30px)"
     />
@@ -35,17 +35,6 @@ export default {
 
 <style lang="scss">
 .article-artwork {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 0;
-  overflow: hidden;
-  padding-bottom: 66%;
-  img {
-    width: 100%;
-    transition: all 0.25s ease;
-  }
   img[lazy='error'] {
     height: 0px;
     width: 0px;
@@ -58,9 +47,14 @@ export default {
     transform: translateX(0);
     opacity: 1;
   }
-  @media (min-width: 1000px) {
-    top: 0;
-    padding-bottom: 50%;
+  @media (min-width: 1000px){
+    max-height: 60vh;
+    overflow: hidden;
   }
+}
+
+.article-artwork-image {
+  width: 100%;
+  display: block;
 }
 </style>

@@ -5,7 +5,11 @@
       :class="[mode, isContest ? 'contest' : true, 'post-atom']"
     >
       <div v-if="mode != 'promotion'" class="post-image">
-        <div class="post-image-crop"><img alt="" v-lazy="pictureUrl" /></div>
+        <div class="post-image-crop">
+          <nuxt-link tag="a" :to="`/articles/` + slug">
+            <img alt="" v-lazy="pictureUrl" />
+          </nuxt-link>
+        </div>
       </div>
       <div class="post-text">
         <div class="post-title-block">
@@ -78,7 +82,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="scss">
 .post-atom {
   hyphens: auto;
 }
@@ -112,7 +116,20 @@ export default {
   box-shadow: 0 0.125em 0.25em rgba(0,0,0,0.125);
 }
 
+.post-image-crop {
+  position: relative;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+  &:hover {
+    box-shadow: 0.125em 0.125em 0 #f5f3ef,
+                0.5em 0.5em 0 #EB181D; 
+  }
+}
+
 .post-image-crop img {
+  position: absolute;
+  top: 50%; left: 0;
+  transform: translateY(-50%);
   width: 100%;
   height: auto;
 }
