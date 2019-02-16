@@ -38,9 +38,11 @@ export default {
   },
   computed: {
     isMobile: function () {
+      // Return true if the device user-agent is "mobile" (as deterimined by 'nuxt-device-detect' module)
       if (this.$device.isMobile) {
         return true
       } else {
+        // Otherwise return false and assume we have a desktop or tablet
         return false
       }
     },
