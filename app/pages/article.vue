@@ -57,7 +57,9 @@
             <p>{{ postAuthorBio }}</p>
           </div>
         </section>
-        <!-- TODO: Disqus integration -->
+        <section class="article-comments">
+          <comments />
+        </section>
       </div>
     </article>
   </main>
@@ -65,12 +67,14 @@
 
 <script>
 import AdSidebar from '@/components/PageComponents/AdSidebar'
+import Comments from '@/components/PageComponents/Comments'
 import FeaturedMedia from '@/components/PageComponents/FeaturedMedia'
 import dayjs from 'dayjs'
 
 export default {
   components: {
     FeaturedMedia,
+    Comments,
     AdSidebar
   },
   computed: {
@@ -365,6 +369,11 @@ export default {
 .advertising {
   grid-column: sidebar;
   padding-top: 2rem;
+}
+
+.article-comments {
+  grid-column: main;
+  margin-top: 2rem;
 }
 
 </style>
