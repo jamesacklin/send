@@ -54,7 +54,7 @@
           </div>
           <div class="author-bio">
             <h3>{{ postAuthor }}</h3>
-            <p>{{ postAuthorBio }}</p>
+            <div v-html="postAuthorBio"></div>
           </div>
         </section>
         <section class="article-comments">

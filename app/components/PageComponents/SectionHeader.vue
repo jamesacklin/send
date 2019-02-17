@@ -23,6 +23,8 @@ export default {
   name: 'SectionHeader',
   props: ['sectionMeta'],
   methods: {
+  },
+  computed: {
     sectionType() {
       // Determine the type of "section" we're on, either a category,
       // category-page, home, or a home-page. Generalizes these out to
@@ -40,12 +42,10 @@ export default {
       } else {
         return ''
       }
-    }
-  },
-  computed: {
+    },
     headerFigure() {
       // If we are on a home section, see if we can return a figure from ACF
-      if (this.sectionType() === 'home') {
+      if (this.sectionType === 'home') {
         const homeFields = this.$store.getters.getPageBySlug('home').acf
         return homeFields.home_figure
       } else {
@@ -62,7 +62,7 @@ export default {
       // background image (at minimum). In most cases, a brand will sponsor a
       // category and therefore we will need more content, like the company name,
       // their logo, and a background image.
-      if (this.sectionType() === 'home') {
+      if (this.sectionType === 'home') {
         const homeFields = this.$store.getters.getPageBySlug('home').acf
         if (homeFields.home_banner_headline & !homeFields.home_banner_content) {
           return `<h2>${homeFields.home_banner_headline}</h2>`
@@ -76,17 +76,17 @@ export default {
         } else {
           return ''
         }
-      } else if (this.sectionType() === 'category') {
+      } else if (this.sectionType === 'category') {
         // Because someone liked to use UPPERCASE for category names
         const catName = titleCase(
           this.$store.getters.getCategoryBySlug(this.$route.params.slug).name
         )
-        const sponsor = this.sectionMeta.category_sponsor
-        const logo = this.sectionMeta.category_sponsor_logo
+        var sponsor = this.sectionMeta.category_sponsor
+        var logo = this.sectionMeta.category_sponsor_logo
         // These template strings should be self-explanetory
         if (sponsor && logo) {
           return `<h2>${catName}</h2><p>Presented by ${sponsor}</p><p><img src='${logo}'></p>`
-        } else if (sponsor & !logo) {
+        } else if (sponsor.length && !logo) {
           return `<h2>${catName}</h2><p>Presented by ${sponsor}</p>`
         } else if (!sponsor) {
           return `<h2>${catName}</h2>`
@@ -100,7 +100,7 @@ export default {
     backgroundImage() {
       // Return the right background image.
       // FIXME: Make this a srcset (see article.vue)
-      if (this.sectionType() === 'home') {
+      if (this.sectionType === 'home') {
         const homeBg = this.$store.getters.getPageBySlug('home').acf
           .home_background_image
         if (homeBg) {
@@ -108,7 +108,7 @@ export default {
         } else {
           return ''
         }
-      } else if (this.sectionType() === 'category') {
+      } else if (this.sectionType === 'category') {
         const catBg = this.sectionMeta.category_background_image
         if (catBg) {
           return catBg
