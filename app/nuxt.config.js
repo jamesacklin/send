@@ -70,13 +70,15 @@ module.exports = {
   modules: [
     '@nuxtjs/pwa',
     '@nuxtjs/axios',
-    ['nuxt-device-detect',
-      { defaultUserAgent: 
-        'Mozilla/5.0 (Linux; Android 5.1.1; Nexus 6 Build/LYZ28E) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.39 Mobile Safari/537.36'
-     }]
+    ['@nuxtjs/google-analytics', { 
+      id: 'UA-474542-4'
+    }],
+    ['nuxt-device-detect', { 
+      defaultUserAgent: 'Mozilla/5.0 (Linux; Android 5.1.1; Nexus 6 Build/LYZ28E) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.39 Mobile Safari/537.36'
+    }]
   ],
   axios: {
-    baseURL: 'http://68.183.116.134/wp-json/wp/v2/',
+    baseURL: 'http://104.248.113.148/wp-json/wp/v2/',
     https: false,
     progress: true
   },
