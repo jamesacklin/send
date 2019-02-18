@@ -41,7 +41,6 @@
         </div>
       </header>
       <div class="article-content">
-        <!-- TODO: Make Rafflecopter script work, may have to split contests out into their own page template -->
         <div class="article-copy" @click="zoomFigure" v-html="post.content.rendered"/>
         <section class="advertising">
           <no-ssr>
@@ -58,7 +57,9 @@
           </div>
         </section>
         <section class="article-comments">
-          <comments />
+          <no-ssr>
+            <comments />
+          </no-ssr>
         </section>
       </div>
     </article>
@@ -180,6 +181,9 @@ export default {
       bodyAttrs: {
         class: 'single post post-id-' + this.post.id
       },
+      script: [
+        { src: 'https://widget-prime.rafflecopter.com/launch.js', defer: true, async: true }
+      ],
       meta: [
         {
           hid: 'description',
