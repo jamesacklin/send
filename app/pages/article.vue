@@ -40,6 +40,14 @@
           </no-ssr>
         </div>
       </header>
+      <div v-if="this.post.acf.contest_platform">
+        <no-ssr placeholder="Loading contest...">
+          <contest 
+            :platform="this.post.acf.contest_platform" 
+            :embedCode="this.post.acf.embed_code"
+          />
+        </no-ssr>
+      </div>
       <div class="article-content">
         <div class="article-copy" @click="zoomFigure" v-html="post.content.rendered"/>
         <section class="advertising">
@@ -68,6 +76,7 @@
 
 <script>
 import AdSidebar from '@/components/PageComponents/AdSidebar'
+import Contest from '@/components/PageComponents/Contest'
 import Comments from '@/components/PageComponents/Comments'
 import FeaturedMedia from '@/components/PageComponents/FeaturedMedia'
 import dayjs from 'dayjs'
@@ -76,6 +85,7 @@ export default {
   components: {
     FeaturedMedia,
     Comments,
+    Contest,
     AdSidebar
   },
   computed: {
@@ -175,15 +185,20 @@ export default {
     name: 'fade',
     mode: 'out-in'
   },
+  mounted() {
+
+    
+
+
+
+
+  },
   head() {
     return {
       title: this.post.title.rendered,
       bodyAttrs: {
         class: 'single post post-id-' + this.post.id
       },
-      script: [
-        { src: 'https://widget-prime.rafflecopter.com/launch.js', defer: true, async: true }
-      ],
       meta: [
         {
           hid: 'description',
