@@ -86,7 +86,7 @@ export default {
         // These template strings should be self-explanetory
         if (sponsor && logo) {
           return `<h2>${catName}</h2><p>Presented by ${sponsor}</p><p><img src='${logo}'></p>`
-        } else if (sponsor.length && !logo) {
+        } else if (sponsor && !logo) {
           return `<h2>${catName}</h2><p>Presented by ${sponsor}</p>`
         } else if (!sponsor) {
           return `<h2>${catName}</h2>`
