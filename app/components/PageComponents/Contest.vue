@@ -51,6 +51,7 @@ export default {
     $("#contest-script").remove();
     $('#__smcx__').remove();
     $('iframe').remove();
+    $('#smcx-sdk').remove();
   },
   beforeMount() {
 

@@ -43,6 +43,7 @@
       <div v-if="this.post.acf.contest_platform">
         <no-ssr placeholder="Loading contest...">
           <contest 
+            :key="randomKey"
             :platform="this.post.acf.contest_platform" 
             :embedCode="this.post.acf.embed_code"
           />
@@ -52,7 +53,8 @@
         <div class="article-copy" @click="zoomFigure" v-html="post.content.rendered"/>
         <section class="advertising">
           <no-ssr>
-            <ad-sidebar :sidebarData="ads" />
+            <ad-sidebar 
+              :sidebarData="ads" />
           </no-ssr>
         </section>
         <section class="article-author-bio" v-if="postAuthorBio">
@@ -157,6 +159,9 @@ export default {
       } else {
         return false
       }
+    },
+    randomKey(){
+      return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     }
   },
   async asyncData({ payload, isStatic, store, params }) {
