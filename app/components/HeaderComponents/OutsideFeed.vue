@@ -77,3 +77,11 @@ export default {
   }
 }
 </script>
+
+<style>
+.jw-error {
+  /* Kill the player div if it doesn't load */
+  display: none !important;
+}
+</style>
+
