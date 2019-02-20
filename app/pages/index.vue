@@ -1,5 +1,6 @@
 <template>
   <main class="content">
+    <search />
     <section class="feed">
       <SectionHeader />
       <div class="feed-items">
@@ -19,6 +20,7 @@ import zip from 'lodash/zip'
 import chunk from 'lodash/chunk'
 
 import SectionHeader from '@/components/PageComponents/SectionHeader'
+import Search from '@/components/Search'
 import Feed from '@/components/PageComponents/Feed'
 import AdSidebar from '@/components/PageComponents/AdSidebar'
 
@@ -26,6 +28,7 @@ export default {
   components: {
     Feed,
     AdSidebar,
+    Search,
     SectionHeader
   },
   async asyncData({ payload, isStatic, store, params }) {
