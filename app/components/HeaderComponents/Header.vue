@@ -6,7 +6,7 @@
         <!-- <advertising id="div-gpt-ad-1550335189859-0" size="banner" unit="DR_Leaderboard"/> -->
       </div>
       <div class="header-sidebar"><OutsideFeed /></div>
-      <Ticker ref="ticker" :tickerStories="tickerStories" />
+      <Ticker ref="ticker" />
     </header>
   </div>
 </template>
@@ -28,12 +28,6 @@ export default {
     return {
       pastHeader: false,
       bannerHeight: null
-    }
-  },
-  computed: {
-    tickerStories() {
-      // FIXME: Make tickerStories a Vuex getter
-      return this.$store.state.tickerStories
     }
   },
   methods: {
