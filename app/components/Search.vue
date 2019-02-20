@@ -3,6 +3,7 @@
     <input 
       class="search-input"
       type="text"
+      tabindex="0"
       placeholder="Type your search term, press Enter to search."
       v-model.lazy="query"
     />
@@ -32,6 +33,7 @@
       >
         <nuxt-link
           tag="a"
+          @click.native="clearInput()"
           :to="`/articles/${result.slug}`"
         >
           <span v-html="result.title.rendered"></span>
@@ -46,7 +48,7 @@
 export default {
   data() {
     return {
-      query: 'surly'
+      query: ''
     }
   },
   methods: {
@@ -79,7 +81,6 @@ export default {
   },
   mounted() {
     this.clearSearch()
-    this.asyncFind()
   }
 }
 </script>
@@ -88,19 +89,37 @@ export default {
 .search-component {
   font-family: "Libre Franklin", sans-serif;
   position: relative;
-  width: 80%;
   margin: 1em auto;
 }
 .search-input {
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: rgba(255,255,255,0.8);
+  color: black;
   width: 100%;
   height: 3em;
   font-size: 1em;
   padding: 0.5em;
+  &:focus {
+    background: #FFF;
+    outline: 2px solid #EB181D;
+  }
 }
 .search-clear {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #EB181D;
+  color: #F5F3EF;
+  height: 2em;
+  font-size: 1em;
+  line-height: 1;
+  padding: 0.5em;
+  border: none;
   position: absolute;
-  right: 0;
-  top: 0.25em;
+  right: 0.5em;
+  top: 0.5em;
 }
 .search-results {
   position: absolute;
