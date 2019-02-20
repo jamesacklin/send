@@ -30,6 +30,15 @@ export default {
       }
     }
   },
+  searchLoadingStatus(state, status){
+    state.searchLoading = status
+  },
+  addSearchPosts(state, posts){
+    state.searchPosts = posts
+  },
+  clearSearchPosts(state){
+    state.searchPosts = []
+  },
   // paginate
   paginate(state, page) {
     state.pagination.pages.push(page)

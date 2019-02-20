@@ -23,9 +23,11 @@ export default () => {
         categories: {},
         categoryIds: []
       },
+      searchLoading: false,
       posts: [],
       pages: [],
       tickerPosts: [],
+      searchPosts: [],
       // TODO: Control navItems from WordPress
       navItems: [
         {

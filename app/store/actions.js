@@ -43,6 +43,25 @@ export default {
     commit('addTickerPosts', tickerPosts)
   },
 
+  async clearSearchPosts({commit, state}){
+    commit('clearSearchPosts')
+    commit('searchLoadingStatus', false)
+  },
+
+  async getSearchPosts({commit, state}, params){
+    commit('searchLoadingStatus', true)
+    commit('clearSearchPosts')
+    const searchPosts = await this.$axios.$get('posts', {
+      params: {
+        search: params.term,
+        per_page: 100,
+        orderby: 'relevance'
+      }
+    })
+    commit('addSearchPosts', searchPosts)
+    commit('searchLoadingStatus', false)
+  },
+
   // category from slug
   async getCategoryFromSlug({ commit, state }, params) {
     // if we don't have the category in the store, go get it and store it
