@@ -1,4 +1,5 @@
 import merge from 'lodash/merge'
+import dayjs from 'dayjs'
 
 export default {
   // Open or close nav drawer
@@ -22,14 +23,23 @@ export default {
     }
   },
 
-  // posts tagged for the ticker, filtered by an expiration in the future
+  // Posts tagged for the ticker, filtered by an expiration in the future
   async getTickerStories({commit, state} , params){
+    // Get current datetime as ISO 8601 string
+    const now = new dayjs().toISOString()
+    // Get posts
+    // We only need the title and slug, so no need for _embed.
     const tickerPosts = await this.$axios.$get('posts', {
       params: {
-        'filter[meta_key]': 'feature_post_in_ticker',
-        'filter[meta_value]': '1'
+        // Look for posts with the 'feature_until' meta field, which shouldn't 
+        // be set if the user didn't tick the 'feature in ticker' box in the UI
+        'filter[meta_key]': 'feature_until',
+        // filter posts with a 'feature_until' date-time value greater than now (the future)
+        'filter[meta_value]': now,
+        'filter[meta_compare]': '>'
       }
     })
+    // Commit ticker posts to the store
     commit('addTickerPosts', tickerPosts)
   },
 

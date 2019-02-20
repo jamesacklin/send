@@ -1,6 +1,8 @@
 <template lang="html">
   <div aria-hidden="true" class="ticker" @mouseover="pauseTicker()" @mouseout="resumeTicker()">
-    <div :class="{ paused: this.paused }">
+    <div 
+      v-if="tickerStories.length"
+      :class="{ paused: this.paused }">
       <div class="text marquee">
         <span class="ticker-badge">Dirt Rag Newswire</span>
         <span
