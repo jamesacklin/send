@@ -22,6 +22,17 @@ export default {
     }
   },
 
+  // posts tagged for the ticker, filtered by an expiration in the future
+  async getTickerStories({commit, state} , params){
+    const tickerPosts = await this.$axios.$get('posts', {
+      params: {
+        'filter[meta_key]': 'feature_post_in_ticker',
+        'filter[meta_value]': '1'
+      }
+    })
+    commit('addTickerPosts', tickerPosts)
+  },
+
   // category from slug
   async getCategoryFromSlug({ commit, state }, params) {
     // if we don't have the category in the store, go get it and store it

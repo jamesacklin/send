@@ -8,7 +8,11 @@
           :key="story.index"
           v-for="story in tickerStories"
         >
-          <a :href="story.link">{{ story.title }}</a>
+          <nuxt-link 
+            :to="`/articles/${story.slug}`"
+            tag="a">
+            {{ story.title.rendered }}
+          </nuxt-link>
         </span>
       </div>
       <div class="text marquee">
@@ -18,7 +22,7 @@
           :key="story.index"
           v-for="story in tickerStories"
         >
-          <a :href="story.link">{{ story.title }}</a>
+          <a :href="story.link">{{ story.title.rendered }}</a>
         </span>
       </div>
     </div>
@@ -42,9 +46,13 @@ export default {
       // Initially not paused
       type: Boolean,
       default: false
-    },
-    // Array of Ticker stories, passed in via props (should this be a getter unto itself?)
-    tickerStories: Array
+    }
+  },
+  computed: {
+    tickerStories() {
+      // FIXME: Make tickerStories a Vuex getter
+      return this.$store.state.tickerPosts
+    }
   },
   methods: {
     pauseTicker: function() {
@@ -55,6 +63,9 @@ export default {
       // Unpause the ticker
       this.paused = false
     }
+  },
+  mounted() {
+    this.$store.dispatch('getTickerStories')
   }
 }
 </script>
