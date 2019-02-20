@@ -40,37 +40,39 @@
           </no-ssr>
         </div>
       </header>
-      <div v-if="this.post.acf.contest_platform">
-        <no-ssr placeholder="Loading contest...">
-          <contest 
-            :key="randomKey"
-            :platform="this.post.acf.contest_platform" 
-            :embedCode="this.post.acf.embed_code"
-          />
-        </no-ssr>
-      </div>
       <div class="article-content">
-        <div class="article-copy" @click="zoomFigure" v-html="post.content.rendered"/>
-        <section class="advertising">
+        <main>
+          <div class="article-copy" @click="zoomFigure" v-html="post.content.rendered"/>
+          <div v-if="this.post.acf.contest_platform">
+            <no-ssr placeholder="Loading contest...">
+              <contest 
+                :key="randomKey"
+                :platform="this.post.acf.contest_platform" 
+                :embedCode="this.post.acf.embed_code"
+              />
+            </no-ssr>
+          </div>
+          <section class="article-author-bio" v-if="postAuthorBio">
+            <div v-if="postAuthorPic" class="author-image">
+              <img :src="postAuthorPic" :alt="postAuthor">
+            </div>
+            <div class="author-bio">
+              <h3>{{ postAuthor }}</h3>
+              <div v-html="postAuthorBio"></div>
+            </div>
+          </section>
+          <section class="article-comments">
+            <no-ssr>
+              <comments />
+            </no-ssr>
+          </section>
+        </main>
+        <aside class="advertising">
           <no-ssr>
             <ad-sidebar 
               :sidebarData="ads" />
           </no-ssr>
-        </section>
-        <section class="article-author-bio" v-if="postAuthorBio">
-          <div v-if="postAuthorPic" class="author-image">
-            <img :src="postAuthorPic" :alt="postAuthor">
-          </div>
-          <div class="author-bio">
-            <h3>{{ postAuthor }}</h3>
-            <div v-html="postAuthorBio"></div>
-          </div>
-        </section>
-        <section class="article-comments">
-          <no-ssr>
-            <comments />
-          </no-ssr>
-        </section>
+        </aside>
       </div>
     </article>
   </main>
@@ -317,6 +319,8 @@ export default {
   }
 }
 
+
+
 .article-content {
   padding: 0 2%;
   border-top: 1px solid rgba(0,0,0,0.1);
@@ -338,8 +342,18 @@ export default {
   }
 }
 
-.article-copy {
+main {
   grid-column: main;
+}
+
+aside {
+  grid-column: main;
+  @media (min-width: 1000px){
+    grid-column: sidebar;
+  }
+}
+
+.article-copy {
   padding-top: 1em;
 }
 
@@ -376,7 +390,6 @@ export default {
 }
 
 .article-author-bio {
-  grid-column: main;
   background: #dcdcdc;
   display: flex;
   .author-image {
@@ -391,12 +404,10 @@ export default {
 }
 
 .advertising {
-  grid-column: sidebar;
   padding-top: 2rem;
 }
 
 .article-comments {
-  grid-column: main;
   margin-top: 2rem;
 }
 
