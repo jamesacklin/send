@@ -42,6 +42,20 @@
       </header>
       <div class="article-content">
         <main>
+          <div class="article-header-ad">
+            <advertising 
+              v-if="!isMobile"
+              :id="'div-gpt-ad-1550758388120-0'"
+              :size="'banner'"
+              :unit="'DR_Leaderboard'"
+            />
+            <advertising 
+              v-if="isMobile"
+              :id="'div-gpt-ad-1550758951288-0'"
+              :size="'mobileBanner'"
+              :unit="'DR_Mobile_Leaderboard'"
+            />
+          </div>
           <div class="article-copy" @click="zoomFigure" v-html="post.content.rendered"/>
           <div v-if="this.post.acf.contest_platform">
             <no-ssr placeholder="Loading contest...">
@@ -83,6 +97,7 @@ import AdSidebar from '@/components/PageComponents/AdSidebar'
 import Contest from '@/components/PageComponents/Contest'
 import Comments from '@/components/PageComponents/Comments'
 import FeaturedMedia from '@/components/PageComponents/FeaturedMedia'
+import Advertising from '@/components/Advertising'
 import dayjs from 'dayjs'
 
 export default {
@@ -90,6 +105,7 @@ export default {
     FeaturedMedia,
     Comments,
     Contest,
+    Advertising,
     AdSidebar
   },
   computed: {
@@ -164,6 +180,15 @@ export default {
     },
     randomKey(){
       return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    },
+    isMobile: function () {
+      // Return true if the device user-agent is "mobile" (as deterimined by 'nuxt-device-detect' module)
+      if (this.$device.isMobile) {
+        return true
+      } else {
+        // Otherwise return false and assume we have a desktop or tablet
+        return false
+      }
     }
   },
   async asyncData({ payload, isStatic, store, params }) {
@@ -351,6 +376,11 @@ aside {
   @media (min-width: 1000px){
     grid-column: sidebar;
   }
+}
+
+.article-header-ad {
+  margin: 1em 0 0;
+  text-align: center;
 }
 
 .article-copy {
