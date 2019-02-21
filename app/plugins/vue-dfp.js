@@ -17,8 +17,15 @@ let mappings = {
   ]
 }
 
+let sizes = {
+  banner: [[970, 415], [970, 90], [728, 90]],
+  mobileBanner: [[300, 100], [320, 50], [300, 250]],
+  rectangle: [[300, 100], [300, 250], [300, 300], [300, 600]]
+};
+
 /* Use @ably/vue-dfp with RMM Google DFP ID */
 Vue.use(DoubleClick, {
   id: '28844187',
-  mappings
+  mappings,
+  sizes
 })

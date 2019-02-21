@@ -1,7 +1,20 @@
 <template>
   <div>
+    <div class="feed-header-ad">
+      <advertising 
+        v-if="!isMobile"
+        :id="'div-gpt-ad-1550758388120-0'"
+        :size="'banner'"
+        :unit="'DR_Leaderboard'"
+      />
+      <advertising 
+        v-if="isMobile"
+        :id="'div-gpt-ad-1550758951288-0'"
+        :size="'mobileBanner'"
+        :unit="'DR_Mobile_Leaderboard'"
+      />
+    </div>
     <template v-for="(feedItem, index) in feedData">
-
        <PostAtom
           v-if="feedItem.type === 'post'"
           :key="feedItem.index"
@@ -13,7 +26,6 @@
           :author="postAuthor(feedItem)"
           :mode="postMode(feedItem)"
         />
-
         <div
           v-if="feedItem.type === 'ad'"
           class="feed-item feed-insert"
@@ -26,9 +38,7 @@
             :unit="feedItem.name"
           />
         </div>
-
     </template>
-
   </div>
 </template>
 
@@ -47,7 +57,18 @@ export default {
     PostAtom,
     Advertising
   },
- methods: {
+  computed: {
+    isMobile: function () {
+      // Return true if the device user-agent is "mobile" (as deterimined by 'nuxt-device-detect' module)
+      if (this.$device.isMobile) {
+        return true
+      } else {
+        // Otherwise return false and assume we have a desktop or tablet
+        return false
+      }
+    }
+  },
+  methods: {
     titleCallout: function(post) {
       // Determine title callouts for each post based on category.
       // FIXME: Make titleCallout an ACF field; it can stay a method because we're operating on an iteratee
@@ -115,10 +136,15 @@ export default {
   margin-bottom: 2em;
 }
 
+.feed .feed-header-ad {
+  margin: 0 0 2em;
+  text-align: center;
+}
+
 .feed-insert  > div > div:not(:empty) {
   margin: 2rem 0;
   text-align: center;
   padding: 2em;
-  background: #a2a2a2
+  background: rgba(0,0,0,0.1);
 }
 </style>
