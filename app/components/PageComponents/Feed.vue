@@ -1,19 +1,6 @@
 <template>
   <div>
-    <div class="feed-header-ad">
-      <advertising 
-        v-if="!isMobile"
-        :id="'div-gpt-ad-1550758388120-0'"
-        :size="'banner'"
-        :unit="'DR_Leaderboard'"
-      />
-      <advertising 
-        v-if="isMobile"
-        :id="'div-gpt-ad-1550758951288-0'"
-        :size="'mobileBanner'"
-        :unit="'DR_Mobile_Leaderboard'"
-      />
-    </div>
+    <ad-header />
     <template v-for="(feedItem, index) in feedData">
        <PostAtom
           v-if="feedItem.type === 'post'"
@@ -44,9 +31,9 @@
 
 <script>
 import find from 'lodash/find'
-
 import PostAtom from '@/components/PostAtom'
 import Advertising from '@/components/Advertising'
+import AdHeader from '@/components/PageComponents/AdHeader'
 
 export default {
   name: 'feed',
@@ -55,18 +42,8 @@ export default {
   ],
   components: {
     PostAtom,
-    Advertising
-  },
-  computed: {
-    isMobile: function () {
-      // Return true if the device user-agent is "mobile" (as deterimined by 'nuxt-device-detect' module)
-      if (this.$device.isMobile) {
-        return true
-      } else {
-        // Otherwise return false and assume we have a desktop or tablet
-        return false
-      }
-    }
+    Advertising,
+    AdHeader
   },
   methods: {
     titleCallout: function(post) {
@@ -134,11 +111,6 @@ export default {
 <style>
 .feed .post-container {
   margin-bottom: 2em;
-}
-
-.feed .feed-header-ad {
-  margin: 0 0 2em;
-  text-align: center;
 }
 
 .feed-insert  > div > div:not(:empty) {

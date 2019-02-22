@@ -42,20 +42,7 @@
       </header>
       <div class="article-content">
         <main>
-          <div class="article-header-ad">
-            <advertising 
-              v-if="!isMobile"
-              :id="'div-gpt-ad-1550758388120-0'"
-              :size="'banner'"
-              :unit="'DR_Leaderboard'"
-            />
-            <advertising 
-              v-if="isMobile"
-              :id="'div-gpt-ad-1550758951288-0'"
-              :size="'mobileBanner'"
-              :unit="'DR_Mobile_Leaderboard'"
-            />
-          </div>
+          <ad-header />
           <div class="article-copy" @click="zoomFigure" v-html="post.content.rendered"/>
           <div v-if="this.post.acf.contest_platform">
             <no-ssr placeholder="Loading contest...">
@@ -93,11 +80,11 @@
 </template>
 
 <script>
+import AdHeader from '@/components/PageComponents/AdHeader'
 import AdSidebar from '@/components/PageComponents/AdSidebar'
 import Contest from '@/components/PageComponents/Contest'
 import Comments from '@/components/PageComponents/Comments'
 import FeaturedMedia from '@/components/PageComponents/FeaturedMedia'
-import Advertising from '@/components/Advertising'
 import dayjs from 'dayjs'
 
 export default {
@@ -105,7 +92,7 @@ export default {
     FeaturedMedia,
     Comments,
     Contest,
-    Advertising,
+    AdHeader,
     AdSidebar
   },
   computed: {
@@ -216,14 +203,6 @@ export default {
   transition: {
     name: 'fade',
     mode: 'out-in'
-  },
-  mounted() {
-
-    
-
-
-
-
   },
   head() {
     return {
@@ -344,8 +323,6 @@ export default {
   }
 }
 
-
-
 .article-content {
   padding: 0 2%;
   border-top: 1px solid rgba(0,0,0,0.1);
@@ -378,7 +355,7 @@ aside {
   }
 }
 
-.article-header-ad {
+.article .advertising-header {
   margin: 1em 0 0;
   text-align: center;
 }
