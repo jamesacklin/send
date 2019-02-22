@@ -1,5 +1,5 @@
 <template>
-  <main class="content">
+  <div class="content">
     <article :id="'post-id-' + post.id" class="article">
       <header class="article-header" :class="{ 'has-artwork': featuredMedia }">
         <featured-media v-if="featuredMedia" :media="post._embedded['wp:featuredmedia'][0]"/>
@@ -76,7 +76,7 @@
         </aside>
       </div>
     </article>
-  </main>
+  </div>
 </template>
 
 <script>
