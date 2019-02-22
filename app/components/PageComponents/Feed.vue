@@ -1,7 +1,7 @@
 <template>
   <div>
+    <ad-header />
     <template v-for="(feedItem, index) in feedData">
-
        <PostAtom
           v-if="feedItem.type === 'post'"
           :key="feedItem.index"
@@ -13,7 +13,6 @@
           :author="postAuthor(feedItem)"
           :mode="postMode(feedItem)"
         />
-
         <div
           v-if="feedItem.type === 'ad'"
           class="feed-item feed-insert"
@@ -26,17 +25,15 @@
             :unit="feedItem.name"
           />
         </div>
-
     </template>
-
   </div>
 </template>
 
 <script>
 import find from 'lodash/find'
-
 import PostAtom from '@/components/PostAtom'
 import Advertising from '@/components/Advertising'
+import AdHeader from '@/components/PageComponents/AdHeader'
 
 export default {
   name: 'feed',
@@ -45,9 +42,10 @@ export default {
   ],
   components: {
     PostAtom,
-    Advertising
+    Advertising,
+    AdHeader
   },
- methods: {
+  methods: {
     titleCallout: function(post) {
       // Determine title callouts for each post based on category.
       // FIXME: Make titleCallout an ACF field; it can stay a method because we're operating on an iteratee
@@ -119,6 +117,6 @@ export default {
   margin: 2rem 0;
   text-align: center;
   padding: 2em;
-  background: #a2a2a2
+  background: rgba(0,0,0,0.1);
 }
 </style>

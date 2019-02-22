@@ -1,5 +1,5 @@
 <template>
-  <main class="content">
+  <div class="content">
     <article :id="'post-id-' + post.id" class="article">
       <header class="article-header" :class="{ 'has-artwork': featuredMedia }">
         <featured-media v-if="featuredMedia" :media="post._embedded['wp:featuredmedia'][0]"/>
@@ -42,6 +42,7 @@
       </header>
       <div class="article-content">
         <main>
+          <ad-header />
           <div class="article-copy" @click="zoomFigure" v-html="post.content.rendered"/>
           <div v-if="this.post.acf.contest_platform">
             <no-ssr placeholder="Loading contest...">
@@ -75,10 +76,11 @@
         </aside>
       </div>
     </article>
-  </main>
+  </div>
 </template>
 
 <script>
+import AdHeader from '@/components/PageComponents/AdHeader'
 import AdSidebar from '@/components/PageComponents/AdSidebar'
 import Contest from '@/components/PageComponents/Contest'
 import Comments from '@/components/PageComponents/Comments'
@@ -90,6 +92,7 @@ export default {
     FeaturedMedia,
     Comments,
     Contest,
+    AdHeader,
     AdSidebar
   },
   computed: {
@@ -164,6 +167,15 @@ export default {
     },
     randomKey(){
       return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    },
+    isMobile: function () {
+      // Return true if the device user-agent is "mobile" (as deterimined by 'nuxt-device-detect' module)
+      if (this.$device.isMobile) {
+        return true
+      } else {
+        // Otherwise return false and assume we have a desktop or tablet
+        return false
+      }
     }
   },
   async asyncData({ payload, isStatic, store, params }) {
@@ -191,14 +203,6 @@ export default {
   transition: {
     name: 'fade',
     mode: 'out-in'
-  },
-  mounted() {
-
-    
-
-
-
-
   },
   head() {
     return {
@@ -319,8 +323,6 @@ export default {
   }
 }
 
-
-
 .article-content {
   padding: 0 2%;
   border-top: 1px solid rgba(0,0,0,0.1);
@@ -351,6 +353,11 @@ aside {
   @media (min-width: 1000px){
     grid-column: sidebar;
   }
+}
+
+.article .advertising-header {
+  margin: 1em 0 0;
+  text-align: center;
 }
 
 .article-copy {
