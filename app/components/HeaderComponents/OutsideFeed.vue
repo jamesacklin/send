@@ -1,8 +1,6 @@
 <template lang="html">
   <div class="outside-player">
-    <no-ssr>
-      <keep-alive> <div id="botr_tluteeuw_8cg9oAyB_div"></div> </keep-alive>
-    </no-ssr>
+    <div id="botr_tluteeuw_8cg9oAyB_div"></div>
   </div>
 </template>
 
