@@ -97,6 +97,7 @@ export default {
   background-color: #292724;
   background-size: cover;
   background-position: center center;
+  border-top: 0.25rem solid #EB181D;
 }
 
 .post-atom.promotion::after {
@@ -120,10 +121,7 @@ export default {
   position: relative;
   padding-bottom: 56.25%;
   overflow: hidden;
-  &:hover {
-    box-shadow: 0.125em 0.125em 0 #f5f3ef,
-                0.5em 0.5em 0 #EB181D; 
-  }
+  background: white;
 }
 
 .post-image-crop img {
@@ -132,6 +130,13 @@ export default {
   transform: translateY(-50%);
   width: 100%;
   height: auto;
+  transition: opacity 0.5s ease;
+  &[lazy='loading'] {
+    opacity: 0;
+  }
+  &[lazy='loaded']{
+    opacity: 1;
+  }
 }
 
 .post-title {
@@ -145,6 +150,10 @@ export default {
 .post-title a {
   text-decoration: none;
   color: #292724;
+}
+
+.promotion .post-title {
+  margin-bottom: 0;
 }
 
 .promotion .post-title a {
@@ -179,7 +188,7 @@ export default {
 }
 
 .post-text {
-  padding: 0 2%;
+  padding: 1em 2% 0;
 }
 
 .post-author {
