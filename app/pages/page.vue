@@ -12,7 +12,7 @@
       </header>
       <div class="page-content">
         <main>
-          <ad-header />
+          <AdHeader />
           <div class="page-copy" v-html="post.content.rendered" />
         </main>
         <aside class="advertising">

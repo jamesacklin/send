@@ -3,6 +3,7 @@
     <!-- TODO: Make article-artwork slots accept more than just image media -->
     <img
       class="article-artwork-image"
+      v-lazy="pictureUrl"
       :srcset="featuredSrcset"
       sizes="(min-width: 1200px) 1140px, (min-width: 992px) 940px, (min-width: 768px) 720px, (min-width: 576px) 510px, calc(100vw - 30px)"
     />
@@ -15,6 +16,9 @@ import each from 'lodash/each'
 export default {
   props: ['media'],
   computed: {
+    pictureUrl(){
+      return this.media.media_details.sizes.medium.source_url
+    },
     featuredSrcset() {
       // If the featured media is an image, iterate over the sizes and
       // compose a srcset-friendly string with image paths and widths
@@ -24,6 +28,7 @@ export default {
         each(postImageSizes, function(size, index) {
           srcset = srcset + `${size.source_url} ${size.width}w, `
         })
+        srcset = srcset + this.media.media_details.sizes.full.source_url + ' 1200w'
         return srcset
       } else {
         return false
@@ -35,6 +40,7 @@ export default {
 
 <style lang="scss">
 .article-artwork {
+  img { transition: all 0.5s ease; }
   img[lazy='error'] {
     height: 0px;
     width: 0px;

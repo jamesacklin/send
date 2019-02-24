@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ad-header />
+    <AdHeader />
     <template v-for="(feedItem, index) in feedData">
        <PostAtom
           v-if="feedItem.type === 'post'"
@@ -69,8 +69,8 @@ export default {
       // FIXME: Make postMode an ACF field; it can stay a method because we're operating on an iteratee
       if (post.categories[0] == '589') {
         return 'promotion'
-        // } else if (post.meta.featuredPost.length) {
-        //   return 'enhanced'
+      // } else if (post.meta.featuredPost.length) {
+      //   return 'enhanced'
       } else {
         return 'default'
       }
@@ -92,12 +92,17 @@ export default {
       // Return the post featured image
       if (post._embedded['wp:featuredmedia']) {
         let featuredImage = post._embedded['wp:featuredmedia'][0]
-        if (featuredImage && featuredImage.media_details.sizes.medium) {
+        if (featuredImage && post.categories[0] == '589'){
+          return (
+            featuredImage.media_details.sizes.full.source_url
+          )
+        } else if (featuredImage && featuredImage.media_details.sizes.medium) {
           return (
             featuredImage.media_details.sizes.medium.source_url ||
             featuredImage.media_details.sizes.full.source_url
           )
-        } else {
+        }
+          else {
           return '/og-card.png'
         }
       } else {

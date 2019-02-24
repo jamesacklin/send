@@ -32,10 +32,16 @@ export default {
   font-weight: 900;
   font-size: 1.2rem;
   text-align: center;
-  padding: 1em;
+  padding: 2.5vh;
   cursor: pointer;
   text-decoration: none;
-  margin-bottom: 1vh;
+  margin-bottom: 0.25em;
+}
+
+@media (min-width: 1000px){
+  .nav-item {
+    font-size: 1.5rem;
+  }
 }
 
 .nav-item.nav-item-external {

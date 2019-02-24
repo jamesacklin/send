@@ -88,7 +88,7 @@ export default {
           return `<h2>${catName}</h2><p>Presented by ${sponsor}</p><p><img src='${logo}'></p>`
         } else if (sponsor && !logo) {
           return `<h2>${catName}</h2><p>Presented by ${sponsor}</p>`
-        } else if (!sponsor) {
+        } else if (!sponsor && !logo) {
           return `<h2>${catName}</h2>`
         } else {
           return ''
@@ -131,20 +131,22 @@ export default {
   background-color: #292724;
   background-size: cover;
   background-position: center center;
-  @media (orientation: portrait) and (max-width: 700px) {
-    padding-top: 33vh;
-  }
-  @media (orientation: portrait) and (min-width: 700px) {
-    padding-top: 16vh;
-  }
-  @media (orientation: portrait) and (min-width: 1000px) {
-    padding-top: 25vh;
-  }
-  @media (orientation: landscape) and (min-width: 700px) {
-    padding-top: 16vh;
-  }
-  @media (orientation: landscape) and (min-width: 1000px) {
-    padding-top: 25vh;
+  &[lazy='loaded']{
+    @media (orientation: portrait) and (max-width: 700px) {
+      padding-top: 33vh;
+    }
+    @media (orientation: portrait) and (min-width: 700px) {
+      padding-top: 16vh;
+    }
+    @media (orientation: portrait) and (min-width: 1000px) {
+      padding-top: 25vh;
+    }
+    @media (orientation: landscape) and (min-width: 700px) {
+      padding-top: 16vh;
+    }
+    @media (orientation: landscape) and (min-width: 1000px) {
+      padding-top: 25vh;
+    }
   }
 }
 
@@ -179,9 +181,11 @@ export default {
     left: 48%;
     transform: rotate(-15deg) translateX(-48%);
     box-shadow: 0.5em 1em 1em rgba(0,0,0,0.4);
+    opacity: 1;
+    transition: opactiy 0.5s ease;
     &[lazy='loading'],
     &[lazy='error'] {
-      visibility: hidden;
+      opacity: 0;
     }
   }
   .text-wrapper {

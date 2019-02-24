@@ -42,7 +42,7 @@
       </header>
       <div class="article-content">
         <main>
-          <ad-header />
+          <AdHeader />
           <div class="article-copy" @click="zoomFigure" v-html="post.content.rendered"/>
           <div v-if="this.post.acf.contest_platform">
             <no-ssr placeholder="Loading contest...">
@@ -370,7 +370,7 @@ aside {
 
 .article-copy .wp-caption.aligncenter,
 .article-copy img {
-  width: 100% !important;
+  width: 100%;
 }
 
 
@@ -390,6 +390,7 @@ aside {
     outline: 1em solid #292724;
     box-shadow: 0 0 4em rgba(0, 0, 0, 0.25);
     margin: 2em 0;
+    z-index: 4;
   }
   .article-copy figure.zoomed img {
     cursor: zoom-out;

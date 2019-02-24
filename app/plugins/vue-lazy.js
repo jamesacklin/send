@@ -4,6 +4,5 @@ import VueLazyload from 'vue-lazyload'
 Vue.use(VueLazyload, {
   preLoad: 1.6,
   throttleWait: 600,
-  error: '/og-card.png',
-  loading: '/bike-animated-loop.svg'
+  error: '/og-card.png'
 })

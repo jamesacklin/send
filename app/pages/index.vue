@@ -95,7 +95,7 @@ export default {
       ]
     }
   },
-  scrollToTop: false,
+  scrollToTop: true,
   transition: {
     name: 'fade',
     mode: 'out-in'
