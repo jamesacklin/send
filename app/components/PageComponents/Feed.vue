@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ad-header />
+    <AdHeader />
     <template v-for="(feedItem, index) in feedData">
        <PostAtom
           v-if="feedItem.type === 'post'"

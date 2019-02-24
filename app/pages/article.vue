@@ -42,7 +42,7 @@
       </header>
       <div class="article-content">
         <main>
-          <ad-header />
+          <AdHeader />
           <div class="article-copy" @click="zoomFigure" v-html="post.content.rendered"/>
           <div v-if="this.post.acf.contest_platform">
             <no-ssr placeholder="Loading contest...">

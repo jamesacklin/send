@@ -19,7 +19,7 @@
 import Advertising from '@/components/Advertising'
 
 export default {
-  name: 'AdHeader',
+  name: 'adHeader',
   components: {
     Advertising
   },
