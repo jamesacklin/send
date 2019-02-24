@@ -99,14 +99,15 @@ export default {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  height: 100%;
+  // align-items: stretch;
+  justify-content: stretch;
   min-width: 20em;
   width: 50%;
-  padding: 5vh 0;
 }
 
 .nav-drawer-header {
-  margin: 1rem 0 2rem;
+  margin: 1rem 0 0;
   display: flex;
   flex-direction: row;
   align-items: center;
