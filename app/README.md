@@ -12,7 +12,7 @@ Send is constructed from a series of components, which are assembled into pages 
 
 Send's component architecture allows the front-end developer to re-use as much code as possible without needing to maintain small bits of code spread throughout the entire application.
 
-This README only addreses the composition and end-user functionality; technical details and notes on data are available as comments in the uncompiled code.
+This README only addresses the composition and end-user functionality; technical details and notes on data are available as comments in the uncompiled code.
 
 ---
 
