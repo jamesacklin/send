@@ -58,7 +58,7 @@ Each page, article, or index view in Send has the appropriate data for linking t
 
 ## Index Pages
 
-The index or home page of the site is home to the first page of posts from Dirt Rag, sorted by newest first. This index page contains a large hero header or "section header," a feed of posts, and some advertisements. Each subsequent page of posts follows the exact same layout and functionality, just with different posts. The index page is available though the URL route `https://www.dirtragmag.com/`;subsequent pages of posts are available at `https://www.dirtragmag.com/page/#`.
+The index or home page of the site is home to the first page of posts from Dirt Rag, sorted by newest first. This index page contains a large hero header or "section header," a feed of posts, and some advertisements. Each subsequent page of posts follows the exact same layout and functionality, just with different posts. The index page is available though the URL route `https://www.dirtragmag.com/`. Subsequent pages of posts are available at `https://www.dirtragmag.com/page/#`.
 
 ### Section Header
 
