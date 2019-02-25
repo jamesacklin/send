@@ -132,7 +132,7 @@ Pages are nearly identical to Posts, except they lack a Featured Media block, co
 
 ---
 
-## Release Philosophy
+## Development & Release Philosophy
 
 In keeping with Agile software methodolgy, issues or feature ideas are placed at virtually any time into a backlog or work queue using _user stories_, loosely following the template _"As a (type of user) I want to be able to (use a feature of the software) so I can (accomplish a task)"_. Stories should be scoped as tightly as possible in order to effectively break up the development work into small, manageable chunks. 
 
