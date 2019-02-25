@@ -34,11 +34,11 @@ On larger viewports, the Outside.tv player slides behind the Advertising Sidebar
 
 ### Navigation
 
-The navigation element is primarily a full-screen "drawer" which appears when the user clicks or taps the "hamburger" button and disappears when the user clicks or taps the "X" button in the drawer itself. The drawer contains a Dirt Rag logo, an "X" close button, a search box, some navigation items, and a copyright footer.
+The navigation element is primarily a full-screen drawer which appears when the user clicks or taps the hamburger button and disappears when the user clicks or taps the "X" button in the drawer itself. The drawer contains a Dirt Rag logo, an "X" close button, a search box, some navigation items, and a copyright footer.
 
-Users can search for posts or pages using the search box. This uses WordPress's internal search functionality and is not as fast as, say, a third-party service which handles substring matching and autocomplete. Therefore, users must press "Enter" or submit their search before any search results will appear. Search results appear in a dropdown box under the field, ranked by WordPress's calculation of relevance. The user can click or tap on any result to be taken to that post or page. The user can also clear the search by clicking or tapping the "Clear" button in the field itself.
+Users can search for posts or pages using the search box. This uses WordPress's internal search functionality and is not as fast as, say, a third-party service which handles substring matching and autocomplete. Therefore, users must press Enter or submit their search before any search results will appear. Search results appear in a dropdown box under the field, ranked by WordPress's calculation of relevance. The user can click or tap on any result to be taken to that post or page. The user can also clear the search by clicking or tapping the "Clear" button in the field itself.
 
-The navigation links with red backgrounds point to categories which Dirt Rag pre-defined as the main "sections" or channels of the site. Users can click or tap on a category name and are taken to that category listing. This list of categories is maintained within Send's source code and is not powered by WordPress. There are also external navigation links, designated by a blue background for contrast. These links are also maintained within Send's source code.
+The navigation links with red backgrounds point to categories which Dirt Rag pre-defined as the main sections or channels of the site. Users can click or tap on a category name and are taken to that category listing. This list of categories is maintained within Send's source code and is not powered by WordPress. There are also external navigation links, designated by a blue background for contrast. These links are also maintained within Send's source code.
 
 ### Footer
 
@@ -58,7 +58,7 @@ Each page, article, or index view in Send has the appropriate data for linking t
 
 ## Index Pages
 
-The index or home page of the site is home to the first page of posts from Dirt Rag, sorted by newest first. This index page contains a large hero header or "section header," a feed of posts, and some advertisements. Each subsequent page of posts follows the exact same layout and functionality, just with different posts. The index page is available though the URL route `https://www.dirtragmag.com/`. Subsequent pages of posts are available at `https://www.dirtragmag.com/page/#`.
+The index or home page of the site is home to the first page of posts from Dirt Rag, sorted by newest first. This index page contains a large hero or section header, a feed of posts, and some advertisements. Each subsequent page of posts follows the exact same layout and functionality, just with different posts. The index page is available though the URL route `https://www.dirtragmag.com/`. Subsequent pages of posts are available at `https://www.dirtragmag.com/page/#`.
 
 ### Section Header
 
@@ -68,7 +68,7 @@ The section header as configured on the home page also appears on each subsequen
 
 ### Feed
 
-The feed of posts is driven by the WordPress API. Currently, the feed displays 30 posts at a time. Each "page" of posts is a set of 30 posts—so the URL route "/" (page 1) shows posts 1-30, "/page/2" shows posts 31-60, and so on.
+The feed of posts is driven by the WordPress API. Currently, the feed displays 30 posts at a time. Each page of posts is a set of 30 posts—so the URL route `/` (page 1) shows posts 1-30, `/page/2` shows posts 31-60, and so on.
 
 Depending on the type of device the reader is browsing the site with, the feed will either return 30 posts as-is for desktop-like browsers, or—for mobile-like devices—will insert a Google ad every 3 posts for a total of 10 available slots in the feed. Each of these slots corresponds to a Google Ad from Dirt Rag's Doubleclick for Publishers account. The overall effect is a stream of posts with the occasional interruption of an ad, much like Facebook, Twitter, or any modern application with a feed of content interspersed with advertising.
 
@@ -76,7 +76,7 @@ Depending on the type of device the reader is browsing the site with, the feed w
 
 Each post on an index page is rendered via the PostAtom component. The PostAtom component is essentially a representaiton of a post's metadata as a single item in the feed. The PostAtom contains a featured image, the post's title, author, date of publishing, and excerpt—all set by fields in WordPress. Featured images are loaded asyncronously—which is to say, all 30 posts' featured images are not loaded at the same time when a user visits the page; each image loads when it scrolls into view. This results in a much lighter page load on initial visit and a seamless browsing experience thereafter. There is no need to worry about setting a post's Featured Image to a specific size—the front-end handles serving appropriately-sized images to each screen size.
 
-The PostAtom can be adjusted for slightly different display "modes" in the feed—`default`, `enhanced`, and `promotion`. Authors can set each post's mode or feed appearance from WordPress. Posts in the **Contests** category are automatically set to `promotion`, which removes the post author, date, and excerpt, sets the Featured Image as the background, and gives it a full-width callout treatment with a red border. The `enhanced` mode makes the Featured Image and text size larger, and moves the title and author data over the excerpt. This could be useful for posts which Editorial wants to drive readers' attention toward.
+The PostAtom can be adjusted for slightly different display modes in the feed—`default`, `enhanced`, and `promotion`. Authors can set each post's mode or feed appearance from WordPress. Posts in the **Contests** category are automatically set to `promotion`, which removes the post author, date, and excerpt, sets the Featured Image as the background, and gives it a full-width callout treatment with a red border. The `enhanced` mode makes the Featured Image and text size larger, and moves the title and author data over the excerpt. This could be useful for posts which Editorial wants to drive readers' attention toward.
 
 The PostAtom component also has provisions for things like title callouts ("Holiday Gift Guide:") or direct action buttons ("Watch Now →"), which could be set from WordPress. This has not been implemented yet.
 
@@ -120,7 +120,7 @@ We can always explore more integrations—especially if Dirt Rag forsees a conte
 
 ### Comments
 
-Article comments are handled via a Disqus plugin. Disqus was chosen for its machine-learning capabilities in flagging abusive or spammy comments and to abstract comment entry and storage away from Dirt Rag's servers. (With the volume of traffic Dirt Rag sees, it makes sense to keep as many assets or auxillary pieces of content off Dirt Rag's servers as possible.) Users can comment upon or "react" (with Emoji) to an article using the Disqus platform and Dirt Rag staffers have the ability to moderate comments through the Disqus admin panel.
+Article comments are handled via a Disqus plugin. Disqus was chosen for its machine-learning capabilities in flagging abusive or spammy comments and to abstract comment entry and storage away from Dirt Rag's servers. (With the volume of traffic Dirt Rag sees, it makes sense to keep as many assets or auxillary pieces of content off Dirt Rag's servers as possible.) Users can comment upon or react to (with Emoji) an article using the Disqus platform and Dirt Rag staffers have the ability to moderate comments through the Disqus admin panel.
 
 ### AdHeader and AdSidebar
 
