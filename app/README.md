@@ -14,6 +14,8 @@ Send's component architecture allows the front-end developer to re-use as much c
 
 This README only addreses the composition and end-user functionality; technical details and notes on data are available as comments in the uncompiled code.
 
+---
+
 ## Global Components
 
 The Send application is designed with several global components, which always stay in view, framing the current page. We are able to re-render these global components based on the URL of the current page, but they are mostly designed to live in a static location and are thus not subject to animations.
@@ -48,24 +50,56 @@ The pagination component, like the header, scrolls with the user as they navigat
 
 Because the pagination component is designed to react and change itself based on whichever page the user is on, there are lots of opportunities to add additional funtionality here. Currently, users can only return to Home from an article or page, and navigate between pages of post listings. However, one could easily imagine a "Next article" link, which takes the user to an automatically-defined article, or one which has been designated by a Dirt Rag staffer. For example, if the user is reading an article about wellness and diet, and Editorial has established a relationship between this post and another from 2013 about the benefits of active recovery, it would make sense to link the user to this post from the global pagination.
 
+---
+
+## Index Pages
+
+The index or home page of the site is home to the first page of posts from Dirt Rag, sorted by newest first. This index page contains a large hero header or "section header," a feed of posts, and some advertisements. Each subsequent page of posts follows the exact same layout and functionality, just with different posts.
+
+### Section Header
+
+The Section Header component is configurable from WordPress with the author's choice of background image, headline text, headline copy, and a small figure image. This header area is designed to be as flexible as possible for whatever messaging Dirt Rag decides to push at any given time. At launch time, this header contained messaging about the latest print edition of the magazine, but can be configured to display an announcement for the upcoming Dirt Fest event, for example.
+
+The section header as configured on the home page also appears on each subsequent page of posts.
+
+### Feed
+
+The feed of posts is driven by the WordPress API. Currently, the feed displays 30 posts at a time. Each "page" of posts is a set of 30 posts—so the URL route "/" (page 1) shows posts 1-30, "/page/2" shows posts 31-60, and so on.
+
+Depending on the type of device the reader is browsing the site with, the feed will either return 30 posts as-is for desktop-like browsers, or—for mobile-like devices—will insert a Google ad every 3 posts for a total of 10 available slots in the feed. Each of these slots corresponds to a Google Ad from Dirt Rag's Doubleclick for Publishers account. The overall effect is a stream of posts with the occasional interruption of an ad, much like Facebook, Twitter, or any modern application with a feed of content interspersed with advertising.
+
+### PostAtom
+
+Each post on an index page is rendered via the PostAtom component. The PostAtom component is essentially a representaiton of a post's metadata as a single item in the feed. The PostAtom contains a featured image, the post's title, author, date of publishing, and excerpt—all set by fields in WordPress. Featured images are loaded asyncronously—which is to say, all 30 posts' featured images are not loaded at the same time when a user visits the page; each image loads when it scrolls into view. This results in a much lighter page load on initial visit and a seamless browsing experience thereafter. There is no need to worry about setting a post's Featured Image to a specific size—the front-end handles serving appropriately-sized images to each screen size.
+
+The PostAtom can be adjusted for slightly different display "modes" in the feed—`default`, `enhanced`, and `promotion`. Authors can set each post's mode or feed appearance from WordPress. Posts in the **Contests** category are automatically set to `promotion`, which removes the post author, date, and excerpt, sets the Featured Image as the background, and gives it a full-width callout treatment with a red border. The `enhanced` mode makes the Featured Image and text size larger, and moves the title and author data over the excerpt. This could be useful for posts which Editorial wants to drive readers' attention toward.
+
+The PostAtom component also has provisions for things like title callouts ("Holiday Gift Guide:") or direct action buttons ("Watch Now →"), which could be set from WordPress. This has not been implemented yet.
+
+### Advertising
+
+Advertising components are instances of the Google Doubleclick for Publishers page tag manager. The slots themselves are baked into Send's source code and are not accessible through WordPress; they are only available to change through the Google Ad Manager panel. The AdSidebar and AdHeader components show up above and/or next to feeds or post/page contents.
+
+---
+
+## Category Index Pages
+
+Category pages are almost identical to index pages, with the exception of the posts being filtered to the euponomous category of posts. Nearly everything is the same—the feed handles advertisements exactly the same as normal index pages, PostAtoms exhibit the same behavior, and so on. However, the Section Header differs slightly.
+
+### Category Section Header
+
+The category section header component is similar to the one which appears on the home or index page, but its options are set from the Category configuration screen in WordPress. The category section header can accept a background image, a corporate sponsor, and a sponsor's logo. Therefore, it is theoretically possible for a company to sponsor a category of Dirt Rag (like Gear or News). It would be possible to add a link to an sponsor company's website with the logo, but this has not been implemented yet.
+
+---
+
+## Forthcoming Details
+
 ```
-Forthcoming:
-- Index
-  - SectionHeader
-  - Feed
-    - PostAtom
-    - Advertising
-  - AdHeader
-  - AdSidebar
-
-- Category Index
-
-- Article
+• Article
   - FeaturedMedia
   - Contest
   - Comments
   - AdHeader
   - AdSidebar
-
-- Page
+• Page
 ```
