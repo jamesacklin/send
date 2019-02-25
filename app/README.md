@@ -142,6 +142,8 @@ When work on a story is complete, the story is added to a release plan. The rele
 
 After every release, the team should schedule a postmortem or retrospective to review pros/cons and adjust plans for the next iteration(s).
 
+For a higher-level overview, read the [Agile Software Development Manifesto](https://agilemanifesto.org/) and the corresponding [Principles of Agile Development](https://agilemanifesto.org/principles.html). There are plenty of detailed resources on Agile software planning; among them [Atlassian's marketing content](https://www.atlassian.com/agile/advantage/going-agile) and [Agile Alliance guides](https://www.agilealliance.org/agile101/).
+
 ---
 
 ## Running Send
