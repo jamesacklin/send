@@ -132,6 +132,18 @@ Pages are nearly identical to Posts, except they lack a Featured Media block, co
 
 ---
 
+## Release Philosophy
+
+In keeping with Agile software methodolgy, issues or feature ideas are placed at virtually any time into a backlog or work queue using _user stories_, loosely following the template _"As a (type of user) I want to be able to (use a feature of the software) so I can (accomplish a task)"_. Stories should be scoped as tightly as possible in order to effectively break up the development work into small, manageable chunks. 
+
+Work iterations are set for a reasonable length of time/capacity—usually 2 weeks. As the iteration progresses, team members work on these "stories" and produce code to support them. 
+
+When work on a story is complete, the story is added to a release plan. The release should be scheduled as soon as a critical mass of code is tested and available, such that end users can take full advantage of the new feature or bug fix. Releases can span multiple iterations, depending on the scope and severity of the bugs involved or the size and priority of the features. 
+
+After every release, the team should schedule a postmortem or retrospective to review pros/cons and adjust plans for the next iteration(s).
+
+---
+
 ## Running Send
 
 Assuming you are not running Send within a Docker container (recommended; see root of the repository), you can run the following commands in the root of this file (`/app`) to run the project locally on your own computer or on a server of your choosing.
