@@ -50,6 +50,10 @@ The pagination component, like the header, scrolls with the user as they navigat
 
 Because the pagination component is designed to react and change itself based on whichever page the user is on, there are lots of opportunities to add additional funtionality here. Currently, users can only return to Home from an article or page, and navigate between pages of post listings. However, one could easily imagine a "Next article" link, which takes the user to an automatically-defined article, or one which has been designated by a Dirt Rag staffer. For example, if the user is reading an article about wellness and diet, and Editorial has established a relationship between this post and another from 2013 about the benefits of active recovery, it would make sense to link the user to this post from the global pagination.
 
+### Other Global Features
+
+Each page, article, or index view in Send has the appropriate data for linking to the page via social media.
+
 ---
 
 ## Index Pages
@@ -125,3 +129,29 @@ Advertising components are instances of the Google Doubleclick for Publishers pa
 ## Pages
 
 Pages are nearly identical to Posts, except they lack a Featured Media block, comments, or contest integrations. Pages are accessible via the URL template `https://www.dirtragmag.com/slug`, where "slug" is an automatically-generated string from the page title in WordPress.
+
+---
+
+## Running Send
+
+Assuming you are not running Send within a Docker container (recommended; see root of the repository), you can run the following commands in the root of this file (`/app`) to run the project locally on your own computer or on a server of your choosing.
+
+Install project dependencies locally into /app/node_modules:
+```
+npm install
+```
+
+Compile and hot-reload for development on port 3000:
+```
+npm run serve
+```
+
+Compile and minifiy for production:
+```
+npm run build
+```
+
+Run the Nuxt server on port 3000:
+```
+npm run start
+```
