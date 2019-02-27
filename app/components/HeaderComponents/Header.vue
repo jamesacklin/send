@@ -66,6 +66,8 @@ header[role='banner'] {
   top: 0;
   width: 100%;
   background: #292724;
+  position: relative;
+  z-index: 1;
   /* transition: background-color 0.2s ease, height 0.2s ease; */
   display: grid;
   grid-template-columns:
@@ -105,7 +107,7 @@ header a.nuxt-link-exact-active {
 .block {
   position: relative;
   @media (min-width: 812px) {
-    height: 200px;
+    height: 122px;
   }
   background: #292724;
 }
@@ -139,10 +141,12 @@ header .header-sidebar {
 
 header .outside-player:not(:empty) {
   width: 300px;
+  position: absolute;
+  top: 130px;
 }
 
 header.sticky .outside-player {
-  position: absolute;
+  top: 1.5em;
 }
 
 header .ticker {
