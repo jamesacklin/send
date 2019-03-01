@@ -2,8 +2,7 @@ import Vuex from 'vuex'
 import actions from './actions'
 import mutations from './mutations'
 import getters from './getters'
-
-// TODO: Google Analytics integration
+import bikeshops from './bikeshops.json'
 
 export default () => {
   return new Vuex.Store({
@@ -23,6 +22,8 @@ export default () => {
         categories: {},
         categoryIds: []
       },
+      // TODO: figure out a server-side solution for this (custom post type?)
+      shops: bikeshops,
       searchLoading: false,
       posts: [],
       pages: [],
@@ -56,7 +57,7 @@ export default () => {
         },
         {
           name: 'Subscribe to Dirt Rag Today',
-          href: 'https://w1.buysub.com/pubs/RG/DRM/DRM_subpage_print_dig.jsp?cds_page_id=164525&cds_mag_code=DRM&id=1550339017903&lsid=90471143378025183&vid=1'
+          href: 'https://w1.buysub.com/pubs/RG/DRM/DRM_subpage_print_dig.jsp?cds_page_id=164525'
         }
       ],
       // TODO: Control footerLinks from WordPress

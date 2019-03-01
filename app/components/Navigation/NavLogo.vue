@@ -5,7 +5,7 @@
     </button>
     <div class="logo-wrapper">
       <nuxt-link tag="a" :to="`/`">
-        <Logo style="cursor: pointer;" orientation="horizontal"/>
+        <Logo style="cursor: pointer;" variant="30annv"/>
       </nuxt-link>
     </div>
     <button class="nav-toggle" @click="closeNav()" v-if="variant === 'drawer'">

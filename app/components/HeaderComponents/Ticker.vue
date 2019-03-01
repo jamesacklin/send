@@ -74,39 +74,42 @@ export default {
 
 <style lang="css" scoped>
 .ticker {
-  background: #1C1C1C;
+  background: #1c1c1c;
   padding: 0.25rem 0;
   height: 30px;
   overflow: hidden;
   white-space: nowrap;
 }
 
-.text.marquee:nth-of-type(1) {
+.text.marquee {
   display: inline-block;
+  width: 100%;
+}
+
+.text.marquee:nth-of-type(1) {
   /* Timing function */
   animation: marquee 30s linear infinite;
 }
 
 .text.marquee:nth-of-type(2) {
-  display: inline-block;
   /* Timing function */
   animation: marquee2 30s linear infinite;
   animation-delay: 15s;
 }
 
 .paused .text.marquee {
-  animation-play-state: paused
+  animation-play-state: paused;
 }
 
 .ticker-story {
-  font-family: "Roboto Mono", monospace;
+  font-family: 'Roboto Mono', monospace;
   font-weight: 300;
-  color: #F5F3EF;
+  color: #f5f3ef;
   text-transform: uppercase;
 }
 
 .ticker-story a {
-  color: #F5F3EF;
+  color: #f5f3ef;
   text-decoration: none;
 }
 
@@ -114,17 +117,17 @@ export default {
   text-decoration: underline;
 }
 
-.ticker-story::after  {
-  content: "•";
+.ticker-story::after {
+  content: '•';
   margin: 0 1rem;
 }
 
 .ticker-badge {
-  font-family: "Roboto Mono", monospace;
+  font-family: 'Roboto Mono', monospace;
   text-transform: uppercase;
   font-weight: 300;
-  color: #F5F3EF;
-  background: #EB181D;
+  color: #f5f3ef;
+  background: #eb181d;
   padding: 0 0.25rem;
   margin-right: 1rem;
 }

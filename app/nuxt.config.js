@@ -42,6 +42,11 @@ module.exports = {
           name: 'index-page'
         },
         {
+          path: '/coolshops',
+          component: resolve(__dirname, 'pages/coolshops.vue'),
+          name: 'page-shops'
+        },
+        {
           path: '/:slug',
           component: resolve(__dirname, 'pages/page.vue'),
           name: 'page'
@@ -70,10 +75,10 @@ module.exports = {
   modules: [
     '@nuxtjs/pwa',
     '@nuxtjs/axios',
-    ['@nuxtjs/google-analytics', { 
+    ['@nuxtjs/google-analytics', {
       id: 'UA-474542-4'
     }],
-    ['nuxt-device-detect', { 
+    ['nuxt-device-detect', {
       defaultUserAgent: 'Mozilla/5.0 (Linux; Android 5.1.1; Nexus 6 Build/LYZ28E) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.39 Mobile Safari/537.36'
     }]
   ],
