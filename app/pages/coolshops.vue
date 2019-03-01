@@ -1,23 +1,55 @@
 <template>
   <div class="content">
-    <article :id="'page-id-' + this.post.id" class="page">
-      <header class="page-header" :class="{ 'has-artwork': featuredMedia }">
-        <featured-media
-          v-if="featuredMedia"
-          :media="post._embedded['wp:featuredmedia'][0]"
-        />
+    <article class="page">
+      <header class="page-header">
         <div class="page-title-block">
-          <h1 class="page-title" v-html="post.title.rendered"></h1>
+          <h1 class="page-title">Cool Shops</h1>
         </div>
       </header>
       <div class="page-content">
         <main>
-          <AdHeader />
-          <div class="page-copy" v-html="post.content.rendered" />
+          <AdHeader/>
+          <div class="page-copy">
+            <p>Bike shops that carry Dirt Rag magazine. Find one near you!</p>
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between">
+              <div style="width: 48%" v-for="shop in shops" :key="shop.index">
+                <h3 style="margin-bottom: 0">{{ shop.store }}</h3>
+                <address style="font-style: normal">
+                  {{ shop.address }}
+                  <br>
+                  {{ shop.city }}, {{ shop.state }}
+                  <br>
+                  {{ shop.zip }}
+                </address>
+              </div>
+            </div>
+            <hr>
+            <p>We love our local bike shops, and we'd love to have you listed here.</p>
+            <p>
+              Head over to our
+              <a
+                href="https://w1.buysub.com/servlet/OrdersGateway?cds_mag_code=DRM&amp;cds_page_id=221362"
+                target="_blank"
+                rel="noopener noreferrer"
+              >sign up page</a>, and start carrying Dirt Rag magazine!
+            </p>
+            <p>
+              Need to update your shop information? Use our&nbsp;
+              <a
+                href="https://w1.buysub.com/pubs/RG/DRM/login.jsp?cds_page_id=164761&amp;cds_mag_code=DRM"
+              >customer service</a>&nbsp;page.
+            </p>
+            <p>
+              If you have any questions about the program, feel free to email us at
+              <a
+                href="mailto:bikeshops@dirtragmag.com"
+              >bikeshops@dirtragmag.com</a>
+            </p>
+          </div>
         </main>
         <aside class="advertising">
           <no-ssr>
-            <ad-sidebar :sidebarData="ads" />
+            <ad-sidebar :sidebarData="ads"/>
           </no-ssr>
         </aside>
       </div>
@@ -26,7 +58,7 @@
 </template>
 
 <script>
-import dayjs from 'dayjs'
+import sortBy from 'lodash'
 import AdHeader from '@/components/PageComponents/AdHeader'
 import AdSidebar from '@/components/PageComponents/AdSidebar'
 
@@ -36,34 +68,14 @@ export default {
     AdHeader
   },
   computed: {
-    post() {
-      // Return the page for whatever page we're looking for in route.params
-      return this.$store.getters.getPageBySlug(this.$route.params.slug)
+    shops() {
+      // Return the list of shops set explicitly in the store
+      const shops = this.$store.state.shops
+      return shops.sort((a, b) => parseFloat(a.zip) - parseFloat(b.zip))
     },
     ads() {
       // Return the ads set explicitly in the store
       return this.$store.state.advertising.rectangle
-    },
-    postDate: function() {
-      // Pretty-format the post date (January 1, 2019)
-      return dayjs(this.date).format('MMMM D, YYYY')
-    },
-    featuredMedia() {
-      // Check for the existence of featured media on the post.
-      // If so, return it. If not, return false.
-      if (this.post._embedded['wp:featuredmedia']) {
-        return this.post._embedded['wp:featuredmedia'][0].media_details.sizes
-          .medium.source_url
-      } else {
-        return false
-      }
-    }
-  },
-  async asyncData({ payload, isStatic, store, params }) {
-    if (payload && isStatic) {
-      store.commit('addPage', [payload])
-    } else {
-      await store.dispatch('getPage', params)
     }
   },
   scrollToTop: true,
@@ -73,30 +85,27 @@ export default {
   },
   head() {
     return {
-      title: this.post.title.rendered + ' · Dirt Rag',
+      title: 'Cool Shops · Dirt Rag',
       bodyAttrs: {
-        class: 'single page page-id-' + this.post.id
+        class: 'single page'
       },
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: this.post.excerpt.rendered
+          content:
+            'Rad bike shops across the country who stock Dirt Rag Magazine'
         },
         {
           hid: 'og:title',
           property: 'og:title',
-          content: this.post.title.rendered + ' | Dirt Rag'
+          content: 'Cool Shops | Dirt Rag'
         },
         {
           hid: 'og:description',
           property: 'og:description',
-          content: this.post.excerpt.rendered
-        },
-        {
-          hid: 'og:image',
-          property: 'og:image',
-          content: this.featuredMedia
+          content:
+            'Rad bike shops across the country who stock Dirt Rag Magazine'
         }
       ]
     }
@@ -126,11 +135,19 @@ export default {
     justify-content: center;
   }
   &.has-artwork {
-    .page-title-block { order: 1; }
-    .page-artwork { order: 2; }
+    .page-title-block {
+      order: 1;
+    }
+    .page-artwork {
+      order: 2;
+    }
     @media (min-width: 1000px) {
-      .page-title-block { order: 2; }
-      .page-artwork { order: 1; }
+      .page-title-block {
+        order: 2;
+      }
+      .page-artwork {
+        order: 1;
+      }
     }
   }
 }
@@ -194,7 +211,7 @@ export default {
 
 .page-content {
   padding: 0 2%;
-  border-top: 1px solid rgba(0,0,0,0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   @media (min-width: 1000px) {
     padding: 0;
     display: grid;
@@ -219,7 +236,7 @@ main {
 
 aside {
   grid-column: main;
-  @media (min-width: 1000px){
+  @media (min-width: 1000px) {
     grid-column: sidebar;
   }
 }
@@ -241,7 +258,6 @@ aside {
 .page-copy img {
   width: 100% !important;
 }
-
 
 @media (min-width: 1000px) {
   .page-copy figure {
@@ -286,5 +302,4 @@ aside {
 .page-comments {
   margin-top: 2rem;
 }
-
 </style>

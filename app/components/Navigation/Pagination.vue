@@ -183,7 +183,11 @@ export default {
       }
     },
     postSingle() {
-      return this.$route.name === 'page' || this.$route.name === 'article'
+      return (
+        this.$route.name === 'page' ||
+        this.$route.name === 'article' ||
+        this.$route.name === 'page-shops'
+      )
     },
     postArchive() {
       return this.$route.name === 'index' || this.$route.name === 'index-page'
@@ -274,12 +278,12 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #F5F3EF;
+      color: #f5f3ef;
       text-decoration: none;
       padding: 1rem;
-      background: #EB181D;
+      background: #eb181d;
       svg {
-        fill: #F5F3EF;
+        fill: #f5f3ef;
       }
       &:hover {
         background: #292724;
