@@ -2,8 +2,7 @@ import Vuex from 'vuex'
 import actions from './actions'
 import mutations from './mutations'
 import getters from './getters'
-
-// TODO: Google Analytics integration
+import bikeshops from './bikeshops.json'
 
 export default () => {
   return new Vuex.Store({
@@ -23,6 +22,8 @@ export default () => {
         categories: {},
         categoryIds: []
       },
+      // TODO: figure out a server-side solution for this (custom post type?)
+      shops: bikeshops,
       searchLoading: false,
       posts: [],
       pages: [],

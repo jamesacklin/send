@@ -1,0 +1,786 @@
+[
+  {
+    "id": 8981,
+    "store": "ABSOLUTE BIKES",
+    "address": "330 W SACKETT ST",
+    "city": "SALIDA",
+    "state": "CO",
+    "zip": 81201,
+    "latitude": 38.5383979,
+    "longitude": -105.9923386
+  },
+  {
+    "id": 8989,
+    "store": "BIKE LOFT",
+    "address": "717 SOUTH BAY RD",
+    "city": "NO SYRACUSE",
+    "state": "NY",
+    "zip": 13212,
+    "latitude": 43.1366046,
+    "longitude": -76.1243641
+  },
+  {
+    "id": 8987,
+    "store": "BIG BANG BICYCLES",
+    "address": "4815 SOMERSET DR SE",
+    "city": "BELLEVUE",
+    "state": "WA",
+    "zip": 98006,
+    "latitude": 47.5588457,
+    "longitude": -122.1624599
+  },
+  {
+    "id": 8986,
+    "store": "BIG ALS BICYCLE HEAVEN",
+    "address": "207 ELK AVENUE",
+    "city": "CRESTED BUTTE",
+    "state": "CO",
+    "zip": 81224,
+    "latitude": 38.8699246,
+    "longitude": -106.9871223
+  },
+  {
+    "id": 8991,
+    "store": "BREWERYTOWN BICYCLES",
+    "address": "2819 W GIRARD AVE",
+    "city": "PHILADELPHIA",
+    "state": "PA",
+    "zip": 19130,
+    "latitude": 39.9746537,
+    "longitude": -75.1825506
+  },
+  {
+    "id": 8998,
+    "store": "CHILE PEPPER BIKE SHOP",
+    "address": "702 S MAIN ST #2",
+    "city": "MOAB",
+    "state": "UT",
+    "zip": 84532,
+    "latitude": 38.5616707,
+    "longitude": -109.5492777
+  },
+  {
+    "id": 9003,
+    "store": "FEATHER RIVER OUTDOORS",
+    "address": "373 MAIN ST",
+    "city": "QUINCY",
+    "state": "CA",
+    "zip": 95971,
+    "latitude": 39.9369437,
+    "longitude": -120.9456792
+  },
+  {
+    "id": 9004,
+    "store": "FREEZE THAW CYCLES",
+    "address": "109 S ALLEN STREET",
+    "city": "STATE COLLEGE",
+    "state": "PA",
+    "zip": 16801,
+    "latitude": 40.7943017,
+    "longitude": -77.8612094
+  },
+  {
+    "id": 9005,
+    "store": "HARRIS CYCLERY",
+    "address": "1353 WASHINGTON ST",
+    "city": "WEST NEWTON",
+    "state": "MA",
+    "zip": 2465,
+    "latitude": 42.3490782,
+    "longitude": -71.2286345
+  },
+  {
+    "id": 9006,
+    "store": "HIGHLANDS SKI & OUTDOOR CEN",
+    "address": "PO BOX 1944",
+    "city": "ABINGDON",
+    "state": "VA",
+    "zip": 24212,
+    "latitude": 36.71,
+    "longitude": -81.98
+  },
+  {
+    "id": 9007,
+    "store": "HOLMES CYCLES",
+    "address": "2139 MARKET ST",
+    "city": "CAMP HILL",
+    "state": "PA",
+    "zip": 17011,
+    "latitude": 40.2399374,
+    "longitude": -76.9215415
+  },
+  {
+    "id": 9008,
+    "store": "IDAHO MOUNTAIN TOURING",
+    "address": "1310 MAIN ST",
+    "city": "BOISE",
+    "state": "ID",
+    "zip": 83702,
+    "latitude": 43.619,
+    "longitude": -116.2095187
+  },
+  {
+    "id": 9009,
+    "store": "JOEIS BIKE SHOP",
+    "address": "723 SOUTH BROADWAY",
+    "city": "BALTIMORE",
+    "state": "MD",
+    "zip": 21231,
+    "latitude": 39.2828884,
+    "longitude": -76.5928287
+  },
+  {
+    "id": 9010,
+    "store": "JOHNS CYCLERY",
+    "address": "309 MACCORKLE AVE",
+    "city": "ST ALBANS",
+    "state": "WV",
+    "zip": 25177,
+    "latitude": 38.3890345,
+    "longitude": -81.8333047
+  },
+  {
+    "id": 9011,
+    "store": "JUST THE RIGHT GEAR",
+    "address": "2265 CATAWBA VALLEY DR",
+    "city": "SALEM",
+    "state": "VA",
+    "zip": 24153,
+    "latitude": 37.3387368,
+    "longitude": -80.0455327
+  },
+  {
+    "id": 9012,
+    "store": "KITTERY TRADING POST",
+    "address": "301 US RTE 1",
+    "city": "KITTERY",
+    "state": "ME",
+    "zip": 3904,
+    "latitude": 43.1115178,
+    "longitude": -70.7353643
+  },
+  {
+    "id": 9013,
+    "store": "LATITUDE 45 CYCLE SPORT",
+    "address": "476 W MITCHELL ST",
+    "city": "PETOSKEY",
+    "state": "MI",
+    "zip": 49770,
+    "latitude": 45.3742864,
+    "longitude": -84.9669263
+  },
+  {
+    "id": 9014,
+    "store": "MAIN STREET BICYCLES",
+    "address": "39 EAST MAIN STREET",
+    "city": "CARPENTERSVLE",
+    "state": "IL",
+    "zip": 60110,
+    "latitude": 42.1088387,
+    "longitude": -88.2881195
+  },
+  {
+    "id": 9015,
+    "store": "MAINE SPORT",
+    "address": "RT 1",
+    "address2": "PO BOX 956",
+    "city": "ROCKPORT",
+    "state": "ME",
+    "zip": 4856,
+    "latitude": 44.1844817,
+    "longitude": -69.0760975
+  },
+  {
+    "id": 9016,
+    "store": "MISSING LINK",
+    "address": "1988 SHATTUCK AVE",
+    "city": "BERKELEY",
+    "state": "CA",
+    "zip": 94704,
+    "latitude": 37.8724354,
+    "longitude": -122.2686821
+  },
+  {
+    "id": 9017,
+    "store": "NEW RIVER BIKES",
+    "address": "211 NORTH COURT",
+    "city": "FAYETTEVILLE",
+    "state": "WV",
+    "zip": 25840,
+    "latitude": 38.053688,
+    "longitude": -81.1046114
+  },
+  {
+    "id": 9018,
+    "store": "OPEN ROAD BICYCLES",
+    "address": "3544 ST JOHNS AVE",
+    "city": "JACKSONVILLE",
+    "state": "FL",
+    "zip": 32205,
+    "latitude": 30.2971062,
+    "longitude": -81.7031269
+  },
+  {
+    "id": 9019,
+    "store": "OPEN ROAD BICYCLES",
+    "address": "517 S ORANGE",
+    "city": "MISSOULA",
+    "state": "MT",
+    "zip": 59801,
+    "latitude": 46.8665513,
+    "longitude": -114.0037705
+  },
+  {
+    "id": 9020,
+    "store": "OUTBAK BIKES",
+    "address": "1125 EUCLID AVE NE",
+    "city": "ATLANTA",
+    "state": "GA",
+    "zip": 30307,
+    "latitude": 33.7643204,
+    "longitude": -84.3502264
+  },
+  {
+    "id": 9021,
+    "store": "OUTDOOR SPORTS CENTER",
+    "address": "80 DANBURY RD",
+    "city": "WILTON",
+    "state": "CT",
+    "zip": 6897,
+    "latitude": 41.1707758,
+    "longitude": -73.415765
+  },
+  {
+    "id": 9022,
+    "store": "OVER THE EDGE SPORTS LTD",
+    "address": "202 EAST ASPEN AVE",
+    "city": "FRUITA",
+    "state": "CO",
+    "zip": 81521,
+    "latitude": 39.1586507,
+    "longitude": -108.7322883
+  },
+  {
+    "id": 9023,
+    "store": "REVOLUTION CYCLES",
+    "address": "2330 ATWOOD AVE",
+    "city": "MADISON",
+    "state": "WI",
+    "zip": 53704,
+    "latitude": 43.0937614,
+    "longitude": -89.3474972
+  },
+  {
+    "id": 9024,
+    "store": "RIDGWAY ADVENTURE SPORTS",
+    "address": "PO BOX 650",
+    "city": "RIDGWAY",
+    "state": "CO",
+    "zip": 81432,
+    "latitude": 38.1526207,
+    "longitude": -107.7561174
+  },
+  {
+    "id": 9025,
+    "store": "ROCK N ROLL SPORTS",
+    "address": "608 W TOMICHI",
+    "city": "GUNNISON",
+    "state": "CO",
+    "zip": 81230,
+    "latitude": 38.5446612,
+    "longitude": -106.934085
+  },
+  {
+    "id": 9026,
+    "store": "ROCKTOWN BICYCLES",
+    "address": "50 S MASON ST STE 100",
+    "city": "HARRISONBURG",
+    "state": "VA",
+    "zip": 22801,
+    "latitude": 38.4485725,
+    "longitude": -78.8664208
+  },
+  {
+    "id": 9027,
+    "store": "ROCKY POINT CYCLE",
+    "address": "669A RT 25 A",
+    "city": "ROCKY POINT",
+    "state": "NY",
+    "zip": 11778,
+    "latitude": 40.9428151,
+    "longitude": -72.9786577
+  },
+  {
+    "id": 9028,
+    "store": "ROTHROCK OUTFITTERS",
+    "address": "418 PENN ST",
+    "city": "HUNTINGDON",
+    "state": "PA",
+    "zip": 16652,
+    "latitude": 40.48449,
+    "longitude": -78.0115663
+  },
+  {
+    "id": 9029,
+    "store": "SAUCON VALLEY BIKES",
+    "address": "824 MAIN ST",
+    "city": "HELLERTOWN",
+    "state": "PA",
+    "zip": 18055,
+    "latitude": 40.5815556,
+    "longitude": -75.3412897
+  },
+  {
+    "id": 9030,
+    "store": "SCHOLLOS BICYCLE CENTER",
+    "address": "649 CENTER AVE",
+    "city": "WEST VIEW",
+    "state": "PA",
+    "zip": 15229,
+    "latitude": 40.5181591,
+    "longitude": -80.0308215
+  },
+  {
+    "id": 9031,
+    "store": "SCHWAB CYCLES",
+    "address": "1565 PIERCE ST",
+    "city": "LAKEWOOD",
+    "state": "CO",
+    "zip": 80214,
+    "latitude": 39.7415615,
+    "longitude": -105.0723866
+  },
+  {
+    "id": 9032,
+    "store": "SEDONA BIKE AND BEAN",
+    "address": "30 BELL ROCK PLZ",
+    "city": "SEDONA",
+    "state": "AZ",
+    "zip": 86351,
+    "latitude": 34.7881515,
+    "longitude": -111.763469
+  },
+  {
+    "id": 9033,
+    "store": "SHARP BICYCLE",
+    "address": "969 MORAGA RD",
+    "city": "LAFAYETTE",
+    "state": "CA",
+    "zip": 94549,
+    "latitude": 37.8906966,
+    "longitude": -122.1188579
+  },
+  {
+    "id": 9034,
+    "store": "SHENANDOAH BICYCLE CO",
+    "address": "135 S MAIN ST",
+    "city": "HARRISONBURG",
+    "state": "VA",
+    "zip": 22801,
+    "latitude": 38.4479801,
+    "longitude": -78.8696249
+  },
+  {
+    "id": 9035,
+    "store": "SNITGER'S BICYCLE STORE",
+    "address": "399 THIRD ST",
+    "city": "BEAVER",
+    "state": "PA",
+    "zip": 15009,
+    "latitude": 40.6962707,
+    "longitude": -80.3012448
+  },
+  {
+    "id": 9036,
+    "store": "SOUTH MAIN CYLCES",
+    "address": "4 N MAIN ST",
+    "city": "BELMONT",
+    "state": "NC",
+    "zip": 28012,
+    "latitude": 35.2426626,
+    "longitude": -81.0376192
+  },
+  {
+    "id": 9037,
+    "store": "SPOKE- N-THINGS",
+    "address": "401 S 3RD ST",
+    "city": "ARKANSAS CITY",
+    "state": "KS",
+    "zip": 67005,
+    "latitude": 37.058555,
+    "longitude": -97.043072
+  },
+  {
+    "id": 9038,
+    "store": "SUNFLOWER OUTDOOR & BIKE SH",
+    "address": "802 MASSACHUSETTS ST",
+    "city": "LAWRENCE",
+    "state": "KS",
+    "zip": 66044,
+    "latitude": 38.9691372,
+    "longitude": -95.2358406
+  },
+  {
+    "id": 9039,
+    "store": "SUNNYSIDE SPORTS",
+    "address": "930 NW NEWPORT AVE",
+    "city": "BEND",
+    "state": "OR",
+    "zip": 97703,
+    "latitude": 44.0626885,
+    "longitude": -121.3256832
+  },
+  {
+    "id": 9040,
+    "store": "TENNESSEE VALLEY BICYCLES",
+    "address": "210 W MAGNOLIA AVE",
+    "city": "KNOXVILLE",
+    "state": "TN",
+    "zip": 37917,
+    "latitude": 35.971648,
+    "longitude": -83.920765
+  },
+  {
+    "id": 9041,
+    "store": "THE BICYCLE SHOP",
+    "address": "437-441 W COLLEGE AVE",
+    "city": "STATE COLLEGE",
+    "state": "PA",
+    "zip": 16801,
+    "latitude": 40.7911188,
+    "longitude": -77.8663685
+  },
+  {
+    "id": 9042,
+    "store": "THE BICYCLE SHOP",
+    "address": "406 MILLER AVE",
+    "city": "SHELBYVILLE",
+    "state": "IN",
+    "zip": 46176,
+    "latitude": 39.5205669,
+    "longitude": -85.7847807
+  },
+  {
+    "id": 9043,
+    "store": "THE BICYCLE TRIP",
+    "address": "1001 SOQUEL AVE",
+    "city": "SANTA CRUZ",
+    "state": "CA",
+    "zip": 95062,
+    "latitude": 36.978846,
+    "longitude": -122.0130176
+  },
+  {
+    "id": 9044,
+    "store": "THE HUB",
+    "address": "27 MARKET ST.",
+    "city": "GLENS FALLS",
+    "state": "NY",
+    "zip": 12801,
+    "latitude": 43.3163893,
+    "longitude": -73.6477342
+  },
+  {
+    "id": 9045,
+    "store": "THE KREB CYCLE",
+    "address": "10 BELL ST",
+    "city": "BELLPORT",
+    "state": "NY",
+    "zip": 11713,
+    "latitude": 40.7568141,
+    "longitude": -72.9372441
+  },
+  {
+    "id": 9046,
+    "store": "THE PEDDLER OF LONG BRANCH",
+    "address": "150 OCEAN BLVD",
+    "city": "LONG BRANCH",
+    "state": "NJ",
+    "zip": 7740,
+    "latitude": 40.3107417,
+    "longitude": -73.9799267
+  },
+  {
+    "id": 9047,
+    "store": "TOWN CYCLE",
+    "address": "1468 UNION VALLEY RD",
+    "city": "WEST MILFORD",
+    "state": "NJ",
+    "zip": 7480,
+    "latitude": 41.129171,
+    "longitude": -74.3703624
+  },
+  {
+    "id": 9048,
+    "store": "TRAIL HEAD CYCLERY",
+    "address": "20301 STEVENS CREEK BLVD",
+    "city": "CUPERTINO",
+    "state": "CA",
+    "zip": 95014,
+    "latitude": 37.3233499,
+    "longitude": -122.0288941
+  },
+  {
+    "id": 9049,
+    "store": "UNION CYCLE",
+    "address": "77 PLEASANT ST",
+    "city": "ATTLEBORO",
+    "state": "MA",
+    "zip": 2703,
+    "latitude": 41.9467542,
+    "longitude": -71.2792292
+  },
+  {
+    "id": 9050,
+    "store": "WATERLOO BICYCLE WORKS",
+    "address": "316 W 3RD ST STE 2",
+    "city": "WATERLOO",
+    "state": "IA",
+    "zip": 50701,
+    "latitude": "",
+    "longitude": ""
+  },
+  {
+    "id": 9051,
+    "store": "WEST HILL SHOP",
+    "address": "49 BRICKYARD LN",
+    "city": "PUTNEY",
+    "state": "VT",
+    "zip": 5346,
+    "latitude": 42.963738,
+    "longitude": -72.522376
+  },
+  {
+    "id": 9052,
+    "store": "WHEEL BASE",
+    "address": "229 N MARKET ST",
+    "city": "FREDERICK",
+    "state": "MD",
+    "zip": 21701,
+    "latitude": 39.417392,
+    "longitude": -77.410769
+  },
+  {
+    "id": 9053,
+    "store": "WHEELS UNLIMITED",
+    "address": "34 LIBERTY STREET SUITE 101",
+    "city": "BATH",
+    "state": "NY",
+    "zip": 14810,
+    "latitude": 42.3345999,
+    "longitude": -77.3180163
+  },
+  {
+    "id": 9054,
+    "store": "WILLAMETTE MOUNTAIN MERCANT",
+    "address": "PO BOX 630",
+    "city": "OAKRIDGE",
+    "state": "OR",
+    "zip": 97463,
+    "latitude": 43.7475511,
+    "longitude": -122.4590108
+  },
+  {
+    "id": 9055,
+    "store": "Discover Bikes",
+    "address": "210 State St",
+    "city": "Hood River",
+    "state": "OR",
+    "zip": 97031,
+    "latitude": 45.7083435,
+    "longitude": -121.5131311
+  },
+  {
+    "id": 9002,
+    "store": "EPIC SPORTS",
+    "address": "411 FRAINE BARRACKS ROAD",
+    "city": "BISMARCK",
+    "state": "ND",
+    "zip": 58504,
+    "latitude": 46.8094497,
+    "longitude": -100.8143324
+  },
+  {
+    "id": 9001,
+    "store": "DIRTY HARRYS",
+    "address": "730 ALLEGHENY RIVER BLVD",
+    "city": "VERONA",
+    "state": "PA",
+    "zip": 15147,
+    "latitude": 40.5057504,
+    "longitude": -79.8433732
+  },
+  {
+    "id": 9000,
+    "store": "COLORADO BIKE SERVICE",
+    "address": "PO BOX 612",
+    "city": "AVON",
+    "state": "CO",
+    "zip": 81620,
+    "latitude": 39.6369412,
+    "longitude": -106.5234348
+  },
+  {
+    "id": 8999,
+    "store": "CITY CYCLE",
+    "address": "3217 ELTON RD",
+    "city": "JOHNSTOWN",
+    "state": "PA",
+    "zip": 15904,
+    "latitude": 40.2792324,
+    "longitude": -78.8454714
+  },
+  {
+    "id": 8997,
+    "store": "CHENANGO POINT CYCLES",
+    "address": "125 PARK AVE",
+    "city": "BINGHAMTON",
+    "state": "NY",
+    "zip": 13903,
+    "latitude": 42.0791937,
+    "longitude": -75.9145076
+  },
+  {
+    "id": 8996,
+    "store": "CHARLESTON BICYCLE CENTER",
+    "address": "409 53RD ST",
+    "city": "CHARLESTON",
+    "state": "WV",
+    "zip": 25304,
+    "latitude": 38.3164236,
+    "longitude": -81.5742713
+  },
+  {
+    "id": 8995,
+    "store": "CAROLINA PEDAL WORKS",
+    "address": "SUITE 104",
+    "address2": "883 HIGHLAND AVE SE",
+    "city": "HICKORY",
+    "state": "NC",
+    "zip": 28602,
+    "latitude": 35.7353882,
+    "longitude": -81.3258022
+  },
+  {
+    "id": 8994,
+    "store": "CAMPUS CYCLES",
+    "address": "2102 S WASHINGTON ST",
+    "city": "DENVER",
+    "state": "CO",
+    "zip": 80210,
+    "latitude": 39.6783964,
+    "longitude": -104.9789081
+  },
+  {
+    "id": 8993,
+    "store": "CAMP S D BUTLER",
+    "address": "LIBRARY PROCESSING CENTE",
+    "address2": "UNIT 35023",
+    "city": "APO",
+    "state": "AP",
+    "zip": 96378,
+    "latitude": 33.4704596,
+    "longitude": -87.0424393
+  },
+  {
+    "id": 8992,
+    "store": "CAMBRIA BICYCLES",
+    "address": "1645 COMMERCE WAY",
+    "city": "PASO ROBLES",
+    "state": "CA",
+    "zip": 93446,
+    "latitude": 35.6121158,
+    "longitude": -120.6528173
+  },
+  {
+    "id": 8990,
+    "store": "BLUEDOG CYCLES",
+    "address": "201 S MAIN ST",
+    "city": "VIROQUA",
+    "state": "WI",
+    "zip": 54665,
+    "latitude": 43.5551357,
+    "longitude": -90.8891532
+  },
+  {
+    "id": 8988,
+    "store": "BIKE KING",
+    "address": "6489 CAHILL AVE",
+    "city": "INVER GROVE H",
+    "state": "MN",
+    "zip": 55076,
+    "latitude": 44.8555881,
+    "longitude": -93.0456493
+  },
+  {
+    "id": 8985,
+    "store": "BEAR VALLEY BIKES",
+    "address": "PO BOX 0424",
+    "city": "BIG BEAR LAKE",
+    "state": "CA",
+    "zip": 92315,
+    "latitude": 34.2442311,
+    "longitude": -116.9116867
+  },
+  {
+    "id": 9056,
+    "store": "Dirty Fingers Bikes",
+    "address": "1235 State St",
+    "address2": "Suite 200",
+    "city": "Hood River",
+    "state": "OR",
+    "zip": 97031,
+    "latitude": 45.7076762,
+    "longitude": -121.52485
+  },
+  {
+    "id": 8984,
+    "store": "BATH CYCLE & SKI / BIKEMAN",
+    "address": "RT 1 115 MAIN ST",
+    "city": "WOOLWICH",
+    "state": "ME",
+    "zip": 4579,
+    "latitude": 43.918309,
+    "longitude": -69.8006171
+  },
+  {
+    "id": 8982,
+    "store": "ADVENTURE CYCLE AND SKI",
+    "address": "178 CENTER STREET",
+    "city": "WINONA",
+    "state": "MN",
+    "zip": 55987,
+    "latitude": 44.0514452,
+    "longitude": -91.6366469
+  },
+  {
+    "id": 8983,
+    "store": "AJOS BIKE AND BOARDS",
+    "address": "1538 BLOOMINGDALE AVE",
+    "city": "VALRICO",
+    "state": "FL",
+    "zip": 33596,
+    "latitude": 27.894047,
+    "longitude": -82.2572891
+  },
+  {
+    "id": 9058,
+    "store": "Hutch's Bicycles",
+    "address": "960 Charnelton St.",
+    "city": "Eugene",
+    "state": "OR",
+    "zip": 97401,
+    "latitude": 44.0492602,
+    "longitude": -123.0961608
+  },
+  {
+    "id": 9057,
+    "store": "Project Bike",
+    "address": "35 NW Bond Street",
+    "city": "Bend",
+    "state": "OR",
+    "zip": 97703,
+    "latitude": 44.0520638,
+    "longitude": -121.3167797
+  }
+]
