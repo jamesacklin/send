@@ -3,7 +3,6 @@
     <header role="banner" :class="{ sticky: pastHeader }">
       <div class="header-content">
         <NavLogo variant="banner" />
-        <!-- <advertising id="div-gpt-ad-1550335189859-0" size="banner" unit="DR_Leaderboard"/> -->
       </div>
       <div class="header-sidebar"><OutsideFeed /></div>
       <Ticker ref="ticker" />
@@ -131,6 +130,7 @@ header.sticky {
 
 header .header-sidebar {
   grid-column: sidebar;
+  position: relative;
 }
 
 @media (max-width: 812px) {
@@ -142,7 +142,7 @@ header .header-sidebar {
 header .outside-player:not(:empty) {
   width: 300px;
   position: absolute;
-  top: 130px;
+  top: 100px;
 }
 
 header.sticky .outside-player {
