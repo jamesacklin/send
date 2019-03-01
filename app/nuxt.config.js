@@ -1,5 +1,7 @@
 const pkg = require('./package')
 
+
+
 module.exports = {
   mode: 'universal',
   head: {
@@ -49,7 +51,28 @@ module.exports = {
         {
           path: '/:slug',
           component: resolve(__dirname, 'pages/page.vue'),
-          name: 'page'
+          name: 'page',
+          beforeEnter: (to, from, next) => {
+            // https://www.reddit.com/r/vuejs/comments/687qcv/any_way_to_pass_data_from_the_beforeenter_guard/dgxcx02/
+            function isValidPage(slug) {
+              // FIXME: Figure out how to test for a valid page object (from WP-API?)
+              return false
+            }
+            function isValidPost(slug) {
+              // FIXME: Figure out how to test for a valid post object (from WP-API?)
+              return false
+            }
+            if (isValidPage(to.params.slug)) {
+              // The slug is a valid "page" slug, continue
+              next();
+            } else if (isValidPost(to.params.slug)) {
+              // The slug isn't a valid page slug, but it's a valid "post" slug
+              next({ path: '/articles/' + to.params.slug })
+            } else {
+              // The slug is completely invalid and we'll just redirect them home
+              next({ path: '/' })
+            }
+          }
         },
         {
           path: '/articles/:slug',
