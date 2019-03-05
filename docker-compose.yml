@@ -1,31 +1,26 @@
-version: "3"
+version: '3'
 
 services:
   nuxt:
+    container_name: send-web
     build: ./app/
     restart: always
     ports:
       - "3000:3000"
     command:
       "npm run start"
-
-  nginx:
-    image: nginx:latest
-    restart: unless-stopped
+  nginx-ssl-proxy:
+    container_name: send-server
+    image: danieldent/nginx-ssl-proxy
+    restart: always
+    environment:
+      UPSTREAM: 172.28.0.2:3000
+      SERVERNAME: acklindesign.com
+      EXTRANAMES: www.acklindesign.com
     ports:
-      - "80:80"
+      - "80:80"    
       - "443:443"
     volumes:
-      - ./nginx:/etc/nginx/conf.d
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/cerbot
+      - "/etc/letsencrypt"
     depends_on:
       - nuxt
-    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
-  
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
