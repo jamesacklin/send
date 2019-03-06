@@ -83,8 +83,8 @@ module.exports = {
     }]
   ],
   axios: {
-    baseURL: 'http://104.248.113.148/wp-json/wp/v2/',
-    https: false,
+    baseURL: 'https://content.acklindesign.com/wp-json/wp/v2/',
+    https: true,
     progress: true
   },
   render: {
