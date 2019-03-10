@@ -6,7 +6,6 @@
 
 <script>
 export default {
-  // TODO: Comment OutsideFeed component
   name: 'OutsideFeed',
   data() {
     return {
