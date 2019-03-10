@@ -30,9 +30,8 @@ export default {
 </script>
 
 <style lang="css" scoped>
-/* FIXME: Figure out some way to pad the bottom of the page based on the pagination height */
 .app-view {
   background-color: #f5f3ef;
-  padding-bottom: 40px;
+  padding-bottom: 38px;
 }
 </style>

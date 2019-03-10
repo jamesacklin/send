@@ -71,8 +71,12 @@ export default () => {
           href: '/contact'
         },
         {
+          name: 'Cool Shops',
+          href: '/coolshops'
+        },
+        {
           name: 'Advertise',
-          href: '/'
+          href: 'https://www.rotatingmassmedia.com/dirtrag'
         },
         {
           name: 'Contribute',
