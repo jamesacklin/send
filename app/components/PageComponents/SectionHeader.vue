@@ -22,8 +22,7 @@ function titleCase(str) {
 export default {
   name: 'SectionHeader',
   props: ['sectionMeta'],
-  methods: {
-  },
+  methods: {},
   computed: {
     sectionType() {
       // Determine the type of "section" we're on, either a category,
@@ -131,7 +130,8 @@ export default {
   background-color: #292724;
   background-size: cover;
   background-position: center center;
-  &[lazy='loaded']{
+  &[lazy='loading'],
+  &[lazy='loaded'] {
     @media (orientation: portrait) and (max-width: 700px) {
       padding-top: 33vh;
     }
@@ -180,7 +180,7 @@ export default {
     top: -11em;
     left: 48%;
     transform: rotate(-15deg) translateX(-48%);
-    box-shadow: 0.5em 1em 1em rgba(0,0,0,0.4);
+    box-shadow: 0.5em 1em 1em rgba(0, 0, 0, 0.4);
     opacity: 1;
     transition: opactiy 0.5s ease;
     &[lazy='loading'],
@@ -195,7 +195,7 @@ export default {
     padding: 0 1rem;
     background: #292724;
     text-align: center;
-    color: #F5F3EF;
+    color: #f5f3ef;
     h2 {
       font-size: 2.25em;
       margin: 1rem 0;
@@ -204,7 +204,7 @@ export default {
       max-width: 10em;
     }
     a {
-      color: #EB181D;
+      color: #eb181d;
       text-decoration: none;
     }
     a:hover {
