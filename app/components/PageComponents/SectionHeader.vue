@@ -1,5 +1,9 @@
 <template lang="html">
-  <header class="section-header" v-lazy:background-image="backgroundImage">
+  <header 
+    class="section-header"
+    :class="{'has-artwork' : backgroundImage.length}"
+    v-lazy:background-image="backgroundImage"
+  >
     <div class="section-header-content">
       <img v-if="headerFigure" v-lazy="headerFigure" class="header-figure" />
       <div class="text-wrapper" v-html="headerContents"></div>
@@ -130,8 +134,8 @@ export default {
   background-color: #292724;
   background-size: cover;
   background-position: center center;
-  &[lazy='loading'],
-  &[lazy='loaded'] {
+  &.has-artwork[lazy='loading'],
+  &.has-artwork[lazy='loaded'] {
     @media (orientation: portrait) and (max-width: 700px) {
       padding-top: 33vh;
     }
