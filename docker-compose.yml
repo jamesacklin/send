@@ -14,9 +14,9 @@ services:
     image: danieldent/nginx-ssl-proxy
     restart: always
     environment:
-      UPSTREAM: 172.28.0.2:3000
-      SERVERNAME: acklindesign.com
-      EXTRANAMES: www.acklindesign.com
+      UPSTREAM: 172.18.0.2:3000
+      SERVERNAME: dirtrag.bike
+      EXTRANAMES: www.dirtrag.bike
     ports:
       - "80:80"    
       - "443:443"

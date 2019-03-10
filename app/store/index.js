@@ -72,7 +72,7 @@ export default () => {
         },
         {
           name: 'Advertise',
-          href: '/advertise'
+          href: '/'
         },
         {
           name: 'Contribute',

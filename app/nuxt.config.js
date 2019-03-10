@@ -83,7 +83,7 @@ module.exports = {
     }]
   ],
   axios: {
-    baseURL: 'https://content.acklindesign.com/wp-json/wp/v2/',
+    baseURL: 'https://content.dirtrag.bike/wp-json/wp/v2/',
     https: true,
     progress: true
   },
