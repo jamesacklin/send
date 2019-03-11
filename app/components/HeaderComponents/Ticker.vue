@@ -24,7 +24,11 @@
           :key="story.index"
           v-for="story in tickerStories"
         >
-          <a :href="story.link">{{ story.title.rendered }}</a>
+          <nuxt-link 
+            :to="`/articles/${story.slug}`"
+            tag="a">
+            {{ story.title.rendered }}
+          </nuxt-link>
         </span>
       </div>
     </div>
@@ -52,7 +56,6 @@ export default {
   },
   computed: {
     tickerStories() {
-      // FIXME: Make tickerStories a Vuex getter
       return this.$store.state.tickerPosts
     }
   },
@@ -67,6 +70,7 @@ export default {
     }
   },
   mounted() {
+    // When mounted, dispatch the 'getTickerStories' action in the store.
     this.$store.dispatch('getTickerStories')
   }
 }
@@ -81,20 +85,15 @@ export default {
   white-space: nowrap;
 }
 
-.text.marquee {
-  display: inline-block;
-  width: 100%;
-}
-
 .text.marquee:nth-of-type(1) {
-  /* Timing function */
-  animation: marquee 30s linear infinite;
+  display: inline-block;
+  animation: marquee 40s linear infinite;
 }
 
 .text.marquee:nth-of-type(2) {
-  /* Timing function */
-  animation: marquee2 30s linear infinite;
-  animation-delay: 15s;
+  display: inline-block;
+  animation: marquee2 40s linear infinite;
+  animation-delay: 20s;
 }
 
 .paused .text.marquee {
