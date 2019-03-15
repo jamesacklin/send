@@ -1,19 +1,31 @@
 const pkg = require('./package')
 
-
-
 module.exports = {
   mode: 'universal',
   head: {
     title: pkg.name,
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'language', content: 'en-us' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+    meta: [{
+        charset: 'utf-8'
+      },
+      {
+        name: 'language',
+        content: 'en-us'
+      },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1'
+      },
+      {
+        hid: 'description',
+        name: 'description',
+        content: pkg.description
+      }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+    link: [{
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: '/favicon.ico'
+      },
       {
         rel: 'preconnect',
         href: 'http://68.183.116.134',
@@ -21,19 +33,34 @@ module.exports = {
       }
     ]
   },
-  loading: { color: '#eb181d' },
+  loading: {
+    color: '#eb181d'
+  },
   css: ['~/static/global.css'],
-  plugins: [
-    { src: '~/plugins/fontawesome.js', ssr: true },
-    { src: '~/plugins/vue-dfp.js', ssr: false },
-    { src: '~/plugins/vue-disqus.js', ssr: false },
-    { src: '~/plugins/vue-lazy.js', ssr: false },
-    { src: '~/plugins/vue-socialsharing.js', ssr: false }
+  plugins: [{
+      src: '~/plugins/fontawesome.js',
+      ssr: true
+    },
+    {
+      src: '~/plugins/vue-dfp.js',
+      ssr: false
+    },
+    {
+      src: '~/plugins/vue-disqus.js',
+      ssr: false
+    },
+    {
+      src: '~/plugins/vue-lazy.js',
+      ssr: false
+    },
+    {
+      src: '~/plugins/vue-socialsharing.js',
+      ssr: false
+    }
   ],
   router: {
     extendRoutes(routes, resolve) {
-      return [
-        {
+      return [{
           path: '/',
           component: resolve(__dirname, 'pages/index.vue'),
           name: 'index'
@@ -51,28 +78,7 @@ module.exports = {
         {
           path: '/:slug',
           component: resolve(__dirname, 'pages/page.vue'),
-          name: 'page',
-          beforeEnter: (to, from, next) => {
-            // https://www.reddit.com/r/vuejs/comments/687qcv/any_way_to_pass_data_from_the_beforeenter_guard/dgxcx02/
-            function isValidPage(slug) {
-              // FIXME: Figure out how to test for a valid page object (from WP-API?)
-              return false
-            }
-            function isValidPost(slug) {
-              // FIXME: Figure out how to test for a valid post object (from WP-API?)
-              return false
-            }
-            if (isValidPage(to.params.slug)) {
-              // The slug is a valid "page" slug, continue
-              next();
-            } else if (isValidPost(to.params.slug)) {
-              // The slug isn't a valid page slug, but it's a valid "post" slug
-              next({ path: '/articles/' + to.params.slug })
-            } else {
-              // The slug is completely invalid and we'll just redirect them home
-              next({ path: '/' })
-            }
-          }
+          name: 'page'
         },
         {
           path: '/articles/:slug',
