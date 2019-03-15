@@ -1,30 +1,27 @@
 <template>
   <div>
-    <AdHeader />
+    <AdHeader/>
     <template v-for="(feedItem, index) in feedData">
-       <PostAtom
-          v-if="feedItem.type === 'post'"
-          :key="feedItem.index"
-          :slug="feedItem.slug"
-          :title="feedItem.title.rendered"
-          :date="feedItem.date"
-          :excerpt="feedItem.excerpt.rendered"
-          :pictureUrl="featuredImage(feedItem)"
-          :author="postAuthor(feedItem)"
-          :mode="postMode(feedItem)"
-        />
-        <div
-          v-if="feedItem.type === 'ad'"
-          class="feed-item feed-insert"
-          :class="`feed-insert-${index}`"
-          :key="index"
-        >
-          <advertising
-            :id="feedItem.id"
-            :size="feedItem.size"
-            :unit="feedItem.name"
-          />
-        </div>
+      <PostAtom
+        v-if="feedItem.type === 'post'"
+        :key="feedItem.index"
+        :slug="feedItem.slug"
+        :title="feedItem.title.rendered"
+        :date="feedItem.date"
+        :excerpt="feedItem.excerpt.rendered"
+        :titleCallout="titleCallout(feedItem)"
+        :pictureUrl="featuredImage(feedItem)"
+        :author="postAuthor(feedItem)"
+        :mode="postMode(feedItem)"
+      />
+      <div
+        v-if="feedItem.type === 'ad'"
+        class="feed-item feed-insert"
+        :class="`feed-insert-${index}`"
+        :key="index"
+      >
+        <advertising :id="feedItem.id" :size="feedItem.size" :unit="feedItem.name"/>
+      </div>
     </template>
   </div>
 </template>
@@ -37,9 +34,7 @@ import AdHeader from '@/components/PageComponents/AdHeader'
 
 export default {
   name: 'feed',
-  props: [
-    'feedData'
-  ],
+  props: ['feedData'],
   components: {
     PostAtom,
     Advertising,
@@ -47,31 +42,23 @@ export default {
   },
   methods: {
     titleCallout: function(post) {
-      // Determine title callouts for each post based on category.
-      // FIXME: Make titleCallout an ACF field; it can stay a method because we're operating on an iteratee
-      if (
-        find(post.categories, function(cat) {
-          return cat == '589'
-        })
-      ) {
-        return 'Contest'
-      } else if (
-        find(post._embedded['wp:term'][1], function(tag) {
-          return tag.id == '2339'
-        })
-      ) {
-        return 'Holiday Gift Guide'
+      // Returns a title callout if the author has defined it in an ACF field.
+      if (post.acf.post_title_callout) {
+        return post.acf.post_title_callout
+      } else {
+        return
       }
     },
     postMode: function(post) {
-      // Determine the post "mode" [enhanced, promotion, default] based on
-      // category or a featuredPost flag in the post meta.
-      // FIXME: Make postMode an ACF field; it can stay a method because we're operating on an iteratee
-      if (post.categories[0] == '589') {
+      // Determine the post "mode" [enhanced, promotion, default] based on a few criteria.
+      // 1) If the author explicitly defines the post feed layout in an ACF field
+      if (post.acf.post_feed_layout) {
+        return post.acf.post_feed_layout
+      } // 2) If the post is in the "Contests" category (ID 589)
+      else if (post.categories[0] == '589') {
         return 'promotion'
-      // } else if (post.meta.featuredPost.length) {
-      //   return 'enhanced'
-      } else {
+      } // 3) If nothing else, return default.
+      else {
         return 'default'
       }
     },
@@ -92,17 +79,14 @@ export default {
       // Return the post featured image
       if (post._embedded['wp:featuredmedia']) {
         let featuredImage = post._embedded['wp:featuredmedia'][0]
-        if (featuredImage && post.categories[0] == '589'){
-          return (
-            featuredImage.media_details.sizes.full.source_url
-          )
+        if (featuredImage && post.categories[0] == '589') {
+          return featuredImage.media_details.sizes.full.source_url
         } else if (featuredImage && featuredImage.media_details.sizes.medium) {
           return (
             featuredImage.media_details.sizes.medium.source_url ||
             featuredImage.media_details.sizes.full.source_url
           )
-        }
-          else {
+        } else {
           return '/og-card.png'
         }
       } else {
@@ -118,10 +102,10 @@ export default {
   margin-bottom: 2em;
 }
 
-.feed-insert  > div > div:not(:empty) {
+.feed-insert > div > div:not(:empty) {
   margin: 2rem 0;
   text-align: center;
   padding: 2em;
-  background: rgba(0,0,0,0.1);
+  background: rgba(0, 0, 0, 0.1);
 }
 </style>

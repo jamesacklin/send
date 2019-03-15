@@ -1,0 +1,5 @@
+spotxchange.com, 214741, RESELLER, 7842df1d2fe2db34
+spotx.tv, 214741, RESELLER, 7842df1d2fe2db34
+springserve.com, 692, RESELLER, a24eb641fc82e93d
+beachfront.com, 12938, DIRECT, e2541279e8e2ca4d
+altitude-arena.com, QH24PC75K10EL12CM3IQ1O7AES, DIRECT

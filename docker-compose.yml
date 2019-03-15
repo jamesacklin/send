@@ -1,21 +1,26 @@
-version: "3"
+version: '3'
 
 services:
   nuxt:
-    build: ./app/
     container_name: send-web
+    build: ./app/
     restart: always
     ports:
       - "3000:3000"
     command:
       "npm run start"
-
-  nginx:
-    image: nginx:latest
+  nginx-ssl-proxy:
     container_name: send-server
+    image: danieldent/nginx-ssl-proxy
+    restart: always
+    environment:
+      UPSTREAM: 172.18.0.2:3000
+      SERVERNAME: dirtrag.bike
+      EXTRANAMES: www.dirtrag.bike
     ports:
-      - "80:80"
+      - "80:80"    
+      - "443:443"
     volumes:
-      - ./nginx:/etc/nginx/conf.d
+      - "/etc/letsencrypt"
     depends_on:
       - nuxt

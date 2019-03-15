@@ -6,7 +6,8 @@
     <div class="footer-sidebar">
       <ul>
         <li v-for="link in footerLinks" :key="link.index">
-          <nuxt-link :to="link.href" tag="a"> {{ link.name }} </nuxt-link>
+          <nuxt-link v-if="!isUrl(link.href)" :to="link.href" tag="a"> {{ link.name }} </nuxt-link>
+          <a v-if="isUrl(link.href)" :href="link.href" rel="external"> {{ link.name }} </a>
         </li>
       </ul>
     </div>
@@ -21,6 +22,16 @@ export default {
       // FIXME: Make footerLinks a Vuex getter
       return this.$store.state.footerLinks
     }
+  },
+  methods: {
+    isUrl(link) {
+      let pattern = /^((http|https|ftp):\/\/)/
+      if (pattern.test(link)) {
+        return true
+      } else {
+        return false
+      }
+    }
   }
 }
 </script>
@@ -31,7 +42,7 @@ footer {
   line-height: 1.6;
   width: 100%;
   background: #292724;
-  color: #F5F3EF;
+  color: #f5f3ef;
   margin-top: 2rem;
   padding: 1rem 0;
   display: grid;
@@ -67,7 +78,7 @@ ul li {
 }
 
 a {
-  color: #F5F3EF;
+  color: #f5f3ef;
   text-decoration: none;
 }
 

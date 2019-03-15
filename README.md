@@ -1,26 +1,37 @@
-# send
+# 🤙 Send
+
+Send is a JavaScript-powered Progressive Web Application for browsing and reading articles from Dirt Rag Magazine. It is written in Vue.js using the Nuxt framework and is powered by the WordPress API with a few Advanced Custom Fields. In essence, it is an example of a "headless" CMS.
+
+Send runs in two Docker containers; `send-web` runs the Nuxt server, and `send-server` runs an nginx proxy, signed with an SSL certificate with the help of `certbot`. On first `docker-compose` run, the helpful `danieldent/nginx-ssl-proxy` image should take care of everything.
+
+For more detail on the app architecture and functionality, see the README in the `/app` directory of this repository.
 
 ## Project setup
 ```
-npm install
+git clone https://github.com/jamesacklin/send.git
 ```
 
-### Compiles and hot-reloads for development
+### Compiles, minifies for production, and starts servers
 ```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
+docker-compose up --build --force-recreate -d
 ```
 
-### Run your tests
+### Inspect Docker bridge network
 ```
-npm run test
+docker network inspect send_default
 ```
 
-### Lints and fixes files
+### Follow send-web logs
 ```
-npm run lint
+docker logs -f send-web
+```
+
+### Follow send-server logs
+```
+docker logs -f send-server
+```
+
+### Rebuild send-web on code updates/releases
+```
+. release.sh
 ```

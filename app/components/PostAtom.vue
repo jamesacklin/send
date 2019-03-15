@@ -87,7 +87,7 @@ export default {
   hyphens: auto;
 }
 
-.post-atom:not(.promotion){
+.post-atom:not(.promotion) {
   background-image: none !important;
 }
 
@@ -97,24 +97,24 @@ export default {
   background-color: #292724;
   background-size: cover;
   background-position: center center;
-  border-top: 0.25rem solid #EB181D;
+  border-top: 0.25rem solid #eb181d;
 }
 
 .post-atom.promotion::after {
-  content: "";
+  content: '';
   display: block;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .post-atom.contest {
-  border: 1px solid #CCC;
-  border-top: 0.25rem solid #EB181D;
-  box-shadow: 0 0.125em 0.25em rgba(0,0,0,0.125);
+  border: 1px solid #ccc;
+  border-top: 0.25rem solid #eb181d;
+  box-shadow: 0 0.125em 0.25em rgba(0, 0, 0, 0.125);
 }
 
 .post-image-crop {
@@ -126,7 +126,8 @@ export default {
 
 .post-image-crop img {
   position: absolute;
-  top: 50%; left: 0;
+  top: 50%;
+  left: 0;
   transform: translateY(-50%);
   width: 100%;
   height: auto;
@@ -134,7 +135,7 @@ export default {
   &[lazy='loading'] {
     opacity: 0;
   }
-  &[lazy='loaded']{
+  &[lazy='loaded'] {
     opacity: 1;
   }
 }
@@ -157,27 +158,27 @@ export default {
 }
 
 .promotion .post-title a {
-  color: #F5F3EF;
+  color: #f5f3ef;
 }
 
 .post-title a:hover {
-  color: #EB181D;
+  // color: #eb181d;
 }
 
 .promotion .post-title {
-  color: #F5F3EF;
+  color: #f5f3ef;
 }
 
 .post-title-callout {
   display: block;
-  color: #EB181D;
+  color: #eb181d;
 }
 
 .post-launch-media {
   font-family: 'Libre Franklin', sans-serif;
   font-size: 1.6rem;
   margin: -1rem 0 0;
-  color: #EB181D;
+  color: #eb181d;
   font-weight: 900;
   cursor: pointer;
 }
@@ -217,7 +218,17 @@ export default {
   z-index: 1;
 }
 
-@media (min-width: 500px){
+.post-atom:hover {
+  .post-image-crop {
+    filter: grayscale(100%) url(/#red);
+  }
+  .post-title a,
+  .post-text {
+    color: #eb181d;
+  }
+}
+
+@media (min-width: 500px) {
   .post-atom {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -235,12 +246,12 @@ export default {
   .promotion .post-text {
     grid-column-start: 1;
     grid-column-end: 2;
-    background: rgba(0,0,0,0.66);
+    background: rgba(0, 0, 0, 0.66);
     padding: 1em;
   }
 }
 
-@media (min-width: 1200px){
+@media (min-width: 1200px) {
   .post-atom {
     grid-template-columns: 1fr 2fr;
   }
