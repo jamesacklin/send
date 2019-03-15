@@ -3,15 +3,24 @@ import dayjs from 'dayjs'
 
 export default {
   // Open or close nav drawer
-  openNavDrawer({ commit, state }) {
+  openNavDrawer({
+    commit,
+    state
+  }) {
     commit('toggleNavDrawer', true)
   },
-  closeNavDrawer({ commit, state }) {
+  closeNavDrawer({
+    commit,
+    state
+  }) {
     commit('toggleNavDrawer', false)
   },
 
   // page
-  async getPage({ commit, state }, params) {
+  async getPage({
+    commit,
+    state
+  }, params) {
     // check store for page already, bail if found
     if (!this.getters.getPageBySlug(params.slug)) {
       const page = await this.$axios.$get('pages?_embed', {
@@ -28,7 +37,10 @@ export default {
   },
 
   // Posts tagged for the ticker, filtered by an expiration in the future
-  async getTickerStories({commit, state} , params){
+  async getTickerStories({
+    commit,
+    state
+  }, params) {
     // Get current datetime as ISO 8601 string
     const now = new dayjs().toISOString()
     // Get posts
@@ -47,12 +59,18 @@ export default {
     commit('addTickerPosts', tickerPosts)
   },
 
-  async clearSearchPosts({commit, state}){
+  async clearSearchPosts({
+    commit,
+    state
+  }) {
     commit('clearSearchPosts')
     commit('searchLoadingStatus', false)
   },
 
-  async getSearchPosts({commit, state}, params){
+  async getSearchPosts({
+    commit,
+    state
+  }, params) {
     commit('searchLoadingStatus', true)
     commit('clearSearchPosts')
     const searchPosts = await this.$axios.$get('posts', {
@@ -67,7 +85,10 @@ export default {
   },
 
   // category from slug
-  async getCategoryFromSlug({ commit, state }, params) {
+  async getCategoryFromSlug({
+    commit,
+    state
+  }, params) {
     // if we don't have the category in the store, go get it and store it
     if (!this.getters.getCategoryBySlug(params.slug)) {
       const cat = await this.$axios.$get('categories', {
@@ -77,14 +98,20 @@ export default {
       })
       // instantiate pagination store model, merge with what we get from the API
       const storeCat = merge(cat[0], {
-        pagination: { current: false, pages: [] }
+        pagination: {
+          current: false,
+          pages: []
+        }
       })
       commit('storeCategory', storeCat)
     }
   },
 
   // post
-  async getPost({ commit, state }, params) {
+  async getPost({
+    commit,
+    state
+  }, params) {
     // check store for post already, bail if found
     if (!this.getters.getPostBySlug(params.slug)) {
       const post = await this.$axios.$get('posts?_embed', {
@@ -96,9 +123,16 @@ export default {
     }
   },
 
-  async getPosts({ commit, state }, params) {
-    const { page } = params
-    const { prefetch } = params
+  async getPosts({
+    commit,
+    state
+  }, params) {
+    const {
+      page
+    } = params
+    const {
+      prefetch
+    } = params
 
     // which page are we on?
     if (!prefetch) {
@@ -150,18 +184,30 @@ export default {
   },
 
   // get posts by category
-  async getPostsByCategory({ commit, state }, params) {
+  async getPostsByCategory({
+    commit,
+    state
+  }, params) {
     // page from route params
-    const { page } = params
+    const {
+      page
+    } = params
     // category slug from route params
-    const { cat } = params
-    const { prefetch } = params
+    const {
+      cat
+    } = params
+    const {
+      prefetch
+    } = params
     // get the ID for the category slug we're on
     const currentCategory = state.categories.categories[cat].id
     // tell the store which category we're on
     commit('currentCategory', currentCategory)
     // which page are we on?
-    commit('currentCategoryPage', { cat: cat, page: page })
+    commit('currentCategoryPage', {
+      cat: cat,
+      page: page
+    })
     // check before requesting more pages
     if (
       // we have no posts, get some
@@ -175,7 +221,10 @@ export default {
         !state.categories.categoryIds.includes(currentCategory))
     ) {
       // paginate - add this to our category-specific object of seen category pages
-      commit('paginateCategory', { cat: cat, page: page })
+      commit('paginateCategory', {
+        cat: cat,
+        page: page
+      })
       // Add this category ID to the list of category IDs we've already gotten
       commit('storeCategoryId', currentCategory)
 
