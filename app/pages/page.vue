@@ -59,11 +59,13 @@ export default {
       }
     }
   },
-  async asyncData({ payload, isStatic, store, params }) {
+  async asyncData({ payload, isStatic, store, params, error, redirect }) {
     if (payload && isStatic) {
       store.commit('addPage', [payload])
     } else {
-      await store.dispatch('getPage', params)
+      await store
+        .dispatch('getPage', params)
+        .then(error => redirect(301, `/articles/${params.slug}`))
     }
   },
   scrollToTop: true,
