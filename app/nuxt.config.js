@@ -28,7 +28,7 @@ module.exports = {
       },
       {
         rel: 'preconnect',
-        href: 'http://68.183.116.134',
+        href: 'https://content.dirtrag.bike',
         crossorigin: true
       }
     ]
