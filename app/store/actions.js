@@ -19,7 +19,11 @@ export default {
           slug: params.slug
         }
       })
-      commit('addPage', page[0])
+      if (page.length === 0) {
+        return new TypeError("Page not found")
+      } else {
+        commit('addPage', page[0])
+      }
     }
   },
 
