@@ -4,34 +4,63 @@ module.exports = {
   mode: 'universal',
   head: {
     title: pkg.name,
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'language', content: 'en-us' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+    meta: [{
+        charset: 'utf-8'
+      },
+      {
+        name: 'language',
+        content: 'en-us'
+      },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1'
+      },
+      {
+        hid: 'description',
+        name: 'description',
+        content: pkg.description
+      }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+    link: [{
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: '/favicon.ico'
+      },
       {
         rel: 'preconnect',
-        href: 'http://68.183.116.134',
+        href: 'https://content.dirtrag.bike',
         crossorigin: true
       }
     ]
   },
-  loading: { color: '#eb181d' },
+  loading: {
+    color: '#eb181d'
+  },
   css: ['~/static/global.css'],
-  plugins: [
-    { src: '~/plugins/fontawesome.js', ssr: true },
-    { src: '~/plugins/vue-dfp.js', ssr: false },
-    { src: '~/plugins/vue-disqus.js', ssr: false },
-    { src: '~/plugins/vue-lazy.js', ssr: false },
-    { src: '~/plugins/vue-socialsharing.js', ssr: false }
+  plugins: [{
+      src: '~/plugins/fontawesome.js',
+      ssr: true
+    },
+    {
+      src: '~/plugins/vue-dfp.js',
+      ssr: false
+    },
+    {
+      src: '~/plugins/vue-disqus.js',
+      ssr: false
+    },
+    {
+      src: '~/plugins/vue-lazy.js',
+      ssr: false
+    },
+    {
+      src: '~/plugins/vue-socialsharing.js',
+      ssr: false
+    }
   ],
   router: {
     extendRoutes(routes, resolve) {
-      return [
-        {
+      return [{
           path: '/',
           component: resolve(__dirname, 'pages/index.vue'),
           name: 'index'

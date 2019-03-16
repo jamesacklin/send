@@ -2,22 +2,19 @@
   <div class="content">
     <article :id="'page-id-' + this.post.id" class="page">
       <header class="page-header" :class="{ 'has-artwork': featuredMedia }">
-        <featured-media
-          v-if="featuredMedia"
-          :media="post._embedded['wp:featuredmedia'][0]"
-        />
+        <featured-media v-if="featuredMedia" :media="post._embedded['wp:featuredmedia'][0]"/>
         <div class="page-title-block">
           <h1 class="page-title" v-html="post.title.rendered"></h1>
         </div>
       </header>
       <div class="page-content">
         <main>
-          <AdHeader />
-          <div class="page-copy" v-html="post.content.rendered" />
+          <AdHeader/>
+          <div class="page-copy" v-html="post.content.rendered"/>
         </main>
         <aside class="advertising">
           <no-ssr>
-            <ad-sidebar :sidebarData="ads" />
+            <ad-sidebar :sidebarData="ads"/>
           </no-ssr>
         </aside>
       </div>
@@ -59,11 +56,13 @@ export default {
       }
     }
   },
-  async asyncData({ payload, isStatic, store, params }) {
+  async asyncData({ payload, isStatic, store, params, error, redirect }) {
     if (payload && isStatic) {
       store.commit('addPage', [payload])
     } else {
-      await store.dispatch('getPage', params)
+      await store
+        .dispatch('getPage', params)
+        .then(error => redirect(301, `/articles/${params.slug}`))
     }
   },
   scrollToTop: true,
@@ -126,11 +125,19 @@ export default {
     justify-content: center;
   }
   &.has-artwork {
-    .page-title-block { order: 1; }
-    .page-artwork { order: 2; }
+    .page-title-block {
+      order: 1;
+    }
+    .page-artwork {
+      order: 2;
+    }
     @media (min-width: 1000px) {
-      .page-title-block { order: 2; }
-      .page-artwork { order: 1; }
+      .page-title-block {
+        order: 2;
+      }
+      .page-artwork {
+        order: 1;
+      }
     }
   }
 }
@@ -194,7 +201,7 @@ export default {
 
 .page-content {
   padding: 0 2%;
-  border-top: 1px solid rgba(0,0,0,0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   @media (min-width: 1000px) {
     padding: 0;
     display: grid;
@@ -219,7 +226,7 @@ main {
 
 aside {
   grid-column: main;
-  @media (min-width: 1000px){
+  @media (min-width: 1000px) {
     grid-column: sidebar;
   }
 }
@@ -241,7 +248,6 @@ aside {
 .page-copy img {
   width: 100% !important;
 }
-
 
 @media (min-width: 1000px) {
   .page-copy figure {
@@ -286,5 +292,4 @@ aside {
 .page-comments {
   margin-top: 2rem;
 }
-
 </style>
