@@ -1,12 +1,12 @@
 <template lang="html">
-  <div class="post-container">
+  <div class="post-container" :id="`post-${id}`">
     <div
       v-lazy:background-image="backgroundImage"
       :class="[mode, isContest ? 'contest' : true, 'post-atom']"
     >
       <div v-if="mode != 'promotion'" class="post-image">
         <div class="post-image-crop">
-          <nuxt-link tag="a" :to="`/articles/` + slug">
+          <nuxt-link tag="a" :to="{ name: 'article', params: { slug: slug, id: id }}">
             <img alt="" v-lazy="pictureUrl" />
           </nuxt-link>
         </div>
@@ -14,8 +14,8 @@
       <div class="post-text">
         <div class="post-title-block">
           <h4 class="post-title">
-            <span v-html="titleCallout" class="post-title-callout"> </span>
-            <nuxt-link tag="a" :to="`/articles/` + slug">
+            <nuxt-link tag="a" :to="{ name: 'article', params: { slug: slug, id: id }}">
+              <span v-html="titleCallout" class="post-title-callout"> </span>
               <span v-html="title" class="post-title-wrap"> </span>
             </nuxt-link>
           </h4>
@@ -49,6 +49,7 @@ import dayjs from 'dayjs'
 export default {
   name: 'PostAtom',
   props: {
+    id: Number,
     slug: String,
     mode: String,
     pictureUrl: String,
@@ -227,7 +228,7 @@ export default {
   }
 }
 
-@media (min-width: 500px) {
+@media (min-width: 600px) {
   .post-atom {
     display: grid;
     grid-template-columns: 1fr 1fr;
