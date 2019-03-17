@@ -4,6 +4,7 @@
     <template v-for="(feedItem, index) in feedData">
       <PostAtom
         v-if="feedItem.type === 'post'"
+        :id="feedItem.id"
         :key="feedItem.index"
         :slug="feedItem.slug"
         :title="feedItem.title.rendered"

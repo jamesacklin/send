@@ -5,39 +5,40 @@ module.exports = {
   head: {
     title: pkg.name,
     meta: [{
-        charset: 'utf-8'
-      },
-      {
-        name: 'language',
-        content: 'en-us'
-      },
-      {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1'
-      },
-      {
-        hid: 'description',
-        name: 'description',
-        content: pkg.description
-      }
+      charset: 'utf-8'
+    },
+    {
+      name: 'language',
+      content: 'en-us'
+    },
+    {
+      name: 'viewport',
+      content: 'width=device-width, initial-scale=1'
+    },
+    {
+      hid: 'description',
+      name: 'description',
+      content: pkg.description
+    }
     ],
     link: [{
-        rel: 'icon',
-        type: 'image/x-icon',
-        href: '/favicon.ico'
-      },
-      {
-        rel: 'preconnect',
-        href: 'https://content.dirtrag.bike',
-        crossorigin: true
-      }
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '/favicon.ico'
+    },
+    {
+      rel: 'preconnect',
+      href: 'https://content.dirtrag.bike',
+      crossorigin: true
+    }
     ]
   },
   loading: {
     color: '#eb181d'
   },
   css: ['~/static/global.css'],
-  plugins: [{
+  plugins: [
+    {
       src: '~/plugins/fontawesome.js',
       ssr: true
     },
@@ -61,45 +62,74 @@ module.exports = {
   router: {
     extendRoutes(routes, resolve) {
       return [{
-          path: '/',
-          component: resolve(__dirname, 'pages/index.vue'),
-          name: 'index'
-        },
-        {
-          path: '/page/:page',
-          component: resolve(__dirname, 'pages/index.vue'),
-          name: 'index-page'
-        },
-        {
-          path: '/coolshops',
-          component: resolve(__dirname, 'pages/coolshops.vue'),
-          name: 'page-shops'
-        },
-        {
-          path: '/:slug',
-          component: resolve(__dirname, 'pages/page.vue'),
-          name: 'page'
-        },
-        {
-          path: '/articles/:slug',
-          component: resolve(__dirname, 'pages/article.vue'),
-          name: 'article'
-        },
-        {
-          path: '/category/:slug',
-          component: resolve(__dirname, 'pages/category-index.vue'),
-          name: 'category-index'
-        },
-        {
-          path: '/category/:slug/page/:page',
-          component: resolve(__dirname, 'pages/category-index.vue'),
-          name: 'category-index-page'
-        }
+        path: '/',
+        component: resolve(__dirname, 'pages/index.vue'),
+        name: 'index'
+      },
+      {
+        path: '/page/:page',
+        component: resolve(__dirname, 'pages/index.vue'),
+        name: 'index-page'
+      },
+      {
+        path: '/coolshops',
+        component: resolve(__dirname, 'pages/coolshops.vue'),
+        name: 'page-shops'
+      },
+      {
+        path: '/:slug',
+        component: resolve(__dirname, 'pages/page.vue'),
+        name: 'page'
+      },
+      {
+        path: '/articles/:slug',
+        component: resolve(__dirname, 'pages/article.vue'),
+        name: 'article'
+      },
+      {
+        path: '/category/:slug',
+        component: resolve(__dirname, 'pages/category-index.vue'),
+        name: 'category-index'
+      },
+      {
+        path: '/category/:slug/page/:page',
+        component: resolve(__dirname, 'pages/category-index.vue'),
+        name: 'category-index-page'
+      }
       ]
+    },
+    scrollBehavior(to, from, savedPosition) {
+      // if the returned position is falsy or an empty object,
+      // will retain current scroll position.
+      let position = false
+
+      // if no children detected
+      if (to.matched.length < 2) {
+        // scroll to the top of the page
+        position = { x: 0, y: 0 }
+      } else if (to.matched.some((r) => r.components.default.options.scrollToTop)) {
+        // if one of the children has scrollToTop option set to true
+        position = { x: 0, y: 0 }
+      }
+
+      // savedPosition is only available for popstate navigations (back button)
+      if (savedPosition) {
+        position = savedPosition
+      }
+
+      return new Promise(resolve => {
+        // wait for the out transition to complete (if necessary)
+        window.$nuxt.$once('triggerScroll', () => {
+          // coords will be used if no selector is provided,
+          // or if the selector didn't match any element.
+          if (to.hash && document.querySelector(to.hash)) {
+            // scroll to anchor by returning the selector
+            position = { selector: to.hash }
+          }
+          resolve(position)
+        })
+      })
     }
-    // scrollBehavior: function(to, from, savedPosition) {
-    //   return savedPosition
-    // }
   },
   modules: [
     '@nuxtjs/pwa',

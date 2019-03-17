@@ -42,13 +42,13 @@
       </header>
       <div class="article-content">
         <main>
-          <AdHeader />
+          <AdHeader/>
           <div class="article-copy" @click="zoomFigure" v-html="post.content.rendered"/>
           <div v-if="this.post.acf.contest_platform">
             <no-ssr placeholder="Loading contest...">
-              <contest 
+              <contest
                 :key="randomKey"
-                :platform="this.post.acf.contest_platform" 
+                :platform="this.post.acf.contest_platform"
                 :embedCode="this.post.acf.embed_code"
               />
             </no-ssr>
@@ -64,14 +64,13 @@
           </section>
           <section class="article-comments">
             <no-ssr>
-              <comments />
+              <comments/>
             </no-ssr>
           </section>
         </main>
         <aside class="advertising">
           <no-ssr>
-            <ad-sidebar 
-              :sidebarData="ads" />
+            <ad-sidebar :sidebarData="ads"/>
           </no-ssr>
         </aside>
       </div>
@@ -95,6 +94,7 @@ export default {
     AdHeader,
     AdSidebar
   },
+  scrollToTop: true,
   computed: {
     post() {
       // Return the post for whatever post we're looking for in route.params
@@ -165,10 +165,17 @@ export default {
         return false
       }
     },
-    randomKey(){
-      return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    randomKey() {
+      return (
+        Math.random()
+          .toString(36)
+          .substring(2, 15) +
+        Math.random()
+          .toString(36)
+          .substring(2, 15)
+      )
     },
-    isMobile: function () {
+    isMobile: function() {
       // Return true if the device user-agent is "mobile" (as deterimined by 'nuxt-device-detect' module)
       if (this.$device.isMobile) {
         return true
@@ -199,7 +206,6 @@ export default {
       }
     }
   },
-  scrollToTop: true,
   transition: {
     name: 'fade',
     mode: 'out-in'
@@ -257,11 +263,19 @@ export default {
     background: #f5f3ef;
   }
   &.has-artwork {
-    .article-title-block { order: 1; }
-    .article-artwork { order: 2; }
+    .article-title-block {
+      order: 1;
+    }
+    .article-artwork {
+      order: 2;
+    }
     @media (min-width: 1000px) {
-      .article-title-block { order: 2; }
-      .article-artwork { order: 1; }
+      .article-title-block {
+        order: 2;
+      }
+      .article-artwork {
+        order: 1;
+      }
     }
   }
 }
@@ -325,7 +339,7 @@ export default {
 
 .article-content {
   padding: 0 2%;
-  border-top: 1px solid rgba(0,0,0,0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   @media (min-width: 1000px) {
     padding: 0;
     display: grid;
@@ -350,7 +364,7 @@ main {
 
 aside {
   grid-column: main;
-  @media (min-width: 1000px){
+  @media (min-width: 1000px) {
     grid-column: sidebar;
   }
 }
@@ -372,7 +386,6 @@ aside {
 .article-copy img {
   width: 100%;
 }
-
 
 @media (min-width: 1000px) {
   .article-copy figure {
@@ -418,5 +431,4 @@ aside {
 .article-comments {
   margin-top: 2rem;
 }
-
 </style>

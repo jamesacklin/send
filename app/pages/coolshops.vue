@@ -78,7 +78,6 @@ export default {
       return this.$store.state.advertising.rectangle
     }
   },
-  scrollToTop: true,
   transition: {
     name: 'fade',
     mode: 'out-in'
