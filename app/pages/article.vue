@@ -94,6 +94,7 @@ export default {
     AdHeader,
     AdSidebar
   },
+  scrollToTop: true,
   computed: {
     post() {
       // Return the post for whatever post we're looking for in route.params
