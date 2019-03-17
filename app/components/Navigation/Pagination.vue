@@ -126,9 +126,15 @@ export default {
         !this.$store.state.pagination.current ||
         this.$store.state.pagination.current === 1
       ) {
-        return '/'
+        if (this.$route.params.id !== undefined) {
+          return `/#post-${this.$route.params.id}`
+        } else {
+          return '/'
+        }
       } else {
-        return '/page/' + this.$store.state.pagination.current + '/'
+        return `/page/${this.$store.state.pagination.current}/#post-${
+          this.$route.params.id
+        }`
       }
     },
     backUpText() {
@@ -280,7 +286,7 @@ export default {
       justify-content: center;
       color: #f5f3ef;
       text-decoration: none;
-      padding: 1rem;
+      padding: 1rem 0;
       background: #eb181d;
       svg {
         fill: #f5f3ef;
