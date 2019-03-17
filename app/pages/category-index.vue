@@ -1,12 +1,12 @@
 <template>
   <main class="content">
     <section class="feed category-feed">
-      <SectionHeader :sectionMeta="acfFields" />
+      <SectionHeader :sectionMeta="acfFields"/>
       <div class="feed-items">
-        <feed :feedData="feedItems" />
+        <feed :feedData="feedItems"/>
       </div>
       <div v-if="!isMobile" class="sidebar-ads">
-        <ad-sidebar :sidebarData="sidebarAds" />
+        <ad-sidebar :sidebarData="sidebarAds"/>
       </div>
     </section>
   </main>
@@ -38,7 +38,7 @@ export default {
     })
   },
   computed: {
-    isMobile: function () {
+    isMobile: function() {
       // Return true if the device user-agent is "mobile" (as deterimined by 'nuxt-device-detect' module)
       if (this.$device.isMobile) {
         return true
@@ -67,9 +67,9 @@ export default {
       return this.$store.state.advertising.rectangle
     },
     feedItems() {
-      if (this.isMobile){
-        // If the user-agent is "mobile", compose a feed, with an ad 
-        // inserted every 3 posts. We should have: 
+      if (this.isMobile) {
+        // If the user-agent is "mobile", compose a feed, with an ad
+        // inserted every 3 posts. We should have:
         // - 30 posts (set back in the Vuex store as state.postsPerPage),
         // - 10 ad slots (explicitly set back in the Vuex store).
         return compact(flattenDeep(zip(chunk(this.posts, 3), this.ads)))
@@ -78,12 +78,12 @@ export default {
         return this.$store.getters.getCatPostsPage(
           parseInt(this.$route.params.page || 1),
           this.catId
-        ) 
+        )
       }
     },
     sidebarAds() {
       // If the user agent is not "mobile", return ads from the store
-      if (!this.isMobile){
+      if (!this.isMobile) {
         return this.$store.state.advertising.rectangle
       } else {
         // Otherwise return an empty array
@@ -110,7 +110,6 @@ export default {
       ]
     }
   },
-  scrollToTop: false,
   transition: {
     name: 'fade',
     mode: 'out-in'
@@ -151,7 +150,7 @@ export default {
 
 .sidebar-ads {
   grid-column: main;
-  @media (min-width: 1000px){
+  @media (min-width: 1000px) {
     grid-column: sidebar;
   }
 }

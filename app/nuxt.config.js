@@ -5,39 +5,40 @@ module.exports = {
   head: {
     title: pkg.name,
     meta: [{
-        charset: 'utf-8'
-      },
-      {
-        name: 'language',
-        content: 'en-us'
-      },
-      {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1'
-      },
-      {
-        hid: 'description',
-        name: 'description',
-        content: pkg.description
-      }
+      charset: 'utf-8'
+    },
+    {
+      name: 'language',
+      content: 'en-us'
+    },
+    {
+      name: 'viewport',
+      content: 'width=device-width, initial-scale=1'
+    },
+    {
+      hid: 'description',
+      name: 'description',
+      content: pkg.description
+    }
     ],
     link: [{
-        rel: 'icon',
-        type: 'image/x-icon',
-        href: '/favicon.ico'
-      },
-      {
-        rel: 'preconnect',
-        href: 'https://content.dirtrag.bike',
-        crossorigin: true
-      }
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '/favicon.ico'
+    },
+    {
+      rel: 'preconnect',
+      href: 'https://content.dirtrag.bike',
+      crossorigin: true
+    }
     ]
   },
   loading: {
     color: '#eb181d'
   },
   css: ['~/static/global.css'],
-  plugins: [{
+  plugins: [
+    {
       src: '~/plugins/fontawesome.js',
       ssr: true
     },
@@ -61,45 +62,42 @@ module.exports = {
   router: {
     extendRoutes(routes, resolve) {
       return [{
-          path: '/',
-          component: resolve(__dirname, 'pages/index.vue'),
-          name: 'index'
-        },
-        {
-          path: '/page/:page',
-          component: resolve(__dirname, 'pages/index.vue'),
-          name: 'index-page'
-        },
-        {
-          path: '/coolshops',
-          component: resolve(__dirname, 'pages/coolshops.vue'),
-          name: 'page-shops'
-        },
-        {
-          path: '/:slug',
-          component: resolve(__dirname, 'pages/page.vue'),
-          name: 'page'
-        },
-        {
-          path: '/articles/:slug',
-          component: resolve(__dirname, 'pages/article.vue'),
-          name: 'article'
-        },
-        {
-          path: '/category/:slug',
-          component: resolve(__dirname, 'pages/category-index.vue'),
-          name: 'category-index'
-        },
-        {
-          path: '/category/:slug/page/:page',
-          component: resolve(__dirname, 'pages/category-index.vue'),
-          name: 'category-index-page'
-        }
+        path: '/',
+        component: resolve(__dirname, 'pages/index.vue'),
+        name: 'index'
+      },
+      {
+        path: '/page/:page',
+        component: resolve(__dirname, 'pages/index.vue'),
+        name: 'index-page'
+      },
+      {
+        path: '/coolshops',
+        component: resolve(__dirname, 'pages/coolshops.vue'),
+        name: 'page-shops'
+      },
+      {
+        path: '/:slug',
+        component: resolve(__dirname, 'pages/page.vue'),
+        name: 'page'
+      },
+      {
+        path: '/articles/:slug',
+        component: resolve(__dirname, 'pages/article.vue'),
+        name: 'article'
+      },
+      {
+        path: '/category/:slug',
+        component: resolve(__dirname, 'pages/category-index.vue'),
+        name: 'category-index'
+      },
+      {
+        path: '/category/:slug/page/:page',
+        component: resolve(__dirname, 'pages/category-index.vue'),
+        name: 'category-index-page'
+      }
       ]
     }
-    // scrollBehavior: function(to, from, savedPosition) {
-    //   return savedPosition
-    // }
   },
   modules: [
     '@nuxtjs/pwa',
