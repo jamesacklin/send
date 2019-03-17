@@ -161,10 +161,6 @@ export default {
   color: #f5f3ef;
 }
 
-.post-title a:hover {
-  // color: #eb181d;
-}
-
 .promotion .post-title {
   color: #f5f3ef;
 }
@@ -218,13 +214,16 @@ export default {
   z-index: 1;
 }
 
-.post-atom:hover {
-  .post-image-crop {
-    filter: grayscale(100%) url(/#red);
-  }
-  .post-title a,
-  .post-text {
-    color: #eb181d;
+@media (hover) {
+  .post-atom:hover {
+    .post-image-crop {
+      /* Inline SVG to use is back in @/layouts/default.vue */
+      filter: grayscale(100%) url(#red);
+    }
+    .post-title a,
+    .post-text {
+      color: #eb181d;
+    }
   }
 }
 
