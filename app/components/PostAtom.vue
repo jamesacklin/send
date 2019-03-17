@@ -1,10 +1,9 @@
 <template lang="html">
   <div class="post-container" :id="`post-${id}`">
     <div
-      v-lazy:background-image="backgroundImage"
       :class="[mode, isContest ? 'contest' : true, 'post-atom']"
     >
-      <div v-if="mode != 'promotion'" class="post-image">
+      <div class="post-image">
         <div class="post-image-crop">
           <nuxt-link tag="a" :to="{ name: 'article', params: { slug: slug, id: id }}">
             <img alt="" v-lazy="pictureUrl" />
@@ -69,15 +68,6 @@ export default {
     postDate: function() {
       // Pretty-format the post date (January 1, 2019)
       return dayjs(this.date).format('MMMM D, YYYY')
-    },
-    backgroundImage() {
-      // Set the background image if the post mode is a promotion
-      // FIXME: Make background image on promotion posts somewhat more intelligent, please
-      if (this.mode == 'promotion') {
-        return this.pictureUrl
-      } else {
-        return '/og-card.png'
-      }
     }
   }
 }
@@ -86,43 +76,32 @@ export default {
 <style lang="scss">
 .post-atom {
   hyphens: auto;
-}
-
-.post-atom:not(.promotion) {
-  background-image: none !important;
-}
-
-.post-atom.promotion {
-  padding: 4em 2%;
-  position: relative;
-  background-color: #292724;
-  background-size: cover;
-  background-position: center center;
-  border-top: 0.25rem solid #eb181d;
-}
-
-.post-atom.promotion::after {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-}
-
-.post-atom.contest {
-  border: 1px solid #ccc;
-  border-top: 0.25rem solid #eb181d;
-  box-shadow: 0 0.125em 0.25em rgba(0, 0, 0, 0.125);
+  &.promotion {
+    padding: 4em 2%;
+    position: relative;
+    background-color: #292724;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-top: 0.25rem solid #eb181d;
+    box-shadow: 0 0.125em 0.25em rgba(0, 0, 0, 0.125);
+  }
 }
 
 .post-image-crop {
   position: relative;
   padding-bottom: 56.25%;
+  height: 0;
+  width: 100%;
   overflow: hidden;
   background: white;
+  .post-atom.promotion & {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .post-image-crop img {
@@ -213,6 +192,8 @@ export default {
 .promotion .post-text {
   position: relative;
   z-index: 1;
+  background: rgba(0, 0, 0, 0.66);
+  padding: 1em;
 }
 
 @media (hover) {
@@ -246,8 +227,6 @@ export default {
   .promotion .post-text {
     grid-column-start: 1;
     grid-column-end: 2;
-    background: rgba(0, 0, 0, 0.66);
-    padding: 1em;
   }
 }
 
