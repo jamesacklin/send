@@ -122,19 +122,26 @@ export default {
   // TODO: Comment pagination component
   computed: {
     backUp() {
+      // If the pagination state is non-present or we are on page one...
       if (
         !this.$store.state.pagination.current ||
         this.$store.state.pagination.current === 1
       ) {
+        // and if the route.params.id value is present
         if (this.$route.params.id !== undefined) {
+          // return to the index page with a post-hash to scroll to
           return `/#post-${this.$route.params.id}`
         } else {
+          // else, just return to the top of home
           return '/'
         }
       } else {
+        // If the pagination state is present (e.g., we navigated here from another page),
+        // go to the post-hash on that page
         return `/page/${this.$store.state.pagination.current}/#post-${
           this.$route.params.id
         }`
+        // FIXME: Make this category-aware ;)
       }
     },
     backUpText() {
