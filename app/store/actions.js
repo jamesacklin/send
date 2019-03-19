@@ -1,5 +1,6 @@
 import merge from 'lodash/merge'
 import dayjs from 'dayjs'
+import { reject } from 'q';
 
 export default {
   // Open or close nav drawer
@@ -29,7 +30,7 @@ export default {
         }
       })
       if (page.length === 0) {
-        return new TypeError("Page not found")
+        reject(error)
       } else {
         commit('addPage', page[0])
       }

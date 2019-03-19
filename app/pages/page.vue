@@ -60,9 +60,11 @@ export default {
     if (payload && isStatic) {
       store.commit('addPage', [payload])
     } else {
-      await store
-        .dispatch('getPage', params)
-        .then(error => redirect(301, `/articles/${params.slug}`))
+      try {
+        await store.dispatch('getPage', params)
+      } catch (error) {
+        redirect(301, `/articles/${params.slug}`)
+      }
     }
   },
   scrollToTop: true,
