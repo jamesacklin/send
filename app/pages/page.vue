@@ -43,7 +43,7 @@ export default {
     },
     postDate: function() {
       // Pretty-format the post date (January 1, 2019)
-      return dayjs(this.date).format('MMMM D, YYYY')
+      return dayjs(this.post.date).format('MMMM D, YYYY')
     },
     featuredMedia() {
       // Check for the existence of featured media on the post.
