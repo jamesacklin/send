@@ -44,6 +44,14 @@
         <main>
           <AdHeader/>
           <div class="article-copy" @click="zoomFigure" v-html="post.content.rendered"/>
+          <div v-if="this.post.acf.special_content">
+            <no-ssr placeholder="Loading special content...">
+              <special-content
+                :key="randomKey"
+                :embedCode="this.post.acf.embed_code"
+              />
+            </no-ssr>
+          </div>
           <div v-if="this.post.acf.contest_platform">
             <no-ssr placeholder="Loading contest...">
               <contest
@@ -82,6 +90,7 @@
 import AdHeader from '@/components/PageComponents/AdHeader'
 import AdSidebar from '@/components/PageComponents/AdSidebar'
 import Contest from '@/components/PageComponents/Contest'
+import SpecialContent from '@/components/PageComponents/SpecialContent'
 import Comments from '@/components/PageComponents/Comments'
 import FeaturedMedia from '@/components/PageComponents/FeaturedMedia'
 import dayjs from 'dayjs'
@@ -91,6 +100,7 @@ export default {
     FeaturedMedia,
     Comments,
     Contest,
+    SpecialContent,
     AdHeader,
     AdSidebar
   },
