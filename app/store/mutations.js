@@ -39,6 +39,9 @@ export default {
   clearSearchPosts(state){
     state.searchPosts = []
   },
+  addContestPosts(state, posts){
+    state.contestPosts = posts
+  },
   // paginate
   paginate(state, page) {
     state.pagination.pages.push(page)

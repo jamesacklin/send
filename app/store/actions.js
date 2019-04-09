@@ -85,6 +85,24 @@ export default {
     commit('searchLoadingStatus', false)
   },
 
+  async getContestPosts({
+    commit,
+    state
+  }, params) {
+    if (!state.contestPosts.length){
+      const contestPosts = await this.$axios.$get('posts?_embed', {
+        params: {
+          per_page: 1,
+          page: 1,
+          orderby: 'date',
+          categories: '589'
+        }
+      })
+      commit('addContestPosts', contestPosts)
+    }
+  },
+
+
   // category from slug
   async getCategoryFromSlug({
     commit,
