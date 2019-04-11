@@ -16,6 +16,7 @@
         />
       </div>
     </div>
+    <OutsideFeed />
     <template v-for="ad in sidebarData">
       <advertising
         :id="ad.id"
@@ -30,13 +31,15 @@
 <script>
 import Advertising from '@/components/Advertising'
 import PostAtom from '@/components/PostAtom'
+import OutsideFeed from '@/components/HeaderComponents/OutsideFeed'
 
 export default {
   name: 'adSidebar',
   props: ['sidebarData'],
   components: {
     Advertising,
-    PostAtom
+    PostAtom,
+    OutsideFeed
   },
   computed: {
     contestPosts: function() {

@@ -4,23 +4,17 @@
       <div class="header-content">
         <NavLogo variant="banner" />
       </div>
-      <div class="header-sidebar"><OutsideFeed /></div>
+      <div class="header-sidebar"></div>
     </header>
   </div>
 </template>
 
 <script>
-// import Advertising from '@/components/Advertising'
 import NavLogo from '@/components/Navigation/NavLogo'
-import OutsideFeed from '@/components/HeaderComponents/OutsideFeed'
-// import Ticker from '@/components/HeaderComponents/Ticker'
 
 export default {
   components: {
-    // Advertising,
     NavLogo,
-    OutsideFeed,
-    // Ticker
   },
   data() {
     return {
@@ -132,30 +126,4 @@ header .header-sidebar {
   position: relative;
 }
 
-@media (max-width: 812px) {
-  header .outside-player {
-    display: none;
-  }
-}
-
-header .outside-player:not(:empty) {
-  width: 300px;
-  position: absolute;
-  top: 100px;
-}
-
-header.sticky .outside-player {
-  top: 1.5em;
-}
-
-header .ticker {
-  grid-column: full;
-  grid-row: 1;
-}
-
-header.sticky .ticker {
-  visibility: hidden;
-  height: 0px;
-  grid-row: 1;
-}
 </style>
