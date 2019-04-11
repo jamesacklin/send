@@ -22,7 +22,7 @@
           <div v-if="isGallery" class="post-launch-media">↗ Launch Gallery</div>
           <div v-if="isContest" class="post-launch-media">Enter to Win Now</div>
           <div
-            v-if="!(isMedia || mode == 'promotion' || mode == 'spliced')"
+            v-show="!(isMedia || mode == 'promotion' || mode == 'spliced')"
             class="post-author"
           >
             <span v-html="author"></span>
@@ -33,7 +33,7 @@
         </div>
 
         <div
-          v-if="!(mode == 'promotion' || mode == 'spliced')"
+          v-show="!(mode == 'promotion' || mode == 'spliced')"
           class="post-excerpt"
           v-html="excerpt"
         ></div>
