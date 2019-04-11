@@ -89,3 +89,4 @@ sw.*
 storybook-static
 
 app/static/sw.js
+.directory
