@@ -277,4 +277,19 @@ export default {
     font-size: 1.2rem;
   }
 }
+
+.advertising .post-container {
+  margin-bottom: inherit !important;
+}
+
+.advertising .promotion {
+  grid-template-columns: 1fr;
+  padding: 2%;
+  .post-text {
+    text-align: left;
+  }
+  h4,
+  .post-title-callout,
+  .post-title-wrap { font-size: 1.5rem; }
+}
 </style>

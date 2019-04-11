@@ -3,13 +3,16 @@
     <div v-if="contestPosts">
       <div v-for="(post, index) in contestPosts" :key="index">
         <PostAtom
-          :id="post.id"
-          :key="post.index"
-          :slug="post.slug"
-          :title="post.title.rendered"
-          :date="post.date"
-          :excerpt="post.excerpt.rendered"
-          :mode="`promotion`"
+        :id="post.id"
+        :key="post.index"
+        :slug="post.slug"
+        :title="post.title.rendered"
+        :date="post.date"
+        :excerpt="post.excerpt.rendered"
+        :pictureUrl="featuredImage(post)"
+        :author="`Dirt Rag Magazine`"
+        :mode="`promotion`"
+        :titleCallout="`Contest`"
         />
       </div>
     </div>
@@ -38,6 +41,26 @@ export default {
   computed: {
     contestPosts: function() {
       return this.$store.state.contestPosts
+    }
+  },
+  methods: {
+    featuredImage: function(post) {
+      // Return the post featured image
+      if (post._embedded['wp:featuredmedia']) {
+        let featuredImage = post._embedded['wp:featuredmedia'][0]
+        if (featuredImage && post.categories[0] == '589') {
+          return featuredImage.media_details.sizes.full.source_url
+        } else if (featuredImage && featuredImage.media_details.sizes.medium) {
+          return (
+            featuredImage.media_details.sizes.medium.source_url ||
+            featuredImage.media_details.sizes.full.source_url
+          )
+        } else {
+          return '/og-card.png'
+        }
+      } else {
+        return '/og-card.png'
+      }
     }
   },
   mounted () {
