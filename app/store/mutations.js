@@ -20,16 +20,6 @@ export default {
       }
     }
   },
-  addTickerPosts(state, posts){
-    for (let post of posts){
-      const i = state.tickerPosts.findIndex(o => o.id === post.id)
-      if (state.tickerPosts[i]){
-        state.tickerPosts[i] = merge(state.tickerPosts[i], post)
-      } else {
-        state.tickerPosts.push(post)
-      }
-    }
-  },
   searchLoadingStatus(state, status){
     state.searchLoading = status
   },
@@ -38,6 +28,9 @@ export default {
   },
   clearSearchPosts(state){
     state.searchPosts = []
+  },
+  addContestPosts(state, posts){
+    state.contestPosts = posts
   },
   // paginate
   paginate(state, page) {

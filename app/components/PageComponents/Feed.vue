@@ -5,7 +5,7 @@
       <PostAtom
         v-if="feedItem.type === 'post'"
         :id="feedItem.id"
-        :key="feedItem.index"
+        :key="feedItem.id"
         :slug="feedItem.slug"
         :title="feedItem.title.rendered"
         :date="feedItem.date"
@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import find from 'lodash/find'
 import PostAtom from '@/components/PostAtom'
 import Advertising from '@/components/Advertising'
 import AdHeader from '@/components/PageComponents/AdHeader'
@@ -47,17 +46,17 @@ export default {
       if (post.acf.post_title_callout) {
         return post.acf.post_title_callout
       } else {
-        return
+        return ''
       }
     },
     postMode: function(post) {
       // Determine the post "mode" [enhanced, promotion, default] based on a few criteria.
-      // 1) If the author explicitly defines the post feed layout in an ACF field
-      if (post.acf.post_feed_layout) {
-        return post.acf.post_feed_layout
-      } // 2) If the post is in the "Contests" category (ID 589)
-      else if (post.categories[0] == '589') {
+      // 1) If the post is in the "Contests" category (ID 589)
+      if (post.categories.includes(589)) {
         return 'promotion'
+      } // 2) If the author explicitly defines the post feed layout in an ACF field
+      else if (post.acf.post_feed_layout) {
+        return post.acf.post_feed_layout
       } // 3) If nothing else, return default.
       else {
         return 'default'

@@ -27,8 +27,8 @@ export default () => {
       searchLoading: false,
       posts: [],
       pages: [],
-      tickerPosts: [],
       searchPosts: [],
+      contestPosts: [],
       // TODO: Control navItems from WordPress
       navItems: [
         {

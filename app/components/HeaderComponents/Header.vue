@@ -5,7 +5,6 @@
         <NavLogo variant="banner" />
       </div>
       <div class="header-sidebar"><OutsideFeed /></div>
-      <Ticker ref="ticker" />
     </header>
   </div>
 </template>
@@ -14,14 +13,14 @@
 // import Advertising from '@/components/Advertising'
 import NavLogo from '@/components/Navigation/NavLogo'
 import OutsideFeed from '@/components/HeaderComponents/OutsideFeed'
-import Ticker from '@/components/HeaderComponents/Ticker'
+// import Ticker from '@/components/HeaderComponents/Ticker'
 
 export default {
   components: {
     // Advertising,
     NavLogo,
     OutsideFeed,
-    Ticker
+    // Ticker
   },
   data() {
     return {

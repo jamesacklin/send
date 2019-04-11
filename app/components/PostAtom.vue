@@ -22,7 +22,7 @@
           <div v-if="isGallery" class="post-launch-media">↗ Launch Gallery</div>
           <div v-if="isContest" class="post-launch-media">Enter to Win Now</div>
           <div
-            v-if="!(isMedia || mode == 'promotion' || mode == 'spliced')"
+            v-show="!(isMedia || mode == 'promotion' || mode == 'spliced')"
             class="post-author"
           >
             <span v-html="author"></span>
@@ -33,7 +33,7 @@
         </div>
 
         <div
-          v-if="!(mode == 'promotion' || mode == 'spliced')"
+          v-show="!(mode == 'promotion' || mode == 'spliced')"
           class="post-excerpt"
           v-html="excerpt"
         ></div>
@@ -276,5 +276,20 @@ export default {
   .enhanced .post-excerpt {
     font-size: 1.2rem;
   }
+}
+
+.advertising .post-container {
+  margin-bottom: inherit !important;
+}
+
+.advertising .promotion {
+  grid-template-columns: 1fr;
+  padding: 2%;
+  .post-text {
+    text-align: left;
+  }
+  h4,
+  .post-title-callout,
+  .post-title-wrap { font-size: 1.5rem; }
 }
 </style>

@@ -37,29 +37,6 @@ export default {
     }
   },
 
-  // Posts tagged for the ticker, filtered by an expiration in the future
-  async getTickerStories({
-    commit,
-    state
-  }, params) {
-    // Get current datetime as ISO 8601 string
-    const now = new dayjs().toISOString()
-    // Get posts
-    // We only need the title and slug, so no need for _embed.
-    const tickerPosts = await this.$axios.$get('posts', {
-      params: {
-        // Look for posts with the 'feature_until' meta field, which shouldn't 
-        // be set if the user didn't tick the 'feature in ticker' box in the UI
-        'filter[meta_key]': 'feature_until',
-        // filter posts with a 'feature_until' date-time value greater than now (the future)
-        'filter[meta_value]': now,
-        'filter[meta_compare]': '>'
-      }
-    })
-    // Commit ticker posts to the store
-    commit('addTickerPosts', tickerPosts)
-  },
-
   async clearSearchPosts({
     commit,
     state
@@ -84,6 +61,24 @@ export default {
     commit('addSearchPosts', searchPosts)
     commit('searchLoadingStatus', false)
   },
+
+  async getContestPosts({
+    commit,
+    state
+  }, params) {
+    if (!state.contestPosts.length){
+      const contestPosts = await this.$axios.$get('posts?_embed', {
+        params: {
+          per_page: 1,
+          page: 1,
+          orderby: 'date',
+          categories: '589'
+        }
+      })
+      commit('addContestPosts', contestPosts)
+    }
+  },
+
 
   // category from slug
   async getCategoryFromSlug({

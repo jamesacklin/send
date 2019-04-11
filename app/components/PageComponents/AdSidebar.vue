@@ -1,5 +1,21 @@
 <template>
   <div class="advertising">
+    <div v-if="contestPosts">
+      <div v-for="(post, index) in contestPosts" :key="index">
+        <PostAtom
+        :id="post.id"
+        :key="post.index"
+        :slug="post.slug"
+        :title="post.title.rendered"
+        :date="post.date"
+        :excerpt="post.excerpt.rendered"
+        :pictureUrl="featuredImage(post)"
+        :author="`Dirt Rag Magazine`"
+        :mode="`promotion`"
+        :titleCallout="`Contest`"
+        />
+      </div>
+    </div>
     <template v-for="ad in sidebarData">
       <advertising
         :id="ad.id"
@@ -13,12 +29,42 @@
 
 <script>
 import Advertising from '@/components/Advertising'
+import PostAtom from '@/components/PostAtom'
 
 export default {
   name: 'adSidebar',
   props: ['sidebarData'],
   components: {
-    Advertising
+    Advertising,
+    PostAtom
+  },
+  computed: {
+    contestPosts: function() {
+      return this.$store.state.contestPosts
+    }
+  },
+  methods: {
+    featuredImage: function(post) {
+      // Return the post featured image
+      if (post._embedded['wp:featuredmedia']) {
+        let featuredImage = post._embedded['wp:featuredmedia'][0]
+        if (featuredImage && post.categories[0] == '589') {
+          return featuredImage.media_details.sizes.full.source_url
+        } else if (featuredImage && featuredImage.media_details.sizes.medium) {
+          return (
+            featuredImage.media_details.sizes.medium.source_url ||
+            featuredImage.media_details.sizes.full.source_url
+          )
+        } else {
+          return '/og-card.png'
+        }
+      } else {
+        return '/og-card.png'
+      }
+    }
+  },
+  mounted () {
+    this.$store.dispatch('getContestPosts')
   }
 }
 </script>
