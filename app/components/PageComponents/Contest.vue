@@ -1,6 +1,6 @@
 <template>
   <div class="contest">
-      <div id="contest-target"></div>
+    <div id="contest-target"></div>
   </div>
 </template>
 
@@ -10,17 +10,14 @@ import jQuery from 'jquery'
 let $ = jQuery
 
 export default {
-  props: [
-    'platform',
-    'embedCode'
-  ],
-  mounted () {
+  props: ['platform', 'embedCode'],
+  mounted() {
     // If the contest is a Surveymonkey form...
-    if (this.platform === 'Surveymonkey'){
+    if (this.platform === 'Surveymonkey') {
       // Test for script contents in the embedCode prop
       var re = /<script\b[^>]*>([\s\S]*?)<\/script>/gm
       var match
-      while (match = re.exec(this.embedCode)) {
+      while ((match = re.exec(this.embedCode))) {
         // If we find a match in the embed code...
         // Create a script element
         let contestScript = document.createElement('script')
@@ -32,7 +29,7 @@ export default {
         // Appends the script to the head
         document.head.appendChild(contestScript)
         // Now, set up a MutationObserver to watch for the widget to mount
-        var observer = new MutationObserver(callback);
+        var observer = new MutationObserver(callback)
         // Watch the body for childList, attribute, and subtree changes
         observer.observe(document.body, {
           childList: true,
@@ -40,12 +37,15 @@ export default {
           subtree: true
         })
         // Called when a mutation is observed
-        function callback(mutationList, observer){
-          // Examine each mutation 
-          mutationList.forEach(function(mutation){
+        function callback(mutationList, observer) {
+          // Examine each mutation
+          mutationList.forEach(function(mutation) {
             // If the mutation target className is this string, the Surveymonkey widget has mounted,
             // probably not at all where we want the widget to actually display
-            if (mutation.target.className === 'smcx-widget smcx-embed smcx-show smcx-widget-dark'){
+            if (
+              mutation.target.className ===
+              'smcx-widget smcx-embed smcx-show smcx-widget-dark'
+            ) {
               // Rip the widget out and put it where we want to on the page
               $('.smcx-widget').appendTo('#contest-target')
             }
@@ -53,7 +53,7 @@ export default {
         }
       }
     } // ... or if the contest is a Rafflecopter giveaway
-    else if (this.platform === 'Rafflecopter'){
+    else if (this.platform === 'Rafflecopter') {
       let contestScript = document.createElement('script')
       // Sets some attributes
       contestScript.setAttribute(
@@ -70,7 +70,7 @@ export default {
   },
   beforeDestroy() {
     // Find the contest-script in the head and destroy it
-    $("#contest-script").remove()
+    $('#contest-script').remove()
     // Destroy the widget target
     $('#contest-target').remove()
     // Destroy some other Surveymonkey hooks

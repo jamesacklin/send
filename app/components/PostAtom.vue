@@ -290,6 +290,8 @@ export default {
   }
   h4,
   .post-title-callout,
-  .post-title-wrap { font-size: 1.5rem; }
+  .post-title-wrap {
+    font-size: 1.5rem;
+  }
 }
 </style>

@@ -20,16 +20,16 @@ export default {
       }
     }
   },
-  searchLoadingStatus(state, status){
+  searchLoadingStatus(state, status) {
     state.searchLoading = status
   },
-  addSearchPosts(state, posts){
+  addSearchPosts(state, posts) {
     state.searchPosts = posts
   },
-  clearSearchPosts(state){
+  clearSearchPosts(state) {
     state.searchPosts = []
   },
-  addContestPosts(state, posts){
+  addContestPosts(state, posts) {
     state.contestPosts = posts
   },
   // paginate

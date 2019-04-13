@@ -46,10 +46,7 @@
           <div class="article-copy" @click="zoomFigure" v-html="post.content.rendered"/>
           <div v-if="this.post.acf.special_content">
             <no-ssr placeholder="Loading special content...">
-              <special-content
-                :key="randomKey"
-                :embedCode="this.post.acf.embed_code"
-              />
+              <special-content :key="randomKey" :embedCode="this.post.acf.embed_code"/>
             </no-ssr>
           </div>
           <div v-if="this.post.acf.contest_platform">

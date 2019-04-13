@@ -1,10 +1,6 @@
 <template>
   <div class="comments">
-    <vue-disqus 
-      shortname="dirt-rag-mag" 
-      :identifier="page_url"
-      :url="page_url"
-    />
+    <vue-disqus shortname="dirt-rag-mag" :identifier="page_url" :url="page_url"/>
   </div>
 </template>
 

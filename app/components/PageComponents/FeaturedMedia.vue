@@ -16,7 +16,7 @@ import each from 'lodash/each'
 export default {
   props: ['media'],
   computed: {
-    pictureUrl(){
+    pictureUrl() {
       return this.media.media_details.sizes.medium.source_url
     },
     featuredSrcset() {
@@ -28,7 +28,8 @@ export default {
         each(postImageSizes, function(size, index) {
           srcset = srcset + `${size.source_url} ${size.width}w, `
         })
-        srcset = srcset + this.media.media_details.sizes.full.source_url + ' 1200w'
+        srcset =
+          srcset + this.media.media_details.sizes.full.source_url + ' 1200w'
         return srcset
       } else {
         return false
@@ -40,7 +41,9 @@ export default {
 
 <style lang="scss">
 .article-artwork {
-  img { transition: all 0.5s ease; }
+  img {
+    transition: all 0.5s ease;
+  }
   img[lazy='error'] {
     height: 0px;
     width: 0px;
@@ -53,7 +56,7 @@ export default {
     transform: translateX(0);
     opacity: 1;
   }
-  @media (min-width: 1000px){
+  @media (min-width: 1000px) {
     max-height: 60vh;
     overflow: hidden;
   }

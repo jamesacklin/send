@@ -155,7 +155,7 @@ export default {
   width: 100%;
   margin-top: 2rem;
   padding: 1rem 0;
-  border-top: 1px solid rgba(255,255,255,0.25);
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
   color: #f5f3ef;
   font-family: 'Roboto Mono', monospace;
   text-align: center;

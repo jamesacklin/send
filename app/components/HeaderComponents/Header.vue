@@ -19,7 +19,7 @@ export default {
   components: {
     // Advertising,
     NavLogo,
-    OutsideFeed,
+    OutsideFeed
     // Ticker
   },
   data() {

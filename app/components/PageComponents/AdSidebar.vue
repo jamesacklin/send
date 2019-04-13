@@ -3,26 +3,21 @@
     <div v-if="contestPosts">
       <div v-for="(post, index) in contestPosts" :key="index">
         <PostAtom
-        :id="post.id"
-        :key="post.index"
-        :slug="post.slug"
-        :title="post.title.rendered"
-        :date="post.date"
-        :excerpt="post.excerpt.rendered"
-        :pictureUrl="featuredImage(post)"
-        :author="`Dirt Rag Magazine`"
-        :mode="`promotion`"
-        :titleCallout="`Contest`"
+          :id="post.id"
+          :key="post.index"
+          :slug="post.slug"
+          :title="post.title.rendered"
+          :date="post.date"
+          :excerpt="post.excerpt.rendered"
+          :pictureUrl="featuredImage(post)"
+          :author="`Dirt Rag Magazine`"
+          :mode="`promotion`"
+          :titleCallout="`Contest`"
         />
       </div>
     </div>
     <template v-for="ad in sidebarData">
-      <advertising
-        :id="ad.id"
-        :size="ad.size"
-        :unit="ad.name"
-        :key="ad.index"
-      />
+      <advertising :id="ad.id" :size="ad.size" :unit="ad.name" :key="ad.index"/>
     </template>
   </div>
 </template>
@@ -63,7 +58,7 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     this.$store.dispatch('getContestPosts')
   }
 }

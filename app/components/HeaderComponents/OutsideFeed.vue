@@ -16,7 +16,7 @@ export default {
     mountScript() {
       // Method for mounting the JW Player platform scripts.
       // Checks to see if a script with ID "outside-script" is null before mounting.
-      if (document.getElementById('outside-script') === null){
+      if (document.getElementById('outside-script') === null) {
         let outsideScript = document.createElement('script')
         // Sets some attributes
         outsideScript.setAttribute(
@@ -32,7 +32,7 @@ export default {
       // Method for removing the JW Player script from the head.
       // TODO: look for domain rather than ID to catch all stray scripts.
       // Checks to see if a script with ID "outside-script" is not null before trying to remove it.
-      if (document.getElementById('outside-script') !== null){
+      if (document.getElementById('outside-script') !== null) {
         let outsideScript = document.getElementById('outside-script')
         // Remove the script
         document.head.removeChild(outsideScript)
@@ -40,14 +40,14 @@ export default {
     }
   },
   watch: {
-    windowWidth(width){
+    windowWidth(width) {
       // Watch the windowWidth data
-      if (width >= 814){
+      if (width >= 814) {
         // If the window is >814px wide, mount the script
-        this.mountScript();
-      } else if (width <= 814){
+        this.mountScript()
+      } else if (width <= 814) {
         // If the window is <814px wide, unmount the script
-        this.unmountScript();
+        this.unmountScript()
       }
     }
   },

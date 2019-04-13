@@ -1,12 +1,12 @@
 <template>
   <div class="advertising-header">
-    <advertising 
+    <advertising
       v-if="!isMobile"
       :id="'div-gpt-ad-1550758388120-0'"
       :size="'banner'"
       :unit="'DR_Leaderboard'"
     />
-    <advertising 
+    <advertising
       v-if="isMobile"
       :id="'div-gpt-ad-1550758951288-0'"
       :size="'mobileBanner'"
@@ -24,7 +24,7 @@ export default {
     Advertising
   },
   computed: {
-    isMobile: function () {
+    isMobile: function() {
       // Return true if the device user-agent is "mobile" (as deterimined by 'nuxt-device-detect' module)
       if (this.$device.isMobile) {
         return true
@@ -34,7 +34,6 @@ export default {
       }
     }
   }
-
 }
 </script>
 

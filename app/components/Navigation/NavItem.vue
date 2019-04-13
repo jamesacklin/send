@@ -8,11 +8,11 @@
 <script>
 export default {
   name: 'navItem',
- props: ['text', 'link'],
+  props: ['text', 'link'],
   methods: {
-    isUrl(link){
-      let pattern = /^((http|https|ftp):\/\/)/;
-      if(pattern.test(link)){
+    isUrl(link) {
+      let pattern = /^((http|https|ftp):\/\/)/
+      if (pattern.test(link)) {
         return true
       } else {
         return false
@@ -27,7 +27,7 @@ export default {
   display: block;
   background: #eb181d;
   width: 100%;
-  color: #F5F3EF;
+  color: #f5f3ef;
   font-family: 'Libre Franklin', sans-serif;
   font-weight: 900;
   font-size: 1.2rem;
@@ -38,18 +38,18 @@ export default {
   margin-bottom: 0.25em;
 }
 
-@media (min-width: 1000px){
+@media (min-width: 1000px) {
   .nav-item {
     font-size: 1.5rem;
   }
 }
 
 .nav-item.nav-item-external {
-  background: rgb(14,121,193);
+  background: rgb(14, 121, 193);
 }
 
 .nav-item:hover {
   color: #292724;
-  background: #F5F3EF;
+  background: #f5f3ef;
 }
 </style>

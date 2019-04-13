@@ -57,7 +57,8 @@ export default () => {
         },
         {
           name: 'Subscribe to Dirt Rag Today',
-          href: 'https://w1.buysub.com/pubs/RG/DRM/DRM_subpage_print_dig.jsp?cds_page_id=164525'
+          href:
+            'https://w1.buysub.com/pubs/RG/DRM/DRM_subpage_print_dig.jsp?cds_page_id=164525'
         }
       ],
       // TODO: Control footerLinks from WordPress

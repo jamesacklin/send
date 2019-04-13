@@ -1,6 +1,6 @@
 <template>
   <div class="special-content">
-      <div id="special-content-target"></div>
+    <div id="special-content-target"></div>
   </div>
 </template>
 
@@ -10,14 +10,12 @@ import jQuery from 'jquery'
 let $ = jQuery
 
 export default {
-  props: [
-    'embedCode'
-  ],
-  mounted () {
+  props: ['embedCode'],
+  mounted() {
     // Test for "<script src='blah'" contents in the embedCode prop
-    var re = /<script[^>]*src="([^"]*)"/;
-    // If we find a match in the embed code... 
-    if (re.test(this.embedCode) === true){
+    var re = /<script[^>]*src="([^"]*)"/
+    // If we find a match in the embed code...
+    if (re.test(this.embedCode) === true) {
       // Get the src attribute value, call it match
       var match = re.exec(this.embedCode)
       // Create a script element
@@ -36,7 +34,7 @@ export default {
   },
   beforeDestroy() {
     // Find the special-content-script in the head and destroy it
-    $("#special-content-script").remove()
+    $('#special-content-script').remove()
     // Destroy the widget target
     $('#special-content-target').remove()
   }

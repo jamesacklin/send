@@ -4,33 +4,35 @@ module.exports = {
   mode: 'universal',
   head: {
     title: pkg.name,
-    meta: [{
-      charset: 'utf-8'
-    },
-    {
-      name: 'language',
-      content: 'en-us'
-    },
-    {
-      name: 'viewport',
-      content: 'width=device-width, initial-scale=1'
-    },
-    {
-      hid: 'description',
-      name: 'description',
-      content: pkg.description
-    }
+    meta: [
+      {
+        charset: 'utf-8'
+      },
+      {
+        name: 'language',
+        content: 'en-us'
+      },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1'
+      },
+      {
+        hid: 'description',
+        name: 'description',
+        content: pkg.description
+      }
     ],
-    link: [{
-      rel: 'icon',
-      type: 'image/x-icon',
-      href: '/favicon.ico'
-    },
-    {
-      rel: 'preconnect',
-      href: 'https://content.dirtrag.bike',
-      crossorigin: true
-    }
+    link: [
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: '/favicon.ico'
+      },
+      {
+        rel: 'preconnect',
+        href: 'https://content.dirtrag.bike',
+        crossorigin: true
+      }
     ]
   },
   loading: {
@@ -61,41 +63,42 @@ module.exports = {
   ],
   router: {
     extendRoutes(routes, resolve) {
-      return [{
-        path: '/',
-        component: resolve(__dirname, 'pages/index.vue'),
-        name: 'index'
-      },
-      {
-        path: '/page/:page',
-        component: resolve(__dirname, 'pages/index.vue'),
-        name: 'index-page'
-      },
-      {
-        path: '/coolshops',
-        component: resolve(__dirname, 'pages/coolshops.vue'),
-        name: 'page-shops'
-      },
-      {
-        path: '/:slug',
-        component: resolve(__dirname, 'pages/page.vue'),
-        name: 'page'
-      },
-      {
-        path: '/articles/:slug',
-        component: resolve(__dirname, 'pages/article.vue'),
-        name: 'article'
-      },
-      {
-        path: '/category/:slug',
-        component: resolve(__dirname, 'pages/category-index.vue'),
-        name: 'category-index'
-      },
-      {
-        path: '/category/:slug/page/:page',
-        component: resolve(__dirname, 'pages/category-index.vue'),
-        name: 'category-index-page'
-      }
+      return [
+        {
+          path: '/',
+          component: resolve(__dirname, 'pages/index.vue'),
+          name: 'index'
+        },
+        {
+          path: '/page/:page',
+          component: resolve(__dirname, 'pages/index.vue'),
+          name: 'index-page'
+        },
+        {
+          path: '/coolshops',
+          component: resolve(__dirname, 'pages/coolshops.vue'),
+          name: 'page-shops'
+        },
+        {
+          path: '/:slug',
+          component: resolve(__dirname, 'pages/page.vue'),
+          name: 'page'
+        },
+        {
+          path: '/articles/:slug',
+          component: resolve(__dirname, 'pages/article.vue'),
+          name: 'article'
+        },
+        {
+          path: '/category/:slug',
+          component: resolve(__dirname, 'pages/category-index.vue'),
+          name: 'category-index'
+        },
+        {
+          path: '/category/:slug/page/:page',
+          component: resolve(__dirname, 'pages/category-index.vue'),
+          name: 'category-index-page'
+        }
       ]
     },
     scrollBehavior(to, from, savedPosition) {
@@ -107,7 +110,9 @@ module.exports = {
       if (to.matched.length < 2) {
         // scroll to the top of the page
         position = { x: 0, y: 0 }
-      } else if (to.matched.some((r) => r.components.default.options.scrollToTop)) {
+      } else if (
+        to.matched.some(r => r.components.default.options.scrollToTop)
+      ) {
         // if one of the children has scrollToTop option set to true
         position = { x: 0, y: 0 }
       }
@@ -134,12 +139,19 @@ module.exports = {
   modules: [
     '@nuxtjs/pwa',
     '@nuxtjs/axios',
-    ['@nuxtjs/google-analytics', {
-      id: 'UA-474542-4'
-    }],
-    ['nuxt-device-detect', {
-      defaultUserAgent: 'Mozilla/5.0 (Linux; Android 5.1.1; Nexus 6 Build/LYZ28E) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.39 Mobile Safari/537.36'
-    }]
+    [
+      '@nuxtjs/google-analytics',
+      {
+        id: 'UA-474542-4'
+      }
+    ],
+    [
+      'nuxt-device-detect',
+      {
+        defaultUserAgent:
+          'Mozilla/5.0 (Linux; Android 5.1.1; Nexus 6 Build/LYZ28E) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.39 Mobile Safari/537.36'
+      }
+    ]
   ],
   axios: {
     baseURL: 'https://content.dirtrag.bike/wp-json/wp/v2/',
