@@ -62,7 +62,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .nav-drawer-wrapper {
   position: fixed;
   z-index: 5;
@@ -104,6 +104,28 @@ export default {
   justify-content: stretch;
   min-width: 20em;
   width: 50%;
+}
+
+.nav-drawer nav .nav-item {
+  display: block;
+  background: #eb181d;
+  width: 100%;
+  color: #f5f3ef;
+  text-align: center;
+  padding: 2.5vh;
+  cursor: pointer;
+  text-decoration: none;
+  margin-bottom: 0.25em;
+  @media (min-width: 1000px) {
+    font-size: 1.5rem;
+  }
+  &:hover {
+    color: #292724;
+    background: #f5f3ef;
+  }
+  &.nav-item-external {
+    background: rgb(14, 121, 193);
+  }
 }
 
 .nav-drawer-header {

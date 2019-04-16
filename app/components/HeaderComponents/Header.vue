@@ -1,8 +1,9 @@
 <template lang="html">
-  <div ref="banner" :class="{ block: pastHeader }">
+  <div ref="banner">
     <header role="banner" :class="{ sticky: pastHeader }">
       <div class="header-content">
         <NavLogo variant="banner" />
+        <HorizontalNav />
       </div>
       <div class="header-sidebar"><OutsideFeed /></div>
     </header>
@@ -10,17 +11,15 @@
 </template>
 
 <script>
-// import Advertising from '@/components/Advertising'
 import NavLogo from '@/components/Navigation/NavLogo'
 import OutsideFeed from '@/components/HeaderComponents/OutsideFeed'
-// import Ticker from '@/components/HeaderComponents/Ticker'
+import HorizontalNav from '@/components/Navigation/HorizontalNav'
 
 export default {
   components: {
-    // Advertising,
+    HorizontalNav,
     NavLogo,
     OutsideFeed
-    // Ticker
   },
   data() {
     return {
@@ -111,11 +110,14 @@ header a.nuxt-link-exact-active {
 }
 
 header.sticky {
-  position: fixed;
-  z-index: 2;
-  background: transparent;
+  // position: fixed;
+  // z-index: 2;
+  // background: transparent;
   div[data-google-query-id] {
     display: none;
+  }
+  .header-content {
+    position: relative;
   }
 }
 
@@ -145,6 +147,7 @@ header .outside-player:not(:empty) {
 }
 
 header.sticky .outside-player {
+  position: fixed;
   top: 1.5em;
 }
 
