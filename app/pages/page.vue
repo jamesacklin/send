@@ -82,7 +82,7 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: this.post.excerpt.rendered
+          content: this.post.excerpt.rendered.replace(/<(?:.|\n)*?>/gm, '')
         },
         {
           hid: 'og:title',
@@ -92,7 +92,7 @@ export default {
         {
           hid: 'og:description',
           property: 'og:description',
-          content: this.post.excerpt.rendered
+          content: this.post.excerpt.rendered.replace(/<(?:.|\n)*?>/gm, '')
         },
         {
           hid: 'og:image',
