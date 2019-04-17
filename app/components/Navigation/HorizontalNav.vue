@@ -1,5 +1,5 @@
 <template lang="html">
-  <div>
+  <div class="horizontal-nav">
     <nav>
       <NavItem
         v-for="navLink in navLinks"
@@ -32,8 +32,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.horizontal-nav {
+  flex-grow: 1;
+  display: none;
+  @media (min-width: 800px) {
+    display: block;
+  }
+}
+
 nav {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  @media (min-width: 800px) {
+    padding-left: 3rem;
+  }
+  @media (min-width: 1200px) {
+    padding-left: 10em;
+  }
 }
 </style>

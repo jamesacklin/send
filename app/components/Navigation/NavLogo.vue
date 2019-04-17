@@ -54,6 +54,9 @@ export default {
   padding: 0 0.33em;
   margin: 0;
   cursor: pointer;
+  @media (min-width: 800px) {
+    display: none;
+  }
 }
 
 .nav-toggle:hover {
