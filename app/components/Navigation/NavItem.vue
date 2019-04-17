@@ -22,34 +22,15 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="scss">
 .nav-item {
-  display: block;
-  background: #eb181d;
-  width: 100%;
-  color: #f5f3ef;
   font-family: 'Libre Franklin', sans-serif;
+  color: white;
   font-weight: 900;
   font-size: 1.2rem;
-  text-align: center;
-  padding: 2.5vh;
-  cursor: pointer;
   text-decoration: none;
-  margin-bottom: 0.25em;
-}
-
-@media (min-width: 1000px) {
-  .nav-item {
-    font-size: 1.5rem;
+  &:hover {
+    color: #eb181d;
   }
-}
-
-.nav-item.nav-item-external {
-  background: rgb(14, 121, 193);
-}
-
-.nav-item:hover {
-  color: #292724;
-  background: #f5f3ef;
 }
 </style>

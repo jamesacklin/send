@@ -56,7 +56,7 @@ export default () => {
           href: '/category/opinion'
         },
         {
-          name: 'Subscribe to Dirt Rag Today',
+          name: 'Subscribe',
           href:
             'https://w1.buysub.com/pubs/RG/DRM/DRM_subpage_print_dig.jsp?cds_page_id=164525'
         }
