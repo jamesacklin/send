@@ -7,18 +7,20 @@
         :text="navLink.name"
         :link="navLink.href"
       />
+      <Search />
     </nav>
   </div>
 </template>
 
 <script>
-// import Search from '@/components/Search'
+import Search from '@/components/Search'
 import NavItem from '@/components/Navigation/NavItem'
 
 export default {
   name: 'HorizontalNav',
   components: {
-    NavItem
+    NavItem,
+    Search
   },
   computed: {
     navLinks: function() {
@@ -40,15 +42,42 @@ export default {
   }
 }
 
+.horizontal-nav .search-component {
+  min-width: 23em;
+  width: 0;
+  margin: 0;
+  font-size: 70%
+}
+
 nav {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   @media (min-width: 800px) {
-    padding-left: 3rem;
+    flex-wrap: wrap;
+    padding-left: 1rem;
+    > div {
+      width: 25%;
+    }
+    .search-component {
+      align-self: flex-end;
+      width: 100% !important;
+      margin-top: 1em !important;
+    }
   }
-  @media (min-width: 1200px) {
-    padding-left: 10em;
+  @media (min-width: 1150px) {
+    flex-wrap: nowrap;
+    > div {
+      width: auto;
+    }
+    .search-component {
+      align-self: flex-end;
+      width: auto !important;
+      margin-top: 0 !important;
+    }
   }
 }
+
+
 </style>
