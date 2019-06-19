@@ -176,7 +176,6 @@ export default {
   justify-content: center;
   align-items: center;
   position: relative;
-  z-index: 1;
   .header-figure {
     position: absolute;
     height: 10em;
