@@ -56,6 +56,10 @@ export default () => {
           href: '/category/opinion'
         },
         {
+          name: 'Store',
+          href: 'https://dirtragmag.threadless.com/'
+        },
+        {
           name: 'Subscribe',
           href:
             'https://w1.buysub.com/pubs/RG/DRM/DRM_subpage_print_dig.jsp?cds_page_id=164525'
@@ -63,6 +67,10 @@ export default () => {
       ],
       // TODO: Control footerLinks from WordPress
       footerLinks: [
+        {
+          name: 'Newsletter Signup',
+          href: 'https://rotatingmassmedia.us6.list-manage.com/subscribe?u=ae6a3a216e3721cb2cb9885ce&id=ddc46c4c51'
+        },
         {
           name: 'Staff',
           href: '/staff'
