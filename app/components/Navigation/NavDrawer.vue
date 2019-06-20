@@ -112,7 +112,7 @@ export default {
   width: 100%;
   color: #f5f3ef;
   text-align: center;
-  padding: 2.5vh;
+  padding: 2vh;
   cursor: pointer;
   text-decoration: none;
   margin-bottom: 0.25em;
