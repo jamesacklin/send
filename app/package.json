@@ -14,14 +14,14 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.12",
-    "@fortawesome/free-brands-svg-icons": "^5.6.3",
-    "@fortawesome/free-solid-svg-icons": "^5.6.3",
-    "@fortawesome/vue-fontawesome": "^0.1.5",
+    "@fortawesome/fontawesome-svg-core": "^1.2.19",
+    "@fortawesome/free-brands-svg-icons": "^5.9.0",
+    "@fortawesome/free-solid-svg-icons": "^5.9.0",
+    "@fortawesome/vue-fontawesome": "^0.1.6",
     "@nuxtjs/axios": "^5.4.1",
     "@nuxtjs/google-analytics": "^2.2.0",
     "@nuxtjs/pwa": "^2.6.0",
-    "dayjs": "^1.8.2",
+    "dayjs": "^1.8.14",
     "jquery": "^3.4.0",
     "lodash": "^4.17.11",
     "nuxt": "^2.6.1",
@@ -32,22 +32,22 @@
     "vue-lazyload": "^1.2.6",
     "vue-multiselect": "^2.1.4",
     "vue-social-sharing": "^2.4.3",
-    "vuex": "^3.1.0"
+    "vuex": "^3.1.1"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.1",
+    "babel-eslint": "^10.0.2",
     "babel-preset-vue": "^2.0.2",
     "css-loader": "^2.1.1",
     "eslint": "^5.16.0",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^2.1.2",
-    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-vue": "^5.2.2",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.12.0",
     "nodemon": "^1.18.11",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
-    "vue-template-compiler": "^2.6.10",
-    "vue-server-renderer": "^2.6.10"
+    "vue-server-renderer": "^2.6.10",
+    "vue-template-compiler": "^2.6.10"
   }
 }
