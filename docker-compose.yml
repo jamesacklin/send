@@ -9,3 +9,12 @@ services:
       - "3000:3000"
     command:
       "npm run start"
+  nginx:
+    image: nginx:1.13
+    container_name: send-server
+    ports:
+      - "80:80"
+    volumes:
+      - ./server:/etc/nginx/conf.d
+    depends_on:
+      - nuxt
