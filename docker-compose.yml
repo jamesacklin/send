@@ -2,8 +2,8 @@ version: '3'
 
 services:
   nuxt:
+    image: jamesacklin/send_nuxt:1.1.2
     container_name: send-web
-    build: ./app/
     restart: always
     ports:
       - "3000:3000"
