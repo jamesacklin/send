@@ -1,6 +1,6 @@
 import merge from 'lodash/merge'
 
-export default {
+const mutations = {
   // add one the pages state
   addPage(state, page) {
     // check the store for existing page before adding
@@ -81,3 +81,5 @@ export default {
     state.navDrawerOpen = onoff
   }
 }
+
+export default mutations
