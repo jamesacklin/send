@@ -152,6 +152,14 @@ export default {
       padding-top: 25vh;
     }
   }
+  /* Padding for sticky nav */
+  margin-top: 76.828px;
+  @media (min-width: 800px){
+    margin-top: 108.781px;
+  }
+  @media (min-width: 1150px){
+    margin-top: 67.156px;
+  }
 }
 
 .section-header[lazy='loading'] {
