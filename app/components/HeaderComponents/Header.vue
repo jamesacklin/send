@@ -39,12 +39,6 @@ header[role='banner'] {
     [main-end] minmax(1em, 1fr) [full-end];
   grid-auto-rows: auto;
   grid-row-gap: 0;
-  @media (min-width: 800px){
-    
-  }
-  @media (min-width: 800px){
-
-  }
 }
 
 header a {
