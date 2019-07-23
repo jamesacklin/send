@@ -31,8 +31,8 @@ header[role='banner'] {
   top: 0;
   width: 100%;
   background: #292724;
-  position: relative;
-  z-index: 1;
+  position: fixed;
+  z-index: 10;
   display: grid;
   grid-template-columns:
     [full-start] minmax(1em, 1fr) [main-start] minmax(0, 72.5em)
@@ -61,5 +61,11 @@ header a.nuxt-link-exact-active {
   justify-content: space-between;
   padding: 1rem 0;
   grid-column: main;
+  @media (min-width: 800px){
+    padding: 0.5rem 0;
+  }
+  @media (min-width: 1150px){
+    padding: 0.5rem 0;
+  }
 }
 </style>

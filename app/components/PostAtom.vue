@@ -35,8 +35,9 @@
         <div
           v-show="!(mode == 'promotion' || mode == 'spliced')"
           class="post-excerpt"
-          v-html="excerpt"
-        ></div>
+        >
+          {{ excerpt | stripHTML | truncate }}
+        </div>
       </div>
     </div>
   </div>
@@ -68,6 +69,20 @@ export default {
     postDate: function() {
       // Pretty-format the post date (January 1, 2019)
       return dayjs(this.date).format('MMMM D, YYYY')
+    }
+  },
+  filters: {
+    stripHTML: function(string) {
+      return string.replace(/<(?:.|\n)*?>/gm, '')
+                   .replace(/&nbsp;/gm, ' ')
+                   .replace(/&#8211;/gm, '—')
+                   .replace(/&#8216;/gm, '‘')
+                   .replace(/&#8217;/gm, '’')
+                   .replace(/&#8220;/gm, '“')
+                   .replace(/&#8221;/gm, '”');
+    },
+    truncate: function(string) {
+      return string.split(" ").splice(0,50).join(" ") + '…';
     }
   }
 }

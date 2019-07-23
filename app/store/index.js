@@ -4,7 +4,7 @@ import mutations from './mutations'
 import getters from './getters'
 import bikeshops from './bikeshops.json'
 
-export default () => {
+const store = () => {
   return new Vuex.Store({
     strict: false,
     state: {
@@ -170,3 +170,5 @@ export default () => {
     getters
   })
 }
+
+export default store

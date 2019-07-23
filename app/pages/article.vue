@@ -228,6 +228,12 @@ export default {
           hid: 'description',
           name: 'description',
           content: this.post.excerpt.rendered.replace(/<(?:.|\n)*?>/gm, '')
+                                             .replace(/&nbsp;/gm, ' ')
+                                             .replace(/&#8211;/gm, '—')
+                                             .replace(/&#8216;/gm, '‘')
+                                             .replace(/&#8217;/gm, '’')
+                                             .replace(/&#8220;/gm, '“')
+                                             .replace(/&#8221;/gm, '”')
         },
         {
           hid: 'og:title',
@@ -238,6 +244,12 @@ export default {
           hid: 'og:description',
           property: 'og:description',
           content: this.post.excerpt.rendered.replace(/<(?:.|\n)*?>/gm, '')
+                                             .replace(/&nbsp;/gm, ' ')
+                                             .replace(/&#8211;/gm, '—')
+                                             .replace(/&#8216;/gm, '‘')
+                                             .replace(/&#8217;/gm, '’')
+                                             .replace(/&#8220;/gm, '“')
+                                             .replace(/&#8221;/gm, '”')
         },
         {
           hid: 'og:image',

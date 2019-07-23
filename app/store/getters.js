@@ -1,4 +1,4 @@
-export default {
+const getters = {
   // get a page by slug
   getPageBySlug: state => slug => {
     return state.pages.filter(page => page.slug === slug)[0]
@@ -48,4 +48,6 @@ export default {
       return a.date < b.date ? 1 : -1
     })
   }
-}
+};
+
+export default getters

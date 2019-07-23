@@ -5,6 +5,7 @@
       type="text"
       tabindex="0"
       placeholder="Type your search term, press Enter to search."
+      @blur="clearInput"
       v-model.lazy="query"
     >
     <button v-if="query !== ''" class="search-clear" @click="clearInput">Clear</button>

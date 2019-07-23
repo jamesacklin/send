@@ -2,7 +2,7 @@ import merge from 'lodash/merge'
 import dayjs from 'dayjs'
 import { reject } from 'q'
 
-export default {
+const actions = {
   // Open or close nav drawer
   openNavDrawer({ commit, state }) {
     commit('toggleNavDrawer', true)
@@ -214,3 +214,5 @@ export default {
     }
   }
 }
+
+export default actions
