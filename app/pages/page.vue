@@ -121,10 +121,17 @@ export default {
   position: relative;
   display: flex;
   flex-direction: column;
+  margin-top: 78px;
+  @media (min-width: 800px){
+    margin-top: 108.781px;
+  }
   @media (min-width: 1000px) {
     background: #f5f3ef;
     min-height: 12.5em;
     justify-content: center;
+  }
+  @media (min-width: 1150px){
+    margin-top: 67.5625px;
   }
   &.has-artwork {
     .page-title-block {
