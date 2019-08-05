@@ -22,19 +22,15 @@ The Send application is designed with several global components, which always st
 
 ### Header
 
-The global header contains a news ticker, a three-line "hamburger" button to toggle the navigation drawer, a Dirt Rag Logo, and the Outside.tv player. From the post editor in WordPress, authors can control if the post headline and link appears in the ticker and an expiration date, after which the story will not appear in the ticker. The logo is available in either horizontal or vertical format, and is available as white text on a solid background of any color. The Outside.tv player only appears on screen widths larger than roughly 800px, and the user is able to pause the player or view it full screen.
+The global header contains a three-line "hamburger" button to toggle the navigation drawer (small screens), a Dirt Rag logo, a search bar, and a horizontal navigation bar (large screens). The logo is available in either horizontal or vertical format, and is available as white text on a solid background of any color.
 
-When the user scrolls down on the page, the ticker becomes hidden and the menu button, Dirt Rag logo, and Outside.tv player scroll with the viewport. This is designed to be unobtrusive as possible, while accomplishing the following goals: 
-
-1. Maintaining an accessible navigation drawer toggle
-2. Keeping the Dirt Rag logo on the screen at all times
-3. Allowing continuous play of the Outside.tv video feed, which positively contributes to revenue
-
-On larger viewports, the Outside.tv player slides behind the Advertising Sidebar to preserve the screen space advertisers pay for.
+When the user scrolls down on the page, the menu button, Dirt Rag logo, and all navigational elements scroll with them.
 
 ### Navigation
 
-The navigation element is primarily a full-screen drawer which appears when the user clicks or taps the hamburger button and disappears when the user clicks or taps the "X" button in the drawer itself. The drawer contains a Dirt Rag logo, an "X" close button, a search box, some navigation items, and a copyright footer.
+On small screens, the navigation element is primarily a full-screen drawer which appears when the user clicks or taps the hamburger button and disappears when the user clicks or taps the "X" button in the drawer itself. The drawer contains a Dirt Rag logo, an "X" close button, a search box, some navigation items, and a copyright footer.
+
+On larger screens, the navigation items sort themselves into a horizontally justified list along the top of the screen, along with the search box.
 
 Users can search for posts or pages using the search box. This uses WordPress's internal search functionality and is not as fast as, say, a third-party service which handles substring matching and autocomplete. Therefore, users must press Enter or submit their search before any search results will appear. Search results appear in a dropdown box under the field, ranked by WordPress's calculation of relevance. The user can click or tap on any result to be taken to that post or page. The user can also clear the search by clicking or tapping the "Clear" button in the field itself.
 
@@ -129,20 +125,6 @@ Advertising components are instances of the Google Doubleclick for Publishers pa
 ## Pages
 
 Pages are nearly identical to Posts, except they lack a Featured Media block, comments, or contest integrations. Pages are accessible via the URL template `https://www.dirtragmag.com/slug`, where "slug" is an automatically-generated string from the page title in WordPress.
-
----
-
-## Development & Release Philosophy
-
-In keeping with Agile software methodolgy, issues or feature ideas are placed at virtually any time into a backlog or work queue using _user stories_, loosely following the template _"As a (type of user) I want to be able to (use a feature of the software) so I can (accomplish a task)"_. Stories should be scoped as tightly as possible in order to effectively break up the development work into small, manageable chunks. 
-
-Work iterations are set for a reasonable length of time/capacity—usually 2 weeks. As the iteration progresses, team members work on these "stories" and produce code to support them. 
-
-When work on a story is complete, the story is added to a release plan. The release should be scheduled as soon as a critical mass of code is tested and available, such that end users can take full advantage of the new feature or bug fix. Releases can span multiple iterations, depending on the scope and severity of the bugs involved or the size and priority of the features. 
-
-After every release, the team should schedule a postmortem or retrospective to review pros/cons and adjust plans for the next iteration(s).
-
-For a higher-level overview, read the [Agile Software Development Manifesto](https://agilemanifesto.org/) and the corresponding [Principles of Agile Development](https://agilemanifesto.org/principles.html). There are plenty of detailed resources on Agile software planning; among them [Atlassian's marketing content](https://www.atlassian.com/agile/advantage/going-agile) and [Agile Alliance guides](https://www.agilealliance.org/agile101/).
 
 ---
 

@@ -90,4 +90,3 @@ storybook-static
 
 app/static/sw.js
 .directory
-app/package-lock.json

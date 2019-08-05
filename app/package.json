@@ -1,7 +1,7 @@
 {
   "name": "send",
-  "version": "0.1.0",
-  "description": "Send, a client application for browsing and reading articles from Dirt Rag Magazine",
+  "version": "1.1.4",
+  "description": "Independent mountain biking news and culture, since 1989. Subscribe today!",
   "author": "James Acklin <james.acklin@gmail.com>",
   "private": true,
   "scripts": {
@@ -23,7 +23,7 @@
     "@nuxtjs/pwa": "^2.6.0",
     "dayjs": "^1.8.14",
     "jquery": "^3.4.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.15",
     "nuxt": "^2.6.1",
     "nuxt-device-detect": "^1.1.4",
     "vue": "^2.6.10",
