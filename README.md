@@ -13,12 +13,26 @@ For more detail on the app architecture and functionality, see the [README in th
 git clone https://github.com/jamesacklin/send.git
 ```
 
-### Compiles, minifies for production, and starts servers
+### Development
+```
+cd app
+npm install
+npm run dev
+```
+
+### Build app Docker image, tag with a version, and push to Docker hub (requires login)
+```
+cd app
+docker build -t ${docker_username}/send_nuxt:X.X.X
+docker push send_nuxt:X.X.X
+```
+
+### Pull versioned images from Docker Hub and start servers
 ```
 docker-compose up --build --force-recreate -d
 ```
 
-### Rebuild send-web on code updates/releases
+### Pull latest images on code updates/releases
 ```
 ./release.sh
 ```
