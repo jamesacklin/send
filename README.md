@@ -6,7 +6,7 @@ Send is a JavaScript-powered Progressive Web Application for browsing and readin
 
 Send runs in two Docker containers; `send-web` runs the Nuxt server on port 3000, and `send-server` runs an non-caching nginx proxy to port 80.
 
-For more detail on the app architecture and functionality, see the [README in the `/app` directory of this repository](/app/README.md).
+For more detail on the app design and code architecture, see the [README in the `/app` directory of this repository](/app/README.md).
 
 ## Project setup
 ```
