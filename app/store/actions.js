@@ -38,8 +38,8 @@ const actions = {
     commit('clearSearchPosts')
     const searchPosts = await this.$axios.$get('posts', {
       params: {
-        search: params.term,
-        per_page: 100,
+        search: params.slug,
+        per_page: 30,
         orderby: 'relevance'
       }
     })

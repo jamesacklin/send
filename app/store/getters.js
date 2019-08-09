@@ -23,6 +23,9 @@ const getters = {
     })
     return posts
   },
+  getSearchPosts: state => {
+    return state.searchPosts
+  },
   getCategoryBySlug: state => slug => {
     return state.categories.categories[slug]
   },

@@ -98,6 +98,16 @@ module.exports = {
           path: '/category/:slug/page/:page',
           component: resolve(__dirname, 'pages/category-index.vue'),
           name: 'category-index-page'
+        },
+        {
+          path: '/search/:slug',
+          component: resolve(__dirname, 'pages/search-index.vue'),
+          name: 'search-index'
+        },
+        {
+          path: '/search/:slug/page/:page',
+          component: resolve(__dirname, 'pages/search-index.vue'),
+          name: 'search-index-page'
         }
       ]
     },
