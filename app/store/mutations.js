@@ -24,10 +24,10 @@ const mutations = {
     state.searchLoading = status
   },
   addSearchPosts(state, posts) {
-    state.searchPosts = posts
+    state.searchPosts.posts = posts
   },
   clearSearchPosts(state) {
-    state.searchPosts = []
+    state.searchPosts.posts = []
   },
   addContestPosts(state, posts) {
     state.contestPosts = posts
@@ -36,9 +36,17 @@ const mutations = {
   paginate(state, page) {
     state.pagination.pages.push(page)
   },
+  // paginate
+  paginateSearch(state, page) {
+    state.searchPosts.pagination.pages.push(page)
+  },
   // current page
   currentPage(state, page) {
     state.pagination.current = page
+  },
+  // current search page
+  currentSearchPage(state, page) {
+    state.searchPosts.pagination.current = page
   },
   // paginate
   paginateCategory(state, params) {
@@ -64,6 +72,11 @@ const mutations = {
   paginateTotals(state, totals) {
     state.pagination.totalPosts = totals.totalPosts
     state.pagination.totalPostsPages = totals.totalPostsPages
+  },
+  // pagination totals from API
+  paginateSearchTotals(state, totals) {
+    state.searchPosts.pagination.totalPosts = totals.totalPosts
+    state.searchPosts.pagination.totalPostsPages = totals.totalPostsPages
   },
   // pagination totals from API
   paginateCategoryTotals(state, params) {

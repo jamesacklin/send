@@ -27,7 +27,12 @@ const store = () => {
       searchLoading: false,
       posts: [],
       pages: [],
-      searchPosts: [],
+      searchPosts: {
+        pagination: {
+          pages: []
+        },
+        posts: []
+      },
       contestPosts: [],
       // TODO: Control navItems from WordPress
       navItems: [

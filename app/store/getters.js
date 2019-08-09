@@ -24,7 +24,7 @@ const getters = {
     return posts
   },
   getSearchPosts: state => {
-    return state.searchPosts
+    return state.searchPosts.posts
   },
   getCategoryBySlug: state => slug => {
     return state.categories.categories[slug]
@@ -50,6 +50,11 @@ const getters = {
     return posts.sort((a, b) => {
       return a.date < b.date ? 1 : -1
     })
+  },
+  // get page of posts
+  getSearchPostsPage: state => page => {
+    // filter just the current page
+    return state.searchPosts.posts.filter(post => post.page === page)
   }
 };
 

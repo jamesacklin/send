@@ -92,6 +92,54 @@
       </li>
       <li v-else>&nbsp;</li>
     </ul>
+    <ul
+      class="pagination pagination-archive"
+      v-if="searchArchive"
+      key="search-archive"
+    >
+      <li v-if="notFirstSearchPage">
+        <nuxt-link :to="prevSearchPage">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            version="1.1"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            aria-labelledby="leftTitle"
+            role="img"
+          >
+            <title id="leftTitle">Left arrow icon</title>
+            <path
+              d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"
+            />
+          </svg>
+          <span class="screen-reader-text">Newer Posts</span>
+        </nuxt-link>
+      </li>
+      <li v-else>&nbsp;</li>
+      <li v-if="notLastSearchPage">
+        <nuxt-link :to="nextSearchPage">
+          <span class="screen-reader-text">Older Posts</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            version="1.1"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            aria-labelledby="rightTitle"
+            role="img"
+          >
+            <title id="rightTitle">Right arrow icon</title>
+            <path
+              d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"
+            />
+          </svg>
+        </nuxt-link>
+      </li>
+      <li v-else>&nbsp;</li>
+    </ul>
     <ul class="pagination pagination-single" v-if="postSingle" key="single">
       <li>
         <nuxt-link :to="backUp">
@@ -195,6 +243,34 @@ export default {
         )
       }
     },
+    nextSearchPage() {
+      return (
+        '/search/' +
+        this.$route.params.slug +
+        '/page/' +
+        (this.$store.state.searchPosts.pagination.current +
+          1) +
+        '/'
+      )
+    },
+    prevSearchPage() {
+      if (
+        this.$store.state.searchPosts.pagination.current -
+          1 ===
+        1
+      ) {
+        return '/search/' + this.$route.params.slug
+      } else {
+        return (
+          '/search/' +
+          this.$route.params.slug +
+          '/page/' +
+          (this.$store.state.searchPosts.pagination.current -
+            1) +
+          '/'
+        )
+      }
+    },
     postSingle() {
       return (
         this.$route.name === 'page' ||
@@ -209,6 +285,12 @@ export default {
       return (
         this.$route.name === 'category-index' ||
         this.$route.name === 'category-index-page'
+      )
+    },
+    searchArchive() {
+      return (
+        this.$route.name === 'search-index' ||
+        this.$route.name === 'search-index-page'
       )
     },
     notFirstPage() {
@@ -237,6 +319,18 @@ export default {
           .pagination.current <
         this.$store.state.categories.categories[this.$route.params.slug]
           .pagination.totalPostsPages
+      )
+    },
+    notFirstSearchPage() {
+      return (
+        this.$store.state.searchPosts.pagination.current &&
+        this.$store.state.searchPosts.pagination.current !== 1
+      )
+    },
+    notLastSearchPage() {
+      return (
+        this.$store.state.searchPosts.pagination.current <
+        this.$store.state.searchPosts.pagination.totalPostsPages
       )
     }
   },

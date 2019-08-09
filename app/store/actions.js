@@ -28,24 +28,10 @@ const actions = {
     }
   },
 
-  async clearSearchPosts({ commit, state }) {
-    commit('clearSearchPosts')
-    commit('searchLoadingStatus', false)
-  },
-
-  async getSearchPosts({ commit, state }, params) {
-    commit('searchLoadingStatus', true)
-    commit('clearSearchPosts')
-    const searchPosts = await this.$axios.$get('posts', {
-      params: {
-        search: params.slug,
-        per_page: 30,
-        orderby: 'relevance'
-      }
-    })
-    commit('addSearchPosts', searchPosts)
-    commit('searchLoadingStatus', false)
-  },
+  // async clearSearchPosts({ commit, state }) {
+  //   commit('clearSearchPosts')
+  //   commit('searchLoadingStatus', false)
+  // },
 
   async getContestPosts({ commit, state }, params) {
     if (!state.contestPosts.length) {
@@ -143,6 +129,60 @@ const actions = {
         })
         // add posts to store
         commit('addPosts', posts.data)
+      }
+    }
+  },
+
+  async getSearchPosts({ commit, state }, params) {
+    const { page } = params
+    const { prefetch } = params
+
+    // which page are we on?
+    if (!prefetch) {
+      commit('currentSearchPage', page)
+    }
+    // check before requesting more pages
+    if (
+      // we have no posts, get some
+      0 === state.searchPosts.pagination.pages.length ||
+      // we have requested a new page and not hit total pages
+      (page &&
+        !state.searchPosts.pagination.pages.includes(page) &&
+        page <= state.pagination.totalPostsPages) ||
+      // we are prefetching and the prefetched page does not yet exist
+      (prefetch &&
+        page &&
+        !state.searchPosts.pagination.pages.includes(page) &&
+        page <= state.pagination.totalPostsPages)
+    ) {
+      // paginate - add this to our object of seen pages
+      commit('paginateSearch', page)
+      // request posts from API
+      const posts = await this.$axios.get('posts?_embed', {
+        params: {
+          search: params.slug,
+          per_page: 30,
+          page: page
+        }
+      })
+
+      if (posts) {
+        // update pagination totals in store from API response
+        commit('paginateSearchTotals', {
+          totalPosts: parseInt(posts.headers['x-wp-total']),
+          totalPostsPages: parseInt(posts.headers['x-wp-totalpages'])
+        })
+        // add page to returned data so we can grab posts by page later
+        posts.data.forEach(post => {
+          // store empty categoryPage info in case we need to add category:page later
+          if (!post.categoryPage) {
+            post.categoryPage = {}
+          }
+          // but add the separate "page" counter anyway, in case we need it again on the index
+          post.page = page
+        })
+        // add posts to store
+        commit('addSearchPosts', posts.data)
       }
     }
   },

@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     clearSearch() {
-      this.$store.dispatch('clearSearchPosts')
+      // this.$store.dispatch('clearSearchPosts')
     },
     clearInput() {
       this.query = ''
@@ -65,7 +65,7 @@ export default {
     }
   },
   mounted() {
-    this.clearSearch()
+    // this.clearSearch()
   }
 }
 </script>

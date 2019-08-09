@@ -1,12 +1,8 @@
 <template>
-  <main class="content">
+  <main class="content" style="paddding-top: 90px;">
     <section class="feed search-feed">
-      <!-- <SectionHeader :sectionMeta=""/> -->
       <div class="feed-items">
         <feed :feedData="feedItems"/>
-      </div>
-      <div v-if="!isMobile" class="sidebar-ads">
-        <ad-sidebar :sidebarData="sidebarAds"/>
       </div>
     </section>
   </main>
@@ -18,15 +14,11 @@ import flattenDeep from 'lodash/flattenDeep'
 import zip from 'lodash/zip'
 import chunk from 'lodash/chunk'
 
-// import SectionHeader from '@/components/PageComponents/SectionHeader'
 import Feed from '@/components/PageComponents/Feed'
-import AdSidebar from '@/components/PageComponents/AdSidebar'
 
 export default {
   components: {
-    Feed,
-    AdSidebar
-    // SectionHeader
+    Feed
   },
   async asyncData({ payload, isStatic, store, params, query }) {
     await store.dispatch('getSearchPosts', {
@@ -35,52 +27,14 @@ export default {
     })
   },
   computed: {
-    isMobile: function() {
-      // Return true if the device user-agent is "mobile" (as deterimined by 'nuxt-device-detect' module)
-      if (this.$device.isMobile) {
-        return true
-      } else {
-        // Otherwise return false and assume we have a desktop or tablet
-        return false
-      }
-    },
-    searchString() {
-      return this.$route.params.slug
-    },
     posts() {
-      // Return the posts for whatever category-page we're on (both set in route.params)
-      return this.$store.getters.getSearchPosts
-    },
-    ads() {
-      // Return the ads explicitly set in the store
-      return this.$store.state.advertising.rectangle
+      return this.$store.getters.getSearchPostsPage(
+        parseInt(this.$route.params.page || 1)
+      )
     },
     feedItems() {
-      if (this.isMobile) {
-        // If the user-agent is "mobile", compose a feed, with an ad
-        // inserted every 3 posts. We should have:
-        // - 30 posts (set back in the Vuex store as state.postsPerPage),
-        // - 10 ad slots (explicitly set back in the Vuex store).
-        return compact(flattenDeep(zip(chunk(this.posts, 3), this.ads)))
-      } else {
-        // If the user-agent is not "mobile", simply return posts.
-        return this.posts
-      }
-    },
-    sidebarAds() {
-      // If the user agent is not "mobile", return ads from the store
-      if (!this.isMobile) {
-        return this.$store.state.advertising.rectangle
-      } else {
-        // Otherwise return an empty array
-        return []
-      }
+      return this.posts
     }
-    // ,
-    // acfFields() {
-    //   // Return whatever Advanced Constom Fields we can for this category (as set in route.params)
-    //   return this.$store.getters.getCategoryBySlug(this.$route.params.slug).acf
-    // }
   },
   head() {
     return {
