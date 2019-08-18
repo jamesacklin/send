@@ -1,7 +1,7 @@
 <template>
   <main class="content">
     <section class="feed">
-      <SectionHeader/>
+
       <div class="feed-items">
         <feed :feedData="feedItems"/>
       </div>
@@ -18,22 +18,24 @@ import flattenDeep from 'lodash/flattenDeep'
 import zip from 'lodash/zip'
 import chunk from 'lodash/chunk'
 
-import SectionHeader from '@/components/PageComponents/SectionHeader'
+// import SectionHeader from '@/components/PageComponents/SectionHeader'
 import Feed from '@/components/PageComponents/Feed'
 import AdSidebar from '@/components/PageComponents/AdSidebar'
 
 export default {
   components: {
     Feed,
-    AdSidebar,
-    SectionHeader
+    AdSidebar
+    // SectionHeader
   },
   async asyncData({ payload, isStatic, store, params }) {
-    await store.dispatch('getPosts', {
-      page: parseInt(params.page || 1)
+    await store.dispatch('setCurrents', {
+      slug: '',
+      id: null
     })
-    await store.dispatch('getPage', {
-      slug: 'home'
+    await store.dispatch('getPosts', {
+      queryType: 'default',
+      page: parseInt(params.page || 1)
     })
   },
   computed: {
@@ -47,10 +49,17 @@ export default {
       }
     },
     posts() {
-      // Return the posts for whatever page we're on (as set in route.params)
-      return this.$store.getters.getPostsPage(
-        parseInt(this.$route.params.page || 1)
-      )
+      return this.$store.getters.getPostsByPage({
+        page: parseInt(this.$route.params.page || 1),
+        queryType: 'default',
+        query: ''
+      })
+    },
+    pagePrev() {
+      return parseInt(this.$route.params.page || 1) - 1
+    },
+    pageNext() {
+      return parseInt(this.$route.params.page || 1) + 1
     },
     ads() {
       // Return the ads set explicitly in the store
@@ -65,9 +74,7 @@ export default {
         return compact(flattenDeep(zip(chunk(this.posts, 3), this.ads)))
       } else {
         // If the user-agent is not "mobile", simply return posts.
-        return this.$store.getters.getPostsPage(
-          parseInt(this.$route.params.page || 1)
-        )
+        return this.posts
       }
     },
     sidebarAds() {

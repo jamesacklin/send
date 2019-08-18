@@ -1,19 +1,85 @@
-import merge from 'lodash/merge'
-import dayjs from 'dayjs'
 import { reject } from 'q'
 
-const actions = {
-  // Open or close nav drawer
-  openNavDrawer({ commit, state }) {
+export default {
+  setCurrents({ commit }, params) {
+    const { slug } = params
+    const categoryId = params.id
+    commit('currentStringQuery', { slug })
+    commit('currentCatId', { categoryId })
+  },
+  async getCategoryIdFromSlug({ commit }, params) {
+    const categoryMeta = await this.$axios.$get('categories', {
+      params: {
+        slug: params.slug
+      }
+    })
+    const categoryId = categoryMeta[0].id
+    commit('currentCatId', { categoryId })
+  },
+  async getPosts({ commit, state }, params) {
+    const { page, prefetch, queryType, slug } = params
+    if (!prefetch) {
+      commit('currentPage', { page, queryType })
+    }
+    if (
+      state.pagination[queryType].pages.length === 0 ||
+      (page &&
+        !state.pagination[queryType].pages.includes(page) &&
+        page <= state.pagination[queryType].totalPostsPages) ||
+      (prefetch &&
+        page &&
+        !state.pagination[queryType].pages.includes(page) &&
+        page <= state.pagination[queryType].totalPostsPages)
+    ) {
+      commit('paginate', { page, queryType })
+      const params = {
+        per_page: state.pagination[queryType].postsPerPage,
+        page
+      }
+      switch (queryType) {
+        case 'category':
+          commit('currentStringQuery', { slug })
+          params.categories = state.current.id
+          break
+        case 'search':
+          commit('currentStringQuery', { slug })
+          params.search = slug
+          params.orderby = 'relevance'
+          break
+        case 'default':
+          break
+      }
+      const posts = await this.$axios.get('posts?_embed', { params })
+      if (posts) {
+        const totals = {
+          totalPosts: parseInt(posts.headers['x-wp-total']),
+          totalPostsPages: parseInt(posts.headers['x-wp-totalpages'])
+        }
+        commit('paginateTotals', { totals, queryType })
+        posts.data.forEach((post) => {
+          if (queryType === 'default' && !post.indexPage) {
+            post.indexPage = page
+          }
+          if (queryType === 'category' && !post.categoryPage) {
+            post.categoryPage = page
+          }
+          if (queryType === 'search' && !post.searchPage) {
+            post.searchPage = page
+            post.searchTerm = slug
+          }
+          post.page = page
+        })
+        commit('addPosts', posts.data)
+      }
+    }
+  },
+  openNavDrawer({ commit }) {
     commit('toggleNavDrawer', true)
   },
-  closeNavDrawer({ commit, state }) {
+  closeNavDrawer({ commit }) {
     commit('toggleNavDrawer', false)
   },
-
-  // page
-  async getPage({ commit, state }, params) {
-    // check store for page already, bail if found
+  async getPage({ commit }, params) {
     if (!this.getters.getPageBySlug(params.slug)) {
       const page = await this.$axios.$get('pages?_embed', {
         params: {
@@ -27,49 +93,7 @@ const actions = {
       }
     }
   },
-
-  // async clearSearchPosts({ commit, state }) {
-  //   commit('clearSearchPosts')
-  //   commit('searchLoadingStatus', false)
-  // },
-
-  async getContestPosts({ commit, state }, params) {
-    if (!state.contestPosts.length) {
-      const contestPosts = await this.$axios.$get('posts?_embed', {
-        params: {
-          per_page: 1,
-          page: 1,
-          orderby: 'date',
-          categories: '589'
-        }
-      })
-      commit('addContestPosts', contestPosts)
-    }
-  },
-
-  // category from slug
-  async getCategoryFromSlug({ commit, state }, params) {
-    // if we don't have the category in the store, go get it and store it
-    if (!this.getters.getCategoryBySlug(params.slug)) {
-      const cat = await this.$axios.$get('categories', {
-        params: {
-          slug: params.slug
-        }
-      })
-      // instantiate pagination store model, merge with what we get from the API
-      const storeCat = merge(cat[0], {
-        pagination: {
-          current: false,
-          pages: []
-        }
-      })
-      commit('storeCategory', storeCat)
-    }
-  },
-
-  // post
   async getPost({ commit, state }, params) {
-    // check store for post already, bail if found
     if (!this.getters.getPostBySlug(params.slug)) {
       const post = await this.$axios.$get('posts?_embed', {
         params: {
@@ -78,181 +102,5 @@ const actions = {
       })
       commit('addPosts', post)
     }
-  },
-
-  async getPosts({ commit, state }, params) {
-    const { page } = params
-    const { prefetch } = params
-
-    // which page are we on?
-    if (!prefetch) {
-      commit('currentPage', page)
-    }
-    // check before requesting more pages
-    if (
-      // we have no posts, get some
-      0 === state.pagination.pages.length ||
-      // we have requested a new page and not hit total pages
-      (page &&
-        !state.pagination.pages.includes(page) &&
-        page <= state.pagination.totalPostsPages) ||
-      // we are prefetching and the prefetched page does not yet exist
-      (prefetch &&
-        page &&
-        !state.pagination.pages.includes(page) &&
-        page <= state.pagination.totalPostsPages)
-    ) {
-      // paginate - add this to our object of seen pages
-      commit('paginate', page)
-      // request posts from API
-      const posts = await this.$axios.get('posts?_embed', {
-        params: {
-          per_page: state.pagination.postsPerPage,
-          page: page
-        }
-      })
-
-      if (posts) {
-        // update pagination totals in store from API response
-        commit('paginateTotals', {
-          totalPosts: parseInt(posts.headers['x-wp-total']),
-          totalPostsPages: parseInt(posts.headers['x-wp-totalpages'])
-        })
-        // add page to returned data so we can grab posts by page later
-        posts.data.forEach(post => {
-          // store empty categoryPage info in case we need to add category:page later
-          if (!post.categoryPage) {
-            post.categoryPage = {}
-          }
-          // but add the separate "page" counter anyway, in case we need it again on the index
-          post.page = page
-        })
-        // add posts to store
-        commit('addPosts', posts.data)
-      }
-    }
-  },
-
-  async getSearchPosts({ commit, state }, params) {
-    const { page } = params
-    const { prefetch } = params
-
-    // which page are we on?
-    if (!prefetch) {
-      commit('currentSearchPage', page)
-    }
-    // check before requesting more pages
-    if (
-      // we have no posts, get some
-      0 === state.searchPosts.pagination.pages.length ||
-      // we have requested a new page and not hit total pages
-      (page &&
-        !state.searchPosts.pagination.pages.includes(page) &&
-        page <= state.pagination.totalPostsPages) ||
-      // we are prefetching and the prefetched page does not yet exist
-      (prefetch &&
-        page &&
-        !state.searchPosts.pagination.pages.includes(page) &&
-        page <= state.pagination.totalPostsPages)
-    ) {
-      // paginate - add this to our object of seen pages
-      commit('paginateSearch', page)
-      // request posts from API
-      const posts = await this.$axios.get('posts?_embed', {
-        params: {
-          search: params.slug,
-          per_page: 30,
-          page: page
-        }
-      })
-
-      if (posts) {
-        // update pagination totals in store from API response
-        commit('paginateSearchTotals', {
-          totalPosts: parseInt(posts.headers['x-wp-total']),
-          totalPostsPages: parseInt(posts.headers['x-wp-totalpages'])
-        })
-        // add page to returned data so we can grab posts by page later
-        posts.data.forEach(post => {
-          // store empty categoryPage info in case we need to add category:page later
-          if (!post.categoryPage) {
-            post.categoryPage = {}
-          }
-          // but add the separate "page" counter anyway, in case we need it again on the index
-          post.page = page
-        })
-        // add posts to store
-        commit('addSearchPosts', posts.data)
-      }
-    }
-  },
-
-  // get posts by category
-  async getPostsByCategory({ commit, state }, params) {
-    // page from route params
-    const { page } = params
-    // category slug from route params
-    const { cat } = params
-    const { prefetch } = params
-    // get the ID for the category slug we're on
-    const currentCategory = state.categories.categories[cat].id
-    // tell the store which category we're on
-    commit('currentCategory', currentCategory)
-    // which page are we on?
-    commit('currentCategoryPage', {
-      cat: cat,
-      page: page
-    })
-    // check before requesting more pages
-    if (
-      // we have no posts, get some
-      0 === state.categories.categories[cat].pagination.pages.length ||
-      // we have requested a new page and not hit total pages
-      (page &&
-        !state.categories.categories[cat].pagination.pages.includes(page) &&
-        page <= state.categories.categories[cat].pagination.totalPostsPages) ||
-      // check if the we don't have this category in the store already
-      (currentCategory &&
-        !state.categories.categoryIds.includes(currentCategory))
-    ) {
-      // paginate - add this to our category-specific object of seen category pages
-      commit('paginateCategory', {
-        cat: cat,
-        page: page
-      })
-      // Add this category ID to the list of category IDs we've already gotten
-      commit('storeCategoryId', currentCategory)
-
-      // request posts from API
-      const posts = await this.$axios.get('posts?_embed', {
-        params: {
-          per_page: state.pagination.postsPerPage,
-          page: page,
-          categories: state.categories.current
-        }
-      })
-
-      if (posts) {
-        // update category-specific pagination totals in store from API response
-        commit('paginateCategoryTotals', {
-          cat: cat,
-          totalPosts: parseInt(posts.headers['x-wp-total']),
-          totalPostsPages: parseInt(posts.headers['x-wp-totalpages'])
-        })
-        // add category:page to returned data so we can grab posts by category:page later
-        posts.data.forEach(post => {
-          if (!post.categoryPage) {
-            post.categoryPage = {}
-          }
-          post.categoryPage = merge(post.categoryPage, {
-            [currentCategory]: page
-          })
-        })
-        // add posts to store
-        commit('addPosts', posts.data)
-      }
-    }
   }
 }
-
-export default actions

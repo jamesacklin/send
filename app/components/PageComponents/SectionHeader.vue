@@ -66,19 +66,20 @@ export default {
       // category and therefore we will need more content, like the company name,
       // their logo, and a background image.
       if (this.sectionType === 'home') {
-        const homeFields = this.$store.getters.getPageBySlug('home').acf
-        if (homeFields.home_banner_headline & !homeFields.home_banner_content) {
-          return `<h2>${homeFields.home_banner_headline}</h2>`
-        } else if (
-          homeFields.home_banner_headline &&
-          homeFields.home_banner_content
-        ) {
-          return `<h2>${homeFields.home_banner_headline}</h2><div>${
-            homeFields.home_banner_content
-          }</div>`
-        } else {
-          return ''
-        }
+        return {}
+        // const homeFields = this.$store.getters.getPageBySlug('home').acf
+        // if (homeFields.home_banner_headline & !homeFields.home_banner_content) {
+        //   return `<h2>${homeFields.home_banner_headline}</h2>`
+        // } else if (
+        //   homeFields.home_banner_headline &&
+        //   homeFields.home_banner_content
+        // ) {
+        //   return `<h2>${homeFields.home_banner_headline}</h2><div>${
+        //     homeFields.home_banner_content
+        //   }</div>`
+        // } else {
+        //   return ''
+        // }
       } else if (this.sectionType === 'category') {
         // Because someone liked to use UPPERCASE for category names
         const catName = titleCase(
@@ -101,26 +102,25 @@ export default {
       }
     },
     backgroundImage() {
-      // Return the right background image.
-      // FIXME: Make this a srcset (see article.vue)
-      if (this.sectionType === 'home') {
-        const homeBg = this.$store.getters.getPageBySlug('home').acf
-          .home_background_image
-        if (homeBg) {
-          return homeBg
-        } else {
-          return ''
-        }
-      } else if (this.sectionType === 'category') {
-        const catBg = this.sectionMeta.category_background_image
-        if (catBg) {
-          return catBg
-        } else {
-          return ''
-        }
-      } else {
-        return ''
-      }
+      return '';
+      // if (this.sectionType === 'home') {
+      //   const homeBg = this.$store.getters.getPageBySlug('home').acf
+      //     .home_background_image
+      //   if (homeBg) {
+      //     return homeBg
+      //   } else {
+      //     return ''
+      //   }
+      // } else if (this.sectionType === 'category') {
+      //   const catBg = this.sectionMeta.category_background_image
+      //   if (catBg) {
+      //     return catBg
+      //   } else {
+      //     return ''
+      //   }
+      // } else {
+      //   return ''
+      // }
     }
   }
 }

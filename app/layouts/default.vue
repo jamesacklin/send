@@ -4,7 +4,7 @@
     <NavDrawer/>
     <nuxt/>
     <Footer/>
-    <Pagination/>
+    <!-- <Pagination/> -->
     <svg id="filters" xmlns="http://www.w3.org/2000/svg" height="0">
       <filter id="red">
         <feColorMatrix type="matrix" values="0.1 2 0 0.7 0.1 0 1 0 0 0 0 1 0 0 0 0 1 0 1 0 "></feColorMatrix>
@@ -17,14 +17,14 @@
 import Header from '@/components/HeaderComponents/Header'
 import Footer from '@/components/Footer'
 import NavDrawer from '@/components/Navigation/NavDrawer'
-import Pagination from '@/components/Navigation/Pagination'
+// import Pagination from '@/components/Navigation/Pagination'
 
 export default {
   components: {
     Header,
     Footer,
-    NavDrawer,
-    Pagination
+    NavDrawer
+    // Pagination
   }
 }
 </script>
