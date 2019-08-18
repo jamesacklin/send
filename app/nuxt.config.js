@@ -67,47 +67,83 @@ module.exports = {
         {
           path: '/',
           component: resolve(__dirname, 'pages/index.vue'),
-          name: 'index'
+          name: 'index',
+          meta: {
+            navigationScheme: 'traversePages',
+            siblings: 'index'
+          }
         },
         {
           path: '/page/:page',
           component: resolve(__dirname, 'pages/index.vue'),
-          name: 'index-page'
+          name: 'index-page',
+          meta: {
+            navigationScheme: 'traversePages',
+            siblings: 'index'
+          }
         },
         {
           path: '/coolshops',
           component: resolve(__dirname, 'pages/coolshops.vue'),
-          name: 'page-shops'
+          name: 'page-shops',
+          meta: {
+            navigationScheme: 'goHome',
+            siblings: null
+          }
         },
         {
           path: '/:slug',
           component: resolve(__dirname, 'pages/page.vue'),
-          name: 'page'
+          name: 'page',
+          meta: {
+            navigationScheme: 'goHome',
+            siblings: null
+          }
         },
         {
           path: '/articles/:slug',
           component: resolve(__dirname, 'pages/article.vue'),
-          name: 'article'
+          name: 'article',
+          meta: {
+            navigationScheme: 'goHome',
+            siblings: null
+          }
         },
         {
           path: '/category/:slug',
           component: resolve(__dirname, 'pages/category-index.vue'),
-          name: 'category-index'
+          name: 'category-index',
+          meta: {
+            navigationScheme: 'traversePages',
+            siblings: 'category'
+          }
         },
         {
           path: '/category/:slug/page/:page',
           component: resolve(__dirname, 'pages/category-index.vue'),
-          name: 'category-index-page'
+          name: 'category-index-page',
+          meta: {
+            navigationScheme: 'traversePages',
+            siblings: 'category'
+          }
         },
         {
           path: '/search/:slug',
           component: resolve(__dirname, 'pages/search-index.vue'),
-          name: 'search-index'
+          name: 'search-index',
+          meta: {
+            navigationScheme: 'traversePages',
+            siblings: 'search'
+          }
         },
         {
           path: '/search/:slug/page/:page',
           component: resolve(__dirname, 'pages/search-index.vue'),
-          name: 'search-index-page'
+          name: 'search-index-page',
+          meta: {
+            navigationScheme: 'traversePages',
+            siblings: 'search'
+          }
         }
       ]
     },
