@@ -20,21 +20,24 @@ export default {
   components: {
     Feed
   },
-  async asyncData({ payload, isStatic, store, params, query }) {
-    await store.dispatch('getSearchPosts', {
-      page: parseInt(params.page || 1),
-      slug: params.slug
-    })
-  },
   computed: {
     posts() {
-      return this.$store.getters.getSearchPostsPage(
-        parseInt(this.$route.params.page || 1)
-      )
+      return this.$store.getters.getPostsByPage({
+        page: parseInt(this.$route.params.page || 1),
+        queryType: 'search',
+        query: this.$route.params.slug
+      })
     },
     feedItems() {
       return this.posts
     }
+  },
+  async asyncData({ payload, isStatic, store, params }) {
+    await store.dispatch('getPosts', {
+      queryType: 'search',
+      slug: params.slug,
+      page: parseInt(params.page || 1)
+    })
   },
   head() {
     return {

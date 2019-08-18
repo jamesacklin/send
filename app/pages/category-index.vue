@@ -1,12 +1,12 @@
 <template>
   <main class="content">
     <section class="feed category-feed">
-      <SectionHeader :sectionMeta="acfFields"/>
+      <!-- <SectionHeader :sectionMeta="acfFields"/> -->
       <div class="feed-items">
-        <feed :feedData="feedItems"/>
+        <feed :feedData="feedItems" />
       </div>
       <div v-if="!isMobile" class="sidebar-ads">
-        <ad-sidebar :sidebarData="sidebarAds"/>
+        <ad-sidebar :sidebarData="sidebarAds" />
       </div>
     </section>
   </main>
@@ -18,24 +18,15 @@ import flattenDeep from 'lodash/flattenDeep'
 import zip from 'lodash/zip'
 import chunk from 'lodash/chunk'
 
-import SectionHeader from '@/components/PageComponents/SectionHeader'
+// import SectionHeader from '@/components/PageComponents/SectionHeader'
 import Feed from '@/components/PageComponents/Feed'
 import AdSidebar from '@/components/PageComponents/AdSidebar'
 
 export default {
   components: {
     Feed,
-    AdSidebar,
-    SectionHeader
-  },
-  async asyncData({ payload, isStatic, store, params, query }) {
-    await store.dispatch('getCategoryFromSlug', {
-      slug: params.slug
-    })
-    await store.dispatch('getPostsByCategory', {
-      page: parseInt(params.page || 1),
-      cat: params.slug
-    })
+    AdSidebar
+    // SectionHeader
   },
   computed: {
     isMobile: function() {
@@ -47,20 +38,12 @@ export default {
         return false
       }
     },
-    catTitle() {
-      // Return the category title for whatever category we're on (as set in route.params)
-      return this.$store.getters.getCategoryBySlug(this.$route.params.slug).name
-    },
-    catId() {
-      // Return the category ID for whatever category we're on (as set in route.params)
-      return this.$store.getters.getCategoryBySlug(this.$route.params.slug).id
-    },
     posts() {
-      // Return the posts for whatever category-page we're on (both set in route.params)
-      return this.$store.getters.getCatPostsPage(
-        parseInt(this.$route.params.page || 1),
-        this.catId
-      )
+      return this.$store.getters.getPostsByPage({
+        page: parseInt(this.$route.params.page || 1),
+        queryType: 'category',
+        query: this.$store.state.current.id
+      })
     },
     ads() {
       // Return the ads explicitly set in the store
@@ -75,10 +58,7 @@ export default {
         return compact(flattenDeep(zip(chunk(this.posts, 3), this.ads)))
       } else {
         // If the user-agent is not "mobile", simply return posts.
-        return this.$store.getters.getCatPostsPage(
-          parseInt(this.$route.params.page || 1),
-          this.catId
-        )
+        return this.posts
       }
     },
     sidebarAds() {
@@ -89,11 +69,21 @@ export default {
         // Otherwise return an empty array
         return []
       }
-    },
-    acfFields() {
-      // Return whatever Advanced Constom Fields we can for this category (as set in route.params)
-      return this.$store.getters.getCategoryBySlug(this.$route.params.slug).acf
     }
+    // acfFields() {
+    //   // Return whatever Advanced Constom Fields we can for this category (as set in route.params)
+    //   return this.$store.getters.getCategoryBySlug(this.$route.params.slug).acf
+    // }
+  },
+  async asyncData({ payload, isStatic, store, params }) {
+    await store.dispatch('getCategoryIdFromSlug', {
+      slug: params.slug
+    })
+    await store.dispatch('getPosts', {
+      queryType: 'category',
+      slug: params.slug,
+      page: parseInt(params.page || 1)
+    })
   },
   head() {
     return {
