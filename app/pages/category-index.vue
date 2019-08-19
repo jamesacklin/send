@@ -1,7 +1,7 @@
 <template>
   <main class="content">
     <section class="feed category-feed">
-      <!-- <SectionHeader :sectionMeta="acfFields"/> -->
+      <SectionHeader :sectionMeta="categoryHeaderData" />
       <div class="feed-items">
         <feed :feedData="feedItems" />
       </div>
@@ -18,15 +18,15 @@ import flattenDeep from 'lodash/flattenDeep'
 import zip from 'lodash/zip'
 import chunk from 'lodash/chunk'
 
-// import SectionHeader from '@/components/PageComponents/SectionHeader'
+import SectionHeader from '@/components/PageComponents/SectionHeader'
 import Feed from '@/components/PageComponents/Feed'
 import AdSidebar from '@/components/PageComponents/AdSidebar'
 
 export default {
   components: {
     Feed,
-    AdSidebar
-    // SectionHeader
+    AdSidebar,
+    SectionHeader
   },
   computed: {
     isMobile: function() {
@@ -69,11 +69,12 @@ export default {
         // Otherwise return an empty array
         return []
       }
+    },
+    categoryHeaderData(){
+      return {
+        title: this.$route.params.slug
+      }
     }
-    // acfFields() {
-    //   // Return whatever Advanced Constom Fields we can for this category (as set in route.params)
-    //   return this.$store.getters.getCategoryBySlug(this.$route.params.slug).acf
-    // }
   },
   async asyncData({ payload, isStatic, store, params }) {
     await store.dispatch('getCategoryIdFromSlug', {

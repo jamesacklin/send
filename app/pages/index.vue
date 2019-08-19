@@ -1,7 +1,7 @@
 <template>
   <main class="content">
     <section class="feed">
-
+      <SectionHeader :sectionMeta="homeHeaderData" />
       <div class="feed-items">
         <feed :feedData="feedItems"/>
       </div>
@@ -18,15 +18,15 @@ import flattenDeep from 'lodash/flattenDeep'
 import zip from 'lodash/zip'
 import chunk from 'lodash/chunk'
 
-// import SectionHeader from '@/components/PageComponents/SectionHeader'
+import SectionHeader from '@/components/PageComponents/SectionHeader'
 import Feed from '@/components/PageComponents/Feed'
 import AdSidebar from '@/components/PageComponents/AdSidebar'
 
 export default {
   components: {
     Feed,
-    AdSidebar
-    // SectionHeader
+    AdSidebar,
+    SectionHeader
   },
   async asyncData({ payload, isStatic, store, params }) {
     await store.dispatch('setCurrents', {
@@ -55,12 +55,6 @@ export default {
         query: ''
       })
     },
-    pagePrev() {
-      return parseInt(this.$route.params.page || 1) - 1
-    },
-    pageNext() {
-      return parseInt(this.$route.params.page || 1) + 1
-    },
     ads() {
       // Return the ads set explicitly in the store
       return this.$store.state.advertising.rectangle
@@ -84,6 +78,13 @@ export default {
       } else {
         // Otherwise return an empty array
         return []
+      }
+    },
+    homeHeaderData() {
+      return {
+        title: 'Dirt Rag Magazine',
+        content: '<p>Over 30 Years of Independent Mountain Bike Coverage! <a href="http://www.google.com">Subscribe Today!</a></p>',
+        img: 'https://images.unsplash.com/photo-1522057306606-8d84daa75e87?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
       }
     }
   },

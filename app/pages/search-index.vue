@@ -1,6 +1,7 @@
 <template>
-  <main class="content" style="paddding-top: 90px;">
+  <main class="content">
     <section class="feed search-feed">
+      <SectionHeader :sectionMeta="searchHeaderData" />
       <div class="feed-items">
         <feed :feedData="feedItems"/>
       </div>
@@ -14,11 +15,13 @@ import flattenDeep from 'lodash/flattenDeep'
 import zip from 'lodash/zip'
 import chunk from 'lodash/chunk'
 
+import SectionHeader from '@/components/PageComponents/SectionHeader'
 import Feed from '@/components/PageComponents/Feed'
 
 export default {
   components: {
-    Feed
+    Feed,
+    SectionHeader,
   },
   computed: {
     posts() {
@@ -30,6 +33,12 @@ export default {
     },
     feedItems() {
       return this.posts
+    },
+    searchHeaderData(){
+      return {
+        title: `Search Results for <em>${this.$route.params.slug}</em>`,
+        content: `Page ${parseInt(this.$route.params.page || 1)}`
+      }
     }
   },
   async asyncData({ payload, isStatic, store, params }) {

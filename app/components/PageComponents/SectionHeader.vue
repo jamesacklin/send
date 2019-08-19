@@ -1,126 +1,66 @@
 <template lang="html">
-  <header 
+  <header
     class="section-header"
-    :class="{'has-artwork' : backgroundImage.length}"
-    v-lazy:background-image="backgroundImage"
-  >
+    :class="{'has-artwork': hasArtwork, 'has-content': hasContent}">
     <div class="section-header-content">
-      <img v-if="headerFigure" v-lazy="headerFigure" class="header-figure" />
-      <div class="text-wrapper" v-html="headerContents"></div>
+      <span v-html="headerFigure" />
+      <div 
+        class="text-wrapper"
+        v-html="headerContents">
+      </div>
     </div>
   </header>
 </template>
 
 <script>
-function titleCase(str) {
-  // General function to turn strings into title case
-  return str
-    .toLowerCase()
-    .split(' ')
-    .map(function(word) {
-      return word.replace(word[0], word[0].toUpperCase())
-    })
-    .join(' ')
-}
-
 export default {
   name: 'SectionHeader',
-  props: ['sectionMeta'],
-  methods: {},
+  props: {
+    sectionMeta: Object
+  },
   computed: {
-    sectionType() {
-      // Determine the type of "section" we're on, either a category,
-      // category-page, home, or a home-page. Generalizes these out to
-      // one of two values: category, or home.
-      if (
-        this.$route.name === 'category-index' ||
-        this.$route.name === 'category-index-page'
-      ) {
-        return 'category'
-      } else if (
-        this.$route.name === 'index' ||
-        this.$route.name === 'index-page'
-      ) {
-        return 'home'
-      } else {
-        return ''
-      }
-    },
-    headerFigure() {
-      // If we are on a home section, see if we can return a figure from ACF
-      if (this.sectionType === 'home') {
-        const homeFields = this.$store.getters.getPageBySlug('home').acf
-        return homeFields.home_figure
+    hasArtwork(){
+      if (this.sectionMeta.img){
+        return true
       } else {
         return false
       }
     },
-    headerContents() {
-      // Create a template string based on the type of section we're on (home or
-      // category), and then—based on the amount of detail provided in ACF—pull
-      // as much extra information as provided.
-
-      // The home page will generally be used to promote a new issue of the
-      // print edition of the magazine; categories will generally need a
-      // background image (at minimum). In most cases, a brand will sponsor a
-      // category and therefore we will need more content, like the company name,
-      // their logo, and a background image.
-      if (this.sectionType === 'home') {
-        return {}
-        // const homeFields = this.$store.getters.getPageBySlug('home').acf
-        // if (homeFields.home_banner_headline & !homeFields.home_banner_content) {
-        //   return `<h2>${homeFields.home_banner_headline}</h2>`
-        // } else if (
-        //   homeFields.home_banner_headline &&
-        //   homeFields.home_banner_content
-        // ) {
-        //   return `<h2>${homeFields.home_banner_headline}</h2><div>${
-        //     homeFields.home_banner_content
-        //   }</div>`
-        // } else {
-        //   return ''
-        // }
-      } else if (this.sectionType === 'category') {
-        // Because someone liked to use UPPERCASE for category names
-        const catName = titleCase(
-          this.$store.getters.getCategoryBySlug(this.$route.params.slug).name
-        )
-        var sponsor = this.sectionMeta.category_sponsor
-        var logo = this.sectionMeta.category_sponsor_logo
-        // These template strings should be self-explanetory
-        if (sponsor && logo) {
-          return `<h2>${catName}</h2><p>Presented by ${sponsor}</p><p><img src='${logo}'></p>`
-        } else if (sponsor && !logo) {
-          return `<h2>${catName}</h2><p>Presented by ${sponsor}</p>`
-        } else if (!sponsor && !logo) {
-          return `<h2>${catName}</h2>`
+    hasContent(){
+      if (this.sectionMeta.title || this.sectionMeta.content){
+        return true
+      } else {
+        return false
+      }
+    },
+    headerFigure() {
+      const sectionMeta = this.sectionMeta
+      const img = meta => {
+        if (meta.img){
+          return `<img class="header-figure" src=${meta.img} alt="" />`
         } else {
           return ''
         }
-      } else {
-        return ''
       }
+      return `${img(sectionMeta)}`
     },
-    backgroundImage() {
-      return '';
-      // if (this.sectionType === 'home') {
-      //   const homeBg = this.$store.getters.getPageBySlug('home').acf
-      //     .home_background_image
-      //   if (homeBg) {
-      //     return homeBg
-      //   } else {
-      //     return ''
-      //   }
-      // } else if (this.sectionType === 'category') {
-      //   const catBg = this.sectionMeta.category_background_image
-      //   if (catBg) {
-      //     return catBg
-      //   } else {
-      //     return ''
-      //   }
-      // } else {
-      //   return ''
-      // }
+    headerContents() {
+      const sectionMeta = this.sectionMeta
+      const title = meta => {
+        if (meta.title){
+          return `<h2>${meta.title}</h2>`
+        } else {
+          return ''
+        }
+      }
+      const content = meta => {
+        if (meta.content){
+          return `<div>${meta.content}</div>`
+        } else {
+          return ''
+        }
+      }
+      return `${title(sectionMeta)} ${content(sectionMeta)}`;
     }
   }
 }
@@ -130,12 +70,14 @@ export default {
 .section-header {
   grid-column: full;
   position: relative;
-  padding: 1rem;
   background-color: #292724;
   background-size: cover;
   background-position: center center;
-  &.has-artwork[lazy='loading'],
-  &.has-artwork[lazy='loaded'] {
+  &.has-content {
+    padding: 1rem;
+  }
+  &.has-artwork {
+    padding: 1rem;
     @media (orientation: portrait) and (max-width: 700px) {
       padding-top: 33vh;
     }
