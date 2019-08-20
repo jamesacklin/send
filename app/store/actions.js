@@ -7,14 +7,16 @@ export default {
     commit('currentStringQuery', { slug })
     commit('currentCatId', { categoryId })
   },
-  async getCategoryIdFromSlug({ commit }, params) {
+  async getCategory({ commit }, params) {
     const categoryMeta = await this.$axios.$get('categories', {
       params: {
         slug: params.slug
       }
     })
     const categoryId = categoryMeta[0].id
+    const catMeta = categoryMeta[0]
     commit('currentCatId', { categoryId })
+    commit('addCategory', { catMeta })
   },
   async getPosts({ commit, state }, params) {
     const { page, prefetch, queryType, slug } = params

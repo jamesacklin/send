@@ -27,6 +27,7 @@ export const state = () => ({
   searchLoading: false,
   posts: [],
   pages: [],
+  categories: [],
   contestPosts: [],
   navItems: [
     {

@@ -38,5 +38,8 @@ export default {
   },
   toggleNavDrawer(state, onoff) {
     state.navDrawerOpen = onoff
+  },
+  addCategory(state, payload){
+    state.categories.push(payload.catMeta)
   }
 }

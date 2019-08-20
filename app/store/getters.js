@@ -28,5 +28,8 @@ export default {
             return a.date < b.date ? 1 : -1
           })
     }
+  },
+  getCategoryBySlug: state => slug => {
+    return state.categories.filter(category => category.slug === slug)[0]
   }
 }

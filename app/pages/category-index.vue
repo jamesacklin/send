@@ -22,6 +22,12 @@ import SectionHeader from '@/components/PageComponents/SectionHeader'
 import Feed from '@/components/PageComponents/Feed'
 import AdSidebar from '@/components/PageComponents/AdSidebar'
 
+function titleCase(str) {
+  return str.toLowerCase().split(' ').map(function(word) {
+    return word.replace(word[0], word[0].toUpperCase());
+  }).join(' ');
+}
+
 export default {
   components: {
     Feed,
@@ -71,13 +77,15 @@ export default {
       }
     },
     categoryHeaderData(){
+      const categoryMeta = this.$store.getters.getCategoryBySlug(this.$route.params.slug)
       return {
-        title: this.$route.params.slug
+        title: titleCase(categoryMeta.name),
+        bg: categoryMeta.acf.category_background_image
       }
     }
   },
   async asyncData({ payload, isStatic, store, params }) {
-    await store.dispatch('getCategoryIdFromSlug', {
+    await store.dispatch('getCategory', {
       slug: params.slug
     })
     await store.dispatch('getPosts', {

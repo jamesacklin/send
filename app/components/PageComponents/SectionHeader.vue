@@ -4,11 +4,11 @@
     :class="{'has-artwork': hasArtwork, 'has-content': hasContent}"
     :style="headerBackground">
     <div class="section-header-content">
-      <span v-html="headerFigure" />
       <div 
         class="text-wrapper"
         v-html="headerContents">
       </div>
+      <span v-html="headerFigure" />
     </div>
   </header>
 </template>
@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     hasArtwork(){
-      if (this.sectionMeta.img){
+      if (this.sectionMeta.bg || this.sectionMeta.img){
         return true
       } else {
         return false
@@ -54,9 +54,7 @@ export default {
           backgroundPosition: '50% 50%'
         }
       } else {
-        return {
-          background: 'transparent'
-        }
+        return ''
       }
     },
     headerContents() {
