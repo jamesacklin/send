@@ -37,6 +37,9 @@ export default {
       queryType: 'default',
       page: parseInt(params.page || 1)
     })
+    await store.dispatch('getPage', {
+      slug: 'home'
+    })
   },
   computed: {
     isMobile: function() {
@@ -81,10 +84,12 @@ export default {
       }
     },
     homeHeaderData() {
+      const pageMeta = this.$store.getters.getPageBySlug('home').acf
       return {
-        title: 'Dirt Rag Magazine',
-        content: '<p>Over 30 Years of Independent Mountain Bike Coverage! <a href="http://www.google.com">Subscribe Today!</a></p>',
-        img: 'https://images.unsplash.com/photo-1522057306606-8d84daa75e87?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
+        title: pageMeta.home_banner_headline,
+        content: pageMeta.home_banner_content,
+        img: pageMeta.home_figure,
+        bg: pageMeta.home_background_image
       }
     }
   },

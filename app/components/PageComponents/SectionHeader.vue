@@ -1,7 +1,8 @@
 <template lang="html">
   <header
     class="section-header"
-    :class="{'has-artwork': hasArtwork, 'has-content': hasContent}">
+    :class="{'has-artwork': hasArtwork, 'has-content': hasContent}"
+    :style="headerBackground">
     <div class="section-header-content">
       <span v-html="headerFigure" />
       <div 
@@ -43,6 +44,20 @@ export default {
         }
       }
       return `${img(sectionMeta)}`
+    },
+    headerBackground() {
+      const sectionMeta = this.sectionMeta
+      if (sectionMeta.bg){
+        return {
+          backgroundImage: `url(${sectionMeta.bg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: '50% 50%'
+        }
+      } else {
+        return {
+          background: 'transparent'
+        }
+      }
     },
     headerContents() {
       const sectionMeta = this.sectionMeta
@@ -146,7 +161,7 @@ export default {
     font-size: 1.2em;
     max-width: 45rem;
     padding: 0 1rem;
-    background: #292724;
+    background: rgba(41,39,36, 0.8);
     text-align: center;
     color: #f5f3ef;
     h2 {
