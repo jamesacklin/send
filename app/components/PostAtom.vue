@@ -3,13 +3,13 @@
     <div
       :class="[mode, isContest ? 'contest' : true, 'post-atom']"
     >
-      <div class="post-image">
+      <!-- <div class="post-image">
         <div class="post-image-crop">
           <nuxt-link tag="a" :to="{ name: 'article', params: { slug: slug, id: id }}">
             <img alt="" v-lazy="pictureUrl" />
           </nuxt-link>
         </div>
-      </div>
+      </div> -->
       <div class="post-text">
         <div class="post-title-block">
           <h4 class="post-title">

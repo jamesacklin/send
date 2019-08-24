@@ -1,7 +1,7 @@
 <template>
   <div class="app-view">
     <Header/>
-    <NavDrawer/>
+    <!-- <NavDrawer/> -->
     <nuxt/>
     <Footer/>
     <Pagination/>
@@ -16,14 +16,14 @@
 <script>
 import Header from '@/components/HeaderComponents/Header'
 import Footer from '@/components/Footer'
-import NavDrawer from '@/components/Navigation/NavDrawer'
+// import NavDrawer from '@/components/Navigation/NavDrawer'
 import Pagination from '@/components/Navigation/Pagination'
 
 export default {
   components: {
     Header,
     Footer,
-    NavDrawer,
+    // NavDrawer,
     Pagination
   }
 }
