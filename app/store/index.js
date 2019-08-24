@@ -9,9 +9,7 @@ export const state = () => ({
       postsPerPage: 30
     },
     category: {
-      current: null,
-      pages: [],
-      postsPerPage: 30
+      current: {},
     },
     search: {
       current: null,
@@ -24,10 +22,9 @@ export const state = () => ({
     id: null
   },
   shops: bikeshops,
-  searchLoading: false,
   posts: [],
   pages: [],
-  categories: [],
+  categories: {},
   contestPosts: [],
   navItems: [
     {

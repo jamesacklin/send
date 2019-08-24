@@ -17,7 +17,6 @@ import compact from 'lodash/compact'
 import flattenDeep from 'lodash/flattenDeep'
 import zip from 'lodash/zip'
 import chunk from 'lodash/chunk'
-
 import SectionHeader from '@/components/PageComponents/SectionHeader'
 import Feed from '@/components/PageComponents/Feed'
 import AdSidebar from '@/components/PageComponents/AdSidebar'
@@ -36,11 +35,9 @@ export default {
   },
   computed: {
     isMobile: function() {
-      // Return true if the device user-agent is "mobile" (as deterimined by 'nuxt-device-detect' module)
       if (this.$device.isMobile) {
         return true
       } else {
-        // Otherwise return false and assume we have a desktop or tablet
         return false
       }
     },
@@ -52,27 +49,19 @@ export default {
       })
     },
     ads() {
-      // Return the ads explicitly set in the store
       return this.$store.state.advertising.rectangle
     },
     feedItems() {
       if (this.isMobile) {
-        // If the user-agent is "mobile", compose a feed, with an ad
-        // inserted every 3 posts. We should have:
-        // - 30 posts (set back in the Vuex store as state.postsPerPage),
-        // - 10 ad slots (explicitly set back in the Vuex store).
         return compact(flattenDeep(zip(chunk(this.posts, 3), this.ads)))
       } else {
-        // If the user-agent is not "mobile", simply return posts.
         return this.posts
       }
     },
     sidebarAds() {
-      // If the user agent is not "mobile", return ads from the store
       if (!this.isMobile) {
         return this.$store.state.advertising.rectangle
       } else {
-        // Otherwise return an empty array
         return []
       }
     },
@@ -108,10 +97,6 @@ export default {
         }
       ]
     }
-  },
-  transition: {
-    name: 'fade',
-    mode: 'out-in'
   }
 }
 </script>

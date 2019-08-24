@@ -30,6 +30,6 @@ export default {
     }
   },
   getCategoryBySlug: state => slug => {
-    return state.categories.filter(category => category.slug === slug)[0]
+    return state.categories[slug]
   }
 }

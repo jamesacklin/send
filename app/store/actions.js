@@ -1,50 +1,59 @@
 import { reject } from 'q'
 
 export default {
-  setCurrents({ commit }, params) {
+  // setCurrents({ commit }, params) {
+  //   const { slug } = params
+  //   const categoryId = params.id
+  //   commit('currentStringQuery', { slug })
+  //   commit('currentCatId', { categoryId })
+  // },
+  async getCategory({ commit, state }, params) {
     const { slug } = params
-    const categoryId = params.id
-    commit('currentStringQuery', { slug })
-    commit('currentCatId', { categoryId })
-  },
-  async getCategory({ commit }, params) {
-    const categoryMeta = await this.$axios.$get('categories', {
-      params: {
-        slug: params.slug
-      }
-    })
-    const categoryId = categoryMeta[0].id
-    const catMeta = categoryMeta[0]
-    commit('currentCatId', { categoryId })
-    commit('addCategory', { catMeta })
+    if (!state.categories[slug]) {
+      const categoryMeta = await this.$axios.$get('categories', {
+        params: { slug }
+      })
+      const catMeta = categoryMeta[0]
+      commit('addCategory', { slug, catMeta })
+    }
   },
   async getPosts({ commit, state }, params) {
     const { page, prefetch, queryType, slug } = params
     if (!prefetch) {
-      commit('currentPage', { page, queryType })
+      commit('currentPage', { page, queryType, slug })
     }
-    if (
-      state.pagination[queryType].pages.length === 0 ||
-      (page &&
-        !state.pagination[queryType].pages.includes(page) &&
-        page <= state.pagination[queryType].totalPostsPages) ||
-      (prefetch &&
-        page &&
-        !state.pagination[queryType].pages.includes(page) &&
-        page <= state.pagination[queryType].totalPostsPages)
-    ) {
-      commit('paginate', { page, queryType })
+    const go = function() {
+      // Return true if:
+      // - if the array of seen pages is empty,
+      // - the array of seen pages does not include this page and the page ID is 
+      //   less than or equal to the number of totalpostspages,
+      // - or we are prefetching and the above is true
+      switch (queryType) {
+        case 'category':
+          if (
+            (!prefetch) && 
+            (state.categories[slug].pagination.pages.length === 0) ||
+            (!state.categories[slug].pagination.pages.includes(page) && page <= state.categories[slug].pagination.totalPostsPages)
+          ) return true
+        case 'search':
+        case 'default':
+          return false
+      }
+
+    }
+    if (go() === true) {
+      commit('paginate', { page, queryType, slug })
       const params = {
-        per_page: state.pagination[queryType].postsPerPage,
+        per_page: 30,
         page
       }
       switch (queryType) {
         case 'category':
-          commit('currentStringQuery', { slug })
-          params.categories = state.current.id
+          // commit('currentStringQuery', { slug })
+          params.categories = state.categories[slug].id
           break
         case 'search':
-          commit('currentStringQuery', { slug })
+          // commit('currentStringQuery', { slug })
           params.search = slug
           params.orderby = 'relevance'
           break
@@ -57,7 +66,7 @@ export default {
           totalPosts: parseInt(posts.headers['x-wp-total']),
           totalPostsPages: parseInt(posts.headers['x-wp-totalpages'])
         }
-        commit('paginateTotals', { totals, queryType })
+        commit('paginateTotals', { totals, queryType, slug })
         posts.data.forEach((post) => {
           if (queryType === 'default' && !post.indexPage) {
             post.indexPage = page

@@ -16,16 +16,51 @@ export default {
       }
     }
   },
+  addCategory(state, payload){
+    const { catMeta, slug } = payload
+    if (!state.categories[slug]) {
+      state.categories[slug] = {}
+    }
+    state.categories[slug] = catMeta
+    if (!state.categories[slug].pagination){
+      state.categories[slug].pagination = {
+        current: null,
+        totalPosts: null,
+        totalPostsPages: null,
+        pages: []
+      }
+    }
+  },
   paginate(state, payload) {
-    state.pagination[payload.queryType].pages.push(payload.page)
+    const { page, prefetch, queryType, slug } = payload
+    switch (queryType) {
+      case 'category':
+        state.categories[slug].pagination.pages.push(page)
+      case 'search':
+      case 'default':
+    }
   },
   paginateTotals(state, payload) {
-    state.pagination[payload.queryType].totalPosts = payload.totals.totalPosts
-    state.pagination[payload.queryType].totalPostsPages =
-      payload.totals.totalPostsPages
+    const { totals, queryType, slug } = payload
+    switch (queryType) {
+      case 'category':
+        state.categories[slug].pagination.totalPosts = totals.totalPosts
+        state.categories[slug].pagination.totalPostsPages = totals.totalPostsPages
+      case 'search':
+      case 'default':
+    }
   },
   currentPage(state, payload) {
-    state.pagination[payload.queryType].current = payload.page
+    const { page, queryType, slug } = payload
+    switch (queryType) {
+      case 'category':
+        state.categories[slug].pagination.current = page
+        state.current.id = state.categories[slug].id
+        state.current.slug = slug
+      case 'search':
+      case 'default':
+        state.pagination[queryType].current = page
+    }
   },
   currentStringQuery(state, payload) {
     state.current.slug = payload.slug
@@ -33,13 +68,10 @@ export default {
   currentCatId(state, payload) {
     state.current.id = payload.categoryId
   },
-  addContestPosts(state, posts) {
-    state.contestPosts = posts
-  },
-  toggleNavDrawer(state, onoff) {
-    state.navDrawerOpen = onoff
-  },
-  addCategory(state, payload){
-    state.categories.push(payload.catMeta)
-  }
+  // addContestPosts(state, posts) {
+  //   state.contestPosts = posts
+  // },
+  // toggleNavDrawer(state, onoff) {
+  //   state.navDrawerOpen = onoff
+  // }
 }
