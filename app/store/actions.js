@@ -36,15 +36,20 @@ export default {
             (!state.categories[slug].pagination.pages.includes(page) && page <= state.categories[slug].pagination.totalPostsPages)
           ) return true
         case 'search':
-        case 'default':
           return false
+        case 'default':
+          if (
+            (!prefetch) && 
+            (state.pagination.default.pages.length === 0) ||
+            (!state.pagination.default.pages.includes(page) && page <= state.pagination.default.totalPostsPages)
+          ) return true
       }
 
     }
     if (go() === true) {
       commit('paginate', { page, queryType, slug })
       const params = {
-        per_page: 30,
+        per_page: 10,
         page
       }
       switch (queryType) {
@@ -60,7 +65,7 @@ export default {
         case 'default':
           break
       }
-      const posts = await this.$axios.get('posts?_embed', { params })
+      const posts = await this.$axios.get('posts?', { params })
       if (posts) {
         const totals = {
           totalPosts: parseInt(posts.headers['x-wp-total']),
