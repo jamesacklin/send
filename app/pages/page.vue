@@ -111,7 +111,7 @@ export default {
   line-height: 1.6;
 }
 
-.page a {
+article.page a {
   color: #eb181d;
 }
 
