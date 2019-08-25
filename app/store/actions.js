@@ -88,12 +88,6 @@ export default {
       }
     }
   },
-  openNavDrawer({ commit }) {
-    commit('toggleNavDrawer', true)
-  },
-  closeNavDrawer({ commit }) {
-    commit('toggleNavDrawer', false)
-  },
   async getPage({ commit }, params) {
     if (!this.getters.getPageBySlug(params.slug)) {
       const page = await this.$axios.$get('pages?_embed', {
@@ -117,5 +111,24 @@ export default {
       })
       commit('addPosts', post)
     }
-  }
+  },
+  async getContestPost({ commit, state}){
+    if (!state.contestPost.length){
+      const post = await this.$axios.get('posts?_embed',{
+        params: {
+          per_page: 1,
+          page: 1,
+          categories: 589,
+          orderBy: 'date'
+        }
+      })
+      commit('addContestPost', post.data[0])
+    }
+  },
+  openNavDrawer({ commit }) {
+    commit('toggleNavDrawer', true)
+  },
+  closeNavDrawer({ commit }) {
+    commit('toggleNavDrawer', false)
+  },
 }

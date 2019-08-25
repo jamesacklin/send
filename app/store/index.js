@@ -25,7 +25,7 @@ export const state = () => ({
   posts: [],
   pages: [],
   categories: {},
-  contestPosts: [],
+  contestPost: [],
   navItems: [
     {
       name: 'News',

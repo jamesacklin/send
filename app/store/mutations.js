@@ -68,10 +68,10 @@ export default {
   currentCatId(state, payload) {
     state.current.id = payload.categoryId
   },
-  // addContestPosts(state, posts) {
-  //   state.contestPosts = posts
-  // },
-  // toggleNavDrawer(state, onoff) {
-  //   state.navDrawerOpen = onoff
-  // }
+  addContestPost(state, post) {
+    state.contestPost.push(post)
+  },
+  toggleNavDrawer(state, onoff) {
+    state.navDrawerOpen = onoff
+  }
 }
