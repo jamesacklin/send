@@ -1,12 +1,12 @@
 import { reject } from 'q'
 
 export default {
-  // setCurrents({ commit }, params) {
-  //   const { slug } = params
-  //   const categoryId = params.id
-  //   commit('currentStringQuery', { slug })
-  //   commit('currentCatId', { categoryId })
-  // },
+  setCurrents({ commit }, params) {
+    const { slug } = params
+    const categoryId = params.id
+    commit('currentStringQuery', { slug })
+    commit('currentCatId', { categoryId })
+  },
   async getCategory({ commit, state }, params) {
     const { slug } = params
     if (!state.categories[slug]) {
@@ -35,14 +35,15 @@ export default {
             (state.categories[slug].pagination.pages.length === 0) ||
             (!state.categories[slug].pagination.pages.includes(page) && page <= state.categories[slug].pagination.totalPostsPages)
           ) return true
-        case 'search':
-          return false
         case 'default':
           if (
             (!prefetch) && 
             (state.pagination.default.pages.length === 0) ||
             (!state.pagination.default.pages.includes(page) && page <= state.pagination.default.totalPostsPages)
           ) return true
+        case 'search':
+          // Always get posts for new searches
+          return true
       }
 
     }
@@ -54,11 +55,9 @@ export default {
       }
       switch (queryType) {
         case 'category':
-          // commit('currentStringQuery', { slug })
           params.categories = state.categories[slug].id
           break
         case 'search':
-          // commit('currentStringQuery', { slug })
           params.search = slug
           params.orderby = 'relevance'
           break

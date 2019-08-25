@@ -14,7 +14,6 @@ import compact from 'lodash/compact'
 import flattenDeep from 'lodash/flattenDeep'
 import zip from 'lodash/zip'
 import chunk from 'lodash/chunk'
-
 import SectionHeader from '@/components/PageComponents/SectionHeader'
 import Feed from '@/components/PageComponents/Feed'
 
@@ -52,7 +51,7 @@ export default {
     return {
       title: 'Dirt Rag Magazine',
       bodyAttrs: {
-        class: 'home archive search-archive'
+        class: 'archive search-archive'
       },
       meta: [
         {
@@ -69,42 +68,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.feed {
-  display: grid;
-  grid-row-gap: 1em;
-  grid-auto-rows: auto;
-  grid-template-columns:
-    [full-start] 0
-    [main-start] minmax(0, 1000px) [main-end]
-    0 [full-end];
-  @media (min-width: 1000px) {
-    padding: 0;
-    display: grid;
-    grid-row-gap: 2em;
-    grid-column-gap: 2em;
-    grid-template-columns:
-      [full-start] minmax(1em, 1fr) [main-start] minmax(0, 45em)
-      [main-end sidebar-start] 300px [sidebar-end] minmax(1em, 1fr) [full-end];
-  }
-  @media (min-width: 1200px) {
-    grid-template-columns:
-      [full-start] minmax(1em, 1fr)
-      [main-start] minmax(0, 62.5em)
-      [main-end sidebar-start] 300px [sidebar-end]
-      minmax(1em, 1fr) [full-end];
-  }
-}
-
-.feed-items {
-  grid-column: main;
-}
-
-.sidebar-ads {
-  grid-column: main;
-  @media (min-width: 1000px) {
-    grid-column: sidebar;
-  }
-}
-</style>
