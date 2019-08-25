@@ -1,9 +1,9 @@
 const pkg = require('./package')
 
 module.exports = {
-  mode: 'spa',
+  mode: 'universal',
   head: {
-    title: pkg.name,
+    title: 'Dirt Rag Magazine',
     meta: [
       {
         charset: 'utf-8'
@@ -19,7 +19,7 @@ module.exports = {
       {
         hid: 'description',
         name: 'description',
-        content: pkg.description
+        content: 'Celebrating 30 years of independent mountain bike journalism'
       }
     ],
     link: [
@@ -185,17 +185,11 @@ module.exports = {
   modules: [
     '@nuxtjs/pwa',
     '@nuxtjs/axios',
+    '@nuxtjs/device',
     [
       '@nuxtjs/google-analytics',
       {
         id: 'UA-474542-4'
-      }
-    ],
-    [
-      'nuxt-device-detect',
-      {
-        defaultUserAgent:
-          'Mozilla/5.0 (Linux; Android 5.1.1; Nexus 6 Build/LYZ28E) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.39 Mobile Safari/537.36'
       }
     ]
   ],
