@@ -11,8 +11,8 @@
         :date="feedItem.date"
         :excerpt="feedItem.excerpt.rendered"
         :titleCallout="titleCallout(feedItem)"
-        
-        
+        :pictureUrl="featuredImage(feedItem)"
+        :author="postAuthor(feedItem)"
         :mode="postMode(feedItem)"
       />
       <div

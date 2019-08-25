@@ -50,7 +50,7 @@ export default {
     if (go() === true) {
       commit('paginate', { page, queryType, slug })
       const params = {
-        per_page: 10,
+        per_page: 30,
         page
       }
       switch (queryType) {
@@ -64,7 +64,7 @@ export default {
         case 'default':
           break
       }
-      const posts = await this.$axios.get('posts?', { params })
+      const posts = await this.$axios.get('posts?_embed', { params })
       if (posts) {
         const totals = {
           totalPosts: parseInt(posts.headers['x-wp-total']),

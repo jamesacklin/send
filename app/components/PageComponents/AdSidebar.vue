@@ -38,8 +38,7 @@ export default {
   },
   computed: {
     contestPosts: function() {
-      return []
-      // return this.$store.state.contestPosts
+      return this.$store.state.contestPosts
     }
   },
   methods: {
@@ -63,7 +62,7 @@ export default {
     }
   },
   mounted() {
-    // this.$store.dispatch('getContestPosts')
+    this.$store.dispatch('getContestPosts')
   }
 }
 </script>
