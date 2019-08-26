@@ -4,7 +4,6 @@
       <div class="nav-drawer-header">
         <NavLogo variant="drawer" />
       </div>
-      <search />
       <nav>
         <NavItem
           v-for="navLink in navLinks"
@@ -22,7 +21,6 @@
 </template>
 
 <script>
-import Search from '@/components/Search'
 import NavItem from '@/components/Navigation/NavItem'
 import NavLogo from '@/components/Navigation/NavLogo'
 
@@ -30,7 +28,6 @@ export default {
   name: 'NavDrawer',
   components: {
     NavItem,
-    Search,
     NavLogo
   },
   computed: {
@@ -100,6 +97,7 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100%;
+  margin-top: 1rem;
   // align-items: stretch;
   justify-content: stretch;
   min-width: 20em;

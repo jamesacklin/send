@@ -1,16 +1,16 @@
 <template>
   <div class="nav-logo-wrapper">
-    <button class="nav-toggle" @click="openNav()" v-if="variant === 'banner'">
+    <button class="nav-toggle" @click="openNav()" v-if="!isOpen">
       <font-awesome-icon :icon="['fas', 'bars']"/>
+    </button>
+    <button class="nav-toggle" @click="closeNav()" v-if="isOpen">
+      <font-awesome-icon :icon="['fas', 'times']"/>
     </button>
     <div class="logo-wrapper">
       <nuxt-link tag="a" :to="`/`">
         <Logo style="cursor: pointer;" variant="30annv"/>
       </nuxt-link>
     </div>
-    <button class="nav-toggle" @click="closeNav()" v-if="variant === 'drawer'">
-      <font-awesome-icon :icon="['fas', 'times']"/>
-    </button>
   </div>
 </template>
 
@@ -22,6 +22,11 @@ export default {
   props: ['variant'],
   components: {
     Logo
+  },
+  computed: {
+    isOpen() {
+      return this.$store.state.navDrawerOpen
+    }
   },
   methods: {
     openNav() {
