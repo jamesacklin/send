@@ -5,6 +5,9 @@
         <NavLogo variant="drawer" />
       </div>
       <nav>
+        <div class="search-component">
+          <Search />
+        </div>
         <NavItem
           v-for="navLink in navLinks"
           @click.native="closeNav()"
@@ -23,12 +26,14 @@
 <script>
 import NavItem from '@/components/Navigation/NavItem'
 import NavLogo from '@/components/Navigation/NavLogo'
+import Search from '@/components/Search'
 
 export default {
   name: 'NavDrawer',
   components: {
     NavItem,
-    NavLogo
+    NavLogo,
+    Search
   },
   computed: {
     navLinks: function() {
@@ -183,7 +188,7 @@ export default {
 }
 
 .search-component {
-  min-width: 20em;
-  width: 50%;
+  font-size: 0.8em;
+  margin-bottom: 1em;
 }
 </style>

@@ -7,20 +7,22 @@
         :text="navLink.name"
         :link="navLink.href"
       />
-      <!-- <Search /> -->
+      <div class="search-component">
+        <Search />
+      </div>
     </nav>
   </div>
 </template>
 
 <script>
-// import Search from '@/components/Search'
+import Search from '@/components/Search'
 import NavItem from '@/components/Navigation/NavItem'
 
 export default {
   name: 'HorizontalNav',
   components: {
     NavItem,
-    // Search
+    Search
   },
   computed: {
     navLinks: function() {

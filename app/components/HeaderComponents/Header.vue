@@ -52,10 +52,10 @@ header a:active {
   padding: 1rem 0;
   grid-column: main;
   @media (min-width: 800px){
-    padding: 0.5rem 1.5rem 0.5rem 0;
+    padding: 0.5rem 0.5rem 0.5rem 0;
   }
   @media (min-width: 1150px){
-    padding: 0.5rem 1.5rem 0.5rem 0;
+    padding: 0.5rem 0.5rem 0.5rem 0;
   }
 }
 </style>

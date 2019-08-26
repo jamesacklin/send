@@ -1,14 +1,32 @@
 <template>
-  <input
-    class="search-input"
-    type="text"
-    tabindex="0"
-    placeholder="Type your search term, press Enter to search."
-  >
+  <form v-on:submit.prevent="submitSearch">
+    <input
+      class="search-input"
+      type="text"
+      tabindex="0"
+      placeholder="Type your search term, press Enter to search."
+      v-model="searchTerm"
+    >
+  </form>
 </template>
 
 <script>
 export default {
+  data(){
+    return {
+      searchterm : null
+    }
+  },
+  methods: {
+    submitSearch(){
+      this.$router.push({
+        name: 'search-index',
+        params: {
+          slug: this.searchTerm
+        }
+      })
+    }
+  }
 }
 </script>
 
