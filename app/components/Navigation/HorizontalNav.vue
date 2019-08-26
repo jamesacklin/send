@@ -7,7 +7,9 @@
         :text="navLink.name"
         :link="navLink.href"
       />
-      <Search />
+      <div class="search-component">
+        <Search />
+      </div>
     </nav>
   </div>
 </template>

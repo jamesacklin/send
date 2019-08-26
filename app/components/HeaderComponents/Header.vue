@@ -33,12 +33,6 @@ header[role='banner'] {
   background: #292724;
   position: fixed;
   z-index: 10;
-  display: grid;
-  grid-template-columns:
-    [full-start] minmax(1em, 1fr) [main-start] minmax(0, 72.5em)
-    [main-end] minmax(1em, 1fr) [full-end];
-  grid-auto-rows: auto;
-  grid-row-gap: 0;
 }
 
 header a {
@@ -51,10 +45,6 @@ header a:active {
   color: #eb181d;
 }
 
-header a.nuxt-link-exact-active {
-  color: #eb181d;
-}
-
 .header-content {
   display: flex;
   align-items: center;
@@ -62,10 +52,10 @@ header a.nuxt-link-exact-active {
   padding: 1rem 0;
   grid-column: main;
   @media (min-width: 800px){
-    padding: 0.5rem 0;
+    padding: 0.5rem 0.5rem 0.5rem 0;
   }
   @media (min-width: 1150px){
-    padding: 0.5rem 0;
+    padding: 0.5rem 0.5rem 0.5rem 0;
   }
 }
 </style>

@@ -1,20 +1,18 @@
 <template>
   <div class="advertising">
-    <div v-if="contestPosts">
-      <div v-for="(post, index) in contestPosts" :key="index">
-        <PostAtom
-          :id="post.id"
-          :key="post.index"
-          :slug="post.slug"
-          :title="post.title.rendered"
-          :date="post.date"
-          :excerpt="post.excerpt.rendered"
-          :pictureUrl="featuredImage(post)"
-          :author="`Dirt Rag Magazine`"
-          :mode="`promotion`"
-          :titleCallout="`Contest`"
-        />
-      </div>
+    <div v-if="contestPost">
+      <PostAtom
+        :id="contestPost.id"
+        :key="contestPost.index"
+        :slug="contestPost.slug"
+        :title="contestPost.title.rendered"
+        :date="contestPost.date"
+        :excerpt="contestPost.excerpt.rendered"
+        :pictureUrl="featuredImage(contestPost)"
+        :author="`Dirt Rag Magazine`"
+        :mode="`promotion`"
+        :titleCallout="`Contest`"
+      />
     </div>
     <OutsideFeed />
     <template v-for="ad in sidebarData">
@@ -37,8 +35,8 @@ export default {
     OutsideFeed
   },
   computed: {
-    contestPosts: function() {
-      return this.$store.state.contestPosts
+    contestPost: function() {
+      return this.$store.state.contestPost[0]
     }
   },
   methods: {
@@ -62,7 +60,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('getContestPosts')
+    this.$store.dispatch('getContestPost')
   }
 }
 </script>

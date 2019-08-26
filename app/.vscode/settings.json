@@ -1,0 +1,9 @@
+{
+  "search.useGlobalIgnoreFiles": true,
+  "files.exclude": {
+    ".nuxt": true,
+    "node_modules": true
+  },
+  "eslint.autoFixOnSave": true,
+  "prettier.eslintIntegration": true
+}

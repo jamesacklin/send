@@ -4,8 +4,10 @@
       <div class="nav-drawer-header">
         <NavLogo variant="drawer" />
       </div>
-      <search />
       <nav>
+        <div class="search-component">
+          <Search />
+        </div>
         <NavItem
           v-for="navLink in navLinks"
           @click.native="closeNav()"
@@ -22,16 +24,16 @@
 </template>
 
 <script>
-import Search from '@/components/Search'
 import NavItem from '@/components/Navigation/NavItem'
 import NavLogo from '@/components/Navigation/NavLogo'
+import Search from '@/components/Search'
 
 export default {
   name: 'NavDrawer',
   components: {
     NavItem,
-    Search,
-    NavLogo
+    NavLogo,
+    Search
   },
   computed: {
     navLinks: function() {
@@ -100,6 +102,7 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100%;
+  margin-top: 1rem;
   // align-items: stretch;
   justify-content: stretch;
   min-width: 20em;
@@ -185,7 +188,7 @@ export default {
 }
 
 .search-component {
-  min-width: 20em;
-  width: 50%;
+  font-size: 0.8em;
+  margin-bottom: 1em;
 }
 </style>

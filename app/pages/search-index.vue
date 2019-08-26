@@ -1,12 +1,12 @@
 <template>
   <main class="content">
-    <section class="feed">
-      <SectionHeader :sectionMeta="homeHeaderData" />
+    <section class="feed search-feed">
+      <SectionHeader :sectionMeta="searchHeaderData" />
       <div class="feed-items">
         <feed :feedData="feedItems"/>
       </div>
       <div v-if="!isMobile" class="sidebar-ads">
-        <ad-sidebar :sidebarData="sidebarAds"/>
+        <ad-sidebar :sidebarData="sidebarAds" />
       </div>
     </section>
   </main>
@@ -24,21 +24,8 @@ import AdSidebar from '@/components/PageComponents/AdSidebar'
 export default {
   components: {
     Feed,
-    AdSidebar,
-    SectionHeader
-  },
-  async asyncData({ payload, isStatic, store, params }) {
-    await store.dispatch('setCurrents', {
-      slug: '',
-      id: null
-    })
-    await store.dispatch('getPosts', {
-      queryType: 'default',
-      page: parseInt(params.page || 1)
-    })
-    await store.dispatch('getPage', {
-      slug: 'home'
-    })
+    SectionHeader,
+    AdSidebar
   },
   computed: {
     isMobile: function() {
@@ -51,8 +38,8 @@ export default {
     posts() {
       return this.$store.getters.getPostsByPage({
         page: parseInt(this.$route.params.page || 1),
-        queryType: 'default',
-        query: ''
+        queryType: 'search',
+        query: this.$route.params.slug
       })
     },
     ads() {
@@ -72,21 +59,25 @@ export default {
         return []
       }
     },
-    homeHeaderData() {
-      const pageMeta = this.$store.getters.getPageBySlug('home').acf
+    searchHeaderData(){
       return {
-        title: pageMeta.home_banner_headline,
-        content: pageMeta.home_banner_content,
-        img: pageMeta.home_figure,
-        bg: pageMeta.home_background_image
+        title: `Search Results for <em>${this.$route.params.slug}</em>`,
+        content: `Page ${parseInt(this.$route.params.page || 1)}`
       }
     }
+  },
+  async asyncData({ payload, isStatic, store, params }) {
+    await store.dispatch('getPosts', {
+      queryType: 'search',
+      slug: params.slug,
+      page: parseInt(params.page || 1)
+    })
   },
   head() {
     return {
       title: 'Dirt Rag Magazine',
       bodyAttrs: {
-        class: 'home archive'
+        class: 'archive search-archive'
       },
       meta: [
         {

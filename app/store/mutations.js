@@ -1,18 +1,14 @@
 import merge from 'lodash/merge'
 
-const mutations = {
-  // add one the pages state
+export default {
   addPage(state, page) {
-    // check the store for existing page before adding
     if (undefined === this.getters.getPageBySlug(page.slug)) {
       state.pages.push(page)
     }
   },
-  // add one or many posts to the posts state
   addPosts(state, posts) {
-    for (let post of posts) {
-      // either merge with the existing item or push onto state array
-      const i = state.posts.findIndex(o => o.id === post.id)
+    for (const post of posts) {
+      const i = state.posts.findIndex((o) => o.id === post.id)
       if (state.posts[i]) {
         state.posts[i] = merge(state.posts[i], post)
       } else {
@@ -20,66 +16,62 @@ const mutations = {
       }
     }
   },
-  searchLoadingStatus(state, status) {
-    state.searchLoading = status
+  addCategory(state, payload){
+    const { catMeta, slug } = payload
+    if (!state.categories[slug]) {
+      state.categories[slug] = {}
+    }
+    state.categories[slug] = catMeta
+    if (!state.categories[slug].pagination){
+      state.categories[slug].pagination = {
+        current: null,
+        totalPosts: null,
+        totalPostsPages: null,
+        pages: []
+      }
+    }
   },
-  addSearchPosts(state, posts) {
-    state.searchPosts = posts
+  paginate(state, payload) {
+    const { page, prefetch, queryType, slug } = payload
+    switch (queryType) {
+      case 'category':
+        state.categories[slug].pagination.pages.push(page)
+      case 'search':
+      case 'default':
+    }
   },
-  clearSearchPosts(state) {
-    state.searchPosts = []
+  paginateTotals(state, payload) {
+    const { totals, queryType, slug } = payload
+    switch (queryType) {
+      case 'category':
+        state.categories[slug].pagination.totalPosts = totals.totalPosts
+        state.categories[slug].pagination.totalPostsPages = totals.totalPostsPages
+      case 'search':
+      case 'default':
+    }
   },
-  addContestPosts(state, posts) {
-    state.contestPosts = posts
+  currentPage(state, payload) {
+    const { page, queryType, slug } = payload
+    switch (queryType) {
+      case 'category':
+        state.categories[slug].pagination.current = page
+        state.current.id = state.categories[slug].id
+        state.current.slug = slug
+      case 'search':
+      case 'default':
+        state.pagination[queryType].current = page
+    }
   },
-  // paginate
-  paginate(state, page) {
-    state.pagination.pages.push(page)
+  currentStringQuery(state, payload) {
+    state.current.slug = payload.slug
   },
-  // current page
-  currentPage(state, page) {
-    state.pagination.current = page
+  currentCatId(state, payload) {
+    state.current.id = payload.categoryId
   },
-  // paginate
-  paginateCategory(state, params) {
-    state.categories.categories[params.cat].pagination.pages.push(params.page)
+  addContestPost(state, post) {
+    state.contestPost.push(post)
   },
-  // current category page
-  currentCategoryPage(state, params) {
-    state.categories.categories[params.cat].pagination.current = params.page
-  },
-  // store raw category info
-  storeCategory(state, category) {
-    state.categories.categories[category.slug] = category
-  },
-  // store category id
-  storeCategoryId(state, cat) {
-    state.categories.categoryIds.push(cat)
-  },
-  // current category
-  currentCategory(state, category) {
-    state.categories.current = category
-  },
-  // pagination totals from API
-  paginateTotals(state, totals) {
-    state.pagination.totalPosts = totals.totalPosts
-    state.pagination.totalPostsPages = totals.totalPostsPages
-  },
-  // pagination totals from API
-  paginateCategoryTotals(state, params) {
-    state.categories.categories[params.cat].pagination.totalPosts =
-      params.totalPosts
-    state.categories.categories[params.cat].pagination.totalPostsPages =
-      params.totalPostsPages
-  },
-  // enable / disable pagination
-  paginateToggle(state, onoff) {
-    state.pagination.paginate = onoff
-  },
-  // open or close nav drawer
   toggleNavDrawer(state, onoff) {
     state.navDrawerOpen = onoff
   }
 }
-
-export default mutations

@@ -32,6 +32,6 @@ export default {
 <style lang="css" scoped>
 .app-view {
   background-color: #f5f3ef;
-  padding-bottom: 38px;
+  padding-bottom: 34px;
 }
 </style>
