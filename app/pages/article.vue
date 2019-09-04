@@ -43,7 +43,7 @@
       <div class="article-content">
         <main>
           <AdHeader/>
-          <div class="article-copy" @click="zoomFigure" v-html="post.content.rendered"/>
+          <div class="article-copy" @click="zoomFigure" v-html="mutatedPost"/>
           <div v-if="this.post.acf.special_content">
             <no-ssr placeholder="Loading special content...">
               <special-content :key="randomKey" :embedCode="this.post.acf.embed_code"/>
@@ -110,6 +110,19 @@ export default {
     ads() {
       // Return the ads set explicitly in the store
       return this.$store.state.advertising.rectangle
+    },
+    mutatedPost() {
+      if (process.client) {
+        const htmlContent = this.post.content.rendered
+        const parser = new DOMParser();
+        const postDom = parser.parseFromString(htmlContent, 'text/html');
+        const firstP = postDom.getElementsByTagName("p")[0];
+        firstP.insertAdjacentHTML('afterend', '<div id="XXXXXXXXXX"><pre>--------- HELLO ---------</pre></div>');
+        return postDom.body.innerHTML;
+      }
+      else {
+        return this.post.content.rendered
+      }
     },
     postDate: function() {
       // Pretty-format the post date (January 1, 2019)
