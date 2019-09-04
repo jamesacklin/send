@@ -119,20 +119,18 @@ export default {
       if (process.client) {
         const htmlContent = this.post.content.rendered
         const parser = new DOMParser()
-        // const serializer = new XMLSerializer()
         const postDom = parser.parseFromString(htmlContent, 'text/html')
         const postDomNodes = postDom.body.children
         const slots = this.ads.map((i) => {
-          let tmpl = `<div id=${i.id}>${i.name}</div>`
+          let tmpl = `<div id=${i.id}><strong>${i.name}</strong></div>`
           let tmplRendered = parser.parseFromString(tmpl, 'text/html')
           return tmplRendered.body.firstElementChild
         })
         const newNodes = compact(flattenDeep(zip(chunk(postDomNodes, 2), slots)))
-        console.log(newNodes)
-        // FIXME: figure out a way to get this array serialized back into a XML string,
-        // something like this:
-        // console.log(serializer.serializeToString(newNodes));
-        return postDom.body.innerHTML
+        const newString = newNodes.map((i) => {
+          return i.outerHTML
+        }).join(' ')
+        return newString
       }
       else {
         return this.post.content.rendered
@@ -246,7 +244,13 @@ export default {
   },
   head() {
     return {
-      title: this.post.title.rendered,
+      title: this.post.title.rendered.replace(/<(?:.|\n)*?>/gm, '')
+                                             .replace(/&nbsp;/gm, ' ')
+                                             .replace(/&#8211;/gm, '—')
+                                             .replace(/&#8216;/gm, '‘')
+                                             .replace(/&#8217;/gm, '’')
+                                             .replace(/&#8220;/gm, '“')
+                                             .replace(/&#8221;/gm, '”'),
       bodyAttrs: {
         class: 'single post post-id-' + this.post.id
       },
