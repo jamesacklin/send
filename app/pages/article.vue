@@ -84,13 +84,17 @@
 </template>
 
 <script>
+import compact from 'lodash/compact'
+import flattenDeep from 'lodash/flattenDeep'
+import zip from 'lodash/zip'
+import chunk from 'lodash/chunk'
+import dayjs from 'dayjs'
 import AdHeader from '@/components/PageComponents/AdHeader'
 import AdSidebar from '@/components/PageComponents/AdSidebar'
 import Contest from '@/components/PageComponents/Contest'
 import SpecialContent from '@/components/PageComponents/SpecialContent'
 import Comments from '@/components/PageComponents/Comments'
 import FeaturedMedia from '@/components/PageComponents/FeaturedMedia'
-import dayjs from 'dayjs'
 
 export default {
   components: {
@@ -114,11 +118,21 @@ export default {
     mutatedPost() {
       if (process.client) {
         const htmlContent = this.post.content.rendered
-        const parser = new DOMParser();
-        const postDom = parser.parseFromString(htmlContent, 'text/html');
-        const firstP = postDom.getElementsByTagName("p")[0];
-        firstP.insertAdjacentHTML('afterend', '<div id="XXXXXXXXXX"><pre>--------- HELLO ---------</pre></div>');
-        return postDom.body.innerHTML;
+        const parser = new DOMParser()
+        // const serializer = new XMLSerializer()
+        const postDom = parser.parseFromString(htmlContent, 'text/html')
+        const postDomNodes = postDom.body.children
+        const slots = this.ads.map((i) => {
+          let tmpl = `<div id=${i.id}>${i.name}</div>`
+          let tmplRendered = parser.parseFromString(tmpl, 'text/html')
+          return tmplRendered.body.firstElementChild
+        })
+        const newNodes = compact(flattenDeep(zip(chunk(postDomNodes, 2), slots)))
+        console.log(newNodes)
+        // FIXME: figure out a way to get this array serialized back into a XML string,
+        // something like this:
+        // console.log(serializer.serializeToString(newNodes));
+        return postDom.body.innerHTML
       }
       else {
         return this.post.content.rendered
