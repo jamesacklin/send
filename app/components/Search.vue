@@ -5,7 +5,7 @@
       type="text"
       tabindex="0"
       placeholder="Type your search term, press Enter to search."
-      v-model="searchTerm"
+      v-model="this.searchTerm"
     >
   </form>
 </template>
@@ -14,7 +14,7 @@
 export default {
   data(){
     return {
-      searchterm : null
+      searchTerm : ''
     }
   },
   methods: {
