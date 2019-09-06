@@ -116,13 +116,13 @@ export default {
       return this.$store.state.advertising.rectangle
     },
     mutatedPost() {
-      if (process.client) {
+      if (process.client && this.$device.isMobile) {
         const htmlContent = this.post.content.rendered
         const parser = new DOMParser()
         const postDom = parser.parseFromString(htmlContent, 'text/html')
         const postDomNodes = postDom.body.children
         const slots = this.ads.map((i) => {
-          let tmpl = `<div id=${i.id}><strong>${i.name}</strong></div>`
+          let tmpl = `<div class="inline-advertising" id=${i.id}></div>`
           let tmplRendered = parser.parseFromString(tmpl, 'text/html')
           return tmplRendered.body.firstElementChild
         })
@@ -487,5 +487,13 @@ aside {
 
 .article-comments {
   margin-top: 2rem;
+}
+
+.inline-advertising {
+  width: calc(100% + 10vw);
+  margin: 2rem 0 2rem -5vw;
+  text-align: center;
+  padding: 2em;
+  background: rgba(0, 0, 0, 0.1);
 }
 </style>
