@@ -53,12 +53,17 @@ export const state = () => ({
     },
     {
       name: 'Store',
-      href: 'https://dirtragmag.threadless.com/'
+      href: 'https://rotatingmassmedia.wixsite.com/dirtragstore'
     },
     {
       name: 'Subscribe',
       href:
         'https://w1.buysub.com/pubs/RG/DRM/DRM_subpage_print_dig.jsp?cds_page_id=164525'
+    },
+    {
+      name: 'Dirt Fest',
+      href: 'https://www.google.com',
+      color: "rgb(120, 44, 131)"
     }
   ],
   // TODO: Control footerLinks from WordPress

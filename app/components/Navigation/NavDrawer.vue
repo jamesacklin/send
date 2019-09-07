@@ -14,6 +14,7 @@
           :key="navLink.index"
           :text="navLink.name"
           :link="navLink.href"
+          :color="navLink.color"
         />
       </nav>
       <div class="nav-drawer-footer">

@@ -6,6 +6,7 @@
         :key="navLink.index"
         :text="navLink.name"
         :link="navLink.href"
+        :color="navLink.color"
       />
       <div class="search-component">
         <Search />
@@ -60,7 +61,7 @@ nav {
     flex-wrap: wrap;
     padding-left: 1rem;
     > div {
-      width: 25%;
+      width: 33%;
     }
     .search-component {
       align-self: flex-end;
