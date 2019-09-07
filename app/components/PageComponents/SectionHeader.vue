@@ -108,9 +108,9 @@ export default {
     }
   }
   /* Padding for sticky nav */
-  margin-top: 76.828px;
-  @media (min-width: 800px){
-    margin-top: 108.781px;
+  margin-top: 64px;
+  @media (min-width: 945px){
+    margin-top: 82px;
   }
   @media (min-width: 1150px){
     margin-top: 67.156px;
