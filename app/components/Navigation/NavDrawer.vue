@@ -14,6 +14,7 @@
           :key="navLink.index"
           :text="navLink.name"
           :link="navLink.href"
+          :color="navLink.color"
         />
       </nav>
       <div class="nav-drawer-footer">
@@ -85,6 +86,9 @@ export default {
   opacity: 1;
   top: 0;
   left: 0;
+  @media (min-width: 945px){
+    visibility: hidden;
+  }
 }
 
 .nav-drawer {
@@ -107,28 +111,6 @@ export default {
   justify-content: stretch;
   min-width: 20em;
   width: 50%;
-}
-
-.nav-drawer nav .nav-item {
-  display: block;
-  background: #eb181d;
-  width: 100%;
-  color: #f5f3ef;
-  text-align: center;
-  padding: 2vh;
-  cursor: pointer;
-  text-decoration: none;
-  margin-bottom: 0.25em;
-  @media (min-width: 1000px) {
-    font-size: 1.5rem;
-  }
-  &:hover {
-    color: #292724;
-    background: #f5f3ef;
-  }
-  &.nav-item-external {
-    background: rgb(14, 121, 193);
-  }
 }
 
 .nav-drawer-header {

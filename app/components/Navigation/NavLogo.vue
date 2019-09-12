@@ -59,7 +59,7 @@ export default {
   padding: 0 0.33em;
   margin: 0;
   cursor: pointer;
-  @media (min-width: 800px) {
+  @media (min-width: 945px) {
     display: none;
   }
 }
