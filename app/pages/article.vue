@@ -43,7 +43,7 @@
       <div class="article-content">
         <main>
           <AdHeader/>
-          <div class="article-copy" @click="zoomFigure" v-html="post.content.rendered"/>
+          <div class="article-copy" @click="zoomFigure" v-html="mutatedPost"/>
           <div v-if="this.post.acf.special_content">
             <no-ssr placeholder="Loading special content...">
               <special-content :key="randomKey" :embedCode="this.post.acf.embed_code"/>
@@ -84,13 +84,17 @@
 </template>
 
 <script>
+import compact from 'lodash/compact'
+import flattenDeep from 'lodash/flattenDeep'
+import zip from 'lodash/zip'
+import chunk from 'lodash/chunk'
+import dayjs from 'dayjs'
 import AdHeader from '@/components/PageComponents/AdHeader'
 import AdSidebar from '@/components/PageComponents/AdSidebar'
 import Contest from '@/components/PageComponents/Contest'
 import SpecialContent from '@/components/PageComponents/SpecialContent'
 import Comments from '@/components/PageComponents/Comments'
 import FeaturedMedia from '@/components/PageComponents/FeaturedMedia'
-import dayjs from 'dayjs'
 
 export default {
   components: {
@@ -110,6 +114,27 @@ export default {
     ads() {
       // Return the ads set explicitly in the store
       return this.$store.state.advertising.rectangle
+    },
+    mutatedPost() {
+      if (process.client && this.$device.isMobile) {
+        const htmlContent = this.post.content.rendered
+        const parser = new DOMParser()
+        const postDom = parser.parseFromString(htmlContent, 'text/html')
+        const postDomNodes = postDom.body.children
+        const slots = this.ads.map((i) => {
+          let tmpl = `<div class="inline-advertising" id=${i.id}></div>`
+          let tmplRendered = parser.parseFromString(tmpl, 'text/html')
+          return tmplRendered.body.firstElementChild
+        })
+        const newNodes = compact(flattenDeep(zip(chunk(postDomNodes, 2), slots)))
+        const newString = newNodes.map((i) => {
+          return i.outerHTML
+        }).join(' ')
+        return newString
+      }
+      else {
+        return this.post.content.rendered
+      }
     },
     postDate: function() {
       // Pretty-format the post date (January 1, 2019)
@@ -219,7 +244,13 @@ export default {
   },
   head() {
     return {
-      title: this.post.title.rendered,
+      title: this.post.title.rendered.replace(/<(?:.|\n)*?>/gm, '')
+                                             .replace(/&nbsp;/gm, ' ')
+                                             .replace(/&#8211;/gm, '—')
+                                             .replace(/&#8216;/gm, '‘')
+                                             .replace(/&#8217;/gm, '’')
+                                             .replace(/&#8220;/gm, '“')
+                                             .replace(/&#8221;/gm, '”'),
       bodyAttrs: {
         class: 'single post post-id-' + this.post.id
       },
@@ -456,5 +487,13 @@ aside {
 
 .article-comments {
   margin-top: 2rem;
+}
+
+.inline-advertising {
+  width: calc(100% + 10vw);
+  margin: 2rem 0 2rem -5vw;
+  text-align: center;
+  padding: 2em;
+  background: rgba(0, 0, 0, 0.1);
 }
 </style>
