@@ -5,7 +5,7 @@
       type="text"
       tabindex="0"
       placeholder="Type your search term, press Enter to search."
-      v-model="this.searchTerm"
+      v-model="searchTerm"
     >
   </form>
 </template>
