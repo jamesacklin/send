@@ -23,8 +23,8 @@ npm run dev
 ### Build app Docker image, tag with a version, and push to Docker hub (requires login)
 ```
 cd app
-docker build -t ${docker_username}/send_nuxt:X.X.X
-docker push send_nuxt:X.X.X
+docker build . -t ${docker_username}/send_nuxt:X.X.X
+docker push ${docker_username}/send_nuxt:X.X.X
 ```
 
 ### Pull versioned images from Docker Hub and start servers

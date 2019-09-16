@@ -2,7 +2,7 @@ version: '3'
 
 services:
   nuxt:
-    image: jamesacklin/send_nuxt:2.0.1
+    image: jamesacklin/send_nuxt:2.1.0
     container_name: send-web
     restart: always
     ports:
