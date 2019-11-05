@@ -1,33 +1,62 @@
 <template lang="html">
-  <div class="post-container" :id="`post-${id}`">
+  <div
+    :id="`post-${id}`"
+    class="post-container"
+  >
     <div
       :class="[mode, isContest ? 'contest' : true, 'post-atom']"
     >
       <div class="post-image">
         <div class="post-image-crop">
-          <nuxt-link tag="a" :to="{ name: 'article', params: { slug: slug, id: id }}">
-            <img alt="" v-lazy="pictureUrl" />
+          <nuxt-link 
+            tag="a" :to="{ name: 'article', params: { slug: slug, id: id }}">
+            <img 
+              alt="" v-lazy="pictureUrl">
           </nuxt-link>
         </div>
       </div>
       <div class="post-text">
         <div class="post-title-block">
           <h4 class="post-title">
-            <nuxt-link tag="a" :to="{ name: 'article', params: { slug: slug, id: id }}">
-              <span v-html="titleCallout" class="post-title-callout"> </span>
-              <span v-html="title" class="post-title-wrap"> </span>
+            <nuxt-link 
+              tag="a" 
+              :to="{ name: 'article', params: { slug: slug, id: id }}"
+            >
+              <span 
+                class="post-title-callout"
+                v-html="titleCallout" 
+              />
+              <span
+                class="post-title-wrap"
+                v-html="title" 
+              />
             </nuxt-link>
           </h4>
-          <div v-if="isMedia" class="post-launch-media">▶ Watch Video</div>
-          <div v-if="isGallery" class="post-launch-media">↗ Launch Gallery</div>
-          <div v-if="isContest" class="post-launch-media">Enter to Win Now</div>
+          <div 
+            v-if="isMedia" 
+            class="post-launch-media"
+          >
+            ▶ Watch Video
+          </div>
+          <div 
+            v-if="isGallery" 
+            class="post-launch-media"
+          >
+            ↗ Launch Gallery
+          </div>
+          <div 
+            v-if="isContest" 
+            class="post-launch-media"
+          >
+            Enter to Win Now
+          </div>
           <div
             v-show="!(isMedia || mode == 'promotion' || mode == 'spliced')"
             class="post-author"
           >
-            <span v-html="author"></span>
+            <span v-html="author" />
             <span class="post-date">
-              &nbsp;—&nbsp; <span v-html="postDate"></span>
+              &nbsp;—&nbsp; <span v-html="postDate" />
             </span>
           </div>
         </div>
@@ -48,6 +77,20 @@ import dayjs from 'dayjs'
 
 export default {
   name: 'PostAtom',
+  filters: {
+    stripHTML: function(string) {
+      return string.replace(/<(?:.|\n)*?>/gm, '')
+                   .replace(/&nbsp;/gm, ' ')
+                   .replace(/&#8211;/gm, '—')
+                   .replace(/&#8216;/gm, '‘')
+                   .replace(/&#8217;/gm, '’')
+                   .replace(/&#8220;/gm, '“')
+                   .replace(/&#8221;/gm, '”');
+    },
+    truncate: function(string) {
+      return string.split(" ").splice(0,50).join(" ") + '…';
+    }
+  },  
   props: {
     id: Number,
     slug: String,
@@ -69,20 +112,6 @@ export default {
     postDate: function() {
       // Pretty-format the post date (January 1, 2019)
       return dayjs(this.date).format('MMMM D, YYYY')
-    }
-  },
-  filters: {
-    stripHTML: function(string) {
-      return string.replace(/<(?:.|\n)*?>/gm, '')
-                   .replace(/&nbsp;/gm, ' ')
-                   .replace(/&#8211;/gm, '—')
-                   .replace(/&#8216;/gm, '‘')
-                   .replace(/&#8217;/gm, '’')
-                   .replace(/&#8220;/gm, '“')
-                   .replace(/&#8221;/gm, '”');
-    },
-    truncate: function(string) {
-      return string.split(" ").splice(0,50).join(" ") + '…';
     }
   }
 }

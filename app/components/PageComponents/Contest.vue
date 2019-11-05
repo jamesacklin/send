@@ -1,6 +1,6 @@
 <template>
   <div class="contest">
-    <div id="contest-target"></div>
+    <div id="contest-target" />
   </div>
 </template>
 

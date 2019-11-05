@@ -1,5 +1,8 @@
 <template lang="html">
-  <div class="nav-drawer-wrapper" :class="drawerStatus">
+  <div
+    class="nav-drawer-wrapper" 
+    :class="drawerStatus"
+  >
     <div class="nav-drawer">
       <div class="nav-drawer-header">
         <NavLogo variant="drawer" />
@@ -10,11 +13,11 @@
         </div>
         <NavItem
           v-for="navLink in navLinks"
-          @click.native="closeNav()"
           :key="navLink.index"
           :text="navLink.name"
           :link="navLink.href"
           :color="navLink.color"
+          @click.native="closeNav()"
         />
       </nav>
       <div class="nav-drawer-footer">
@@ -49,17 +52,17 @@ export default {
       }
     }
   },
+  watch: {
+    // Watch route, close nav on route change
+    // https://stackoverflow.com/questions/46402809/vuejs-event-on-route-change
+    $route() {
+      this.closeNav()
+    }
+  },
   methods: {
     closeNav() {
       // Dispatch vuex action to flip navDrawerOpen to false
       this.$store.dispatch('closeNavDrawer')
-    }
-  },
-  watch: {
-    // Watch route, close nav on route change
-    // https://stackoverflow.com/questions/46402809/vuejs-event-on-route-change
-    $route(to, from) {
-      this.closeNav()
     }
   }
 }
@@ -86,7 +89,7 @@ export default {
   opacity: 1;
   top: 0;
   left: 0;
-  @media (min-width: 945px){
+  @media (min-width: 945px) {
     visibility: hidden;
   }
 }

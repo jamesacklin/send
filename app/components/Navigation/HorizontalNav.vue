@@ -31,8 +31,8 @@ export default {
       return this.$store.state.navItems
     }
   },
-  methods: {},
-  watch: {}
+  watch: {},
+  methods: {}
 }
 </script>
 
@@ -49,7 +49,7 @@ export default {
   min-width: 23em;
   width: 0;
   margin: 0;
-  font-size: 66%
+  font-size: 66%;
 }
 
 nav {
@@ -79,6 +79,4 @@ nav {
     }
   }
 }
-
-
 </style>

@@ -3,16 +3,22 @@
     <article class="page">
       <header class="page-header">
         <div class="page-title-block">
-          <h1 class="page-title">Cool Shops</h1>
+          <h1 class="page-title">
+            Cool Shops
+          </h1>
         </div>
       </header>
       <div class="page-content">
         <main>
-          <AdHeader/>
+          <AdHeader />
           <div class="page-copy">
             <p>Bike shops that carry Dirt Rag magazine. Find one near you!</p>
             <div style="display: flex; flex-wrap: wrap; justify-content: space-between">
-              <div style="width: 48%" v-for="shop in shops" :key="shop.index">
+              <div 
+                v-for="shop in shops" 
+                :key="shop.index" 
+                style="width: 48%"
+              >
                 <h3 style="margin-bottom: 0">{{ shop.store }}</h3>
                 <address style="font-style: normal">
                   {{ shop.address }}
@@ -58,7 +64,6 @@
 </template>
 
 <script>
-import sortBy from 'lodash'
 import AdHeader from '@/components/PageComponents/AdHeader'
 import AdSidebar from '@/components/PageComponents/AdSidebar'
 

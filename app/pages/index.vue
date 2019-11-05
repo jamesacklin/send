@@ -27,19 +27,6 @@ export default {
     AdSidebar,
     SectionHeader
   },
-  async asyncData({ payload, isStatic, store, params }) {
-    await store.dispatch('setCurrents', {
-      slug: '',
-      id: null
-    })
-    await store.dispatch('getPosts', {
-      queryType: 'default',
-      page: parseInt(params.page || 1)
-    })
-    await store.dispatch('getPage', {
-      slug: 'home'
-    })
-  },
   computed: {
     isMobile: function() {
       if (this.$device.isMobile) {
@@ -96,6 +83,19 @@ export default {
         }
       ]
     }
+  },
+  async asyncData({ store, params }) {
+    await store.dispatch('setCurrents', {
+      slug: '',
+      id: null
+    })
+    await store.dispatch('getPosts', {
+      queryType: 'default',
+      page: parseInt(params.page || 1)
+    })
+    await store.dispatch('getPage', {
+      slug: 'home'
+    })
   },
   transition: {
     name: 'fade',

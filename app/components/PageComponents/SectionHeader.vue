@@ -6,8 +6,8 @@
     <div class="section-header-content">
       <div 
         class="text-wrapper"
-        v-html="headerContents">
-      </div>
+        v-html="headerContents"
+      />
       <span v-html="headerFigure" />
     </div>
   </header>

@@ -1,5 +1,9 @@
 <template lang="html">
-  <div :class="variant" class="logo" :style="{ background: bgColor }">
+  <div
+    :class="variant"
+    class="logo"
+    :style="{ background: bgColor }"
+  >
     <svg
       v-if="variant == 'vertical'"
       width="100%"

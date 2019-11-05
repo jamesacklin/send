@@ -1,6 +1,6 @@
 <template>
   <div class="special-content">
-    <div id="special-content-target"></div>
+    <div id="special-content-target" />
   </div>
 </template>
 

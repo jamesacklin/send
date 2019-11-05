@@ -1,7 +1,8 @@
 <template>
   <div 
     class="advertising-header"
-    :class="{ 'inline-advertising': isMobile }">
+    :class="{ 'inline-advertising': isMobile }"
+  >
     <advertising
       v-if="!isMobile"
       :id="'div-gpt-ad-1550758388120-0'"

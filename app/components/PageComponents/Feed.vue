@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AdHeader/>
+    <AdHeader />
     <template v-for="(feedItem, index) in feedData">
       <PostAtom
         v-if="feedItem.type === 'post'"
@@ -17,11 +17,15 @@
       />
       <div
         v-if="feedItem.type === 'ad'"
+        :key="index"
         class="feed-item feed-insert"
         :class="`feed-insert-${index}`"
-        :key="index"
       >
-        <advertising :id="feedItem.id" :size="feedItem.size" :unit="feedItem.name"/>
+        <advertising 
+          :id="feedItem.id" 
+          :size="feedItem.size" 
+          :unit="feedItem.name"
+        />
       </div>
     </template>
   </div>
@@ -34,12 +38,12 @@ import AdHeader from '@/components/PageComponents/AdHeader'
 
 export default {
   name: 'feed',
-  props: ['feedData'],
   components: {
     PostAtom,
     Advertising,
     AdHeader
   },
+  props: ['feedData'],
   methods: {
     titleCallout: function(post) {
       // Returns a title callout if the author has defined it in an ACF field.

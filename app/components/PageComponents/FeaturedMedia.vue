@@ -1,12 +1,11 @@
 <template lang="html">
   <div class="article-artwork">
-    <!-- TODO: Make article-artwork slots accept more than just image media -->
     <img
-      class="article-artwork-image"
       v-lazy="pictureUrl"
+      class="article-artwork-image"
       :srcset="featuredSrcset"
       sizes="(min-width: 1200px) 1140px, (min-width: 992px) 940px, (min-width: 768px) 720px, (min-width: 576px) 510px, calc(100vw - 30px)"
-    />
+    >
   </div>
 </template>
 
@@ -25,7 +24,7 @@ export default {
       if (this.media.media_type === 'image') {
         var srcset = ''
         const postImageSizes = this.media.media_details.sizes
-        each(postImageSizes, function(size, index) {
+        each(postImageSizes, function(size) {
           srcset = srcset + `${size.source_url} ${size.width}w, `
         })
         srcset =

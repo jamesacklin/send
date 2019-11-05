@@ -5,9 +5,24 @@
     </div>
     <div class="footer-sidebar">
       <ul>
-        <li v-for="link in footerLinks" :key="link.index">
-          <nuxt-link v-if="!isUrl(link.href)" :to="link.href" tag="a"> {{ link.name }} </nuxt-link>
-          <a v-if="isUrl(link.href)" :href="link.href" rel="external"> {{ link.name }} </a>
+        <li
+          v-for="link in footerLinks"
+          :key="link.index"
+        >
+          <nuxt-link 
+            v-if="!isUrl(link.href)" 
+            :to="link.href" 
+            tag="a"
+          > 
+            {{ link.name }}
+          </nuxt-link>
+          <a 
+            v-if="isUrl(link.href)" 
+            :href="link.href" 
+            rel="external"
+          > 
+            {{ link.name }} 
+          </a>
         </li>
       </ul>
     </div>

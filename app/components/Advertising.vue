@@ -1,5 +1,5 @@
 <template>
-  <div :id="id"></div>
+  <div :id="id" />
 </template>
 <script type="text/babel">
 export default {
@@ -11,17 +11,23 @@ export default {
   props: {
     // The ID is random by default, but you should still bind an ID prop.
     id: {
+      'type': String,
       default: () => {
         return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1)
       }
     },
     // You will also need a unit prop.
     unit: {
+      'type': String,
       required: true
     },
     // The size prop determines which size GPT will serve.
-    size: {},
+    size: {
+      'type': String,
+      default: null
+    },
     slotType: {
+      'type': String,
       default: 'normal'
     }
   },
@@ -50,6 +56,16 @@ export default {
         return false
       }
     }
+  },
+  mounted() {
+    // Call the display function on mount.
+    this.display()
+  },
+  beforeDestroy() {
+    // Destroy the slots before we destroy the component.
+    googletag.cmd.push(() => {
+      googletag.destroySlots()
+    })
   },
   methods: {
     display() {
@@ -80,16 +96,6 @@ export default {
         .defineOutOfPageSlot(this.adUnit, this.id)
         .addService(googletag.pubads())
     }
-  },
-  mounted() {
-    // Call the display function on mount.
-    this.display()
-  },
-  beforeDestroy() {
-    // Destroy the slots before we destroy the component.
-    googletag.cmd.push(() => {
-      googletag.destroySlots()
-    })
   }
 }
 </script>
