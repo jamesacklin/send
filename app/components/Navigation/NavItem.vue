@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: 'navItem',
+  name: 'NavItem',
   props: ['text', 'link', 'color'],
   computed: {
     cssProps() {

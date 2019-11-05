@@ -10,8 +10,8 @@
         :title="feedItem.title.rendered"
         :date="feedItem.date"
         :excerpt="feedItem.excerpt.rendered"
-        :titleCallout="titleCallout(feedItem)"
-        :pictureUrl="featuredImage(feedItem)"
+        :title-callout="titleCallout(feedItem)"
+        :picture-url="featuredImage(feedItem)"
         :author="postAuthor(feedItem)"
         :mode="postMode(feedItem)"
       />
@@ -37,7 +37,7 @@ import Advertising from '@/components/Advertising'
 import AdHeader from '@/components/PageComponents/AdHeader'
 
 export default {
-  name: 'feed',
+  name: 'Feed',
   components: {
     PostAtom,
     Advertising,

@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <article 
-      :id="'page-id-' + this.post.id" 
+      :id="'page-id-' + post.id" 
       class="page"
     >
       <header 
@@ -29,7 +29,7 @@
         </main>
         <aside class="advertising">
           <no-ssr>
-            <ad-sidebar :sidebarData="ads" />
+            <ad-sidebar :sidebar-data="ads" />
           </no-ssr>
         </aside>
       </div>
@@ -71,7 +71,7 @@ export default {
       }
     }
   },
-  async asyncData({ payload, isStatic, store, params, error, redirect }) {
+  async asyncData({ payload, isStatic, store, params, redirect }) {
     if (payload && isStatic) {
       store.commit('addPage', [payload])
     } else {

@@ -39,19 +39,19 @@ export default {
       const pageInt = parseInt(page || 1) - 1
       if (siblings === 'index'){
           return `/page/${pageInt}`
-      } else if (siblings === 'search' || 'category'){
+      } else if (siblings === 'search' || 'category'){ // eslint-disable-line
           return `/${siblings}/${slug}/page/${pageInt}`
       } else {
         return "#"
       }
     },
     pageNext() {
-      const { navigationScheme, siblings } = this.$route.meta
+      const { siblings } = this.$route.meta
       const { page, slug } = this.$route.params
       const pageInt = parseInt(page || 1) + 1
       if (siblings === 'index'){
           return `/page/${pageInt}`
-      } else if (siblings === 'search' || 'category'){
+      } else if (siblings === 'search' || 'category'){ // eslint-disable-line
           return `/${siblings}/${slug}/page/${pageInt}`
       } else {
         return "#"

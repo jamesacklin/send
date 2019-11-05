@@ -57,7 +57,7 @@
         </main>
         <aside class="advertising">
           <no-ssr>
-            <ad-sidebar :sidebarData="ads" />
+            <ad-sidebar :sidebar-data="ads" />
           </no-ssr>
         </aside>
       </div>

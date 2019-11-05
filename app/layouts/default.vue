@@ -5,14 +5,14 @@
     <nuxt />
     <Footer />
     <Pagination />
-    <svg 
-      id="filters" 
-      xmlns="http://www.w3.org/2000/svg" 
+    <svg
+      id="filters"
+      xmlns="http://www.w3.org/2000/svg"
       height="0"
     >
       <filter id="red">
-        <feColorMatrix 
-          type="matrix" 
+        <feColorMatrix
+          type="matrix"
           values="0.1 2 0 0.7 0.1 0 1 0 0 0 0 1 0 0 0 0 1 0 1 0 "
         />
       </filter>

@@ -2,7 +2,8 @@
   <header
     class="section-header"
     :class="{'has-artwork': hasArtwork, 'has-content': hasContent}"
-    :style="headerBackground">
+    :style="headerBackground"
+  >
     <div class="section-header-content">
       <div 
         class="text-wrapper"

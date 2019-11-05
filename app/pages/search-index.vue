@@ -1,12 +1,15 @@
 <template>
   <main class="content">
     <section class="feed search-feed">
-      <SectionHeader :sectionMeta="searchHeaderData" />
+      <SectionHeader :section-meta="searchHeaderData" />
       <div class="feed-items">
-        <feed :feedData="feedItems"/>
+        <feed :feed-data="feedItems" />
       </div>
-      <div v-if="!isMobile" class="sidebar-ads">
-        <ad-sidebar :sidebarData="sidebarAds" />
+      <div
+        v-if="!isMobile"
+        class="sidebar-ads"
+      >
+        <ad-sidebar :sidebar-data="sidebarAds" />
       </div>
     </section>
   </main>
@@ -66,7 +69,7 @@ export default {
       }
     }
   },
-  async asyncData({ payload, isStatic, store, params }) {
+  async asyncData({ store, params }) {
     await store.dispatch('getPosts', {
       queryType: 'search',
       slug: params.slug,

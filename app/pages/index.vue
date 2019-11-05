@@ -1,12 +1,15 @@
 <template>
   <main class="content">
     <section class="feed">
-      <SectionHeader :sectionMeta="homeHeaderData" />
+      <SectionHeader :section-meta="homeHeaderData" />
       <div class="feed-items">
-        <feed :feedData="feedItems"/>
+        <feed :feed-data="feedItems" />
       </div>
-      <div v-if="!isMobile" class="sidebar-ads">
-        <ad-sidebar :sidebarData="sidebarAds"/>
+      <div
+        v-if="!isMobile"
+        class="sidebar-ads"
+      >
+        <ad-sidebar :sidebar-data="sidebarAds" />
       </div>
     </section>
   </main>

@@ -9,11 +9,27 @@
 import jQuery from 'jquery'
 let $ = jQuery
 
+// Called when a mutation is observed
+  function callback(mutationList) {
+    // Examine each mutation
+    mutationList.forEach(function(mutation) {
+      // If the mutation target className is this string, the Surveymonkey widget has mounted,
+      // probably not at all where we want the widget to actually display
+      if (
+        mutation.target.className ===
+        'smcx-widget smcx-embed smcx-show smcx-widget-dark'
+      ) {
+        // Rip the widget out and put it where we want to on the page
+        $('.smcx-widget').appendTo('#contest-target')
+      }
+    })
+  }
+
 export default {
   props: ['platform', 'embedCode'],
   mounted() {
     // If the contest is a Surveymonkey form...
-    if (this.platform === 'Surveymonkey') {
+    if (this.platform === 'Surveymonkey') {      
       // Test for script contents in the embedCode prop
       var re = /<script\b[^>]*>([\s\S]*?)<\/script>/gm
       var match
@@ -36,21 +52,6 @@ export default {
           attributes: true,
           subtree: true
         })
-        // Called when a mutation is observed
-        function callback(mutationList, observer) {
-          // Examine each mutation
-          mutationList.forEach(function(mutation) {
-            // If the mutation target className is this string, the Surveymonkey widget has mounted,
-            // probably not at all where we want the widget to actually display
-            if (
-              mutation.target.className ===
-              'smcx-widget smcx-embed smcx-show smcx-widget-dark'
-            ) {
-              // Rip the widget out and put it where we want to on the page
-              $('.smcx-widget').appendTo('#contest-target')
-            }
-          })
-        }
       }
     } // ... or if the contest is a Rafflecopter giveaway
     else if (this.platform === 'Rafflecopter') {

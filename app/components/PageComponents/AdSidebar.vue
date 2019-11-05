@@ -8,10 +8,10 @@
         :title="contestPost.title.rendered"
         :date="contestPost.date"
         :excerpt="contestPost.excerpt.rendered"
-        :pictureUrl="featuredImage(contestPost)"
+        :picture-url="featuredImage(contestPost)"
         :author="`Dirt Rag Magazine`"
         :mode="`promotion`"
-        :titleCallout="`Contest`"
+        :title-callout="`Contest`"
       />
     </div>
     <OutsideFeed />
@@ -32,7 +32,7 @@ import PostAtom from '@/components/PostAtom'
 import OutsideFeed from '@/components/HeaderComponents/OutsideFeed'
 
 export default {
-  name: 'adSidebar',
+  name: 'AdSidebar',
   components: {
     Advertising,
     PostAtom,

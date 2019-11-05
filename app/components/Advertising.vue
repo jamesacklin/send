@@ -63,16 +63,16 @@ export default {
   },
   beforeDestroy() {
     // Destroy the slots before we destroy the component.
-    googletag.cmd.push(() => {
-      googletag.destroySlots()
+    googletag.cmd.push(() => { // eslint-disable-line
+      googletag.destroySlots() // eslint-disable-line
     })
   },
   methods: {
     display() {
       // The display method. The Google tag instance takes a push command where we "define" the slot, then display it (by ID).
-      googletag.cmd.push(() => {
+      googletag.cmd.push(() => { // eslint-disable-line
         this.define()
-        googletag.display(this.id)
+        googletag.display(this.id) // eslint-disable-line
       })
     },
     define() {
@@ -86,15 +86,15 @@ export default {
     },
     defineSlot() {
       // The function to define a slot normally by chaining functions to the googletag instance.
-      googletag
+      googletag // eslint-disable-line
         .defineSlot(this.adUnit, this.sizes, this.id)
-        .addService(googletag.pubads())
+        .addService(googletag.pubads()) // eslint-disable-line
     },
     defineOutOfPageSlot() {
       // The function to define an out-of-page slot by chaining functions to the googletag instance.
-      googletag
+      googletag // eslint-disable-line
         .defineOutOfPageSlot(this.adUnit, this.id)
-        .addService(googletag.pubads())
+        .addService(googletag.pubads()) // eslint-disable-line
     }
   }
 }
