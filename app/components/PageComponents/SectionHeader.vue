@@ -1,7 +1,7 @@
 <template lang="html">
   <header
     class="section-header"
-    :class="{'has-artwork': hasArtwork, 'has-content': hasContent}"
+    :class="{'has-artwork': hasArtwork, 'has-content': hasContent, 'maximized': isMaximized}"
     :style="headerBackground"
   >
     <div class="section-header-content">
@@ -35,6 +35,13 @@ export default {
     },
     hasContent(){
       if (this.sectionMeta.title || this.sectionMeta.content){
+        return true
+      } else {
+        return false
+      }
+    },
+    isMaximized() {
+      if (this.sectionMeta.max){
         return true
       } else {
         return false
@@ -111,6 +118,11 @@ export default {
     }
     @media (orientation: landscape) and (min-width: 1000px) {
       padding-top: 25vh;
+    }
+  }
+  &.maximized {
+    @media (orientation: landscape) and (min-width: 1000px) {
+      padding-top: 75vh;
     }
   }
   /* Padding for sticky nav */

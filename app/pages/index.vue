@@ -68,7 +68,8 @@ export default {
         title: pageMeta.home_banner_headline,
         content: pageMeta.home_banner_content,
         img: pageMeta.home_figure,
-        bg: pageMeta.home_background_image
+        bg: pageMeta.home_background_image,
+        max: pageMeta.home_banner_max
       }
     }
   },
