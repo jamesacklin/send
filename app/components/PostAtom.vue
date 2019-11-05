@@ -9,9 +9,13 @@
       <div class="post-image">
         <div class="post-image-crop">
           <nuxt-link 
-            tag="a" :to="{ name: 'article', params: { slug: slug, id: id }}">
-            <img 
-              alt="" v-lazy="pictureUrl">
+            tag="a" 
+            :to="{ name: 'article', params: { slug: slug, id: id }}"
+          >
+            <img
+              v-lazy="pictureUrl" 
+              alt=""
+            >
           </nuxt-link>
         </div>
       </div>

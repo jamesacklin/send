@@ -1,16 +1,31 @@
 <template>
   <div class="content">
-    <article :id="'page-id-' + this.post.id" class="page">
-      <header class="page-header" :class="{ 'has-artwork': featuredMedia }">
-        <featured-media v-if="featuredMedia" :media="post._embedded['wp:featuredmedia'][0]" />
+    <article 
+      :id="'page-id-' + this.post.id" 
+      class="page"
+    >
+      <header 
+        class="page-header" 
+        :class="{ 'has-artwork': featuredMedia }"
+      >
+        <featured-media 
+          v-if="featuredMedia" 
+          :media="post._embedded['wp:featuredmedia'][0]"
+        />
         <div class="page-title-block">
-          <h1 class="page-title" v-html="post.title.rendered" />
+          <h1 
+            class="page-title" 
+            v-html="post.title.rendered"
+          />
         </div>
       </header>
       <div class="page-content">
         <main>
           <AdHeader />
-          <div class="page-copy" v-html="post.content.rendered" />
+          <div 
+            class="page-copy" 
+            v-html="post.content.rendered"
+          />
         </main>
         <aside class="advertising">
           <no-ssr>

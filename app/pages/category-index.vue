@@ -5,7 +5,10 @@
       <div class="feed-items">
         <feed :feedData="feedItems" />
       </div>
-      <div v-if="!isMobile" class="sidebar-ads">
+      <div 
+        v-if="!isMobile" 
+        class="sidebar-ads"
+      >
         <ad-sidebar :sidebarData="sidebarAds" />
       </div>
     </section>

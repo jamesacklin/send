@@ -19,7 +19,9 @@
                 :key="shop.index" 
                 style="width: 48%"
               >
-                <h3 style="margin-bottom: 0">{{ shop.store }}</h3>
+                <h3 style="margin-bottom: 0">
+                  {{ shop.store }}
+                </h3>
                 <address style="font-style: normal">
                   {{ shop.address }}
                   <br>
@@ -55,7 +57,7 @@
         </main>
         <aside class="advertising">
           <no-ssr>
-            <ad-sidebar :sidebarData="ads"/>
+            <ad-sidebar :sidebarData="ads" />
           </no-ssr>
         </aside>
       </div>
