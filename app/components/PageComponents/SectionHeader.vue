@@ -18,7 +18,12 @@
 export default {
   name: 'SectionHeader',
   props: {
-    sectionMeta: Object
+    sectionMeta: {
+      type: Object,
+      default: function () {
+        return {}
+      }
+    }
   },
   computed: {
     hasArtwork(){

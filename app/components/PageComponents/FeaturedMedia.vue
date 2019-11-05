@@ -13,7 +13,9 @@
 import each from 'lodash/each'
 
 export default {
-  props: ['media'],
+  props: {
+    'media': Object
+  },
   computed: {
     pictureUrl() {
       return this.media.media_details.sizes.medium.source_url

@@ -26,7 +26,10 @@ let $ = jQuery
   }
 
 export default {
-  props: ['platform', 'embedCode'],
+  props: {
+    'platform': String, 
+    'embedCode': String
+  },
   mounted() {
     // If the contest is a Surveymonkey form...
     if (this.platform === 'Surveymonkey') {      

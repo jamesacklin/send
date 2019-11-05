@@ -36,7 +36,9 @@ export default {
   components: {
     Logo
   },
-  props: ['variant'],
+  props: {
+    'variant': String
+  },
   computed: {
     isOpen() {
       return this.$store.state.navDrawerOpen

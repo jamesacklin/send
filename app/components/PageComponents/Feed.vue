@@ -43,7 +43,14 @@ export default {
     Advertising,
     AdHeader
   },
-  props: ['feedData'],
+  props: {
+    feedData: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    }
+  },
   methods: {
     titleCallout: function(post) {
       // Returns a title callout if the author has defined it in an ACF field.

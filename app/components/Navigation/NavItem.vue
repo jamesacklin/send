@@ -22,7 +22,11 @@
 <script>
 export default {
   name: 'NavItem',
-  props: ['text', 'link', 'color'],
+  props: {
+    'text': String, 
+    'link': String, 
+    'color': String
+  },
   computed: {
     cssProps() {
       if (this.color) {

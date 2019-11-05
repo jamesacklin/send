@@ -4,6 +4,7 @@ module.exports = {
     'plugin:vue/recommended'
   ],
   rules: {
-    'vue/no-v-html': 'off'
+    'vue/no-v-html': 'off',
+    'vue/require-default-prop': 'off'
   }
 };

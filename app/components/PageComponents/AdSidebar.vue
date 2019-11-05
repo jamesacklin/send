@@ -38,7 +38,9 @@ export default {
     PostAtom,
     OutsideFeed
   },
-  props: ['sidebarData'],
+  props: {
+    'sidebarData': Array
+  },
   computed: {
     contestPost: function() {
       return this.$store.state.contestPost[0]
