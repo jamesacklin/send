@@ -122,7 +122,8 @@ export default {
   }
   &.maximized {
     @media (orientation: landscape) and (min-width: 1000px) {
-      padding-top: 75vh;
+      padding-top: 0;
+      height: 30rem;
     }
   }
   /* Padding for sticky nav */
