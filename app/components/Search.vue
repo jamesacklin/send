@@ -1,11 +1,11 @@
 <template>
-  <form v-on:submit.prevent="submitSearch">
+  <form @submit.prevent="submitSearch">
     <input
+      v-model="searchTerm"
       class="search-input"
       type="text"
       tabindex="0"
       placeholder="Type your search term, press Enter to search."
-      v-model="searchTerm"
     >
   </form>
 </template>
@@ -14,11 +14,11 @@
 export default {
   data(){
     return {
-      searchTerm : ''
+      searchTerm: ''
     }
   },
   methods: {
-    submitSearch(){
+    submitSearch() {
       this.$router.push({
         name: 'search-index',
         params: {

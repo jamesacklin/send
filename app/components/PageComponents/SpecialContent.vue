@@ -1,6 +1,6 @@
 <template>
   <div class="special-content">
-    <div id="special-content-target"></div>
+    <div id="special-content-target" />
   </div>
 </template>
 
@@ -10,7 +10,9 @@ import jQuery from 'jquery'
 let $ = jQuery
 
 export default {
-  props: ['embedCode'],
+  props: {
+    'embedCode': String
+  },
   mounted() {
     // Test for "<script src='blah'" contents in the embedCode prop
     var re = /<script[^>]*src="([^"]*)"/

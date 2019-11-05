@@ -1,5 +1,5 @@
 <template>
-  <div :id="id"></div>
+  <div :id="id" />
 </template>
 <script type="text/babel">
 export default {
@@ -11,17 +11,23 @@ export default {
   props: {
     // The ID is random by default, but you should still bind an ID prop.
     id: {
+      'type': String,
       default: () => {
         return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1)
       }
     },
     // You will also need a unit prop.
     unit: {
+      'type': String,
       required: true
     },
     // The size prop determines which size GPT will serve.
-    size: {},
+    size: {
+      'type': String,
+      default: null
+    },
     slotType: {
+      'type': String,
       default: 'normal'
     }
   },
@@ -51,12 +57,22 @@ export default {
       }
     }
   },
+  mounted() {
+    // Call the display function on mount.
+    this.display()
+  },
+  beforeDestroy() {
+    // Destroy the slots before we destroy the component.
+    googletag.cmd.push(() => { // eslint-disable-line
+      googletag.destroySlots() // eslint-disable-line
+    })
+  },
   methods: {
     display() {
       // The display method. The Google tag instance takes a push command where we "define" the slot, then display it (by ID).
-      googletag.cmd.push(() => {
+      googletag.cmd.push(() => { // eslint-disable-line
         this.define()
-        googletag.display(this.id)
+        googletag.display(this.id) // eslint-disable-line
       })
     },
     define() {
@@ -70,26 +86,16 @@ export default {
     },
     defineSlot() {
       // The function to define a slot normally by chaining functions to the googletag instance.
-      googletag
+      googletag // eslint-disable-line
         .defineSlot(this.adUnit, this.sizes, this.id)
-        .addService(googletag.pubads())
+        .addService(googletag.pubads()) // eslint-disable-line
     },
     defineOutOfPageSlot() {
       // The function to define an out-of-page slot by chaining functions to the googletag instance.
-      googletag
+      googletag // eslint-disable-line
         .defineOutOfPageSlot(this.adUnit, this.id)
-        .addService(googletag.pubads())
+        .addService(googletag.pubads()) // eslint-disable-line
     }
-  },
-  mounted() {
-    // Call the display function on mount.
-    this.display()
-  },
-  beforeDestroy() {
-    // Destroy the slots before we destroy the component.
-    googletag.cmd.push(() => {
-      googletag.destroySlots()
-    })
   }
 }
 </script>

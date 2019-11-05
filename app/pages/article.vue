@@ -1,15 +1,27 @@
 <template>
   <div class="content">
-    <article :id="'post-id-' + post.id" class="article">
-      <header class="article-header" :class="{ 'has-artwork': featuredMedia }">
-        <featured-media v-if="featuredMedia" :media="post._embedded['wp:featuredmedia'][0]"/>
+    <article
+      :id="'post-id-' + post.id"
+      class="article"
+    >
+      <header
+        class="article-header"
+        :class="{ 'has-artwork': featuredMedia }"
+      >
+        <featured-media
+          v-if="featuredMedia"
+          :media="post._embedded['wp:featuredmedia'][0]"
+        />
         <div class="article-title-block">
-          <h1 class="article-title" v-html="post.title.rendered"></h1>
+          <h1 
+            class="article-title" 
+            v-html="post.title.rendered" 
+          />
           <div class="article-author">
-            <span v-html="postAuthor"></span>
+            <span v-html="postAuthor" />
             <span class="article-date">
               &nbsp;—&nbsp;
-              <span v-html="postDate"></span>
+              <span v-html="postDate" />
             </span>
           </div>
           <no-ssr>
@@ -23,18 +35,18 @@
               >
                 <span>
                   <network network="facebook">
-                    <font-awesome-icon :icon="['fab', 'facebook-square']"/>
+                    <font-awesome-icon :icon="['fab', 'facebook-square']" />
                   </network>
                   <network network="twitter">
-                    <font-awesome-icon :icon="['fab', 'twitter']"/>
+                    <font-awesome-icon :icon="['fab', 'twitter']" />
                   </network>
                   <network network="reddit">
-                    <font-awesome-icon :icon="['fab', 'reddit']"/>
+                    <font-awesome-icon :icon="['fab', 'reddit']" />
                   </network>
                 </span>
               </social-sharing>
               <a :href="thisUrl">
-                <font-awesome-icon :icon="['fas', 'link']"/>
+                <font-awesome-icon :icon="['fas', 'link']" />
               </a>
             </div>
           </no-ssr>
@@ -42,40 +54,56 @@
       </header>
       <div class="article-content">
         <main>
-          <AdHeader/>
-          <div class="article-copy" @click="zoomFigure" v-html="mutatedPost"/>
-          <div v-if="this.post.acf.special_content">
+          <AdHeader />
+          <div 
+            class="article-copy"
+            @click="zoomFigure"
+            v-html="mutatedPost"
+          />
+          <div v-if="post.acf.special_content">
             <no-ssr placeholder="Loading special content...">
-              <special-content :key="randomKey" :embedCode="this.post.acf.embed_code"/>
-            </no-ssr>
-          </div>
-          <div v-if="this.post.acf.contest_platform">
-            <no-ssr placeholder="Loading contest...">
-              <contest
-                :key="randomKey"
-                :platform="this.post.acf.contest_platform"
-                :embedCode="this.post.acf.embed_code"
+              <special-content 
+                :key="randomKey" 
+                :embed-code="post.acf.embed_code"
               />
             </no-ssr>
           </div>
-          <section class="article-author-bio" v-if="postAuthorBio">
-            <div v-if="postAuthorPic" class="author-image">
-              <img :src="postAuthorPic" :alt="postAuthor">
+          <div v-if="post.acf.contest_platform">
+            <no-ssr placeholder="Loading contest...">
+              <contest
+                :key="randomKey"
+                :platform="post.acf.contest_platform"
+                :embed-code="post.acf.embed_code"
+              />
+            </no-ssr>
+          </div>
+          <section
+            v-if="postAuthorBio"
+            class="article-author-bio"
+          >
+            <div
+              v-if="postAuthorPic"
+              class="author-image"
+            >
+              <img
+                :src="postAuthorPic"
+                :alt="postAuthor"
+              >
             </div>
             <div class="author-bio">
               <h3>{{ postAuthor }}</h3>
-              <div v-html="postAuthorBio"></div>
+              <div v-html="postAuthorBio" />
             </div>
           </section>
           <section class="article-comments">
             <no-ssr>
-              <comments/>
+              <comments />
             </no-ssr>
           </section>
         </main>
         <aside class="advertising">
           <no-ssr>
-            <ad-sidebar :sidebarData="ads"/>
+            <ad-sidebar :sidebar-data="ads" />
           </no-ssr>
         </aside>
       </div>

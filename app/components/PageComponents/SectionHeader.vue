@@ -1,13 +1,14 @@
 <template lang="html">
   <header
     class="section-header"
-    :class="{'has-artwork': hasArtwork, 'has-content': hasContent}"
-    :style="headerBackground">
+    :class="{'has-artwork': hasArtwork, 'has-content': hasContent, 'maximized': isMaximized}"
+    :style="headerBackground"
+  >
     <div class="section-header-content">
       <div 
         class="text-wrapper"
-        v-html="headerContents">
-      </div>
+        v-html="headerContents"
+      />
       <span v-html="headerFigure" />
     </div>
   </header>
@@ -17,7 +18,12 @@
 export default {
   name: 'SectionHeader',
   props: {
-    sectionMeta: Object
+    sectionMeta: {
+      type: Object,
+      default: function () {
+        return {}
+      }
+    }
   },
   computed: {
     hasArtwork(){
@@ -29,6 +35,13 @@ export default {
     },
     hasContent(){
       if (this.sectionMeta.title || this.sectionMeta.content){
+        return true
+      } else {
+        return false
+      }
+    },
+    isMaximized() {
+      if (this.sectionMeta.max){
         return true
       } else {
         return false
@@ -105,6 +118,12 @@ export default {
     }
     @media (orientation: landscape) and (min-width: 1000px) {
       padding-top: 25vh;
+    }
+  }
+  &.maximized {
+    @media (orientation: landscape) and (min-width: 1000px) {
+      padding-top: 0;
+      height: 30rem;
     }
   }
   /* Padding for sticky nav */

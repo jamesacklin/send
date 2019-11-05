@@ -3,21 +3,23 @@
     <ul class="pagination">
       <li>
         <NuxtLink
-          v-if="parseInt(this.$route.params.page || 1) >= 2 
-                && navScheme === 'traversePages'" 
-          :to="pagePrev">
+          v-if="parseInt(this.$route.params.page || 1) >= 2 && navScheme === 'traversePages'" 
+          :to="pagePrev"
+        >
           &larr; Previous
         </NuxtLink>
         <NuxtLink
           v-if="navScheme === 'goHome'"
-          :to="'/'">
+          :to="'/'"
+        >
           &larrb; Go Home
         </NuxtLink>
       </li>
       <li>
         <NuxtLink
           v-if="navScheme === 'traversePages'"
-          :to="pageNext">
+          :to="pageNext"
+        >
           Next &rarr;
         </NuxtLink>
       </li>
@@ -32,24 +34,24 @@ export default {
       return this.$route.meta.navigationScheme
     },
     pagePrev() {
-      const { navigationScheme, siblings } = this.$route.meta
+      const { siblings } = this.$route.meta
       const { page, slug } = this.$route.params
       const pageInt = parseInt(page || 1) - 1
       if (siblings === 'index'){
           return `/page/${pageInt}`
-      } else if (siblings === 'search' || 'category'){
+      } else if (siblings === 'search' || 'category'){ // eslint-disable-line
           return `/${siblings}/${slug}/page/${pageInt}`
       } else {
         return "#"
       }
     },
     pageNext() {
-      const { navigationScheme, siblings } = this.$route.meta
+      const { siblings } = this.$route.meta
       const { page, slug } = this.$route.params
       const pageInt = parseInt(page || 1) + 1
       if (siblings === 'index'){
           return `/page/${pageInt}`
-      } else if (siblings === 'search' || 'category'){
+      } else if (siblings === 'search' || 'category'){ // eslint-disable-line
           return `/${siblings}/${slug}/page/${pageInt}`
       } else {
         return "#"

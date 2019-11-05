@@ -21,8 +21,12 @@
 
 <script>
 export default {
-  name: 'navItem',
-  props: ['text', 'link', 'color'],
+  name: 'NavItem',
+  props: {
+    'text': String, 
+    'link': String, 
+    'color': String
+  },
   computed: {
     cssProps() {
       if (this.color) {

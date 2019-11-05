@@ -1,20 +1,35 @@
 <template>
   <div class="content">
-    <article :id="'page-id-' + this.post.id" class="page">
-      <header class="page-header" :class="{ 'has-artwork': featuredMedia }">
-        <featured-media v-if="featuredMedia" :media="post._embedded['wp:featuredmedia'][0]"/>
+    <article 
+      :id="'page-id-' + post.id" 
+      class="page"
+    >
+      <header 
+        class="page-header" 
+        :class="{ 'has-artwork': featuredMedia }"
+      >
+        <featured-media 
+          v-if="featuredMedia" 
+          :media="post._embedded['wp:featuredmedia'][0]"
+        />
         <div class="page-title-block">
-          <h1 class="page-title" v-html="post.title.rendered"></h1>
+          <h1 
+            class="page-title" 
+            v-html="post.title.rendered"
+          />
         </div>
       </header>
       <div class="page-content">
         <main>
-          <AdHeader/>
-          <div class="page-copy" v-html="post.content.rendered"/>
+          <AdHeader />
+          <div 
+            class="page-copy" 
+            v-html="post.content.rendered"
+          />
         </main>
         <aside class="advertising">
           <no-ssr>
-            <ad-sidebar :sidebarData="ads"/>
+            <ad-sidebar :sidebar-data="ads" />
           </no-ssr>
         </aside>
       </div>
@@ -56,7 +71,7 @@ export default {
       }
     }
   },
-  async asyncData({ payload, isStatic, store, params, error, redirect }) {
+  async asyncData({ payload, isStatic, store, params, redirect }) {
     if (payload && isStatic) {
       store.commit('addPage', [payload])
     } else {
@@ -122,7 +137,7 @@ article.page a {
   display: flex;
   flex-direction: column;
   margin-top: 78px;
-  @media (min-width: 800px){
+  @media (min-width: 800px) {
     margin-top: 108.781px;
   }
   @media (min-width: 1000px) {
@@ -130,7 +145,7 @@ article.page a {
     min-height: 12.5em;
     justify-content: center;
   }
-  @media (min-width: 1150px){
+  @media (min-width: 1150px) {
     margin-top: 67.5625px;
   }
   &.has-artwork {

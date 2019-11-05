@@ -8,15 +8,20 @@
         :title="contestPost.title.rendered"
         :date="contestPost.date"
         :excerpt="contestPost.excerpt.rendered"
-        :pictureUrl="featuredImage(contestPost)"
+        :picture-url="featuredImage(contestPost)"
         :author="`Dirt Rag Magazine`"
         :mode="`promotion`"
-        :titleCallout="`Contest`"
+        :title-callout="`Contest`"
       />
     </div>
     <OutsideFeed />
     <template v-for="ad in sidebarData">
-      <advertising :id="ad.id" :size="ad.size" :unit="ad.name" :key="ad.index"/>
+      <advertising
+        :id="ad.id"
+        :key="ad.index"
+        :size="ad.size"
+        :unit="ad.name"
+      />
     </template>
   </div>
 </template>
@@ -27,18 +32,23 @@ import PostAtom from '@/components/PostAtom'
 import OutsideFeed from '@/components/HeaderComponents/OutsideFeed'
 
 export default {
-  name: 'adSidebar',
-  props: ['sidebarData'],
+  name: 'AdSidebar',
   components: {
     Advertising,
     PostAtom,
     OutsideFeed
+  },
+  props: {
+    'sidebarData': Array
   },
   computed: {
     contestPost: function() {
       return this.$store.state.contestPost[0]
     }
   },
+  mounted() {
+    this.$store.dispatch('getContestPost')
+  },  
   methods: {
     featuredImage: function(post) {
       // Return the post featured image
@@ -58,9 +68,6 @@ export default {
         return '/og-card.png'
       }
     }
-  },
-  mounted() {
-    this.$store.dispatch('getContestPost')
   }
 }
 </script>

@@ -1,14 +1,28 @@
 <template>
   <div class="nav-logo-wrapper">
-    <button class="nav-toggle" @click="openNav()" v-if="!isOpen">
-      <font-awesome-icon :icon="['fas', 'bars']"/>
+    <button 
+      v-if="!isOpen"
+      class="nav-toggle"
+      @click="openNav()"
+    >
+      <font-awesome-icon :icon="['fas', 'bars']" />
     </button>
-    <button class="nav-toggle" @click="closeNav()" v-if="isOpen">
-      <font-awesome-icon :icon="['fas', 'times']"/>
+    <button
+      v-if="isOpen" 
+      class="nav-toggle"
+      @click="closeNav()"
+    >
+      <font-awesome-icon :icon="['fas', 'times']" />
     </button>
     <div class="logo-wrapper">
-      <nuxt-link tag="a" :to="`/`">
-        <Logo style="cursor: pointer;" variant="30annv"/>
+      <nuxt-link 
+        tag="a" 
+        :to="`/`"
+      >
+        <Logo 
+          style="cursor: pointer;" 
+          variant="30annv"
+        />
       </nuxt-link>
     </div>
   </div>
@@ -19,9 +33,11 @@ import Logo from '@/components/Logo'
 
 export default {
   name: 'NavLogo',
-  props: ['variant'],
   components: {
     Logo
+  },
+  props: {
+    'variant': String
   },
   computed: {
     isOpen() {

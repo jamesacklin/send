@@ -1,12 +1,15 @@
 <template>
   <main class="content">
     <section class="feed">
-      <SectionHeader :sectionMeta="homeHeaderData" />
+      <SectionHeader :section-meta="homeHeaderData" />
       <div class="feed-items">
-        <feed :feedData="feedItems"/>
+        <feed :feed-data="feedItems" />
       </div>
-      <div v-if="!isMobile" class="sidebar-ads">
-        <ad-sidebar :sidebarData="sidebarAds"/>
+      <div
+        v-if="!isMobile"
+        class="sidebar-ads"
+      >
+        <ad-sidebar :sidebar-data="sidebarAds" />
       </div>
     </section>
   </main>
@@ -26,19 +29,6 @@ export default {
     Feed,
     AdSidebar,
     SectionHeader
-  },
-  async asyncData({ payload, isStatic, store, params }) {
-    await store.dispatch('setCurrents', {
-      slug: '',
-      id: null
-    })
-    await store.dispatch('getPosts', {
-      queryType: 'default',
-      page: parseInt(params.page || 1)
-    })
-    await store.dispatch('getPage', {
-      slug: 'home'
-    })
   },
   computed: {
     isMobile: function() {
@@ -78,7 +68,8 @@ export default {
         title: pageMeta.home_banner_headline,
         content: pageMeta.home_banner_content,
         img: pageMeta.home_figure,
-        bg: pageMeta.home_background_image
+        bg: pageMeta.home_background_image,
+        max: pageMeta.home_banner_max
       }
     }
   },
@@ -96,6 +87,19 @@ export default {
         }
       ]
     }
+  },
+  async asyncData({ store, params }) {
+    await store.dispatch('setCurrents', {
+      slug: '',
+      id: null
+    })
+    await store.dispatch('getPosts', {
+      queryType: 'default',
+      page: parseInt(params.page || 1)
+    })
+    await store.dispatch('getPage', {
+      slug: 'home'
+    })
   },
   transition: {
     name: 'fade',

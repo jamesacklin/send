@@ -1,5 +1,9 @@
 <template lang="html">
-  <div :class="variant" class="logo" :style="{ background: bgColor }">
+  <div
+    :class="variant"
+    class="logo"
+    :style="{ background: bgColor }"
+  >
     <svg
       v-if="variant == 'vertical'"
       width="100%"
@@ -39,7 +43,10 @@
       viewBox="0 0 195 41"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g fill-rule="nonzero" fill="none">
+      <g
+        fill-rule="nonzero"
+        fill="none"
+      >
         <path 
           fill="#000" 
           d="M0 40.133172h195V0H0z"

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AdHeader/>
+    <AdHeader />
     <template v-for="(feedItem, index) in feedData">
       <PostAtom
         v-if="feedItem.type === 'post'"
@@ -10,18 +10,22 @@
         :title="feedItem.title.rendered"
         :date="feedItem.date"
         :excerpt="feedItem.excerpt.rendered"
-        :titleCallout="titleCallout(feedItem)"
-        :pictureUrl="featuredImage(feedItem)"
+        :title-callout="titleCallout(feedItem)"
+        :picture-url="featuredImage(feedItem)"
         :author="postAuthor(feedItem)"
         :mode="postMode(feedItem)"
       />
       <div
         v-if="feedItem.type === 'ad'"
+        :key="index"
         class="feed-item feed-insert"
         :class="`feed-insert-${index}`"
-        :key="index"
       >
-        <advertising :id="feedItem.id" :size="feedItem.size" :unit="feedItem.name"/>
+        <advertising 
+          :id="feedItem.id" 
+          :size="feedItem.size" 
+          :unit="feedItem.name"
+        />
       </div>
     </template>
   </div>
@@ -33,12 +37,19 @@ import Advertising from '@/components/Advertising'
 import AdHeader from '@/components/PageComponents/AdHeader'
 
 export default {
-  name: 'feed',
-  props: ['feedData'],
+  name: 'Feed',
   components: {
     PostAtom,
     Advertising,
     AdHeader
+  },
+  props: {
+    feedData: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    }
   },
   methods: {
     titleCallout: function(post) {
