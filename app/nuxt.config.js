@@ -90,6 +90,15 @@ module.exports = {
           }
         },
         {
+          path: '/graphtest',
+          component: resolve(__dirname, 'pages/graphtest.vue'),
+          name: 'page-graphtest',
+          meta: {
+            navigationScheme: 'goHome',
+            siblings: null
+          }
+        },
+        {
           path: '/:slug',
           component: resolve(__dirname, 'pages/page.vue'),
           name: 'page',
@@ -182,6 +191,17 @@ module.exports = {
   },
   modules: [
     '@nuxtjs/pwa',
+    [
+      '@nuxtjs/apollo',
+      {
+        clientConfigs: {
+          default: {
+            httpEndpoint: 'https://content.dirtrag.bike/graphql',
+            // browserHttpEndpoint: '/graphql'
+          }
+        }
+      }
+    ],
     '@nuxtjs/axios',
     '@nuxtjs/device',
     [
