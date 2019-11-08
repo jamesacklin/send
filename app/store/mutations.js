@@ -1,13 +1,16 @@
 import merge from 'lodash/merge'
 
 export default {
+  addGraphPosts(state, posts){
+    state.graphPosts = posts
+  },
   addPage(state, page) {
     if (undefined === this.getters.getPageBySlug(page.slug)) {
       state.pages.push(page)
     }
   },
   addPosts(state, posts) {
-    for (const post of posts) {
+    for (const post of posts) { // eslint-disable-line
       const i = state.posts.findIndex((o) => o.id === post.id)
       if (state.posts[i]) {
         state.posts[i] = merge(state.posts[i], post)
@@ -32,12 +35,15 @@ export default {
     }
   },
   paginate(state, payload) {
-    const { page, prefetch, queryType, slug } = payload
+    const { page, queryType, slug } = payload
     switch (queryType) {
       case 'category':
         state.categories[slug].pagination.pages.push(page)
+        break
       case 'search':
+        break
       case 'default':
+        break
     }
   },
   paginateTotals(state, payload) {
@@ -46,8 +52,11 @@ export default {
       case 'category':
         state.categories[slug].pagination.totalPosts = totals.totalPosts
         state.categories[slug].pagination.totalPostsPages = totals.totalPostsPages
+        break
       case 'search':
+        break
       case 'default':
+        break
     }
   },
   currentPage(state, payload) {
@@ -57,9 +66,12 @@ export default {
         state.categories[slug].pagination.current = page
         state.current.id = state.categories[slug].id
         state.current.slug = slug
+        break
       case 'search':
+        break
       case 'default':
         state.pagination[queryType].current = page
+        break
     }
   },
   currentStringQuery(state, payload) {

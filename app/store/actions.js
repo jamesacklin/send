@@ -1,4 +1,5 @@
 import { reject } from 'q'
+import gql from 'graphql-tag'
 
 export default {
   setCurrents({ commit }, params) {
@@ -35,12 +36,14 @@ export default {
             (state.categories[slug].pagination.pages.length === 0) ||
             (!state.categories[slug].pagination.pages.includes(page) && page <= state.categories[slug].pagination.totalPostsPages)
           ) return true
+          break
         case 'default':
           if (
             (!prefetch) && 
             (state.pagination.default.pages.length === 0) ||
             (!state.pagination.default.pages.includes(page) && page <= state.pagination.default.totalPostsPages)
           ) return true
+          break
         case 'search':
           // Always get posts for new searches
           return true
@@ -96,13 +99,13 @@ export default {
         }
       })
       if (page.length === 0) {
-        reject(error)
+        reject()
       } else {
         commit('addPage', page[0])
       }
     }
   },
-  async getPost({ commit, state }, params) {
+  async getPost({ commit }, params) {
     if (!this.getters.getPostBySlug(params.slug)) {
       const post = await this.$axios.$get('posts?_embed', {
         params: {
@@ -131,4 +134,23 @@ export default {
   closeNavDrawer({ commit }) {
     commit('toggleNavDrawer', false)
   },
+  async getGraphPosts({ commit }){
+    const client = this.app.apolloProvider.defaultClient
+    const posts = await client.query({
+      query: gql`query {
+                  posts(first: 30, where: {orderby: {order: DESC, field: DATE}}) {
+                    edges {
+                      cursor
+                      node {
+                        title(format: RENDERED)
+                        date
+                        excerpt(format: RENDERED)
+                        id
+                      }
+                    }
+                  }
+                }`
+    })
+    commit('addGraphPosts', posts.data.posts.edges)
+  }
 }

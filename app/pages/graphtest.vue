@@ -1,33 +1,33 @@
 <template>
   <div style="padding-top: 5em">
-    <div
-      v-for="post in posts.edges"
+    <PostAtom
+      v-for="post in posts"
+      :id="post.id"
       :key="post.cursor"
-    >
-      <h2 v-html="post.node.title" />
-      <div v-html="post.node.excerpt" />
-    </div>
+      :picture-url="`https://doglime.com/wp-content/uploads/2019/05/Standard-Red-Poodle.jpg`"
+      :slug="`#`"
+      :title="post.node.title"
+      :date="post.node.date"
+      :excerpt="post.node.excerpt"
+    />
   </div>
 </template>
 
 <script>
-import gql from 'graphql-tag'
+import PostAtom from '@/components/PostAtom'
 
 export default {
   name: 'GraphTest',
-  apollo: {
-    posts: gql`query {
-      posts(first: 30, where: {orderby: {order: DESC, field: DATE}}) {
-        edges {
-          cursor
-          node {
-            title(format: RENDERED)
-            date
-            excerpt(format: RENDERED)
-          }
-        }
-      }
-    }`
+  components: {
+    PostAtom
+  },
+  computed: {
+    posts () {
+      return this.$store.state.graphPosts
+    }
+  },
+  async asyncData({ store }){
+    await store.dispatch('getGraphPosts')
   }
 }
 </script>
