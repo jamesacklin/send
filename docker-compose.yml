@@ -2,19 +2,19 @@ version: '3'
 
 services:
   nuxt:
-    image: jamesacklin/send_nuxt:2.2.0
+    image: jamesacklin/send_nuxt:2.2.1
     container_name: send-web
     restart: always
     ports:
       - "3000:3000"
     command:
       "npm run start"
-  nginx:
-    image: nginx:1.13
-    container_name: send-server
-    ports:
-      - "80:80"
-    volumes:
-      - ./server:/etc/nginx/conf.d
-    depends_on:
-      - nuxt
+    nginx:
+      image: nginx:1.13
+      container_name: send-server
+      ports:
+        - "80:80"
+      volumes:
+        - ./server:/etc/nginx/conf.d
+      depends_on:
+        - nuxt
