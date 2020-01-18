@@ -28,8 +28,8 @@ export const state = () => ({
   contestPost: [],
   navItems: [
     {
-      name: 'News',
-      href: '/category/news'
+      name: 'Destinations',
+      href: '/category/destinations'
     },
     {
       name: 'Gear',

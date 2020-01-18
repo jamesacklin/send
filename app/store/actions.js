@@ -34,13 +34,15 @@ export default {
             (!prefetch) && 
             (state.categories[slug].pagination.pages.length === 0) ||
             (!state.categories[slug].pagination.pages.includes(page) && page <= state.categories[slug].pagination.totalPostsPages)
-          ) return true
+          ) return true;
+          break;
         case 'default':
           if (
             (!prefetch) && 
             (state.pagination.default.pages.length === 0) ||
             (!state.pagination.default.pages.includes(page) && page <= state.pagination.default.totalPostsPages)
           ) return true
+          break;
         case 'search':
           // Always get posts for new searches
           return true
@@ -96,13 +98,13 @@ export default {
         }
       })
       if (page.length === 0) {
-        reject(error)
+        reject()
       } else {
         commit('addPage', page[0])
       }
     }
   },
-  async getPost({ commit, state }, params) {
+  async getPost({ commit }, params) {
     if (!this.getters.getPostBySlug(params.slug)) {
       const post = await this.$axios.$get('posts?_embed', {
         params: {
